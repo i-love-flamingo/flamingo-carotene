@@ -2,7 +2,7 @@
   "name": "flamingo-carotene-module",
   "version": "6.0.0-alpha.0",
   "description": "> TODO: description",
-  "author": "Dominik Dumont <dominik.dumont@aoe.com>",
+  "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
   "license": "MIT",
   "main": "lib/flamingo-carotene-module.js",
