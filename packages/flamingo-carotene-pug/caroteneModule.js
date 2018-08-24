@@ -1,7 +1,7 @@
 const path = require('path')
 
 // const CaroteneModule = require('../flamingo-carotene-module')
-const buildHandler = require('./handler/build')
+const buildHandler = require(path.join(__dirname, 'handler', 'build'))
 
 // class CarotenePug extends CaroteneModule {
 class CarotenePug {
