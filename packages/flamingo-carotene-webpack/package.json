@@ -5,7 +5,7 @@
   "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/flamingo-carotene-webpack.js",
+  "main": "caroteneModule.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
