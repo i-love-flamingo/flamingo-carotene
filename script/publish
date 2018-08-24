@@ -6,6 +6,7 @@ const path = require('path')
 
 const publishPackages = (error, packages) => {
   if (error) {
+    console.log(`⚠️   Error while globing packages:`)
     console.log(error)
     return
   }
