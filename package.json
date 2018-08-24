@@ -3,7 +3,8 @@
   "version": "6.0.0-alpha",
   "description": "Flamingo Carotene is a tool to build Flamingo themes",
   "scripts": {
-    "test": ""
+    "test": "",
+    "publish-packages": "./script/publish"
   },
   "private": true,
   "keywords": [

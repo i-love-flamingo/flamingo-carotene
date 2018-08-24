@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+const glob = require("glob")
+const shell = require('shelljs')
+const path = require('path')
+
+const publishPackages = (error, packages) => {
+  if (error) {
+    console.log(error)
+    return
+  }
+
+  console.log(`🥕  Packages found:\r\n        ${packages.join('\r\n        ')}\r\n`)
+
+  for (const package of packages) {
+    publishPackage(package)
+  }
+}
+
+const publishPackage = package => {
+  const exec = require('child_process').exec
+  const fs = require('fs')
+  const { name, version } = require(path.join('..', package, 'package.json'))
+
+  shell.cd(package)
+
+  const npmrc = fs.readFileSync('.npmrc', { encoding: 'utf8' })
+
+  fs.writeFileSync('.npmrc', npmrc.replace('/om3-npm/', '/om3-npm-local/'))
+
+  const childProcess = exec('npm publish', error => {
+    if (error) {
+      if (error.message && error.message.indexOf('cannot modify pre-existing version') === -1) {
+        throw error
+      }
+
+      console.log(`⚠️   Package ${name}@${version} is already existing, skip publishing.`)
+      return
+    }
+
+    console.log(`🥕  Published ${name}@${version}`)
+  })
+
+  // For verbose output:
+  // childProcess.stdout.pipe(process.stdout)
+  // childProcess.stderr.pipe(process.stderr)
+
+  // Restore npmrc file
+  fs.writeFileSync('.npmrc', npmrc)
+
+  // Return to parent repository directory
+  shell.cd('-')
+}
+
+// options is optional
+glob("packages/*", publishPackages)
