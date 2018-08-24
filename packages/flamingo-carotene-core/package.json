@@ -5,6 +5,7 @@
   "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
   "license": "MIT",
+  "main": "bin/flamingo-carotene",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
