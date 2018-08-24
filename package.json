@@ -19,6 +19,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.1.2"
+    "glob": "^7.1.2",
+    "lerna": "^3.1.2",
+    "shelljs": "^0.8.2"
   }
 }
