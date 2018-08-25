@@ -1,3 +1,5 @@
+const path = require('path')
+
 // const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
 
