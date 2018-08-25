@@ -2,10 +2,8 @@
   "name": "flamingo-carotene",
   "version": "6.0.0-alpha",
   "description": "Flamingo Carotene is a tool to build Flamingo themes",
-  "scripts": {
-    "test": "echo \"No tests yet\"",
-    "publish-packages": "./script/publish"
-  },
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "MIT",
   "private": true,
   "keywords": [
     "flamingo-carotene",
@@ -13,11 +11,13 @@
     "carotene",
     "om3"
   ],
-  "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "test": "echo \"No tests yet\"",
+    "publish-packages": "./script/publish"
+  },
   "devDependencies": {
     "glob": "^7.1.2",
     "lerna": "^3.1.2",

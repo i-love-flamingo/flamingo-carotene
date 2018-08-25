@@ -2,9 +2,7 @@
 
 const path = require('path')
 
-const classPath = path.join(__dirname, '..', 'src', 'class')
-
-const cliTools = require(path.join(classPath, 'cliTools'))
+const cliTools = require('./cliTools')
 
 const command = cliTools.getCommand()
 
@@ -13,6 +11,6 @@ if (!command || command.charAt(0) === '-') {
   cliTools.exit()
 }
 
-const Carotene = require(path.join(classPath, 'carotene'))
+const Carotene = require('./carotene')
 
 new Carotene()

@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 const cliTools = require('./cliTools')
-const initialConfig = require('../../initialConfig')
+const initialConfig = require('./initialConfig')
 
 const caroteneLibPattern = 'flamingo-carotene-'
 

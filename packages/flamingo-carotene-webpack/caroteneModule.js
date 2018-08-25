@@ -1,8 +1,8 @@
 const path = require('path')
 
 // const CaroteneModule = require('../flamingo-carotene-module')
-const WebpackConfig = require(path.join(__dirname, 'src', 'class', 'webpackConfig'))
-const buildHandler = require(path.join(__dirname, 'handler', 'build'))
+const WebpackConfig = require('./lib/webpackConfig')
+const buildHandler = require('./lib/handler/build')
 
 // class CaroteneWebpack extends CaroteneModule {
 class CaroteneWebpack {
