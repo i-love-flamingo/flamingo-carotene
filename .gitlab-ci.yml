@@ -1,26 +1,26 @@
 image: aoepeople/carotene-env:1.7.0
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - node_modules
-  key: "$CI_COMMIT_REF_NAME"
+    - node_modules/
 
 stages:
   - setup
   - test
   - publish
 
-setup flamingo carotene:
+Setup:
   stage: setup
   script:
     - yarn
 
-test packages:
+Test Packages:
   stage: test
   script:
     - yarn test
 
-publish packages:
+Publish Packages:
   stage: publish
   script:
     - yarn publish-packages
