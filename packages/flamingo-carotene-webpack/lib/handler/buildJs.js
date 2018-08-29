@@ -36,3 +36,5 @@ const webpackBuildJs = function (core) {
 
   buildHandler(core)
 }
+
+module.exports = webpackBuildJs

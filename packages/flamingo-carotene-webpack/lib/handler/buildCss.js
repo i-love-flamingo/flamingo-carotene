@@ -4,7 +4,7 @@ const buildHandler = require('./build')
 
 const cssExtensions = [ '.css', '.scss', '.sass' ]
 
-const webpackBuildJs = function (core) {
+const webpackBuildCss = function (core) {
   const config = core.getConfig()
 
   if (typeof config.entry === 'object') {
@@ -38,3 +38,5 @@ const webpackBuildJs = function (core) {
 
   buildHandler(core)
 }
+
+module.exports = webpackBuildCss
