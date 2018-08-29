@@ -40,9 +40,9 @@ const pugBuild = (core) => {
   config = core.getConfig()
   cliTools = core.getCliTools()
 
-  const timeStarted = (new Date()).getTime()
+  const timeStarted = new Date().getTime()
 
-  cliTools.info('Run pug')
+  cliTools.info('Pug - start')
 
   glob(config.paths.pug.src + config.pug.filesPattern, (error, files) => {
     if (error) {
@@ -60,8 +60,7 @@ const pugBuild = (core) => {
         return
       }
 
-      const timeTaken = (new Date()).getTime() - timeStarted
-      cliTools.info(`Generated ${results.length} AST file(s) in: ${timeTaken}ms`, true)
+      cliTools.info(`Pug - end\r\n    Generated ${results.length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
       if (config.pug && typeof config.pug.callback === 'function') {
         config.pug.callback(core)

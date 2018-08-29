@@ -12,13 +12,13 @@ const webpackBuild = function (core) {
     return
   }
 
-  cleanupDist(config.paths.dist)
-
   // cliTools.info(`Webpack config used to build:\r\n${cliTools.inspect(config.webpackConfig)}`, true)
 
-  cliTools.info('Run webpack')
+  cliTools.info('Webpack - start')
 
   cliTools.info(`Running webpack in mode: ${config.webpackConfig.mode}`, true)
+
+  const timeStarted = new Date().getTime()
 
   webpack(config.webpackConfig, (error, stats) => {
     if (error) {
@@ -39,18 +39,12 @@ const webpackBuild = function (core) {
       cliTools.warn(info.warnings)
     }
 
+    cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+
     if (config.webpack && typeof config.webpack.callback === 'function') {
       config.webpack.callback(core)
     }
   })
-}
-
-const cleanupDist = function (dist) {
-  shell.rm('-rf', path.join(dist, 'js'))
-  shell.rm('-rf', path.join(dist, 'css'))
-  shell.rm('-rf', path.join(dist, 'image'))
-  shell.rm('-rf', path.join(dist, 'font'))
-  shell.rm(path.join(dist, 'manifest.json'))
 }
 
 module.exports = webpackBuild
