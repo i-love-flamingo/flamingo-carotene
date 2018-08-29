@@ -1,0 +1,22 @@
+{
+  "name": "flamingo-carotene-dev-server",
+  "version": "6.0.0-alpha.6",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "MIT",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-dev-server",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "debounce": "^1.2.0",
+    "socket.io": "^2.1.1"
+  }
+}
