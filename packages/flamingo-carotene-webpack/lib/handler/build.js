@@ -12,6 +12,8 @@ const webpackBuild = function (core) {
     return
   }
 
+  cleanupDist(config.paths.dist)
+
   // cliTools.info(`Webpack config used to build:\r\n${cliTools.inspect(config.webpackConfig)}`, true)
 
   cliTools.info('Run webpack')
@@ -20,27 +22,35 @@ const webpackBuild = function (core) {
 
   webpack(config.webpackConfig, (error, stats) => {
     if (error) {
-      cliTools.warn(error.stack || error);
+      cliTools.warn(error.stack || error)
       if (error.details) {
-        cliTools.warn(error.details);
+        cliTools.warn(error.details)
       }
-      return;
+      return
     }
 
-    const info = stats.toJson();
+    const info = stats.toJson()
 
     if (stats.hasErrors()) {
-      cliTools.warn(info.errors);
+      cliTools.warn(info.errors)
     }
 
     if (stats.hasWarnings()) {
-      cliTools.warn(info.warnings);
+      cliTools.warn(info.warnings)
     }
 
     if (config.webpack && typeof config.webpack.callback === 'function') {
       config.webpack.callback(core)
     }
   })
+}
+
+const cleanupDist = function (dist) {
+  shell.rm('-rf', path.join(dist, 'js'))
+  shell.rm('-rf', path.join(dist, 'css'))
+  shell.rm('-rf', path.join(dist, 'image'))
+  shell.rm('-rf', path.join(dist, 'font'))
+  shell.rm(path.join(dist, 'manifest.json'))
 }
 
 module.exports = webpackBuild
