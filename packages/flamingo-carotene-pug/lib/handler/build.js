@@ -62,6 +62,10 @@ const pugBuild = (core) => {
 
       const timeTaken = (new Date()).getTime() - timeStarted
       cliTools.info(`Generated ${results.length} AST file(s) in: ${timeTaken}ms`, true)
+
+      if (config.pug && typeof config.pug.callback === 'function') {
+        config.pug.callback(core)
+      }
     })
   })
 }

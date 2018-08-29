@@ -36,6 +36,10 @@ const webpackBuild = function (core) {
     if (stats.hasWarnings()) {
       cliTools.warn(info.warnings);
     }
+
+    if (config.webpack && typeof config.webpack.callback === 'function') {
+      config.webpack.callback(core)
+    }
   })
 }
 
