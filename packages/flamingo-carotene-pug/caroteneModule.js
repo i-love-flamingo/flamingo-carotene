@@ -23,6 +23,8 @@ class CarotenePug {
           config.pug = {
             filesPattern: '/**/*.pug'
           }
+
+          config.pug['callback'] = null
         }
       },
       {

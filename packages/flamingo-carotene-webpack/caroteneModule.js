@@ -2,6 +2,8 @@ const path = require('path')
 
 // const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
+const buildHandlerJs = require('./lib/handler/buildJs')
+const buildHandlerCss = require('./lib/handler/buildCss')
 
 // class CaroteneWebpack extends CaroteneModule {
 class CaroteneWebpack {
@@ -27,6 +29,8 @@ class CaroteneWebpack {
           config.webpack.dist['imageFolderName'] = 'image'
 
           config.webpack['rulesInclude'] = null
+
+          config.webpack['callback'] = null
         }
       },
       {
@@ -45,6 +49,14 @@ class CaroteneWebpack {
       {
         command: 'buildWebpack',
         handler: buildHandler
+      },
+      {
+        command: 'buildWebpackJs',
+        handler: buildHandlerJs
+      },
+      {
+        command: 'buildWebpackCss',
+        handler: buildHandlerCss
       }
     ]
   }
