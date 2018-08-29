@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-const path = require('path')
+const shell = require('shelljs')
 
-const cliTools = require('./cliTools')
+const core = require('./core')
+
+const cliTools = core.getCliTools()
+const config = core.getConfig()
+const dispatcher = core.getDispatcher()
 
 const command = cliTools.getCommand()
 
@@ -11,6 +15,12 @@ if (!command || command.charAt(0) === '-') {
   cliTools.exit()
 }
 
-const Carotene = require('./carotene')
+dispatcher.dispatchCommand('config')
 
-new Carotene()
+if (command === 'build') {
+  shell.rm('-rf', config.paths.dist)
+}
+
+if (command !== 'config') {
+  dispatcher.dispatchCommand(command)
+}

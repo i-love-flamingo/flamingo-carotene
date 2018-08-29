@@ -1,9 +1,8 @@
 const packageJson = require('../package.json')
 
 class CaroteneModule {
-  constructor (config, cliTools) {
-    this.config = config
-    this.cliTools = cliTools
+  constructor (core) {
+    this.cliTools = core.getCliTools()
   }
 
   getVersion () {

@@ -5,22 +5,29 @@ const buildHandler = require('./lib/handler/build')
 
 // class CarotenePug extends CaroteneModule {
 class CarotenePug {
-  constructor (config, cliTools) {
-    // super(config, cliTools)
+  constructor (core) {
+    // super(core)
 
     this.listeners = [
       {
         command: 'config',
         priority: -50,
-        handler: function (config, cliTools) {
+        handler: function (core) {
+          const config = core.getConfig()
+
           config.paths.pug = {
             src: path.join(config.paths.src, 'pug'),
             dist: path.join(config.paths.dist, 'pug')
           }
+
           config.pug = {
             filesPattern: '/**/*.pug'
           }
         }
+      },
+      {
+        command: 'buildTemplates',
+        handler: buildHandler
       },
       {
         command: 'build',

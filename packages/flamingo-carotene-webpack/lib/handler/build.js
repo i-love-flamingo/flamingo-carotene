@@ -1,6 +1,12 @@
+const path = require('path')
+
+const shell = require('shelljs')
 const webpack = require('webpack')
 
-const webpackBuild = function (config, cliTools) {
+const webpackBuild = function (core) {
+  const config = core.getConfig()
+  const cliTools = core.getCliTools()
+
   if (!config.webpackConfig) {
     cliTools.warn('No webpack config found')
     return

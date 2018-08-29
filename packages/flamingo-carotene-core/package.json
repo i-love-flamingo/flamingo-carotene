@@ -11,6 +11,7 @@
     "carotene",
     "om3"
   ],
+  "main": "lib/core.js",
   "bin": {
     "flamingo-carotene": "./bin/flamingoCarotene.js"
   },

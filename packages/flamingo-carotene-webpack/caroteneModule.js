@@ -1,19 +1,20 @@
 const path = require('path')
 
 // const CaroteneModule = require('../flamingo-carotene-module')
-const WebpackConfig = require('./lib/webpackConfig')
 const buildHandler = require('./lib/handler/build')
 
 // class CaroteneWebpack extends CaroteneModule {
 class CaroteneWebpack {
-  constructor (config, cliTools) {
-    // super(config, cliTools)
+  constructor (core) {
+    // super(core)
 
     this.listeners = [
       {
         command: 'config',
         priority: -50,
-        handler: function (config, cliTools) {
+        handler: function (core) {
+          const config = core.getConfig()
+
           config.paths['webpack'] = {}
           config.paths.webpack['src'] = config.paths.src
           config.paths.webpack['dist'] = config.paths.dist
@@ -30,12 +31,19 @@ class CaroteneWebpack {
       },
       {
         command: 'config',
-        handler: function (config, cliTools) {
-          config['webpackConfig'] = new WebpackConfig(config, cliTools)
+        handler: function (core) {
+          const config = core.getConfig()
+          const WebpackConfig = require('./lib/webpackConfig')
+
+          config['webpackConfig'] = new WebpackConfig(core)
         }
       },
       {
         command: 'build',
+        handler: buildHandler
+      },
+      {
+        command: 'buildWebpack',
         handler: buildHandler
       }
     ]

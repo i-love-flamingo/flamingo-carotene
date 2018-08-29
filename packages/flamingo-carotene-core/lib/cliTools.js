@@ -97,4 +97,4 @@ class CliTools {
   }
 }
 
-module.exports = new CliTools()
+module.exports = CliTools

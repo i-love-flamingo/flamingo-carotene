@@ -1,8 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 
-const cliTools = require('./cliTools')
 const initialConfig = require('./initialConfig')
+const core = require('./core')
+
+const cliTools = core.getCliTools()
 
 const caroteneLibPattern = 'flamingo-carotene-'
 
@@ -13,7 +15,9 @@ class Config {
     this.config = initialConfig
 
     this.config.caroteneModuleNames = this.getCaroteneModuleNames()
+  }
 
+  getConfig () {
     return this.config
   }
 
@@ -41,7 +45,7 @@ class Config {
     const caroteneModuleNames = []
 
     for (const dependency of dependencies) {
-      if (dependency.startsWith(caroteneLibPattern)) {
+      if (dependency.startsWith(caroteneLibPattern) && dependency !== `${caroteneLibPattern}core`) {
         caroteneModuleNames.push(dependency)
       }
     }
@@ -67,4 +71,4 @@ class Config {
   }
 }
 
-module.exports = new Config()
+module.exports = Config

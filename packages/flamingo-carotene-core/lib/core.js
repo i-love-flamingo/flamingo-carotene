@@ -1,30 +1,55 @@
 const path = require('path')
 const fs = require('fs')
-const shell = require('shelljs')
 
-const cliTools = require('./cliTools')
-const config = require('./config')
-const Dispatcher = require('./dispatcher')
+let config = null
+let cliTools = null
+let dispatcher = null
+let modules = null
 
-class Carotene {
-  constructor () {
-    this.modules = this.getModules()
-
-    this.dispatcher = new Dispatcher(this.modules)
-
-    this.executeCommand('config')
-
-    if (cliTools.getCommand() === 'build') {
-      shell.rm('-rf', config.paths.dist)
+class Core {
+  getConfig () {
+    if (config !== null) {
+      return config
     }
 
-    if (cliTools.getCommand() !== 'config') {
-      this.executeCommand(cliTools.getCommand())
+    const Config = require('./config')
+    config = new Config().getConfig()
+
+    return config
+  }
+
+  getCliTools () {
+    if (cliTools !== null) {
+      return cliTools
     }
+
+    const CliTools = require('./cliTools')
+    cliTools = new CliTools()
+
+    return cliTools
+  }
+
+  getDispatcher () {
+    if (dispatcher !== null) {
+      return dispatcher
+    }
+
+    const Dispatcher = require('./dispatcher')
+    dispatcher = new Dispatcher(this.getModules())
+
+    return dispatcher
   }
 
   getModules () {
-    const modules = []
+    if (modules !== null) {
+      return modules
+    }
+
+    // Ensure config and cliTools when loading modules
+    this.getConfig()
+    this.getCliTools()
+
+    modules = []
 
     // Get carotene modules of dependencies
     for (const moduleName of config.caroteneModuleNames) {
@@ -37,7 +62,7 @@ class Carotene {
 
       const Module = require(modulePath)
 
-      modules.push(new Module(config, cliTools))
+      modules.push(new Module(this))
     }
 
     // Get carotene module of project
@@ -48,19 +73,13 @@ class Carotene {
     } else {
       const Module = require(projectModulePath)
 
-      modules.push(new Module(config, cliTools))
+      modules.push(new Module(this))
     }
 
     cliTools.info(`Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
 
     return modules
   }
-
-  executeCommand (command) {
-    cliTools.info(`Execute command: ${command}`)
-
-    this.dispatcher.dispatchCommand(command)
-  }
 }
 
-module.exports = Carotene
+module.exports = new Core()

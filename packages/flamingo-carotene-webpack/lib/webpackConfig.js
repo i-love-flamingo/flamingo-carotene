@@ -16,9 +16,9 @@ const eslintConfigFileNames = ['.eslintrc', '.eslintrc.js', '.eslintrc.yaml', '.
 const babelConfigFileNames = ['.babelrc', '.babelrc.js', 'babel.config.js']
 
 class WebpackConfig {
-  constructor(config, cliTools) {
-    this.config = config
-    this.cliTools = cliTools
+  constructor(core) {
+    this.config = core.getConfig()
+    this.cliTools = core.getCliTools()
 
     this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
 
@@ -96,7 +96,7 @@ class WebpackConfig {
   }
 
   getWebpackConfig () {
-    const config = {
+    const webpackConfig = {
       target: 'web',
       // context: config.paths.src,
       mode: isProd ? 'production' : 'development',
@@ -104,7 +104,7 @@ class WebpackConfig {
       output: {
         path: this.config.paths.webpackDist,
         filename: this.getOutputFileName(),
-        // publicPath: this.config.paths.webpackPublic,
+        publicPath: this.config.webpack.publicPath || '/'
       },
       module: {
         rules: [
@@ -175,10 +175,10 @@ class WebpackConfig {
     }
 
     if (!isProd) {
-      config['devtool'] = 'source-map'
+      webpackConfig['devtool'] = 'source-map'
     }
 
-    return config
+    return webpackConfig
   }
 
   getOutputFileName () {
@@ -266,8 +266,10 @@ class WebpackConfig {
 
   getStyleLoaders () {
     const loaders = [
-      // isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-      MiniCssExtractPlugin.loader,
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: this.getMiniCssExtractPluginOptions()
+      },
       'css-loader'
     ]
 
@@ -288,6 +290,20 @@ class WebpackConfig {
       'sass-loader',
       'import-glob'
     ])
+  }
+
+  getMiniCssExtractPluginOptions () {
+    const pluginOptions = {}
+
+    if (this.config.webpack.dist.cssFolderName) {
+      const cssDirName = path.dirname(path.join(this.config.paths.dist, this.getCssFileName()))
+
+      const relativeDistPath = path.relative(cssDirName, this.config.paths.dist)
+
+      pluginOptions['publicPath'] = relativeDistPath + '/'
+    }
+
+    return pluginOptions
   }
 }
 
