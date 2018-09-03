@@ -29,7 +29,7 @@ class Dispatcher {
     }
 
     listenerQue.sort((l1, l2) => {
-      return l1.priority - l2.priority
+      return l2.priority - l1.priority
     })
 
     cliTools.info(`Listeners for command: ${command}\r\n${cliTools.inspect(listenerQue)}`, true)

@@ -23,7 +23,7 @@ class CaroteneDevServer {
     this.listeners = [
       {
         command: 'config',
-        priority: -10,
+        priority: 10,
         handler: function (core) {
           const command = core.getCliTools().getCommand()
 

@@ -11,7 +11,7 @@ class CarotenePug {
     this.listeners = [
       {
         command: 'config',
-        priority: -50,
+        priority: 100,
         handler: function (core) {
           const config = core.getConfig()
 
@@ -21,10 +21,9 @@ class CarotenePug {
           }
 
           config.pug = {
-            filesPattern: '/**/*.pug'
+            filesPattern: '/**/*.pug',
+            callback: null
           }
-
-          config.pug['callback'] = null
         }
       },
       {
