@@ -1,6 +1,3 @@
-const path = require('path')
-
-const shell = require('shelljs')
 const webpack = require('webpack')
 
 const webpackBuild = function (core) {
