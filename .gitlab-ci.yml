@@ -1,27 +1,26 @@
 image: aoepeople/carotene-env:1.7.0
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-
 stages:
-  - setup
-  - test
-  - publish
+- test
+- publish
 
-Setup:
-  stage: setup
-  script:
-    - yarn
+.prepare-yarn: &prepare_yarn
+  cache:
+    paths:
+    - .yarn
+  before_script:
+  - export YARN_CACHE_FOLDER=$(pwd -P)/.yarn
+  - yarn
 
 Test Packages:
   stage: test
+  <<: *prepare_yarn
   script:
-    - yarn test
+  - yarn test
 
 Publish Packages:
   stage: publish
+  <<: *prepare_yarn
   script:
     - yarn publish-packages
   only:
