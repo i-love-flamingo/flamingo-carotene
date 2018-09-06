@@ -24,7 +24,11 @@ class Behavior {
         console.info('Registered behaviors: ', this.behaviours)
     }
 
-    attachBehaviors (domElement) {
+	/**
+	 * Attachs a Behavior to given domElement (and all children)
+	 * @param domElement|null
+	 */
+	attachBehaviors (domElement) {
         domElement = domElement || document
         const allElements = domElement.querySelectorAll('[data-behavior]')
         for (let behaviorElementIndex = 0; behaviorElementIndex < allElements.length; ++behaviorElementIndex) {
@@ -33,37 +37,81 @@ class Behavior {
         }
     }
 
-    attachBehaviorToElement (domElement) {
-        console.log('attachBehaviorToElement', domElement)
+	/**
+	 * Detach all Behaviors to given domElement (and all children)
+	 * @param domElement
+	 */
+	detachBehaviors (domElement) {
+		domElement = domElement || document
+		const allElements = domElement.querySelectorAll('[data-behavior]')
+		for (let behaviorElementIndex = 0; behaviorElementIndex < allElements.length; ++behaviorElementIndex) {
+			const behaviorElement = allElements[behaviorElementIndex]
+			this.detachBehaviorsOfElement(behaviorElement)
+		}
+	}
 
+	/**
+	 * Attachs a behavior to a given element
+	 * @param domElement
+	 */
+	attachBehaviorToElement (domElement) {
         if (!domElement) {
-            console.log('no valid dom element given', domElement)
+            console.error('Behavior: attachBehaviorToElement: No valid domElement given', domElement)
             return
         }
 
         let instance = domElement.flamingoBehaviorInstance
         if (instance) {
-            console.error('Element already initialized', instance)
+            console.error('Behavior: attachBehaviorToElement: Element already initialized', instance)
             return
         }
 
-        let behaviorName = domElement.dataset.behavior
-		behaviorName = behaviorName.charAt(0).toUpperCase() + behaviorName.slice(1);
-
+        let behaviorName = this.convertBehaviorNameStringToClass(domElement.dataset.behavior)
 		if (!this.behaviours.hasOwnProperty(behaviorName)) {
-        	console.error('Behavior "'+behaviorName+'" not registered');
+        	console.error('Behavior: attachBehaviorToElement: Behavior "'+behaviorName+'" should be attached, but not registered. Check your spelling.');
         	return
 		}
 		const behaviorClass = this.behaviours[behaviorName]
-		console.info('initialize behavior "'+behaviorName+'" on domElement', domElement)
+		console.info('Behavior: attachBehaviorToElement: Initialize behavior "'+behaviorName+'" on domElement', domElement)
         domElement.flamingoBehaviorInstance = new behaviorClass(domElement)
     }
 
-    detachBehaviors (domElement) {
+	/**
+	 *
+	 * @param domElement
+	 */
+	detachBehaviorsOfElement (domElement) {
+		if (!domElement) {
+			console.error('Behavior: detachBehaviors: No valid domElement given', domElement)
+			return
+		}
 
-    }
+		let instance = domElement.flamingoBehaviorInstance
+		if (!instance) {
+			console.error('Behavior: detachBehaviors: Cant detach element, there is no behavior present.', instance)
+			return
+		}
 
+		let behaviorName = instance.name
 
+		if (typeof instance.destroy !== 'function') {
+			console.error('Behavior: detachBehaviors: Cannot call destroy on "'+behaviorName+'" - destructor not found.', domElement)
+			return
+		}
+
+		console.info('Behavior: detachBehaviors: Destroy behavior "'+behaviorName+'" on domElement', domElement)
+		instance.destroy()
+		domElement.flamingoBehaviorInstance = null
+	}
+
+	/**
+	 *
+	 * @param behaviorName
+	 * @returns {string}
+	 */
+	convertBehaviorNameStringToClass(behaviorName) {
+		return behaviorName.charAt(0).toUpperCase() + behaviorName.slice(1);
+	}
 }
 
 module.exports = Behavior
