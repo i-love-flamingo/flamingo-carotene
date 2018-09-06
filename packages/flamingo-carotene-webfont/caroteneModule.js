@@ -12,7 +12,7 @@ class CaroteneWebfont {
 
           // Webfont config - post config creation
           if (!config.webfont || typeof config.webfont.options !== 'object') {
-            cliTools.warn('No webfont config found! Provide a config.webfont.options object to use the webfont webpack plugin.')
+            core.getCliTools().warn('No webfont config found! Provide a config.webfont.options object to use the webfont webpack plugin.')
             return
           }
 
