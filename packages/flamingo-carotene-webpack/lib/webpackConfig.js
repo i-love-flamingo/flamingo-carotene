@@ -106,6 +106,12 @@ class WebpackConfig {
         filename: this.getOutputFileName(),
         publicPath: this.config.webpack.publicPath || '/'
       },
+      resolve: {
+        modules: [
+            this.config.paths.src,
+            path.join(this.config.paths.project, 'node_modules')
+        ]
+      },
       module: {
         rules: [
           {
