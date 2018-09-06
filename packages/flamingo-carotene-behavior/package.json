@@ -14,5 +14,8 @@
   "main": "lib/behavior.js",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "glob": "^7.1.3"
   }
 }
