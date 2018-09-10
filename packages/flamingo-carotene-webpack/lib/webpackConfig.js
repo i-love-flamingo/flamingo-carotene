@@ -263,7 +263,7 @@ class WebpackConfig {
   getBabelLoaderOptions () {
     if (!this.babelConfigDetected) {
       return {
-        presets: ['env']
+        presets: ['@babel/preset-env']
       }
     }
 
