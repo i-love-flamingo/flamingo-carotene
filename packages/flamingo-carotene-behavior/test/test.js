@@ -65,5 +65,22 @@ test('behaviors are working with normal globbing', () => {
 
 });
 
+test('destroy/dispose will be called on detach', () => {
+  let fixture = loadTestDom('fixture.html');
+
+  let test1Content = fixture.getElementById('test1').textContent
+  expect(test1Content).toBe('ORIGINALCONTENT1');
+
+  const behavior = new Behavior(behaviorModulesGlob)
+  behavior.attachBehaviors(fixture)
+
+  test1Content = fixture.getElementById('test1').textContent
+  expect(test1Content).toBe('Text changed by Behavior (Test)');
+
+  behavior.detachBehaviors(fixture)
+
+  test1Content = fixture.getElementById('test1').textContent
+  expect(test1Content).toBe('ORIGINALCONTENT1');
+});
 
 // console.log(li.getAttribute('style'))

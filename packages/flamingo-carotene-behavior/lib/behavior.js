@@ -6,26 +6,48 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+/**
+ *
+ */
 var Behavior =
 /*#__PURE__*/
 function () {
   /**
    * @param listOfBehaviourClasses
-      *
-      * listOfBehaviourClasses is an array, which holds "default" classes of behaviors in it
-      * 0: default: named function
-      * 1: default: named function
-      * ...
-      *
+   *
+   * Webpack Globbing: import behaviorModules from '*.behavior.js'
+   * behaviourClasses is an array, which holds esModules and a "default" class of behaviors in it
+   * 0: default: named function
+   * 1: default: named function
+   * ...
+   *
+   * OR
+   *
+   * Babel Globbing: import * as behaviorModules from '*.behavior.js'
+   * Object of Classes - result of babel globbing
+   * {
+   *   anyName: named function
+   *   anotherName: named function
+   *   ...
+   * }
    */
-  function Behavior(listOfBehaviourClasses) {
+  function Behavior(behaviourClasses) {
     _classCallCheck(this, Behavior);
 
-    this.behaviours = {};
+    /**
+     * List of all registered behaviors
+     * @type {{}}
+     */
+    this.behaviors = {};
+    /**
+     * Internal Flag, which outputs console logs of behavior functionality
+     * @type {boolean}
+     */
 
-    for (var behaviorClassObjectIndex in listOfBehaviourClasses) {
-      var behaviorClassObject = listOfBehaviourClasses[behaviorClassObjectIndex];
-      console.log('behaviorClassObject', behaviorClassObject);
+    this.debug = false;
+
+    for (var behaviorClassObjectIndex in behaviourClasses) {
+      var behaviorClassObject = behaviourClasses[behaviorClassObjectIndex];
       var behaviorClass = null; // Support for globbing: import behaviorModules from '...'
 
       if (behaviorClassObject.hasOwnProperty('__esModule') && behaviorClassObject.__esModule === true) {
@@ -35,15 +57,17 @@ function () {
       } else {
         // Support for globbing: import * as behaviorModules from '...'
         behaviorClass = behaviorClassObject;
-      }
+      } // if class has got a name
+
 
       if (behaviorClass.hasOwnProperty('name')) {
-        var className = behaviorClass.name;
-        this.behaviours[className] = behaviorClass;
+        var className = this._sanitizeName(behaviorClass.name);
+
+        this.behaviors[className] = behaviorClass;
       }
     }
 
-    console.info('Registered behaviors: ', this.behaviours);
+    if (this.debug) console.info("Registered behaviors:", this.behaviors);
   }
   /**
    * Attachs a Behavior to given domElement (and all children)
@@ -56,10 +80,29 @@ function () {
     value: function attachBehaviors(domElement) {
       domElement = domElement || document;
       var allElements = domElement.querySelectorAll('[data-behavior]');
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-      for (var behaviorElementIndex = 0; behaviorElementIndex < allElements.length; ++behaviorElementIndex) {
-        var behaviorElement = allElements[behaviorElementIndex];
-        this.attachBehaviorToElement(behaviorElement);
+      try {
+        for (var _iterator = allElements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var behaviorElement = _step.value;
+
+          this._attachBehaviorToDom(behaviorElement);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
     /**
@@ -72,84 +115,138 @@ function () {
     value: function detachBehaviors(domElement) {
       domElement = domElement || document;
       var allElements = domElement.querySelectorAll('[data-behavior]');
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
-      for (var behaviorElementIndex = 0; behaviorElementIndex < allElements.length; ++behaviorElementIndex) {
-        var behaviorElement = allElements[behaviorElementIndex];
-        this.detachBehaviorsOfElement(behaviorElement);
+      try {
+        for (var _iterator2 = allElements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var behaviorElement = _step2.value;
+
+          this._detachBehaviorsToDom(behaviorElement);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
       }
     }
     /**
-     * Attachs a behavior to a given element
+     * Returns a behavior instance from a dom Element
+     * @param domElement
+     * @returns {*}
+     */
+
+  }, {
+    key: "getBehaviorFromElement",
+    value: function getBehaviorFromElement(domElement) {
+      var instance = null;
+
+      if (domElement.hasOwnProperty('nodeType')) {
+        if (this.debug) console.error("Behavior: attachBehaviorToElement: No valid domElement given", domElement);
+      }
+
+      if (domElement.hasOwnProperty('behaviorInstance')) {
+        instance = domElement.behaviorInstance;
+      }
+
+      return instance;
+    }
+    /**
+     * Attachs a behavior to a given dom element
      * @param domElement
      */
 
   }, {
-    key: "attachBehaviorToElement",
-    value: function attachBehaviorToElement(domElement) {
-      if (!domElement) {
-        console.error('Behavior: attachBehaviorToElement: No valid domElement given', domElement);
-        return;
-      }
-
-      var instance = domElement.flamingoBehaviorInstance;
+    key: "_attachBehaviorToDom",
+    value: function _attachBehaviorToDom(domElement) {
+      var instance = this.getBehaviorFromElement(domElement);
 
       if (instance) {
-        console.error('Behavior: attachBehaviorToElement: Element already initialized', instance);
+        if (this.debug) console.error('Behavior: attachBehaviorToElement: Element already initialized', instance);
         return;
       }
 
-      var behaviorName = this.convertBehaviorNameStringToClass(domElement.dataset.behavior);
+      var behaviorName = this._sanitizeName(domElement.dataset.behavior);
 
-      if (!this.behaviours.hasOwnProperty(behaviorName)) {
-        console.error('Behavior: attachBehaviorToElement: Behavior "' + behaviorName + '" should be attached, but not registered. Check your spelling.');
+      if (!this.behaviors.hasOwnProperty(behaviorName)) {
+        if (this.debug) console.error("Behavior: attachBehaviorToElement: Behavior \"".concat(behaviorName, "\" should be attached, but not registered. Check your spelling."));
         return;
       }
 
-      var behaviorClass = this.behaviours[behaviorName];
-      console.info('Behavior: attachBehaviorToElement: Initialize behavior "' + behaviorName + '" on domElement', domElement);
-      domElement.flamingoBehaviorInstance = new behaviorClass(domElement);
+      var behaviorClass = this.behaviors[behaviorName];
+      if (this.debug) console.info("Behavior: attachBehaviorToElement: Initialize behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+      domElement.behaviorInstance = {
+        name: behaviorName,
+        behavior: new behaviorClass(domElement)
+      };
     }
     /**
-     *
+     * Detach a behavior from a given dom element
      * @param domElement
      */
 
   }, {
-    key: "detachBehaviorsOfElement",
-    value: function detachBehaviorsOfElement(domElement) {
-      if (!domElement) {
-        console.error('Behavior: detachBehaviors: No valid domElement given', domElement);
-        return;
-      }
-
-      var instance = domElement.flamingoBehaviorInstance;
+    key: "_detachBehaviorsToDom",
+    value: function _detachBehaviorsToDom(domElement) {
+      var instance = this.getBehaviorFromElement(domElement);
 
       if (!instance) {
-        console.error('Behavior: detachBehaviors: Cant detach element, there is no behavior present.', instance);
+        if (this.debug) console.error("Behavior: detachBehaviors: Cant detach element, there is no behavior present.", instance);
         return;
       }
 
-      var behaviorName = instance.name;
+      var behaviorName = this._sanitizeName(instance.name);
 
-      if (typeof instance.destroy !== 'function') {
-        console.error('Behavior: detachBehaviors: Cannot call destroy on "' + behaviorName + '" - destructor not found.', domElement);
-        return;
+      if (this.debug) console.info("Behavior: detachBehaviors: Destroy behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+      var destroyed = false; // check if there is a destroy method
+
+      if (typeof instance.behavior.destroy === 'function') {
+        instance.behavior.destroy();
+        destroyed = true;
+      } // check if there is a dispose method
+
+
+      if (typeof instance.behavior.dispose === 'function') {
+        instance.behavior.dispose();
+        destroyed = true;
       }
 
-      console.info('Behavior: detachBehaviors: Destroy behavior "' + behaviorName + '" on domElement', domElement);
-      instance.destroy();
-      domElement.flamingoBehaviorInstance = null;
+      if (!destroyed) {
+        if (this.debug) console.error("Behavior: detachBehaviors: Cannot call destroy/dispose on \"".concat(behaviorName, "\" - methods not found."), domElement);
+      }
+
+      domElement.behaviorInstance = null;
     }
     /**
-     *
-     * @param behaviorName
+     * Sanatizing Name for Behavior ClassNames and Data Attributes
+     * @param {string} behaviorName
      * @returns {string}
      */
 
   }, {
-    key: "convertBehaviorNameStringToClass",
-    value: function convertBehaviorNameStringToClass(behaviorName) {
-      return behaviorName.charAt(0).toUpperCase() + behaviorName.slice(1);
+    key: "_sanitizeName",
+    value: function _sanitizeName(behaviorName) {
+      return behaviorName.toLowerCase();
+    }
+    /**
+     * Enables Debug Mode
+     * @param state {boolean}
+     */
+
+  }, {
+    key: "setDebug",
+    value: function setDebug(state) {
+      this.debug(state);
     }
   }]);
 

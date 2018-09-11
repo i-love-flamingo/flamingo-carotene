@@ -7,7 +7,6 @@ export default class Test3 {
     this.refs = {}
     this.refs.element = element
     element.innerHTML = "Text changed by Behavior (Test3)"
-    console.log('TEST2 behaviour contructed', element)
   }
 
   destroy () {

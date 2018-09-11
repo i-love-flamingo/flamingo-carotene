@@ -6,11 +6,12 @@ export default class Test1 {
   constructor (element) {
     this.refs = {}
     this.refs.element = element
+    this.oldContent = element.textContent;
     element.innerHTML = "Text changed by Behavior (Test)"
-    console.log('TEST behaviour contructed', element)
   }
 
-  destroy () {
+  dispose () {
+    this.refs.element.innerHTML = this.oldContent;
     this.refs = null
   }
 }
