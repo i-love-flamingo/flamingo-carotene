@@ -17,6 +17,11 @@
     "test": "jest"
   },
   "devDependencies": {
+    "redux": "^3.7.2",
+    "redux-watch": "^1.1.1",
+    "object-path": "^0.11.4",
+    "object-path-immutable": "^1.0.1",
+    "deep-equal": "^1.0.1",
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.0.0",
