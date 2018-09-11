@@ -67,7 +67,9 @@ function () {
       }
     }
 
-    if (this.debug) console.info("Registered behaviors:", this.behaviors);
+    if (this.debug) {
+      console.info("Registered behaviors:", this.behaviors);
+    }
   }
   /**
    * Attachs a Behavior to given domElement (and all children)
@@ -152,7 +154,9 @@ function () {
       var instance = null;
 
       if (domElement.hasOwnProperty('nodeType')) {
-        if (this.debug) console.error("Behavior: attachBehaviorToElement: No valid domElement given", domElement);
+        if (this.debug) {
+          console.error("Behavior: attachBehaviorToElement: No valid domElement given", domElement);
+        }
       }
 
       if (domElement.hasOwnProperty('behaviorInstance')) {
@@ -172,19 +176,29 @@ function () {
       var instance = this.getBehaviorFromElement(domElement);
 
       if (instance) {
-        if (this.debug) console.error('Behavior: attachBehaviorToElement: Element already initialized', instance);
+        if (this.debug) {
+          console.error('Behavior: attachBehaviorToElement: Element already initialized', instance);
+        }
+
         return;
       }
 
       var behaviorName = this._sanitizeName(domElement.dataset.behavior);
 
       if (!this.behaviors.hasOwnProperty(behaviorName)) {
-        if (this.debug) console.error("Behavior: attachBehaviorToElement: Behavior \"".concat(behaviorName, "\" should be attached, but not registered. Check your spelling."));
+        if (this.debug) {
+          console.error("Behavior: attachBehaviorToElement: Behavior \"".concat(behaviorName, "\" should be attached, but not registered. Check your spelling."));
+        }
+
         return;
       }
 
       var behaviorClass = this.behaviors[behaviorName];
-      if (this.debug) console.info("Behavior: attachBehaviorToElement: Initialize behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+
+      if (this.debug) {
+        console.info("Behavior: attachBehaviorToElement: Initialize behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+      }
+
       domElement.behaviorInstance = {
         name: behaviorName,
         behavior: new behaviorClass(domElement)
@@ -201,13 +215,19 @@ function () {
       var instance = this.getBehaviorFromElement(domElement);
 
       if (!instance) {
-        if (this.debug) console.error("Behavior: detachBehaviors: Cant detach element, there is no behavior present.", instance);
+        if (this.debug) {
+          console.error("Behavior: detachBehaviors: Cant detach element, there is no behavior present.", instance);
+        }
+
         return;
       }
 
       var behaviorName = this._sanitizeName(instance.name);
 
-      if (this.debug) console.info("Behavior: detachBehaviors: Destroy behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+      if (this.debug) {
+        console.info("Behavior: detachBehaviors: Destroy behavior \"".concat(behaviorName, "\" on domElement"), domElement);
+      }
+
       var destroyed = false; // check if there is a destroy method
 
       if (typeof instance.behavior.destroy === 'function') {
@@ -222,7 +242,9 @@ function () {
       }
 
       if (!destroyed) {
-        if (this.debug) console.error("Behavior: detachBehaviors: Cannot call destroy/dispose on \"".concat(behaviorName, "\" - methods not found."), domElement);
+        if (this.debug) {
+          console.error("Behavior: detachBehaviors: Cannot call destroy/dispose on \"".concat(behaviorName, "\" - methods not found."), domElement);
+        }
       }
 
       domElement.behaviorInstance = null;
@@ -246,7 +268,7 @@ function () {
   }, {
     key: "setDebug",
     value: function setDebug(state) {
-      this.debug(state);
+      this.debug = state;
     }
   }]);
 
