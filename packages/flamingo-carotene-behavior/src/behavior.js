@@ -56,7 +56,9 @@ class Behavior {
         this.behaviors[className] = behaviorClass
       }
     }
-    if (this.debug) console.info(`Registered behaviors:`, this.behaviors)
+    if (this.debug) {
+      console.info(`Registered behaviors:`, this.behaviors)
+    }
   }
 
   /**
@@ -93,7 +95,9 @@ class Behavior {
     let instance = null
 
     if (domElement.hasOwnProperty('nodeType')) {
-      if (this.debug) console.error(`Behavior: attachBehaviorToElement: No valid domElement given`, domElement)
+      if (this.debug) {
+        console.error(`Behavior: attachBehaviorToElement: No valid domElement given`, domElement)
+      }
     }
 
     if (domElement.hasOwnProperty('behaviorInstance')) {
@@ -110,19 +114,25 @@ class Behavior {
   _attachBehaviorToDom(domElement) {
     const instance = this.getBehaviorFromElement(domElement)
     if (instance) {
-      if (this.debug) console.error('Behavior: attachBehaviorToElement: Element already initialized', instance)
+      if (this.debug) {
+        console.error('Behavior: attachBehaviorToElement: Element already initialized', instance)
+      }
       return
     }
 
     const behaviorName = this._sanitizeName(domElement.dataset.behavior)
 
     if (!this.behaviors.hasOwnProperty(behaviorName)) {
-      if (this.debug) console.error(`Behavior: attachBehaviorToElement: Behavior "${behaviorName}" should be attached, but not registered. Check your spelling.`)
+      if (this.debug) {
+        console.error(`Behavior: attachBehaviorToElement: Behavior "${behaviorName}" should be attached, but not registered. Check your spelling.`)
+      }
       return
     }
 
     const behaviorClass = this.behaviors[behaviorName]
-    if (this.debug) console.info(`Behavior: attachBehaviorToElement: Initialize behavior "${behaviorName}" on domElement`, domElement)
+    if (this.debug) {
+      console.info(`Behavior: attachBehaviorToElement: Initialize behavior "${behaviorName}" on domElement`, domElement)
+    }
 
     domElement.behaviorInstance = {
       name: behaviorName,
@@ -137,12 +147,16 @@ class Behavior {
   _detachBehaviorsToDom(domElement) {
     const instance = this.getBehaviorFromElement(domElement)
     if (!instance) {
-      if (this.debug) console.error(`Behavior: detachBehaviors: Cant detach element, there is no behavior present.`, instance)
+      if (this.debug) {
+        console.error(`Behavior: detachBehaviors: Cant detach element, there is no behavior present.`, instance)
+      }
       return
     }
 
     const behaviorName = this._sanitizeName(instance.name)
-    if (this.debug) console.info(`Behavior: detachBehaviors: Destroy behavior "${behaviorName}" on domElement`, domElement)
+    if (this.debug) {
+      console.info(`Behavior: detachBehaviors: Destroy behavior "${behaviorName}" on domElement`, domElement)
+    }
 
     let destroyed = false
 
@@ -159,7 +173,9 @@ class Behavior {
     }
 
     if (!destroyed) {
-      if (this.debug) console.error(`Behavior: detachBehaviors: Cannot call destroy/dispose on "${behaviorName}" - methods not found.`, domElement)
+      if (this.debug) {
+        console.error(`Behavior: detachBehaviors: Cannot call destroy/dispose on "${behaviorName}" - methods not found.`, domElement)
+      }
     }
 
     domElement.behaviorInstance = null
@@ -179,7 +195,7 @@ class Behavior {
    * @param state {boolean}
    */
   setDebug(state) {
-    this.debug(state)
+    this.debug = state
   }
 
 }
