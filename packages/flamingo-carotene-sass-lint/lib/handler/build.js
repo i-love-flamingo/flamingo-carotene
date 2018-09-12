@@ -20,13 +20,14 @@ const sassLint = (core) => {
 
   cliTools.info('SassLint - start')
 
+  const spawnEnv = process.env
+  spawnEnv.FORCE_COLOR = true
+
   const childProcess = spawn(
     cmd,
     parameters,
     {
-      env : {
-        FORCE_COLOR: true
-      }
+      env : spawnEnv
     }
   )
 
@@ -57,7 +58,8 @@ const sassLint = (core) => {
     errors.push(data)
   })
 
-  childProcess.on('close', (code) => {
+
+  childProcess.on('exit', (code) => {
 
     let output = 'SassLint - end\n'
     output += results.join('\n').trim()
