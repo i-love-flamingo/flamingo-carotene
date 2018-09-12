@@ -31,6 +31,8 @@ const sassLint = (core) => {
     }
   )
 
+  // this is new
+
   const results = []
   const errors = []
 
