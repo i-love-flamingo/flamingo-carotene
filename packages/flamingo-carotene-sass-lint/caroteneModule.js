@@ -13,6 +13,7 @@ class SassLint {
         priority: 100,
         handler: function (core) {
           const config = core.getConfig()
+          config.paths.sassLint = __dirname
         }
       },
       {
