@@ -4,9 +4,6 @@ const buildHandler = require('./lib/handler/build')
 class SassLint {
   constructor (core) {
     // super(core)
-
-    const cliTools = core.getCliTools()
-
     this.listeners = [
       {
         command: 'config',
