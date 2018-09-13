@@ -35,7 +35,7 @@ class Core {
     }
 
     const Dispatcher = require('./dispatcher')
-    dispatcher = new Dispatcher(this.getModules())
+    dispatcher = new Dispatcher()
 
     return dispatcher
   }

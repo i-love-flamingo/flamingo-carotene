@@ -3,16 +3,14 @@ const core = require('./core')
 const cliTools = core.getCliTools()
 
 class Dispatcher {
-  constructor (modules) {
-    this.modules = modules
-  }
-
   dispatchCommand (command) {
     cliTools.info(`Dispatch command: ${command}`)
 
+    const modules = core.getModules()
+
     const listenerQue = []
 
-    for (const module of this.modules) {
+    for (const module of modules) {
       const listeners = module.getListeners()
 
       for (const listener of listeners) {
