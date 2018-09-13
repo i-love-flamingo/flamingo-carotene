@@ -1,0 +1,5 @@
+dist
+coverage
+vendor
+docs
+tmp

@@ -1,0 +1,11 @@
+.DS_Store
+.cache
+.idea
+.gradle
+.es-cache
+.sass-cache
+.temp
+dist
+node_modules
+npm-debug.log
+yarn-error.log
