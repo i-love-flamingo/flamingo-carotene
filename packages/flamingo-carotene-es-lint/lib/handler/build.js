@@ -7,14 +7,13 @@ const esLint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  // trying to find sass lint in project folder..
+  // trying to find es lint in project folder..
   let configFile = path.join(config.paths.project, '.eslintrc.js')
 
   // if not exists, take standard one
   if (!fs.existsSync(configFile)) {
     configFile = path.join(config.paths.esLint, '.eslintrc.js')
   }
-
   const cmd = `yarn`
     // ToDo Add ignore path
   const parameters = ['eslint', '--config', `${configFile}`, '--ext', '.js', '.']
@@ -53,10 +52,11 @@ const esLint = (core) => {
     // if (!skipLine) {
     //   results.push(data)
     // }
-      results.push("Publih")
+      results.push(data)
   });
 
   childProcess.stderr.on('data', function (data) {
+      console.log(data)
     errors.push(data)
   })
 
