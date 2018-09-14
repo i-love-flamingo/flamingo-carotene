@@ -82,5 +82,3 @@ test('destroy/dispose will be called on detach', () => {
   test1Content = fixture.getElementById('test1').textContent
   expect(test1Content).toBe('ORIGINALCONTENT1');
 });
-
-// console.log(li.getAttribute('style'))
