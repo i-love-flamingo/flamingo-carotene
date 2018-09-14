@@ -11,6 +11,13 @@ const initialState = {
 
 state.init(initialState)
 
+test('state cant be initialized more than one time', () => {
+  const t = () => {
+    state.init({})
+  }
+  expect(t).toThrow(Error)
+});
+
 test('state has correct initial values', () => {
 	expect(state.get('foo')).toBe(true);
   expect(state.get('bar.foo')).toBe(1);
@@ -18,12 +25,28 @@ test('state has correct initial values', () => {
 });
 
 test('state watch reports changes correctly', done => {
-  state.watch(`bar.foo`, (newState) => {
-    expect(newState).toBe(15);
-    expect(state.get('bar.foo')).toBe(15);
+  const newValue = 15
+
+	state.watch(`bar.foo`, (newState) => {
+    expect(newState).toBe(newValue);
+    expect(state.get('bar.foo')).toBe(newValue);
     done()
 	})
-	state.set('bar.foo', 15)
+	state.set('bar.foo', newValue)
 });
 
+test('unknown state returns undefined', () => {
+  expect(state.get('blubber.blah')).toBe(undefined);
+});
+
+test('unknown state set triggers watcher', done => {
+  const newValue = 'fooobar'
+
+  state.watch(`blubber.blah`, (newState) => {
+    expect(newState).toBe(newValue);
+    expect(state.get('blubber.blah')).toBe(newValue);
+    done()
+  })
+  state.set('blubber.blah', newValue)
+});
 
