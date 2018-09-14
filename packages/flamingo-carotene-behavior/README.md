@@ -51,15 +51,15 @@ Initialisation is easy.
 
 * Load all your behaviors with globbing
   
-  The babel-way:
-  ```
-  import * as behaviorModules from './../../**/*.behavior.js'
-  ```
+  * The babel-way:
+    ```
+    import * as behaviorModules from './../../**/*.behavior.js'
+    ```
   
-  The webpack-way:
-  ```
-  import behaviorModules from './../../**/*.behavior.js'
-  ```
+  * The webpack-way:
+    ```
+    import behaviorModules from './../../**/*.behavior.js'
+    ```
   
 * Create a behavior Instance, and pass your behaviors to the constructor
   ```
