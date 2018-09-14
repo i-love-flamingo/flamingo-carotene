@@ -16,7 +16,7 @@ const esLint = (core) => {
   let ignoreConfigFilePath = loadConfigPath('.eslintignore',config)
 
   const cmd = `yarn`
-  const parameters = ['eslint', '--config', `${rulesConfigFilePath}`, '--ignore-path', `${ignoreConfigFilePath}`, '--ext', '.js', '.']
+  const parameters = ['eslint', '--config', rulesConfigFilePath, '--ignore-path', ignoreConfigFilePath, '--ext', '.js', '.']
 
   cliTools.info('ESLint - start')
 
@@ -39,10 +39,10 @@ const esLint = (core) => {
     // ignore first result line... - cause its the cmd itself
     let skipLine = false
 
-    // dont need current cmd
-    // if (data.toString().trim().search('\/\.bin\/eslint') !== -1) {
-    //     skipLine = true
-    // }
+    // Don't need current cmd
+    if (data.toString().trim().search('\/\.bin\/eslint') !== -1) {
+        skipLine = true
+    }
 
     if (!skipLine) {
       results.push(data)
@@ -76,14 +76,14 @@ const esLint = (core) => {
  */
 const loadConfigPath = (configName, config) => {
   // trying to find es lint in project folder..
-  let configFile = path.join(config.paths.project, configName)
+  let configFilePath = path.join(config.paths.project, configName)
 
   // if not exists, take standard one
-  if (!fs.existsSync(configFile)) {
-      configFile = path.join(config.paths.esLint, configName)
+  if (!fs.existsSync(configFilePath)) {
+      configFilePath = path.join(config.paths.esLint, configName)
   }
 
-  return configFile
+  return configFilePath
 }
 
 module.exports = esLint
