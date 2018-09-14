@@ -26,7 +26,6 @@ test('state has correct initial values', () => {
 
 test('state watch reports changes correctly', done => {
   const newValue = 15
-
 	state.watch(`bar.foo`, (newState) => {
     expect(newState).toBe(newValue);
     expect(state.get('bar.foo')).toBe(newValue);
@@ -41,7 +40,6 @@ test('unknown state returns undefined', () => {
 
 test('unknown state set triggers watcher', done => {
   const newValue = 'fooobar'
-
   state.watch(`blubber.blah`, (newState) => {
     expect(newState).toBe(newValue);
     expect(state.get('blubber.blah')).toBe(newValue);
