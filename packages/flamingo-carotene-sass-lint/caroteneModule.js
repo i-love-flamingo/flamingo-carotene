@@ -14,6 +14,10 @@ class SassLint {
         }
       },
       {
+        command: 'lint',
+        handler: buildHandler
+      },
+      {
         command: 'buildTemplates',
         handler: buildHandler
       },
