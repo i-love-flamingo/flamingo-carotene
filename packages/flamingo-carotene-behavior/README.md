@@ -45,6 +45,7 @@ The Dom-Element with the data-behavior attribute is passed to the constructor of
 Initialisation is easy.
 
 * Load the Behavior Module 
+
 ```
 import Behavior from 'flamingo-carotene-behavior'
 ```
@@ -52,16 +53,19 @@ import Behavior from 'flamingo-carotene-behavior'
 * Load all your behaviors with globbing
   
   * The babel-way
+
 ```
 import * as behaviorModules from './../../**/*.behavior.js'
 ```
   
   * The webpack-way
+
 ```
 import behaviorModules from './../../**/*.behavior.js'
 ```
   
   * do it manually
+
 ```
 import myBehavior from './foo/bar/myBehavior.js'
 import anotherBehavior from './xxx/yyy/anotherBehavior.js'
@@ -72,6 +76,7 @@ const behaviorModules = {
 ```
   
 * Create a behavior Instance, and pass your behaviors to the constructor
+
 ```
 const behavior = new Behavior(behaviorModules)
 behavior.attachBehaviors() 
