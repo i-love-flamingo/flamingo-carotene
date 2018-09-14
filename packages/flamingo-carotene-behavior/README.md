@@ -54,7 +54,7 @@ Initialisation is easy.
   * The babel-way
     ```
     import * as behaviorModules from './../../**/*.behavior.js'
-   ```
+    ```
   
   * The webpack-way
     ```
