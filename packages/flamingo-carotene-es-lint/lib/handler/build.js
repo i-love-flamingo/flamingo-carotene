@@ -2,21 +2,21 @@ const { spawn } = require('child_process');
 const path = require('path')
 const fs = require('fs')
 
+/**
+ * Executes the es lint
+ * @param core
+ */
 const esLint = (core) => {
 
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
   // trying to find es lint in project folder..
-  let configFile = path.join(config.paths.project, '.eslintrc.js')
+  let rulesConfigFilePath = loadConfigPath('.eslintrc.js', config)
+  let ignoreConfigFilePath = loadConfigPath('.eslintignore',config)
 
-  // if not exists, take standard one
-  if (!fs.existsSync(configFile)) {
-    configFile = path.join(config.paths.esLint, '.eslintrc.js')
-  }
   const cmd = `yarn`
-    // ToDo Add ignore path
-  const parameters = ['eslint', '--config', `${configFile}`, '--ext', '.js', '.']
+  const parameters = ['eslint', '--config', `${rulesConfigFilePath}`, '--ignore-path', `${ignoreConfigFilePath}`, '--ext', '.js', '.']
 
   cliTools.info('ESLint - start')
 
@@ -37,26 +37,19 @@ const esLint = (core) => {
 
   childProcess.stdout.on('data', function (data) {
     // ignore first result line... - cause its the cmd itself
-    // let skipLine = false
-    //
-    // // dont need "yarn run" info
-    // if (data.toString().trim().search('yarn run v') !== -1) {
-    //   skipLine = true
-    // }
-    //
+    let skipLine = false
+
     // dont need current cmd
-    // if (data.toString().trim().search('\/\.bin\/sass-lint --config') !== -1) {
-    //   skipLine = true
+    // if (data.toString().trim().search('\/\.bin\/eslint') !== -1) {
+    //     skipLine = true
     // }
-    //
-    // if (!skipLine) {
-    //   results.push(data)
-    // }
+
+    if (!skipLine) {
       results.push(data)
+    }
   });
 
   childProcess.stderr.on('data', function (data) {
-      console.log(data)
     errors.push(data)
   })
 
@@ -74,6 +67,23 @@ const esLint = (core) => {
       cliTools.info(output)
     }
   });
+}
+
+/**
+ * Loads a config file from the project and if there does not exist such a config file, a default file will be loaded.
+ * @param configName Complete name of the config file which should be loaded.
+ * @param config The config used get the paths.
+ */
+const loadConfigPath = (configName, config) => {
+  // trying to find es lint in project folder..
+  let configFile = path.join(config.paths.project, configName)
+
+  // if not exists, take standard one
+  if (!fs.existsSync(configFile)) {
+      configFile = path.join(config.paths.esLint, configName)
+  }
+
+  return configFile
 }
 
 module.exports = esLint
