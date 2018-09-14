@@ -61,6 +61,16 @@ Initialisation is easy.
     import behaviorModules from './../../**/*.behavior.js'
     ```
   
+  * the manual-way
+    ```
+    import myBehavior from './foo/bar/myBehavior.js'
+    import anotherBehavior from './xxx/yyy/anotherBehavior.js'
+    const behaviorModules = {
+      'myBehavior': myBehavior,
+      'anotherBehavior': anotherBehavior
+    }
+    ```
+  
 * Create a behavior Instance, and pass your behaviors to the constructor
   ```
   const behavior = new Behavior(behaviorModules)
