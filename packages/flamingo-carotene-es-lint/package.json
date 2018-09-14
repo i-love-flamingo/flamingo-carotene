@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-es-lint",
-  "version": "6.0.0-alpha.24",
+  "version": "6.0.0-alpha.25",
   "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "MIT",
@@ -15,6 +15,7 @@
     "test": "eslint"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^2.0.7",
@@ -23,7 +24,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "babel-eslint": "^7.2.3"
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
