@@ -15,6 +15,10 @@ class ESLint {
         }
       },
       {
+        command: 'lint',
+        handler: buildHandler
+      },
+      {
         command: 'buildTemplates',
         handler: buildHandler
       },
