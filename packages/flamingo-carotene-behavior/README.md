@@ -2,7 +2,7 @@
 
 ## Description
 
-The behavior Module is a "Dom-Aware-Component-Loader".
+The behavior Module is a "Dom-Aware-Component-Loader", which loads automaticly js-classes and attach it to a dom-element.
 
 ## What it is for
 
