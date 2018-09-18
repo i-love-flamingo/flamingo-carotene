@@ -25,6 +25,10 @@ class ESLint {
       {
         command: 'build',
         handler: buildHandler
+      },
+      {
+        command: 'buildWebpackJs',
+        handler: buildHandler
       }
     ]
   }

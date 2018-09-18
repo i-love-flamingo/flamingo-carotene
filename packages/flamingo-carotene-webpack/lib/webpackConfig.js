@@ -11,8 +11,6 @@ const postcssConfigFileNames = ['.postcssrc', '.postcssrc.json', '.postcssrc.yml
 
 const browserslistConfigFileNames = ['.browserslistrc', 'browserslist']
 
-const eslintConfigFileNames = ['.eslintrc', '.eslintrc.js', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json']
-
 const babelConfigFileNames = ['.babelrc', '.babelrc.js', 'babel.config.js']
 
 class WebpackConfig {
@@ -24,7 +22,6 @@ class WebpackConfig {
 
     this.postcssConfigDetected = null
     this.browserslistConfigDetected = null
-    this.eslintConfigDetected = null
     this.babelConfigDetected = null
 
     this.detectProjectConfigs()
@@ -37,14 +34,11 @@ class WebpackConfig {
 
     this.detectBrowserslistConfig()
 
-    this.detectEslintConfig()
-
     this.detectBabelConfig()
 
     this.cliTools.info(`Configs detected:\r\n` +
       `        postcss      -> ${this.postcssConfigDetected}\r\n` +
       `        browserslist -> ${this.browserslistConfigDetected}\r\n` +
-      `        eslint       -> ${this.eslintConfigDetected}\r\n` +
       `        babel        -> ${this.babelConfigDetected}`, true)
   }
 
@@ -61,17 +55,6 @@ class WebpackConfig {
     }
 
     this.browserslistConfigDetected = this.isOneOfFilesExistingInProjectRoot(browserslistConfigFileNames)
-  }
-
-  detectEslintConfig () {
-    this.eslintConfigDetected = false
-
-    if (this.projectPackageJson.hasOwnProperty('eslintConfig')) {
-      this.eslintConfigDetected = true
-      return
-    }
-
-    this.eslintConfigDetected = this.isOneOfFilesExistingInProjectRoot(eslintConfigFileNames)
   }
 
   detectBabelConfig () {
@@ -247,15 +230,6 @@ class WebpackConfig {
       },
       'import-glob'
     ]
-
-    if (this.eslintConfigDetected) {
-      loaders.push({
-        loader: 'eslint-loader',
-        // options: {
-        //   parser: 'babel-eslint',
-        // }
-      })
-    }
 
     return loaders
   }

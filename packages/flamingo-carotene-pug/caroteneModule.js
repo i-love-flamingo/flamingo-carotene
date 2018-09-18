@@ -3,17 +3,19 @@ const path = require('path')
 // const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
 
+
+
 // class CarotenePug extends CaroteneModule {
 class CarotenePug {
   constructor (core) {
     // super(core)
+    const config = core.getConfig()
 
     this.listeners = [
       {
         command: 'config',
         priority: 100,
         handler: function (core) {
-          const config = core.getConfig()
 
           config.paths.pug = {
             src: path.join(config.paths.src, 'pug'),
@@ -33,6 +35,21 @@ class CarotenePug {
       {
         command: 'build',
         handler: buildHandler
+      },
+      {
+        command: 'watchPugBuild',
+        handler: buildHandler
+      }
+    ]
+
+    this.watcher = [
+      {
+        'watchId': 'pug',
+        'path': [
+          path.join(config.paths.src, '**', '*.pug'),
+        ],
+        'command': 'watchPugBuild',
+        'callbackKey': 'pug'
       }
     ]
   }
@@ -40,6 +57,11 @@ class CarotenePug {
   getListeners () {
     return this.listeners
   }
+
+  getWatcherForDevServer () {
+    return this.watcher
+  }
+
 }
 
 module.exports = CarotenePug

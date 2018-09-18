@@ -18,6 +18,10 @@ class SassLint {
         handler: buildHandler
       },
       {
+        command: 'buildWebpackCss',
+        handler: buildHandler
+      },
+      {
         command: 'buildTemplates',
         handler: buildHandler
       },

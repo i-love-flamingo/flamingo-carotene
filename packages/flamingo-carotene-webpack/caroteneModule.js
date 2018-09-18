@@ -10,12 +10,13 @@ class CaroteneWebpack {
   constructor (core) {
     // super(core)
 
+    const config = core.getConfig()
+
     this.listeners = [
       {
         command: 'config',
         priority: 100,
         handler: function (core) {
-          const config = core.getConfig()
 
           config.paths['webpack'] = {}
           config.paths.webpack['src'] = config.paths.src
@@ -59,10 +60,33 @@ class CaroteneWebpack {
         handler: buildHandlerCss
       }
     ]
+
+    this.watcher = [
+      {
+        'watchId': 'webpackSass',
+        'path': [
+          path.join(config.paths.src, '**', '*.sass'),
+        ],
+        'command': 'buildWebpackCss',
+        'callbackKey': 'webpack'
+      },
+      {
+        'watchId': 'webpackJs',
+        'path': [
+          path.join(config.paths.src, '**', '*.js'),
+        ],
+        'command': 'buildWebpackJs',
+        'callbackKey': 'webpack'
+      }
+    ]
   }
 
   getListeners() {
     return this.listeners
+  }
+
+  getWatcherForDevServer () {
+    return this.watcher
   }
 }
 
