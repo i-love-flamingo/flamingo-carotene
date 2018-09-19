@@ -2,11 +2,11 @@
 
 ## Description
 
-The behavior Module is a "Dom-Aware-Component-Loader", which loads automaticly js-classes and attach it to a dom-element.
+The behavior Module is a "DOM-aware" component loader, which loads js-classes automatically and attaches them to dom-elements.
 
 ## What it is for
 
-Given, you've got a DOM Structure like this: 
+Given, you've got a DOM structure like this: 
 ```
 <div>
     <h1>Click here to see the collapsible content</h1>
@@ -14,7 +14,7 @@ Given, you've got a DOM Structure like this:
 </div>
 ```
     
-And you want to add some javascript behavior to the headline element, to toggle visibility of the content element.
+And you want to add some javascript behavior to the headline element to toggle visibility of the content element.
 
 Simply add "data-behavior"-attribute to the element group     
 ```
@@ -24,7 +24,7 @@ Simply add "data-behavior"-attribute to the element group
 </div>
 ```
 
-After that create an ES6 Class with the name of the data-attribute (in that case "collapsible")
+After that create an ES6 class with the name of the data-attribute (in that case "collapsible")
 
 ```
 export default class Collapsible {
@@ -38,13 +38,13 @@ export default class Collapsible {
   }
 }
 ```
-Note: The NAME of the class is important here!
-The Dom-Element with the data-behavior attribute is passed to the constructor of your class.
+**Note:** The NAME of the class is important here!
+The DOM element with the data-behavior attribute is passed to the constructor of your class.
 
 ## How to initialize
 Initialisation is easy.
 
-### Load the Behavior Module 
+### Load the behavior module 
 
 ```
 import Behavior from 'flamingo-carotene-behavior'
@@ -75,7 +75,7 @@ const behaviorModules = {
 }
 ```
   
-### Create a behavior Instance, and pass your behaviors to the constructor
+### Create a behavior instance and pass your behaviors to the constructor
 
 ```
 const behavior = new Behavior(behaviorModules)
@@ -86,10 +86,10 @@ Done!
 
 ## Debugging
 
-If you've got strange results or behaviors of the Behavior Module it is worth to turn on debugging console messages.
+If you've got strange results or behaviors of the behavior module, it is worth to turn on debugging console messages.
 Simply add
 ```
 behavior.setDebug(true)
 ```
-after createing the behavior instance.
+after creating the behavior instance.
 

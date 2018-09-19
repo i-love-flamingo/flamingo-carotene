@@ -2,7 +2,7 @@
 
 ## Description
 
-The state-manager gives you the possibility to set and get states and watch changes.
+The state-manager gives you the possibility to set and get states, and watch changes.
 
 
 ## How to initialize
@@ -15,7 +15,7 @@ import state from 'flamingo-carotene-state-manager'
 Note: The state-manager is a singleton and already returns an instance but a class.
 
 
-### Creating Initial State
+### Creating initial state
 ```
 const initialState = {
  {
@@ -30,7 +30,7 @@ const initialState = {
 }
 ```
 
-### Initialize Class with initial State 
+### Initialize class with initial state 
 
 ```
 state.init(initialState)
@@ -41,7 +41,7 @@ state.init(initialState)
 ### Getting a state
 
 You can get a value of a state by using "get()".
-The first parameter is a '.'-notated path of the value inside the state object
+The first parameter is a '.'-notated path of the value inside the state object.
 ```
 state.get('bar.baz')
 ```
@@ -64,5 +64,5 @@ state.watch(`baz.data`, (newValue) => {
 })
 ```
 
-Note that the newValue is an immutable. So you cant change the state by changing newValue inside the watcher.
-To change states, always call "set()" 
+Note that the newValue is an immutable. So you can't change the state by changing newValue inside the watcher.
+To change states, always call "set()". 
