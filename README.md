@@ -1,10 +1,135 @@
 # `flamingo-carotene`
 
 ## Description
-@TODO
+Flamingo Carotene is a collection of packages, which are "self-registered" - and can be combined by personal or project needs.
+
+There are basicly 2 kind of flamingo-carotene packages:
+
+* __Builder and Build-Helper__
+  
+  Which can handle some jobs in you build process.
+
+  Examples:
+  * flamingo-carotene-es-lint
+  * flamingo-carotene-webfont
+  
+* __Browser Modules__
+
+  Which runs in the browser, and should be part of your project (if needed)
+
+  Examples:
+  * flamingo-carotene-behavior
+  * flamingo-carotene-state-manager
+  
+You can easly add a package to your project with:
+```
+yarn add [PACKAGE-NAME]
+``` 
+Example:
+```
+yarn add flamingo-carotene-es-lint  
+``` 
 
 ## How to create a new module
-@TODO
+
+If you want to create a new package, the best way to start is to copy one module, which has the same scope.
+
+You need to be sure, that following exists:
+* ```npm.rc```
+* ```package.json```
+  with 
+  * ```publishConfig```
+  * ```scripts```
+    * ```test```
+    * ```build``` (optional, for browser module)
+* ```caroteneModule.js``` (this is where the magic happens)
+
+### Create the caroteneModule.js - the M stands for Magic
+
+Its simple and its easy!
+
+#### Example Simple Module Skeleton
+
+```
+class MyModuleClass {
+  constructor (core) {
+    this.listeners = [
+      {
+        command: 'config',
+        priority: 100,
+        handler: function (core) {
+          const config = core.getConfig()
+          // add, change or maniplulate some config values here
+        }
+      },
+      {
+        command: 'addBuildCommandTitleHere',
+        handler: function (core) {
+          // do some stuff here
+        }
+      },
+      ...
+    ]
+  }
+
+  getListeners () {
+    return this.listeners
+  }
+}
+
+module.exports = MyModuleClass 
+```
+
+#### Example Module with fileWatcher
+
+```
+class MyModuleClass {
+  constructor (core) {
+    this.listeners = [
+      {
+        command: 'config',
+        priority: 100,
+        handler: function (core) {
+          const config = core.getConfig()
+          // add, change or maniplulate some config values here
+          
+          config.myModule = {
+            callback: null
+          }
+        }
+      },
+      {
+        command: 'watchMyModule',
+        handler: function (core) {
+          // do some stuff here when a file has changed
+        }
+      },
+      ...
+    ]
+
+    this.watcher = [
+      {
+        'watchId': 'myModule',
+        'path': [
+          path.join(config.paths.src, '**', '*.foo')
+        ],
+        'command': 'watchMyModule',
+        'callbackKey': 'myModule'
+      }
+    ]
+  }
+
+  getListeners () {
+    return this.listeners
+  }
+
+  getWatcherForDevServer () {
+    return this.watcher
+  }
+}
+
+module.exports = MyModuleClass
+```
 
 ## How to publish
 
