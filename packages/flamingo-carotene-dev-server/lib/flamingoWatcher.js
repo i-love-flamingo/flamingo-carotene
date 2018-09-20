@@ -2,6 +2,9 @@ const chokidar = require('chokidar')
 const path = require('path')
 const fs = require('fs')
 
+/**
+ * This class is a wrapper for a watcher instance
+ */
 class FlamingoWatcher {
 
   /**
@@ -19,14 +22,31 @@ class FlamingoWatcher {
     this.watchPaths = watchPaths
     this.callbackKey = callbackKey
     this.command = command
+
+    // instance of chokidar
     this.watcher = null;
+
+    // flag, if this watcher is currently running a build
     this.buildInProgress = false
+
+    // flag, if the watcher needs to rerun after the build is finished
     this.rerunAfterBuild = false
+
+    // flamingo-carotene-core
     this.core = core
+
+    // buffer, where a original callback is stored, as long as it is overwritten
     this.oldCallback = null
+
+    // carotene dispatcher
     this.dispatcher = core.getDispatcher()
+
+    // carotene cliTools
     this.cliTools = core.getCliTools()
+
+    // if a build is triggered, the file-path, which has trigger the change
     this.currentChangedPath = ''
+
     this.initialize()
   }
 
@@ -43,7 +63,8 @@ class FlamingoWatcher {
    */
   initialize () {
     // setup watcher
-    const isWindows = (process.platform === "win32");
+    console.log(process.platform)
+    const isWindows = (process.platform === "win32" || process.platform === "linux");
     this.watcher = chokidar.watch(this.watchPaths, {
       ignored: /(^|[\/\\])\../, // dot files or folders
       usePolling: isWindows,
@@ -65,7 +86,7 @@ class FlamingoWatcher {
     }
 
     // append SocketIO to webpackJs
-    if (this.watchId === 'webpackJs') {
+    if (this.watchId === 'watchWebpackJs') {
       // check if current dist build IS already a dev build...
       // - If not trigger build
       if (!fs.existsSync(this.getDevBuildFileName())) {
@@ -90,7 +111,10 @@ class FlamingoWatcher {
     return path.join(config.paths.dist, 'isDevBuild')
   }
 
-  /** Appends SocketIO lib to build JS */
+  /**
+   * Appends SocketIO lib to JS
+   * This is needed to autoreload Browser via Websocket on buildchange.
+   */
   appendSocketId () {
     const config = this.core.getConfig()
     const entryNames = Object.keys(config.webpackConfig.entry)
@@ -150,7 +174,6 @@ class FlamingoWatcher {
     // reload browser
     this.watcherCaroteneModule.reportBuildStateToClient()
 
-
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {
       this.rerunAfterBuild = false
@@ -158,7 +181,6 @@ class FlamingoWatcher {
       this.buildOnChange(this.currentChangedPath)
     }
   }
-
 }
 
 module.exports = FlamingoWatcher

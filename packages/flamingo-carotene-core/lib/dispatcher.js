@@ -36,18 +36,6 @@ class Dispatcher {
       listener.handler(core)
     }
   }
-
-  dispatchWatcher () {
-    const modules = core.getModules()
-    let watcherList = []
-    for (const module of modules) {
-      if (typeof module.getWatcherForDevServer === 'function') {
-        const watcher = module.getWatcherForDevServer()
-        watcherList = [...watcherList, ...watcher];
-      }
-    }
-    return watcherList
-  }
 }
 
 module.exports = Dispatcher

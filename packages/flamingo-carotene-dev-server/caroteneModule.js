@@ -25,8 +25,7 @@ class CaroteneDevServer {
       {
         command: 'dev',
         handler: (core) => {
-          this.dispatcher = core.getDispatcher();
-          const watcherConfigList = this.dispatcher.dispatchWatcher();
+          const watcherConfigList = this.getWatcherConfiguration();
 
           io.on('connection', (client) => {
             // console.info(`Connected to client: ${client.id}`)
@@ -39,6 +38,18 @@ class CaroteneDevServer {
         }
       }
     ]
+  }
+
+  getWatcherConfiguration () {
+    const modules = this.core.getModules()
+    let watcherList = []
+    for (const module of modules) {
+      if (typeof module.getWatcherForDevServer === 'function') {
+        const watcher = module.getWatcherForDevServer()
+        watcherList = [...watcherList, ...watcher];
+      }
+    }
+    return watcherList
   }
 
   // report build state to client
