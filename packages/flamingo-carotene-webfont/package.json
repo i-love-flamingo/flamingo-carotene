@@ -12,7 +12,7 @@
     "om3"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"No tests present\""
   },
   "dependencies": {
     "webfont-webpack-plugin": "^0.2.2"

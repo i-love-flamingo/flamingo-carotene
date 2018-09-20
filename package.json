@@ -15,7 +15,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"No tests yet\"",
+    "test": "./script/testPackages",
     "lint": "eslint --ignore-path .eslintignore --ext .js packages/",
     "publish-packages": "./script/publish"
   },

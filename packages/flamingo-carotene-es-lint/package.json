@@ -12,7 +12,7 @@
     "om3"
   ],
   "scripts": {
-    "test": "eslint"
+    "test": "echo \"No tests present\""
   },
   "dependencies": {
     "babel-eslint": "^7.2.3",

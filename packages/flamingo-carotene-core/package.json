@@ -16,7 +16,7 @@
     "flamingo-carotene": "./bin/flamingoCarotene.js"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"No tests present\""
   },
   "dependencies": {
     "chalk": "^2.4.1",
