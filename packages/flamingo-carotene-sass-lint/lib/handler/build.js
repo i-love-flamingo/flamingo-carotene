@@ -73,6 +73,11 @@ const sassLint = (core) => {
     else {
       cliTools.info(output)
     }
+
+    if (config.sassLint.breakOnError && errors.length > 0) {
+      core.reportError(`SassLint report errors.`);
+    }
+
   });
 }
 

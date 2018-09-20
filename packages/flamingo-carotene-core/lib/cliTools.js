@@ -92,7 +92,6 @@ class CliTools {
    */
   exit (code) {
     code = code || 0
-
     process.exit(code)
   }
 }

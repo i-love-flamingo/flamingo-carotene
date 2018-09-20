@@ -11,6 +11,10 @@ class SassLint {
         handler: function (core) {
           const config = core.getConfig()
           config.paths.sassLint = __dirname
+          if (!config.sassLint) {
+            config.sassLint = {}
+          }
+          config.sassLint.breakOnError = false
         }
       },
       {
@@ -18,7 +22,7 @@ class SassLint {
         handler: buildHandler
       },
       {
-        command: 'buildWebpackCss',
+        command: 'watchWebpackCss',
         handler: buildHandler
       },
       {
@@ -27,7 +31,11 @@ class SassLint {
       },
       {
         command: 'build',
-        handler: buildHandler
+        handler: function(core) {
+          const config = core.getConfig()
+          config.sassLint.breakOnError = true
+          buildHandler(core)
+        }
       }
     ]
   }

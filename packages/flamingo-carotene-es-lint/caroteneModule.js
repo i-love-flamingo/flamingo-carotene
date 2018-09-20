@@ -11,6 +11,11 @@ class ESLint {
         priority: 100,
         handler: function (core) {
           const config = core.getConfig()
+
+          if (!config.eslint) {
+            config.eslint = {}
+          }
+          config.eslint.breakOnError = false
           config.paths.esLint = __dirname
         }
       },
@@ -24,10 +29,14 @@ class ESLint {
       },
       {
         command: 'build',
-        handler: buildHandler
+        handler: function(core) {
+          const config = core.getConfig()
+          config.eslint.breakOnError = true
+          buildHandler(core)
+        }
       },
       {
-        command: 'buildWebpackJs',
+        command: 'watchWebpackJs',
         handler: buildHandler
       }
     ]

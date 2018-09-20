@@ -37,7 +37,7 @@ class CarotenePug {
         handler: buildHandler
       },
       {
-        command: 'watchPugBuild',
+        command: 'watchPug',
         handler: buildHandler
       }
     ]
@@ -48,7 +48,7 @@ class CarotenePug {
         'path': [
           path.join(config.paths.src, '**', '*.pug'),
         ],
-        'command': 'watchPugBuild',
+        'command': 'watchPug',
         'callbackKey': 'pug'
       }
     ]

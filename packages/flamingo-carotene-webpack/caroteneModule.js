@@ -58,6 +58,14 @@ class CaroteneWebpack {
       {
         command: 'buildWebpackCss',
         handler: buildHandlerCss
+      },
+      {
+        command: 'watchWebpackJs',
+        handler: buildHandlerJs
+      },
+      {
+        command: 'watchWebpackCss',
+        handler: buildHandlerCss
       }
     ]
 
@@ -67,7 +75,7 @@ class CaroteneWebpack {
         'path': [
           path.join(config.paths.src, '**', '*.sass'),
         ],
-        'command': 'buildWebpackCss',
+        'command': 'watchWebpackCss',
         'callbackKey': 'webpack'
       },
       {
@@ -75,7 +83,7 @@ class CaroteneWebpack {
         'path': [
           path.join(config.paths.src, '**', '*.js'),
         ],
-        'command': 'buildWebpackJs',
+        'command': 'watchWebpackJs',
         'callbackKey': 'webpack'
       }
     ]

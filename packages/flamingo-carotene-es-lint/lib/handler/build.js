@@ -66,6 +66,10 @@ const esLint = (core) => {
     else {
       cliTools.info(output)
     }
+
+    if (config.eslint.breakOnError && errors.length > 0) {
+      core.reportError(`ESLint report errors.`);
+    }
   });
 }
 

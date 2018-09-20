@@ -6,7 +6,10 @@ let cliTools = null
 let dispatcher = null
 let modules = null
 
+let errors = []
+
 class Core {
+
   getConfig () {
     if (config !== null) {
       return config
@@ -38,6 +41,18 @@ class Core {
     dispatcher = new Dispatcher()
 
     return dispatcher
+  }
+
+  reportError (error) {
+    errors.push(error)
+  }
+
+  getErrors () {
+    return errors
+  }
+
+  hasErrors () {
+    return (errors.length > 0)
   }
 
   getModules () {
