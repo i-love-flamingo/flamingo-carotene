@@ -13,7 +13,7 @@
   ],
   "main": "dist/behavior.js",
   "scripts": {
-    "build": "mkdir -p lib & yarn babel src/behavior.js -o dist/behavior.js",
+    "build": "mkdir -p dist & yarn babel src/behavior.js -o dist/behavior.js",
     "test": "jest"
   },
   "devDependencies": {
