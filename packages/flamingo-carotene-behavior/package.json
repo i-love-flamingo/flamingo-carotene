@@ -11,9 +11,9 @@
     "carotene",
     "om3"
   ],
-  "main": "lib/behavior.js",
+  "main": "dist/behavior.js",
   "scripts": {
-    "build": "mkdir -p lib & yarn babel src/behavior.js -o lib/behavior.js",
+    "build": "mkdir -p lib & yarn babel src/behavior.js -o dist/behavior.js",
     "test": "jest"
   },
   "devDependencies": {

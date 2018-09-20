@@ -11,9 +11,9 @@
     "carotene",
     "om3"
   ],
-  "main": "lib/stateManager.js",
+  "main": "dist/stateManager.js",
   "scripts": {
-    "build": "mkdir -p lib & yarn babel src/stateManager.js -o lib/stateManager.js",
+    "build": "mkdir -p lib & yarn babel src/stateManager.js -o dist/stateManager.js",
     "test": "jest"
   },
   "dependencies": {

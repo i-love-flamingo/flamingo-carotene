@@ -16,9 +16,21 @@
   ],
   "scripts": {
     "test": "echo \"No tests yet\"",
+    "lint": "eslint --ignore-path .eslintignore --ext .js packages/",
     "publish-packages": "./script/publish"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-html": "^2.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-config-i-am-meticulous": "^11.0.0",
     "glob": "^7.1.2",
     "lerna": "^3.1.2",
     "shelljs": "^0.8.2"
