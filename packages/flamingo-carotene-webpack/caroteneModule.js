@@ -17,7 +17,6 @@ class CaroteneWebpack {
         command: 'config',
         priority: 100,
         handler: function (core) {
-
           config.paths['webpack'] = {}
           config.paths.webpack['src'] = config.paths.src
           config.paths.webpack['dist'] = config.paths.dist
@@ -73,7 +72,7 @@ class CaroteneWebpack {
       {
         'watchId': 'webpackSass',
         'path': [
-          path.join(config.paths.src, '**', '*.sass'),
+          path.join(config.paths.src, '**', '*.sass')
         ],
         'command': 'watchWebpackCss',
         'callbackKey': 'webpack'
@@ -81,7 +80,7 @@ class CaroteneWebpack {
       {
         'watchId': 'webpackJs',
         'path': [
-          path.join(config.paths.src, '**', '*.js'),
+          path.join(config.paths.src, '**', '*.js')
         ],
         'command': 'watchWebpackJs',
         'callbackKey': 'webpack'
@@ -89,7 +88,7 @@ class CaroteneWebpack {
     ]
   }
 
-  getListeners() {
+  getListeners () {
     return this.listeners
   }
 

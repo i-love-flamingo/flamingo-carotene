@@ -1,9 +1,8 @@
-const { spawn } = require('child_process');
+const { spawn } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
 const sassLint = (core) => {
-
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
@@ -27,7 +26,7 @@ const sassLint = (core) => {
     cmd,
     parameters,
     {
-      env : spawnEnv
+      env: spawnEnv
     }
   )
 
@@ -47,38 +46,34 @@ const sassLint = (core) => {
     }
 
     // dont need current cmd
-    if (data.toString().trim().search('\/\.bin\/sass-lint --config') !== -1) {
+    if (data.toString().trim().search('/.bin/sass-lint --config') !== -1) {
       skipLine = true
     }
 
     if (!skipLine) {
       results.push(data)
     }
-  });
+  })
 
   childProcess.stderr.on('data', function (data) {
     errors.push(data)
   })
 
-
   childProcess.on('exit', (code) => {
-
     let output = 'SassLint - end\n'
     output += results.join('\n').trim()
     output += errors.join('\n').trim()
 
     if (code !== 0) {
       cliTools.warn(output)
-    }
-    else {
+    } else {
       cliTools.info(output)
     }
 
     if (config.sassLint.breakOnError && errors.length > 0) {
-      core.reportError(`SassLint report errors.`);
+      core.reportError(`SassLint report errors.`)
     }
-
-  });
+  })
 }
 
 module.exports = sassLint

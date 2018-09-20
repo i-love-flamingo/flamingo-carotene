@@ -6,7 +6,6 @@ const fs = require('fs')
  * This class is a wrapper for a watcher instance
  */
 class FlamingoWatcher {
-
   /**
    *
    * @param core - flamingo carotene core
@@ -15,8 +14,7 @@ class FlamingoWatcher {
    * @param command - flamingo carotene command, that will be triggered
    * @param callbackKey - key of config[KEY].callback function, that will be called
    */
-  constructor (watcherCaroteneModule, core, watchId, watchPaths, command, callbackKey)
-  {
+  constructor (watcherCaroteneModule, core, watchId, watchPaths, command, callbackKey) {
     this.watcherCaroteneModule = watcherCaroteneModule
     this.watchId = watchId
     this.watchPaths = watchPaths
@@ -24,7 +22,7 @@ class FlamingoWatcher {
     this.command = command
 
     // instance of chokidar
-    this.watcher = null;
+    this.watcher = null
 
     // flag, if this watcher is currently running a build
     this.buildInProgress = false
@@ -64,10 +62,10 @@ class FlamingoWatcher {
   initialize () {
     // setup watcher
     console.log(process.platform)
-    const isWindows = (process.platform === "win32" || process.platform === "linux");
+    const usePolling = (process.platform === 'win32' || process.platform === 'linux')
     this.watcher = chokidar.watch(this.watchPaths, {
-      ignored: /(^|[\/\\])\../, // dot files or folders
-      usePolling: isWindows,
+      ignored: /(^|[/\\])\../, // dot files or folders
+      usePolling: usePolling
     })
 
     // start watcher
@@ -133,16 +131,15 @@ class FlamingoWatcher {
    * @param changedPath
    */
   buildOnChange (changedPath) {
-    this.currentChangedPath = changedPath;
+    this.currentChangedPath = changedPath
     this.cliTools.info(`Watcher-${this.watchId}: Change detected...`)
 
     // if there is a build in progress - que the change and do nothing.
     if (this.isBuildInProgress()) {
       this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`)
       this.rerunAfterBuild = true
-    }
-    // no build in progress? so - build it!
-    else {
+    } else {
+      // no build in progress? so - build it!
       const config = this.core.getConfig()
 
       // save original callback...
@@ -167,7 +164,7 @@ class FlamingoWatcher {
     const config = this.core.getConfig()
 
     // restore old, original callback...
-    config[this.callbackKey].callback = this.oldCallback;
+    config[this.callbackKey].callback = this.oldCallback
 
     this.buildInProgress = false
 

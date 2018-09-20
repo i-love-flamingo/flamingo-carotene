@@ -31,7 +31,7 @@ class SassLint {
       },
       {
         command: 'build',
-        handler: function(core) {
+        handler: function (core) {
           const config = core.getConfig()
           config.sassLint.breakOnError = true
           buildHandler(core)

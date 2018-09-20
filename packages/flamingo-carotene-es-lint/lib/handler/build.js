@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+const { spawn } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
@@ -7,13 +7,12 @@ const fs = require('fs')
  * @param core
  */
 const esLint = (core) => {
-
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
   // trying to find es lint in project folder..
   let rulesConfigFilePath = loadConfigPath('.eslintrc.js', config)
-  let ignoreConfigFilePath = loadConfigPath('.eslintignore',config)
+  let ignoreConfigFilePath = loadConfigPath('.eslintignore', config)
 
   const cmd = `yarn`
   const parameters = ['eslint', '--config', rulesConfigFilePath, '--ignore-path', ignoreConfigFilePath, '--ext', '.js', '.']
@@ -27,7 +26,7 @@ const esLint = (core) => {
     cmd,
     parameters,
     {
-      env : spawnEnv
+      env: spawnEnv
     }
   )
 
@@ -40,37 +39,34 @@ const esLint = (core) => {
     let skipLine = false
 
     // Don't need current cmd
-    if (data.toString().trim().search('\/\.bin\/eslint') !== -1) {
-        skipLine = true
+    if (data.toString().trim().search('/.bin/eslint') !== -1) {
+      skipLine = true
     }
 
     if (!skipLine) {
       results.push(data)
     }
-  });
+  })
 
   childProcess.stderr.on('data', function (data) {
     errors.push(data)
   })
 
-
   childProcess.on('exit', (code) => {
-
     let output = 'ESLint - end\n'
     output += results.join('\n').trim()
     output += errors.join('\n').trim()
 
     if (code !== 0) {
       cliTools.warn(output)
-    }
-    else {
+    } else {
       cliTools.info(output)
     }
 
     if (config.eslint.breakOnError && errors.length > 0) {
-      core.reportError(`ESLint report errors.`);
+      core.reportError(`ESLint report errors.`)
     }
-  });
+  })
 }
 
 /**
@@ -84,7 +80,7 @@ const loadConfigPath = (configName, config) => {
 
   // if not exists, take standard one
   if (!fs.existsSync(configFilePath)) {
-      configFilePath = path.join(config.paths.esLint, configName)
+    configFilePath = path.join(config.paths.esLint, configName)
   }
 
   return configFilePath

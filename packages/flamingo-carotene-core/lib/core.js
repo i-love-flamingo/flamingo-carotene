@@ -9,7 +9,6 @@ let modules = null
 let errors = []
 
 class Core {
-
   getConfig () {
     if (config !== null) {
       return config

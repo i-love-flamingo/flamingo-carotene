@@ -33,8 +33,7 @@ function deepEqualStrict (value1, value2) {
  * Application state manager. Can store application wide state information and publish changes.
  */
 class State {
-
-  constructor() {
+  constructor () {
     this.store = null
   }
 

@@ -6,3 +6,4 @@ tmp
 node_modules
 test
 babel.config.js
+webpackConfig.js

@@ -3,7 +3,6 @@ const buildHandler = require('./lib/handler/build')
 // class CarotenePug extends CaroteneModule {
 class ESLint {
   constructor (core) {
-
     // super(core)
     this.listeners = [
       {
@@ -29,7 +28,7 @@ class ESLint {
       },
       {
         command: 'build',
-        handler: function(core) {
+        handler: function (core) {
           const config = core.getConfig()
           config.eslint.breakOnError = true
           buildHandler(core)

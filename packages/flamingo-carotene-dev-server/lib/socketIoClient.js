@@ -6,4 +6,4 @@ socket.on('connect', function onConnect () {
   console.info(`Connected socket with id: ${socket.id}`)
 })
 
-socket.on('built', () => location.reload())
+socket.on('built', () => window.location.reload())

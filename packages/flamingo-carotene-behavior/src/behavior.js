@@ -2,7 +2,6 @@
  *
  */
 class Behavior {
-
   /**
    * @param listOfBehaviourClasses
    *
@@ -22,7 +21,7 @@ class Behavior {
    *   ...
    * }
    */
-  constructor(behaviourClasses) {
+  constructor (behaviourClasses) {
     /**
      * List of all registered behaviors
      * @type {{}}
@@ -44,8 +43,7 @@ class Behavior {
         if (behaviorClassObject.hasOwnProperty('default')) {
           behaviorClass = behaviorClassObject.default
         }
-      }
-      else {
+      } else {
         // Support for globbing: import * as behaviorModules from '...'
         behaviorClass = behaviorClassObject
       }
@@ -65,7 +63,7 @@ class Behavior {
    * Attachs a Behavior to given domElement (and all children)
    * @param domElement|null
    */
-  attachBehaviors(domElement) {
+  attachBehaviors (domElement) {
     domElement = domElement || document
     const allElements = domElement.querySelectorAll('[data-behavior]')
 
@@ -78,7 +76,7 @@ class Behavior {
    * Detach all Behaviors to given domElement (and all children)
    * @param domElement
    */
-  detachBehaviors(domElement) {
+  detachBehaviors (domElement) {
     domElement = domElement || document
     const allElements = domElement.querySelectorAll('[data-behavior]')
     for (let behaviorElement of allElements) {
@@ -91,7 +89,7 @@ class Behavior {
    * @param domElement
    * @returns {*}
    */
-  getBehaviorFromElement(domElement) {
+  getBehaviorFromElement (domElement) {
     let instance = null
 
     if (domElement.hasOwnProperty('nodeType')) {
@@ -111,7 +109,7 @@ class Behavior {
    * Attachs a behavior to a given dom element
    * @param domElement
    */
-  _attachBehaviorToDom(domElement) {
+  _attachBehaviorToDom (domElement) {
     const instance = this.getBehaviorFromElement(domElement)
     if (instance) {
       if (this.debug) {
@@ -129,14 +127,14 @@ class Behavior {
       return
     }
 
-    const behaviorClass = this.behaviors[behaviorName]
+    const BehaviorClass = this.behaviors[behaviorName]
     if (this.debug) {
       console.info(`Behavior: attachBehaviorToElement: Initialize behavior "${behaviorName}" on domElement`, domElement)
     }
 
     domElement.behaviorInstance = {
       name: behaviorName,
-      behavior: new behaviorClass(domElement)
+      behavior: new BehaviorClass(domElement)
     }
   }
 
@@ -144,7 +142,7 @@ class Behavior {
    * Detach a behavior from a given dom element
    * @param domElement
    */
-  _detachBehaviorsToDom(domElement) {
+  _detachBehaviorsToDom (domElement) {
     const instance = this.getBehaviorFromElement(domElement)
     if (!instance) {
       if (this.debug) {
@@ -186,7 +184,7 @@ class Behavior {
    * @param {string} behaviorName
    * @returns {string}
    */
-  _sanitizeName(behaviorName) {
+  _sanitizeName (behaviorName) {
     return behaviorName.toLowerCase()
   }
 
@@ -194,10 +192,9 @@ class Behavior {
    * Enables Debug Mode
    * @param state {boolean}
    */
-  setDebug(state) {
+  setDebug (state) {
     this.debug = state
   }
-
 }
 
 module.exports = Behavior
