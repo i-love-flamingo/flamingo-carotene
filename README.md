@@ -35,18 +35,18 @@ yarn add flamingo-carotene-es-lint
 If you want to create a new package, the best way to start is to copy one module, which has the same scope.
 
 You need to be sure, that following exists:
-* ```npm.rc```
-* ```package.json```
+* `.npmrc`
+* `package.json`
   with 
-  * ```publishConfig```
-  * ```scripts```
-    * ```test```
-    * ```build``` (optional, for browser module)
-* ```caroteneModule.js``` (this is where the magic happens)
+  * `publishConfig`
+  * `scripts`
+    * `test`
+    * `build` (optional, for browser module)
+* `caroteneModule.js` (this is where the magic happens)
 
 ### Create the caroteneModule.js - the M stands for Magic
 
-Its simple and its easy!
+It's simple and its easy!
 
 #### Example Simple Module Skeleton
 
@@ -153,7 +153,7 @@ which iterates over all packages and executes the test script which is defined i
 You can only publish versions if: 
 * Your stuff is lint-error-free!
 * You've executed all tests (and there are no issues)
-* ```git-status``` reports no dirty workspace
+* `git-status` reports no dirty workspace
 
 To publish a new version of flamingo-carotene simply execute
 ```
@@ -163,7 +163,7 @@ It will show you the current version and gives you the ability to select a new o
 While we're in alpha mode, you need to select "Custom Version" - and type in the version number you want to publish. (without the "v" in front).
 
 So - as an example - if the current version is
-```v6.0.0-alpha.29``` you may want to select ```Custom Version``` and type in ```6.0.0-alpha.30```
+`v6.0.0-alpha.29` you may want to select `Custom Version` and type in `6.0.0-alpha.30`
 
 The new Version tag will be pushed, and the CIGitlab /CD Pipeline will start
 https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/pipelines
