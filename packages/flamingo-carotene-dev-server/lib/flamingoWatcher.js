@@ -61,7 +61,6 @@ class FlamingoWatcher {
    */
   initialize () {
     // setup watcher
-    console.log(process.platform)
     const usePolling = (process.platform === 'win32' || process.platform === 'linux')
     this.watcher = chokidar.watch(this.watchPaths, {
       ignored: /(^|[/\\])\../, // dot files or folders
