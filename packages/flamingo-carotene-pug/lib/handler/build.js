@@ -13,27 +13,31 @@ const generateAst = (file, callback) => {
   const templateFilename = path.relative(config.paths.pug.src, file)
   const astFile = path.join(config.paths.pug.dist, templateFilename.replace('.pug', '.ast.json'))
   const content = fs.readFileSync(file, 'utf8')
+  try {
+    pug.compile(content, {
+      filename,
+      basedir: config.paths.src,
+      compileDebug: true,
+      plugins: [
+        {
+          preCodeGen (ast, options) {
+            cliTools.log(`        > ${filename}`, true)
 
-  pug.compile(content, {
-    filename,
-    basedir: config.paths.src,
-    plugins: [
-      {
-        preCodeGen (ast, options) {
-          cliTools.log(`        > ${filename}`, true)
-
-          mkdirp(path.dirname(astFile), () => {
-            const astJson = JSON.stringify(ast, null, ' ').replace(new RegExp(config.paths.src + '/', 'g'), '')
-            fs.writeFile(astFile, astJson, (err, info) => {
-              callback(err, info)
+            mkdirp(path.dirname(astFile), () => {
+              const astJson = JSON.stringify(ast, null, ' ').replace(new RegExp(config.paths.src + '/', 'g'), '')
+              fs.writeFile(astFile, astJson, (err, info) => {
+                callback(err, info)
+              })
             })
-          })
 
-          return ast
+            return ast
+          }
         }
-      }
-    ]
-  })
+      ]
+    })
+  } catch (e) {
+    callback(e, null)
+  }
 }
 
 const pugBuild = (core) => {
@@ -43,6 +47,12 @@ const pugBuild = (core) => {
   const timeStarted = new Date().getTime()
 
   cliTools.info('Pug - start')
+
+  const complete = () => {
+    if (config.pug && typeof config.pug.callback === 'function') {
+      config.pug.callback(core)
+    }
+  }
 
   glob(config.paths.pug.src + config.pug.filesPattern, (error, files) => {
     if (error) {
@@ -56,15 +66,14 @@ const pugBuild = (core) => {
 
     async.mapLimit(files, threadCount, generateAst, (error, results) => {
       if (error) {
-        cliTools.warn(`Error: ${error}`)
+        cliTools.warn(`Pug error:\n${error}`)
+        complete()
         return
       }
 
       cliTools.info(`Pug - end\r\n    Generated ${results.length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
-      if (config.pug && typeof config.pug.callback === 'function') {
-        config.pug.callback(core)
-      }
+      complete()
     })
   })
 }
