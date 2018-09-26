@@ -60,6 +60,8 @@ class FlamingoWatcher {
    * Setup watcher
    */
   initialize () {
+    const config = this.core.getConfig()
+
     // setup watcher
     const usePolling = (process.platform === 'win32' || process.platform === 'linux')
     this.watcher = chokidar.watch(this.watchPaths, {
@@ -67,12 +69,13 @@ class FlamingoWatcher {
       usePolling: usePolling
     })
 
+    this.watcher.unwatch(path.join(config.paths.src, '**', 'fontIcon.sass'))
+
     // start watcher
     this.watcher.on('change', this.buildOnChange.bind(this))
     this.watcher.on('error', error => this.cliTools.warn(error))
 
     // filter basePath in display
-    const config = this.core.getConfig()
     const showWatchPaths = []
     const basePath = config.paths.src
     for (let watchPath of this.watchPaths) {
