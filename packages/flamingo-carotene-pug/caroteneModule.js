@@ -21,7 +21,8 @@ class CarotenePug {
 
           config.pug = {
             filesPattern: '/**/*.pug',
-            callback: null
+            callback: null,
+            breakOnError: false
           }
         }
       },
@@ -31,7 +32,11 @@ class CarotenePug {
       },
       {
         command: 'build',
-        handler: buildHandler
+        handler: function (core) {
+          const config = core.getConfig()
+          config.pug.breakOnError = true
+          buildHandler(core)
+        }
       },
       {
         command: 'watchPug',

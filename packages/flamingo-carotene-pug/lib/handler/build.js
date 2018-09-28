@@ -48,7 +48,15 @@ const pugBuild = (core) => {
 
   cliTools.info('Pug - start')
 
-  const complete = () => {
+  const complete = (error) => {
+    if (error) {
+      cliTools.warn(`Pug error:\n${error}`)
+
+      if (config.pug.breakOnError) {
+        core.reportError('Pug reported error.')
+      }
+    }
+
     if (config.pug && typeof config.pug.callback === 'function') {
       config.pug.callback(core)
     }
@@ -56,7 +64,7 @@ const pugBuild = (core) => {
 
   glob(config.paths.pug.src + config.pug.filesPattern, (error, files) => {
     if (error) {
-      cliTools.warn(`Error: ${error}`)
+      complete(error)
       return
     }
 
@@ -66,8 +74,7 @@ const pugBuild = (core) => {
 
     async.mapLimit(files, threadCount, generateAst, (error, results) => {
       if (error) {
-        cliTools.warn(`Pug error:\n${error}`)
-        complete()
+        complete(error)
         return
       }
 
