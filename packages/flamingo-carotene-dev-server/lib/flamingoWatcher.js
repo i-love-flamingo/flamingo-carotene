@@ -86,7 +86,7 @@ class FlamingoWatcher {
     }
 
     // append SocketIO to webpackJs
-    if (this.watchId === 'watchWebpackJs') {
+    if (this.watchId === 'webpackJs') {
       // check if current dist build IS already a dev build...
       // - If not trigger build
       if (!fs.existsSync(this.getDevBuildFileName())) {
