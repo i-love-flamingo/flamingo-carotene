@@ -60,7 +60,7 @@ function () {
       } // if class has got a name
 
 
-      if (behaviorClass.hasOwnProperty('name')) {
+      if (behaviorClass.name) {
         var className = this._sanitizeName(behaviorClass.name);
 
         this.behaviors[className] = behaviorClass;

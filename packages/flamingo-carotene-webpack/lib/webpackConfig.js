@@ -108,7 +108,7 @@ class WebpackConfig {
             use: this.getStyleLoaders()
           },
           {
-            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            test: /\.(png|jpe?g|gif)(\?.*)?$/,
             include: this.getRulesInclude(),
             use: [
               {
@@ -150,7 +150,10 @@ class WebpackConfig {
           new UglifyJsPlugin({
             cache: true,
             parallel: true,
-            sourceMap: true
+            sourceMap: true,
+            uglifyOptions: {
+              keep_fnames: true
+            }
           }),
         ]
       },

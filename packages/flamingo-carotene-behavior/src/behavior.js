@@ -49,7 +49,7 @@ class Behavior {
       }
 
       // if class has got a name
-      if (behaviorClass.hasOwnProperty('name')) {
+      if (behaviorClass.name) {
         const className = this._sanitizeName(behaviorClass.name)
         this.behaviors[className] = behaviorClass
       }
