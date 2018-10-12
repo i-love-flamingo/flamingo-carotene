@@ -15,7 +15,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "./script/testPackages",
+    "test": "yarn lerna run test",
     "lint": "eslint --ignore-path .eslintignore --ext .js packages/",
     "publish-packages": "./script/publish"
   },
