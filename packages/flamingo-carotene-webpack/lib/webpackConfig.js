@@ -268,9 +268,15 @@ class WebpackConfig {
         }
       })
     }
-
     return loaders.concat([
-      'sass-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          includePaths: [
+            path.join(this.config.paths.project, 'node_modules')
+          ]
+        }
+      },
       'import-glob'
     ])
   }
