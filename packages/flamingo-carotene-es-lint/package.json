@@ -25,5 +25,8 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^4.0.0"
+  },
+  "peerDependencies": {
+    "eslint-config-flamingo-carotene": "^6.0.6"
   }
 }
