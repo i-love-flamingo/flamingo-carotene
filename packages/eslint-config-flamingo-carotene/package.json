@@ -1,18 +1,14 @@
 {
-  "name": "flamingo-carotene-es-lint",
+  "name": "eslint-config-flamingo-carotene",
   "version": "6.0.3",
-  "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
+  "description": "Flamingo carotene ESLint config, following our styleguide",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "MIT",
-  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-es-lint",
-  "keywords": [
-    "flamingo-carotene",
-    "flamingo",
-    "carotene",
-    "om3"
-  ],
-  "scripts": {
-    "test": "echo \"No tests present\""
+  "homepage": "",
+  "license": "ISC",
+  "main": ".eslintrc",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
