@@ -8,5 +8,8 @@
   "repository": {
     "type": "git",
     "url": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git"
+  },
+  "dependencies": {
+    "external-svg-sprite-loader": "^3.4.1"
   }
 }

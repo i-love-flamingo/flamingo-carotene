@@ -10,7 +10,8 @@ class FlamingoCaroteneWebpackSvgSprite {
         command: 'config',
         priority: -10,
         handler: function (core) {
-          config.webpackConfig.module.rules = [
+          // TODO: svgstore configuration must be somehow in the project, find out why.
+          /* config.webpackConfig.module.rules = [
             ...config.webpackConfig.module.rules,
             {
               test: /\.svg$/,
@@ -25,7 +26,6 @@ class FlamingoCaroteneWebpackSvgSprite {
               ]
             }
           ]
-
           const SvgStorePlugin = require('external-svg-sprite-loader/lib/SvgStorePlugin')
           config.webpackConfig.plugins.push(new SvgStorePlugin({
             sprite: {
@@ -35,7 +35,7 @@ class FlamingoCaroteneWebpackSvgSprite {
               deltaY: 20,
               iconHeight: 20
             }
-          }))
+          })) */
         }
       }
     ]
