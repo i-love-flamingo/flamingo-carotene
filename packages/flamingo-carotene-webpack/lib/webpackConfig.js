@@ -108,7 +108,7 @@ class WebpackConfig {
             use: this.getStyleLoaders()
           },
           {
-            test: /\.(png|jpe?g|gif)(\?.*)?$/,
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
             include: this.getRulesInclude(),
             use: [
               {
