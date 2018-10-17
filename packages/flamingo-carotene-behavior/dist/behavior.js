@@ -13,10 +13,10 @@ var Behavior =
 /*#__PURE__*/
 function () {
   /**
-   * @param listOfBehaviourClasses
+   * @param listOfBehaviorClasses
    *
    * Webpack Globbing: import behaviorModules from '*.behavior.js'
-   * behaviourClasses is an array, which holds esModules and a "default" class of behaviors in it
+   * behaviorClasses is an array, which holds esModules and a "default" class of behaviors in it
    * 0: default: named function
    * 1: default: named function
    * ...
@@ -31,7 +31,7 @@ function () {
    *   ...
    * }
    */
-  function Behavior(behaviourClasses) {
+  function Behavior(behaviorClasses) {
     _classCallCheck(this, Behavior);
 
     /**
@@ -45,39 +45,65 @@ function () {
      */
 
     this.debug = false;
-
-    for (var behaviorClassObjectIndex in behaviourClasses) {
-      var behaviorClassObject = behaviourClasses[behaviorClassObjectIndex];
-      var behaviorClass = null; // Support for globbing: import behaviorModules from '...'
-
-      if (behaviorClassObject.hasOwnProperty('__esModule') && behaviorClassObject.__esModule === true) {
-        if (behaviorClassObject.hasOwnProperty('default')) {
-          behaviorClass = behaviorClassObject.default;
-        }
-      } else {
-        // Support for globbing: import * as behaviorModules from '...'
-        behaviorClass = behaviorClassObject;
-      } // if class has got a name
-
-
-      if (behaviorClass.name) {
-        var className = this._sanitizeName(behaviorClass.name);
-
-        this.behaviors[className] = behaviorClass;
-      }
-    }
-
-    if (this.debug) {
-      console.info("Registered behaviors:", this.behaviors);
-    }
+    this.registerBehaviorClasses(behaviorClasses);
   }
   /**
-   * Attachs a Behavior to given domElement (and all children)
-   * @param domElement|null
+   * Add additional behavior implementations after the Behavior object was initialized
+   *
+   * @param behaviorClasses
+   *
+   * Webpack Globbing: import behaviorModules from '*.behavior.js'
+   * behaviorClasses is an array, which holds esModules and a "default" class of behaviors in it
+   * 0: default: named function
+   * 1: default: named function
+   * ...
+   *
+   * OR
+   *
+   * Babel Globbing: import * as behaviorModules from '*.behavior.js'
+   * Object of Classes - result of babel globbing
+   * {
+   *   anyName: named function
+   *   anotherName: named function
+   *   ...
+   * }
    */
 
 
   _createClass(Behavior, [{
+    key: "registerBehaviorClasses",
+    value: function registerBehaviorClasses(behaviorClasses) {
+      for (var behaviorClassObjectIndex in behaviorClasses) {
+        var behaviorClassObject = behaviorClasses[behaviorClassObjectIndex];
+        var behaviorClass = null; // Support for globbing: import behaviorModules from '...'
+
+        if (behaviorClassObject.hasOwnProperty('__esModule') && behaviorClassObject.__esModule === true) {
+          if (behaviorClassObject.hasOwnProperty('default')) {
+            behaviorClass = behaviorClassObject.default;
+          }
+        } else {
+          // Support for globbing: import * as behaviorModules from '...'
+          behaviorClass = behaviorClassObject;
+        } // if class has got a name
+
+
+        if (behaviorClass.name) {
+          var className = this._sanitizeName(behaviorClass.name);
+
+          this.behaviors[className] = behaviorClass;
+        }
+      }
+
+      if (this.debug) {
+        console.info("Registered behaviors:", this.behaviors);
+      }
+    }
+    /**
+     * Attachs a Behavior to given domElement (and all children)
+     * @param domElement|null
+     */
+
+  }, {
     key: "attachBehaviors",
     value: function attachBehaviors(domElement) {
       domElement = domElement || document;

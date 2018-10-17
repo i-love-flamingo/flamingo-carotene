@@ -3,10 +3,10 @@
  */
 class Behavior {
   /**
-   * @param listOfBehaviourClasses
+   * @param listOfBehaviorClasses
    *
    * Webpack Globbing: import behaviorModules from '*.behavior.js'
-   * behaviourClasses is an array, which holds esModules and a "default" class of behaviors in it
+   * behaviorClasses is an array, which holds esModules and a "default" class of behaviors in it
    * 0: default: named function
    * 1: default: named function
    * ...
@@ -21,7 +21,7 @@ class Behavior {
    *   ...
    * }
    */
-  constructor (behaviourClasses) {
+  constructor (behaviorClasses) {
     /**
      * List of all registered behaviors
      * @type {{}}
@@ -34,8 +34,33 @@ class Behavior {
      */
     this.debug = false
 
-    for (let behaviorClassObjectIndex in behaviourClasses) {
-      const behaviorClassObject = behaviourClasses[behaviorClassObjectIndex]
+    this.registerBehaviorClasses(behaviorClasses)
+  }
+
+  /**
+   * Add additional behavior implementations after the Behavior object was initialized
+   *
+   * @param behaviorClasses
+   *
+   * Webpack Globbing: import behaviorModules from '*.behavior.js'
+   * behaviorClasses is an array, which holds esModules and a "default" class of behaviors in it
+   * 0: default: named function
+   * 1: default: named function
+   * ...
+   *
+   * OR
+   *
+   * Babel Globbing: import * as behaviorModules from '*.behavior.js'
+   * Object of Classes - result of babel globbing
+   * {
+   *   anyName: named function
+   *   anotherName: named function
+   *   ...
+   * }
+   */
+  registerBehaviorClasses (behaviorClasses) {
+    for (let behaviorClassObjectIndex in behaviorClasses) {
+      const behaviorClassObject = behaviorClasses[behaviorClassObjectIndex]
       let behaviorClass = null
 
       // Support for globbing: import behaviorModules from '...'
