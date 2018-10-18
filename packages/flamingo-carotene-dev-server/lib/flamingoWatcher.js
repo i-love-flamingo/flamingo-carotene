@@ -56,6 +56,15 @@ class FlamingoWatcher {
     return this.buildInProgress
   }
 
+  removeBasePathFromPath (path) {
+    const config = this.core.getConfig()
+    const basePath = config.paths.src
+    if (path.substr(0, basePath.length) === basePath) {
+      path = path.substr(basePath.length)
+    }
+    return path
+  }
+
   /**
    * Setup watcher
    */
@@ -63,10 +72,10 @@ class FlamingoWatcher {
     const config = this.core.getConfig()
 
     // setup watcher
-    const usePolling = (process.platform === 'win32' || process.platform === 'linux')
+    // const usePolling = (process.platform === 'win32' || process.platform === 'linux')
     this.watcher = chokidar.watch(this.watchPaths, {
       ignored: /(^|[/\\])\../, // dot files or folders
-      usePolling: usePolling
+      // usePolling: usePolling
     })
 
     this.watcher.unwatch(path.join(config.paths.src, '**', 'fontIcon.sass'))
@@ -77,12 +86,8 @@ class FlamingoWatcher {
 
     // filter basePath in display
     const showWatchPaths = []
-    const basePath = config.paths.src
     for (let watchPath of this.watchPaths) {
-      if (watchPath.substr(0, basePath.length) === basePath) {
-        watchPath = watchPath.substr(basePath.length)
-      }
-      showWatchPaths.push(watchPath)
+      showWatchPaths.push(this.removeBasePathFromPath(watchPath))
     }
 
     // append SocketIO to webpackJs
@@ -90,7 +95,7 @@ class FlamingoWatcher {
       // check if current dist build IS already a dev build...
       // - If not trigger build.
       if (!fs.existsSync(this.getDevBuildFileName())) {
-        this.cliTools.info(`Rebuilding JS to inject socketIoClient`)
+        this.cliTools.info(`Rebuilding JS to inject socketIoClient`, true)
         this.dispatcher.dispatchCommand(this.command)
         fs.writeFileSync(this.getDevBuildFileName(), '1')
       }
@@ -99,7 +104,7 @@ class FlamingoWatcher {
     }
 
     // output state in CLI
-    this.cliTools.info(`Watcher-${this.watchId}: listens to ${showWatchPaths.join(', ')} `)
+    this.cliTools.info(`Watcher-${this.watchId}: listens to ${showWatchPaths.join(', ')} `, true)
   }
 
   /**
@@ -134,11 +139,12 @@ class FlamingoWatcher {
    */
   buildOnChange (changedPath) {
     this.currentChangedPath = changedPath
-    this.cliTools.info(`Watcher-${this.watchId}: Change detected...`)
+    const displayChangedPath = this.removeBasePathFromPath(changedPath)
+    this.cliTools.info(`Watcher-${this.watchId}: Change ${displayChangedPath}`, true)
 
     // if there is a build in progress - que the change and do nothing.
     if (this.isBuildInProgress()) {
-      this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`)
+      this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`, true)
       this.rerunAfterBuild = true
     } else {
       // no build in progress? so - build it!
@@ -161,7 +167,7 @@ class FlamingoWatcher {
    * watcher build is finish.
    */
   watcherFinishBuildCallback () {
-    this.cliTools.info(`Watcher-${this.watchId}: Build finished`)
+    this.cliTools.info(`Watcher-${this.watchId}: Build finished`, true)
 
     const config = this.core.getConfig()
 
@@ -176,7 +182,7 @@ class FlamingoWatcher {
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {
       this.rerunAfterBuild = false
-      this.cliTools.info(`Watcher-${this.watchId}: Rebuilding, cause of change while building...`)
+      this.cliTools.info(`Watcher-${this.watchId}: Rebuilding, cause of change while building...`, true)
       this.buildOnChange(this.currentChangedPath)
     }
   }
