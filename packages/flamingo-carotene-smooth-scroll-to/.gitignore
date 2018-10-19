@@ -1,0 +1,9 @@
+.DS_Store
+.cache
+.idea
+.gradle
+.sass-cache
+.temp
+node_modules
+npm-debug.log
+yarn-error.log
