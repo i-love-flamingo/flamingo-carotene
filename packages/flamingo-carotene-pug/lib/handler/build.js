@@ -8,6 +8,22 @@ const pug = require('pug')
 let config
 let cliTools
 
+/**
+ * Resolves extended and included template paths.
+ * Paths that start with a tilde `~` will resolve to the projects `/node_modules/` folder. (usage: `~module-name/path/to/template`)
+ * @param filename
+ * @param source
+ * @param options
+ * @returns {*}
+ */
+const resolveTemplatePath = (filename, source, options) => {
+  if (filename[0] === '~') {
+    return path.join(path.join(config.paths.project, 'node_modules'), filename.slice(1))
+  }
+
+  return path.join(filename[0] === '/' ? options.basedir : path.dirname(source.trim()), filename)
+}
+
 const generateAst = (file, callback) => {
   const filename = path.relative(config.paths.src, file)
   const templateFilename = path.relative(config.paths.pug.src, file)
@@ -20,6 +36,7 @@ const generateAst = (file, callback) => {
       compileDebug: true,
       plugins: [
         {
+          resolve: resolveTemplatePath,
           preCodeGen (ast, options) {
             cliTools.log(`        > ${filename}`, true)
 
