@@ -152,7 +152,7 @@ class WebpackConfig {
             parallel: true,
             sourceMap: true,
             uglifyOptions: {
-              keep_fnames: true
+              keep_fnames: true // Needed for IE11 and behaviors - otherwise the IE cannot differentiate the behavior names
             }
           }),
         ]
