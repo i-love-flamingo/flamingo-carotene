@@ -43,6 +43,11 @@ const esLint = (core) => {
       skipLine = true
     }
 
+    // Skip line when only console codes should be written - should come from the prettified eslint output
+    if (data == '\u001B[2K' || data == '\u001B[1G') {
+      skipLine = true
+    }
+
     if (!skipLine) {
       results.push(data)
     }
@@ -53,9 +58,7 @@ const esLint = (core) => {
   })
 
   childProcess.on('exit', (code) => {
-    let output = 'ESLint - end\n'
-    output += results.join('\n').trim()
-    output += errors.join('\n').trim()
+    const output = ['ESLint - end'].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {
       cliTools.warn(output)

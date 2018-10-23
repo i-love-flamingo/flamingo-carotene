@@ -50,6 +50,11 @@ const sassLint = (core) => {
       skipLine = true
     }
 
+    // Skip line when only console codes should be written - should come from the prettified sass-lint output
+    if (data == '\u001B[2K' || data == '\u001B[1G') {
+      skipLine = true
+    }
+
     if (!skipLine) {
       results.push(data)
     }
@@ -60,9 +65,7 @@ const sassLint = (core) => {
   })
 
   childProcess.on('exit', (code) => {
-    let output = 'SassLint - end\n'
-    output += results.join('\n').trim()
-    output += errors.join('\n').trim()
+    const output = ['SassLint - end'].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {
       cliTools.warn(output)
