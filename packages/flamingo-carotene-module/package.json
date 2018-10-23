@@ -3,7 +3,7 @@
   "version": "6.0.0",
   "description": "> TODO: description",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "MIT",
+  "license": "ISC",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-pug",
   "keywords": [
     "flamingo-carotene",
