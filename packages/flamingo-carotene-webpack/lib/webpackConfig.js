@@ -219,7 +219,10 @@ class WebpackConfig {
     const include = [this.config.paths.src]
 
     if (this.config.webpack.rulesInclude && Array.isArray(this.config.webpack.rulesInclude)) {
-      return include.concat(this.config.webpack.rulesInclude)
+      // Concat the arrays and remove doubles
+      return include.concat(this.config.webpack.rulesInclude).filter(function (value, index, self) {
+        return self.indexOf(value) === index
+      })
     }
 
     return include
