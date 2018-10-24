@@ -29,7 +29,7 @@ class Babel {
           for (const rule of config.webpackConfig.module.rules) {
             if (rule.test.toString() === /\.js$/.toString()) {
               if (rule.use && Object.prototype.toString.call(rule.use).slice(8, -1) !== 'Array') {
-                cliTools.warn('Babel wants to inject its loader into the js loaders \'use\' array, but couldn\'t find it')
+                cliTools.warn('Babel wants to inject its loader into the js\' rules \'use\' array, but couldn\'t find it')
                 return
               }
 
@@ -38,14 +38,14 @@ class Babel {
             }
           }
 
-          cliTools.warn('Babel didn\'t find the js loader to inject its loader')
+          cliTools.warn('Babel didn\'t find the js rule to inject its loader')
         }
       }
     ]
   }
 
   getLoaderOptions () {
-    if (!this.isConfigAvailableInProject) {
+    if (!this.isConfigAvailableInProject()) {
       return {
         presets: ['@babel/preset-env']
       }
