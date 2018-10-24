@@ -7,8 +7,6 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
 
-const browserslistConfigFileNames = ['.browserslistrc', 'browserslist']
-
 class WebpackConfig {
   constructor(core) {
     this.config = core.getConfig()
@@ -16,29 +14,7 @@ class WebpackConfig {
 
     this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
 
-    this.browserslistConfigDetected = null
-
-    this.detectProjectConfigs()
-
     return this.getWebpackConfig()
-  }
-
-  detectProjectConfigs () {
-    this.detectBrowserslistConfig()
-
-    this.cliTools.info(`Configs detected:\r\n` +
-      `        browserslist -> ${this.browserslistConfigDetected}`, true)
-  }
-
-  detectBrowserslistConfig () {
-    this.browserslistConfigDetected = false
-
-    if (this.projectPackageJson.hasOwnProperty('browserslist')) {
-      this.browserslistConfigDetected = true
-      return
-    }
-
-    this.browserslistConfigDetected = this.isOneOfFilesExistingInProjectRoot(browserslistConfigFileNames)
   }
 
   isOneOfFilesExistingInProjectRoot (fileNames) {
