@@ -17,16 +17,6 @@ class WebpackConfig {
     return this.getWebpackConfig()
   }
 
-  isOneOfFilesExistingInProjectRoot (fileNames) {
-    for (const fileName of fileNames) {
-      if (fs.existsSync(path.join(this.config.paths.project, fileName))) {
-        return true
-      }
-    }
-
-    return false
-  }
-
   getWebpackConfig () {
     const webpackConfig = {
       target: 'web',
