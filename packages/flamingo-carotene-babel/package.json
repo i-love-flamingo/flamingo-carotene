@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-babel",
   "version": "0.0.0",
-  "description": "Transpile your code",
+  "description": "Add the babel loader to your webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "ISC",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-babel",
