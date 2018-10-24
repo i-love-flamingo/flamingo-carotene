@@ -1,4 +1,4 @@
-const buildHandler = require('./lib/handler/build')
+const lintHandler = require('./lib/handler/lint')
 
 // class CarotenePug extends CaroteneModule {
 class SassLint {
@@ -19,23 +19,19 @@ class SassLint {
       },
       {
         command: 'lint',
-        handler: buildHandler
-      },
-      {
-        command: 'watchWebpackCss',
-        handler: buildHandler
-      },
-      {
-        command: 'buildTemplates',
-        handler: buildHandler
+        handler: lintHandler
       },
       {
         command: 'build',
         handler: function (core) {
           const config = core.getConfig()
           config.sassLint.breakOnError = true
-          buildHandler(core)
+          lintHandler(core)
         }
+      },
+      {
+        command: 'watchWebpackCss',
+        handler: lintHandler
       }
     ]
   }
