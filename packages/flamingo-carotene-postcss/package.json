@@ -1,0 +1,21 @@
+{
+  "name": "flamingo-carotene-postcss",
+  "version": "0.0.0",
+  "description": "Add the postcss loader to your webpack setup",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "ISC",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-postcss",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "autoprefixer": "^9.1.2",
+    "postcss-loader": "^3.0.0"
+  }
+}

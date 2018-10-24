@@ -7,8 +7,6 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
 
-const postcssConfigFileNames = ['.postcssrc', '.postcssrc.json', '.postcssrc.yml', '.postcssrc.js', 'postcss.config.js']
-
 const browserslistConfigFileNames = ['.browserslistrc', 'browserslist']
 
 class WebpackConfig {
@@ -18,7 +16,6 @@ class WebpackConfig {
 
     this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
 
-    this.postcssConfigDetected = null
     this.browserslistConfigDetected = null
 
     this.detectProjectConfigs()
@@ -27,17 +24,10 @@ class WebpackConfig {
   }
 
   detectProjectConfigs () {
-    this.detectPostcssConfig()
-
     this.detectBrowserslistConfig()
 
     this.cliTools.info(`Configs detected:\r\n` +
-      `        postcss      -> ${this.postcssConfigDetected}\r\n` +
       `        browserslist -> ${this.browserslistConfigDetected}`, true)
-  }
-
-  detectPostcssConfig () {
-    this.postcssConfigDetected = this.isOneOfFilesExistingInProjectRoot(postcssConfigFileNames)
   }
 
   detectBrowserslistConfig () {
@@ -218,27 +208,12 @@ class WebpackConfig {
   }
 
   getStyleLoaders () {
-    const loaders = [
+    return [
       {
         loader: MiniCssExtractPlugin.loader,
         options: this.getMiniCssExtractPluginOptions()
       },
-      'css-loader'
-    ]
-
-    if (this.postcssConfigDetected) {
-      loaders.push('postcss-loader')
-    } else {
-      loaders.push({
-        loader: 'postcss-loader',
-        options: {
-          plugins: [
-            require('autoprefixer')
-          ]
-        }
-      })
-    }
-    return loaders.concat([
+      'css-loader',
       {
         loader: 'sass-loader',
         options: {
@@ -248,7 +223,7 @@ class WebpackConfig {
         }
       },
       'import-glob'
-    ])
+    ]
   }
 
   getMiniCssExtractPluginOptions () {
