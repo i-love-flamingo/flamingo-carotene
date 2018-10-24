@@ -9,15 +9,16 @@ const ignoreFileNames = ['.eslintignore']
 const defaultConfigFileName = '.eslintrc.js'
 const defaultIgnoreFileName = '.eslintignore'
 
-// class CarotenePug extends CaroteneModule {
 class ESLint {
   constructor (core) {
-    // super(core)
+    this.config = core.getConfig()
+    this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
+
     this.listeners = [
       {
         command: 'config',
         priority: 100,
-        handler: function (core) {
+        handler: (core) => {
           const config = core.getConfig()
 
           config.paths.eslint = __dirname
@@ -25,8 +26,8 @@ class ESLint {
           config.eslint = {}
           config.eslint.useWebpackLoader = true
           config.eslint.breakOnError = false
-          config.eslint.configFilePath = getESLintFilePath(configFileNames, defaultConfigFileName, config)
-          config.eslint.ignoreFilePath = getESLintFilePath(ignoreFileNames, defaultIgnoreFileName, config)
+          config.eslint.configFilePath = this.isConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultConfigFileName)
+          config.eslint.ignoreFilePath = this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName)
         }
       },
       {
@@ -46,12 +47,7 @@ class ESLint {
               enforce: 'pre',
               test: /\.js$/,
               use: [
-                {
-                  loader: 'eslint-loader',
-                  options: {
-                    quiet: true
-                  }
-                }
+                'eslint-loader'
               ],
               exclude: /node_modules/
             })
@@ -86,26 +82,35 @@ class ESLint {
     ]
   }
 
+  isConfigAvailableInProject () {
+    if (this.projectPackageJson.hasOwnProperty('eslintConfig')) {
+      return true
+    }
+
+    return this.isOneOfFilesExistingInProjectRoot(configFileNames)
+  }
+
+  isIgnoreConfigAvailableInProject () {
+    if (this.projectPackageJson.hasOwnProperty('eslintIgnore')) {
+      return true
+    }
+
+    return this.isOneOfFilesExistingInProjectRoot(ignoreFileNames)
+  }
+
+  isOneOfFilesExistingInProjectRoot (fileNames) {
+    for (const fileName of fileNames) {
+      if (fs.existsSync(path.join(this.config.paths.project, fileName))) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   getListeners () {
     return this.listeners
   }
-}
-
-/**
- * Loads a config file from the project and if there does not exist such a config file, a default file will be loaded.
- * @param fileNames Array of file names to check
- * @param defaultFileName Name of the default file located in this package
- * @param config The flamingo carotene config
- */
-getESLintFilePath = (fileNames, defaultFileName, config) => {
-  for (const fileName of fileNames) {
-    const filePath = path.join(config.paths.project, fileName)
-    if (fs.existsSync(filePath)) {
-      return filePath
-    }
-  }
-
-  return path.join(config.paths.esLint, defaultFileName)
 }
 
 module.exports = ESLint

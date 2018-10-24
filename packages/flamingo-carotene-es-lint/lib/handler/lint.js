@@ -9,7 +9,7 @@ const eslint = (core) => {
   const config = core.getConfig()
 
   const cmd = `yarn`
-  const parameters = ['eslint', '--config', config.eslint.configFilePath, '--ignore-path', config.eslint.ignoreFilePath, '--ext', '.js', '.']
+  const parameters = getCommandParameters(config)
 
   cliTools.info('ESLint - start')
 
@@ -64,6 +64,31 @@ const eslint = (core) => {
       core.reportError(`ESLint report errors.`)
     }
   })
+}
+
+/**
+ * Get the parameters for the cli lint command
+ * @param config
+ * @returns {string[]}
+ */
+getCommandParameters = function (config) {
+  const parameters = [
+    'eslint'
+  ]
+
+  if (config.eslint.configFilePath !== null) {
+    parameters.push('--config', config.eslint.configFilePath)
+  }
+
+  if (config.eslint.ignoreFilePath !== null) {
+    parameters.push('--ignore-path', config.eslint.ignoreFilePath)
+  }
+
+  return parameters.concat([
+    '--ext',
+    '.js',
+    '.'
+  ])
 }
 
 module.exports = eslint
