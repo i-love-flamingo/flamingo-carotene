@@ -11,8 +11,6 @@ const postcssConfigFileNames = ['.postcssrc', '.postcssrc.json', '.postcssrc.yml
 
 const browserslistConfigFileNames = ['.browserslistrc', 'browserslist']
 
-const babelConfigFileNames = ['.babelrc', '.babelrc.js', 'babel.config.js']
-
 class WebpackConfig {
   constructor(core) {
     this.config = core.getConfig()
@@ -22,7 +20,6 @@ class WebpackConfig {
 
     this.postcssConfigDetected = null
     this.browserslistConfigDetected = null
-    this.babelConfigDetected = null
 
     this.detectProjectConfigs()
 
@@ -34,12 +31,9 @@ class WebpackConfig {
 
     this.detectBrowserslistConfig()
 
-    this.detectBabelConfig()
-
     this.cliTools.info(`Configs detected:\r\n` +
       `        postcss      -> ${this.postcssConfigDetected}\r\n` +
-      `        browserslist -> ${this.browserslistConfigDetected}\r\n` +
-      `        babel        -> ${this.babelConfigDetected}`, true)
+      `        browserslist -> ${this.browserslistConfigDetected}`, true)
   }
 
   detectPostcssConfig () {
@@ -55,17 +49,6 @@ class WebpackConfig {
     }
 
     this.browserslistConfigDetected = this.isOneOfFilesExistingInProjectRoot(browserslistConfigFileNames)
-  }
-
-  detectBabelConfig () {
-    this.babelConfigDetected = false
-
-    if (this.projectPackageJson.hasOwnProperty('babel')) {
-      this.babelConfigDetected = true
-      return
-    }
-
-    this.babelConfigDetected = this.isOneOfFilesExistingInProjectRoot(babelConfigFileNames)
   }
 
   isOneOfFilesExistingInProjectRoot (fileNames) {
@@ -229,25 +212,9 @@ class WebpackConfig {
   }
 
   getJsLoaders () {
-    const loaders = [
-      {
-        loader: 'babel-loader',
-        options: this.getBabelLoaderOptions()
-      },
+    return [
       'import-glob'
     ]
-
-    return loaders
-  }
-
-  getBabelLoaderOptions () {
-    if (!this.babelConfigDetected) {
-      return {
-        presets: ['@babel/preset-env']
-      }
-    }
-
-    return {}
   }
 
   getStyleLoaders () {
