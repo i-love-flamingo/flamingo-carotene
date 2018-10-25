@@ -41,7 +41,28 @@ class PostCSS {
                 return
               }
 
-              const postcssLoaderIndex = rule.use.indexOf('css-loader') + 1
+              // Lookup the css-loader to place PostCSS loader after it
+              let postcssLoaderIndex = null
+              for (let loaderIndex = 0; rule.use.length -1; loaderIndex++) {
+                const loader = rule.use[loaderIndex]
+                if (typeof(loader) === 'string') {
+                  if (loader === 'css-loader') {
+                    postcssLoaderIndex = loaderIndex + 1
+                    break
+                  }
+                  continue
+                }
+
+                if (typeof(loader) === 'object' && loader.loader === 'css-loader') {
+                  postcssLoaderIndex = loaderIndex + 1
+                  break
+                }
+              }
+
+              if (postcssLoaderIndex === null) {
+                cliTools.warn('PostCSS wants to inject its loader after the css-loader, but couldn\'t find it')
+                return
+              }
 
               rule.use.splice(Math.min(rule.use.length, postcssLoaderIndex), 0, loaderConfig)
               return
