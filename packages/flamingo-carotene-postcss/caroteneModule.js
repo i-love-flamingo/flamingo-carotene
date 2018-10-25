@@ -16,22 +16,28 @@ class PostCSS {
           const config = core.getConfig()
           const cliTools = core.getCliTools()
 
+          const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
+
           if (!config.webpackConfig || !config.webpackConfig.module || !config.webpackConfig.module.rules) {
             cliTools.warn('PostCSS is configured to integrate into webpack but there is no webpack config availbale')
             return
           }
 
-          let loaderConfig = 'postcss-loader'
+          const loaderConfig = {
+            loader: 'postcss-loader',
+            options: {}
+          }
 
           if (!this.isConfigAvailableInProject()) {
-            loaderConfig = {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [
-                  require('autoprefixer')
-                ]
-              }
+            loaderConfig.options = {
+              plugins: [
+                require('autoprefixer')
+              ]
             }
+          }
+
+          if (!isProd) {
+            loaderConfig.options.sourceMap = true
           }
 
           for (const rule of config.webpackConfig.module.rules) {
