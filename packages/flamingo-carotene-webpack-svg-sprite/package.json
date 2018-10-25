@@ -5,10 +5,7 @@
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "MIT",
   "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git"
-  },
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-webpack-svg-sprite",
   "dependencies": {
     "external-svg-sprite-loader": "^3.4.1"
   }

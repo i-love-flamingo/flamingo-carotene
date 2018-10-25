@@ -6,10 +6,7 @@
   "homepage": "",
   "license": "ISC",
   "main": ".eslintrc",
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git"
-  },
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/eslint-config-flamingo-carotene",
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "eslint-config-standard": "^12.0.0",
