@@ -174,12 +174,15 @@ class WebpackConfig {
   }
 
   getStyleLoaders () {
-    return [
+    let styleLoaders = [
       {
         loader: MiniCssExtractPlugin.loader,
         options: this.getMiniCssExtractPluginOptions()
       },
-      'css-loader',
+      {
+        loader: 'css-loader',
+        options: {}
+      },
       {
         loader: 'sass-loader',
         options: {
@@ -188,8 +191,19 @@ class WebpackConfig {
           ]
         }
       },
-      'import-glob'
+      {
+        loader: 'import-glob',
+        options: {}
+      }
     ]
+
+    if (!isProd) {
+      styleLoaders.forEach((styleLoader) => {
+        styleLoader.options.sourceMap = true
+      })
+    }
+
+    return styleLoaders
   }
 
   getMiniCssExtractPluginOptions () {
