@@ -1,40 +1,46 @@
 
 { "disallowAttributeConcatenation": null
-, "disallowAttributeInterpolation": true
-, "disallowBlockExpansion": null
-, "disallowClassAttributeWithStaticValue": true
+, "disallowAttributeInterpolation": null
+, "disallowAttributeTemplateString": null
+, "disallowBlockExpansion": true
+, "disallowClassAttributeWithStaticValue": null
 , "disallowClassLiterals": null
 , "disallowClassLiteralsBeforeAttributes": null
-, "disallowClassLiteralsBeforeIdLiterals": null
-, "disallowDuplicateAttributes": true
+, "disallowClassLiteralsBeforeIdLiterals": true
+, "disallowDuplicateAttributes": null
 , "disallowHtmlText": null
-, "disallowIdAttributeWithStaticValue": null
-, "disallowIdLiterals": true
+, "disallowIdAttributeWithStaticValue": true
+, "disallowIdLiterals": null
 , "disallowIdLiteralsBeforeAttributes": null
+, "disallowLegacyMixinCall": true
 , "disallowMultipleLineBreaks": true
 , "disallowSpaceAfterCodeOperator": null
-, "disallowSpacesInsideAttributeBrackets": true
-, "disallowSpecificAttributes": [ { "a": "name" }]
-, "disallowSpecificTags": null
-, "disallowStringConcatenation": true
+, "disallowSpacesInsideAttributeBrackets": null
+, "disallowSpecificAttributes": []
+, "disallowSpecificTags": []
+, "disallowStringConcatenation": null
 , "disallowStringInterpolation": null
 , "disallowTagInterpolation": null
+, "disallowTemplateString": null
+, "disallowTrailingSpaces": true
+, "maximumLineLength": null
 , "maximumNumberOfLines": null
 , "requireClassLiteralsBeforeAttributes": true
-, "requireClassLiteralsBeforeIdLiterals": true
+, "requireClassLiteralsBeforeIdLiterals": null
 , "requireIdLiteralsBeforeAttributes": true
 , "requireLineFeedAtFileEnd": true
 , "requireLowerCaseAttributes": true
 , "requireLowerCaseTags": true
 , "requireSpaceAfterCodeOperator": true
 , "requireSpacesInsideAttributeBrackets": null
-, "requireSpecificAttributes": [ ]
+, "requireSpecificAttributes": []
 , "requireStrictEqualityOperators": true
 , "validateAttributeQuoteMarks": "'"
-, "validateAttributeSeparator": null
+, "validateAttributeSeparator": { "separator": " ", "multiLineSeparator": "\n  " }
 , "validateDivTags": true
 , "validateExtensions": null
 , "validateIndentation": 2
 , "validateLineBreaks": "LF"
 , "validateSelfClosingTags": true
+, "validateTemplateString": true
 }
