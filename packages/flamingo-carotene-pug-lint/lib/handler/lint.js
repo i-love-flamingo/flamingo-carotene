@@ -8,15 +8,15 @@ const pugLint = (core) => {
     const config = core.getConfig()
 
     // trying to find sass lint in project folder..
-    let configFile = path.join(config.paths.project, '.pug-lintrc.json')
+    let configFile = path.join(config.paths.project, '.pug-lintrc.js')
 
     // if not exists, take standard one
     if (!fs.existsSync(configFile)) {
-        configFile = path.join(config.paths.pugLint, '.pug-lintrc.json')
+        configFile = path.join(config.paths.pugLint, '.pug-lintrc.js')
     }
 
     const files = []
-    glob.sync(`${config.paths.src}/**/*.pug`).forEach((file) => {
+    glob.sync(`${config.paths.src}/${config.pugLint.filesPattern}`).forEach((file) => {
         files.push(path.resolve(file))
     })
 
@@ -44,7 +44,7 @@ const pugLint = (core) => {
 
     childProcess.stderr.on('data', function (data) {
         const errorPrefix = `${config.paths.project}/`
-        let lines = data.toString().split("\n").map((line) => {
+        const lines = data.toString().split("\n").map((line) => {
             if (line.includes(errorPrefix)) {
                 return `⚠️   ${line.split(errorPrefix).join('')}`
             }

@@ -1,9 +1,7 @@
 const lintHandler = require('./lib/handler/lint')
 
-// class CarotenePug extends CaroteneModule {
 class PugLint {
   constructor (core) {
-    // super(core)
     this.listeners = [
       {
         command: 'config',
@@ -11,10 +9,11 @@ class PugLint {
         handler: function (core) {
           const config = core.getConfig()
           config.paths.pugLint = __dirname
-          if (!config.pugLint) {
-            config.pugLint = {}
+
+          config.pugLint = {
+            filesPattern: '/**/*.pug',
+            breakOnError: false
           }
-          config.pugLint.breakOnError = false
         }
       },
       {
@@ -28,6 +27,10 @@ class PugLint {
           config.pugLint.breakOnError = true
           lintHandler(core)
         }
+      },
+      {
+          command: 'watchPug',
+          handler: lintHandler
       }
     ]
   }
