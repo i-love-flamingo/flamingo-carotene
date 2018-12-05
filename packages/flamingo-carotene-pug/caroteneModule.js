@@ -15,12 +15,12 @@ class CarotenePug {
         priority: 100,
         handler: function (core) {
           config.paths.pug = {
-            src: path.join(config.paths.src, 'pug'),
-            dist: path.join(config.paths.dist, 'pug')
+            src: path.join(config.paths.src, 'page'),
+            dist: path.join(config.paths.dist, 'template', 'page')
           }
 
           config.pug = {
-            filesPattern: '/**/*.pug',
+            filesPattern: '/{*,.,*/page/*}/{*,*/*.partial}/*.pug',
             callback: null,
             breakOnError: false
           }
