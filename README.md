@@ -5,6 +5,7 @@ Flamingo-Carotene is an easy to use frontend (-tooling) for projects with the Fl
 
 It introduces a modular concept to provide reusable modules and comes with a collection of yarn/npm packages, that provide useful features for frontend development.
 
+Flamingo-Carotene features pug based templating using [atomic design](/docs/atomic-design.md) as well as having the option to use webpack and sass for the frontend build.
 
 The basic goals for flamingo-carotene are:
 * Provide independent frontend development with productivity tools (pug, sass, ES6, …)
