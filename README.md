@@ -1,4 +1,53 @@
-# `flamingo-carotene`
+# Flamingo-Carotene
+
+## What is it ?
+Flamingo-Carotene is an easy to use frontend (-tooling) abstraction for projects with the Flamingo framework.
+
+It introduces a modular concept to provide reusable modules.
+
+
+## How to use it
+First get the [Flamingo-Carotene core module](./packages/flamingo-carotene-core).
+```bash
+yarn add flamingo-carotene-core
+```
+
+Then add any module you like to use from either the [list of official modules](#official-modules) or external ones.
+```bash
+yarn add [flamingo-carotene-module-name] [-D]
+```
+
+## Modules
+The modules generally differ into two types. The one is responsible for the tooling - e.g. to do something in the build
+process, like webpack. The other is used in the code you will deliver - e.g. to add some behavior to your website, like
+state manager.
+
+Every useful config of a module should be exposed to let you configure it to your wishes.
+
+To understand how modules work or if you want to develop and use your own modules read the [how to module](./MODULE.md).
+
+### List of official modules
+- [eslint-config-flamingo-carotene](./packages/eslint-config-flamingo-carotene)
+- [flamingo-carotene-babel](./packages/flamingo-carotene-babel)
+- [flamingo-carotene-behavior](./packages/flamingo-carotene-behavior)
+- [flamingo-carotene-core](./packages/flamingo-carotene-core)
+- [flamingo-carotene-dev-server](./packages/flamingo-carotene-dev-server)
+- [flamingo-carotene-es-lint](./packages/flamingo-carotene-es-lint)
+- [flamingo-carotene-module](./packages/flamingo-carotene-module)
+- [flamingo-carotene-postcss](./packages/flamingo-carotene-postcss)
+- [flamingo-carotene-pug](./packages/flamingo-carotene-pug)
+- [flamingo-carotene-pug-lint](./packages/flamingo-carotene-pug-lint)
+- [flamingo-carotene-sass-lint](./packages/flamingo-carotene-sass-lint)
+- [flamingo-carotene-smooth-scroll-to](./packages/flamingo-carotene-smooth-scroll-to)
+- [flamingo-carotene-state-manager](./packages/flamingo-carotene-state-manager)
+- [flamingo-carotene-webfont](./packages/flamingo-carotene-webfont)
+- [flamingo-carotene-webpack](./packages/flamingo-carotene-webpack)
+- [flamingo-carotene-webpack-svg-sprite](./packages/flamingo-carotene-webpack-svg-sprite)
+
+
+
+
+// Merged content from here -----
 
 ## About Flamingo Carotene
 
@@ -9,6 +58,11 @@ Basic principles of flamingo carotene are:
 1. Indepedent packages: Your are not forced to use "one default" for your project. Instead you can select which feature you want to use. The flamingo carotene packages are well split (having an individual purpose and following high cohasion low coupling principles).
 2. No library lock in: By intention the flamingo-carotene does not force you to use some specific frontend framework (like jquery, vue, angular or react).
 3. Freedom: As a result of 2. it is possible to use any javascript framework you might consider useful for your project.
+
+
+
+
+// Content to work on / split into other files from here -----
 
 There are basicly 2 kind of flamingo-carotene packages:
 
@@ -252,7 +306,8 @@ To publish a new version of flamingo-carotene simply execute
 yarn lerna version
 ```
 It will show you the current version and gives you the ability to select a new one.
-While we're in alpha mode, you need to select "Custom Version" - and type in the version number you want to publish. (without the "v" in front).
+While we're in alpha mode, you need to select "Custom Version" - and type in the version number you want to publish.
+(without the "v" in front).
 
 So - as an example - if the current version is
 `v6.0.0-alpha.29` you may want to select `Custom Version` and type in `6.0.0-alpha.30`
@@ -260,14 +315,5 @@ So - as an example - if the current version is
 The new Version tag will be pushed, and the CIGitlab /CD Pipeline will start
 https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/pipelines
 
-If there are no errors while building, the package will be pushed in the artifactory and is ready to use as dependency in other projects
-   
-
-
-
-
-
-
- 
-
-
+If there are no errors while building, the package will be pushed in the artifactory and is ready to use as dependency
+in other projects
