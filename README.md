@@ -56,7 +56,12 @@ To understand how modules work or if you want to develop and use your own module
 - [flamingo-carotene-webpack](./packages/flamingo-carotene-webpack)
 - [flamingo-carotene-webpack-svg-sprite](./packages/flamingo-carotene-webpack-svg-sprite)
 
+## Flamingo-Carotene and Flamingo
+The generated frontend build artefacts plays well together with the flamingo `pugtemplating` flamingo module.
 
+The following picture illustrates this:
+
+![](docs/carotene-overview.png)
 
 # Getting started
 
