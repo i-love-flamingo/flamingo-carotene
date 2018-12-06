@@ -20,9 +20,10 @@ class CarotenePug {
           }
 
           config.pug = {
-            filesPattern: '/{*,.,*/page/*}/{*,*/*.partial}/*.pug',
+            filesPattern: '/{*,.,*/page/*}/{.,*,*/*.partial}/*.pug',
             callback: null,
-            breakOnError: false
+            breakOnError: false,
+            staticAssetPattern: '/*',
           }
         }
       },

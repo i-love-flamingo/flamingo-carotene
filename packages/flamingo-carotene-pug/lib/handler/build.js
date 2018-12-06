@@ -4,6 +4,7 @@ const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const pug = require('pug')
+const shell = require('shelljs')
 
 let config
 let cliTools
@@ -57,6 +58,21 @@ const generateAst = (file, callback) => {
   }
 }
 
+const copyAsset = (srcFileName, callback) => {
+  const assetSrcBasePath = path.join(config.paths.src,'asset')
+  const assetTargetBasePath = path.join(config.paths.dist,'asset')
+  const relativeFileName = path.relative(assetSrcBasePath, srcFileName)
+  const targetFileName = path.join(assetTargetBasePath, relativeFileName)
+  try {
+    mkdirp(path.dirname(targetFileName), () => {
+      cliTools.log(`        asset > ${srcFileName} to ${targetFileName}`, true)
+    shell.cp(srcFileName, targetFileName)
+  })
+  } catch (e) {
+    callback(e, null)
+  }
+}
+
 const pugBuild = (core) => {
   config = core.getConfig()
   cliTools = core.getCliTools()
@@ -100,6 +116,31 @@ const pugBuild = (core) => {
       complete()
     })
   })
+
+  if (config.pug.staticAssetPattern != "") {
+    const assetSrcBasePath = path.join(config.paths.src,'asset')
+    const assetTargetBasePath = path.join(config.paths.dist,'asset')
+    // Copy assets
+    mkdirp(assetTargetBasePath, function (err) {
+      if (err) console.error(err)
+      glob(assetSrcBasePath + config.pug.staticAssetPattern, (error, files) => {
+          if (error) {
+            complete(error)
+            return
+          }
+          const threadCount = require('os').cpus().length || 2
+          cliTools.info('Pug copy static assets - start')
+        async.mapLimit(files, threadCount, copyAsset, (error, results) => {
+            if (error) {
+              complete(error)
+              return
+            }
+            cliTools.info(`Pug copy static assets - end\r\n   Finished after ${new Date().getTime() - timeStarted}ms`)
+          complete()
+        })
+      })
+    })
+  }
 }
 
 module.exports = pugBuild
