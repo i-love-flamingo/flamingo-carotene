@@ -3,8 +3,8 @@ const path = require('path')
 // const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
 
-// class CarotenePug extends CaroteneModule {
-class CarotenePug {
+// class CaroteneStaticAssets extends CaroteneModule {
+class CaroteneStaticAsset {
   constructor (core) {
     // super(core)
     const config = core.getConfig()
@@ -12,17 +12,11 @@ class CarotenePug {
     this.listeners = [
       {
         command: 'config',
-        priority: 100,
+        priority: 110,
         handler: function (core) {
-          config.paths.pug = {
-            src: path.join(config.paths.src, 'page'),
-            dist: path.join(config.paths.dist, 'template', 'page')
-          }
 
-          config.pug = {
-            filesPattern: '/{*,.,*/page/*}/{.,*,*/*.partial}/*.pug',
-            callback: null,
-            breakOnError: false
+          config.staticAsset = {
+            staticAssetPattern: '/*',
           }
         }
       },
@@ -34,24 +28,23 @@ class CarotenePug {
         command: 'build',
         handler: function (core) {
           const config = core.getConfig()
-          config.pug.breakOnError = true
           buildHandler(core)
         }
       },
       {
-        command: 'watchPug',
+        command: 'watchAsset',
         handler: buildHandler
       }
     ]
 
     this.watcher = [
       {
-        'watchId': 'pug',
+        'watchId': 'static-asset',
         'path': [
-          path.join(config.paths.src, '**', '*.pug')
+          path.join(config.paths.src, 'asset', '**', '*.*')
         ],
-        'command': 'watchPug',
-        'callbackKey': 'pug'
+        'command': 'watchAsset',
+        'callbackKey': 'static-asset'
       }
     ]
   }
@@ -65,4 +58,4 @@ class CarotenePug {
   }
 }
 
-module.exports = CarotenePug
+module.exports = CaroteneStaticAsset
