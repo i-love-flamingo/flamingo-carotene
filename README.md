@@ -9,8 +9,8 @@ Flamingo-Carotene features pug based templating using [atomic design](/docs/atom
 
 The basic goals for flamingo-carotene are:
 * Provide independent frontend development with productivity tools (pug, sass, ES6, …)
-* Provide standalone build of JS, CSS, Asset...
-* support a styleguide driven development approach
+* Provide a standalone build of the frontend to build JS, CSS, Asset etc. This build logic is not depending on flamingo and can develop independently from flamingo.
+* We prefer a  a styleguide driven development approach, featuring atomic design and following concepts of progressive enhancement
 
 The basic technical design targets of flamingo-carotene are:
 1. Independent packages: Your are not forced to use "one default" for your project. Instead you can select which feature you want to use. The flamingo carotene packages are well split (having an individual purpose and following high cohasion low coupling principles).
@@ -51,6 +51,7 @@ To understand how modules work or if you want to develop and use your own module
 - [flamingo-carotene-pug-lint](./packages/flamingo-carotene-pug-lint)
 - [flamingo-carotene-sass-lint](./packages/flamingo-carotene-sass-lint)
 - [flamingo-carotene-smooth-scroll-to](./packages/flamingo-carotene-smooth-scroll-to)
+- [flamingo-carotene-static-asset](./packages/flamingo-carotene-static-asset)
 - [flamingo-carotene-state-manager](./packages/flamingo-carotene-state-manager)
 - [flamingo-carotene-webfont](./packages/flamingo-carotene-webfont)
 - [flamingo-carotene-webpack](./packages/flamingo-carotene-webpack)
@@ -123,7 +124,7 @@ import (
 
 ## Next Steps
 
-After the first steps you can should continue with:
+After the first steps you can continue with:
 
 * [Read more about Atomic Design](/docs/atomic-design.md)
 * Use the `flamingo-carotene-webpack` package to use webpack to build JS and CSS
@@ -132,9 +133,13 @@ After the first steps you can should continue with:
 * Use the `flamingo-carotene-state-manager` package to use the page state pattern to communicate and manage state between design components.
 
 
-## Used tools
+## Links to used tools
 
 Read more about the tools used in flamingo carotene packages:
+
+*Yarn and NPM*
+- https://yarnpkg.com/en/
+- https://www.npmjs.com/
 
 *PUG for templating*
 - https://pugjs.org/api/getting-started.html
