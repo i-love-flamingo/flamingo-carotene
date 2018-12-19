@@ -6,7 +6,7 @@ Atomic design ([http://atomicdesign.bradfrost.com/](http://atomicdesign.bradfros
 
 Atomic design distiguishs between the following "atomic design elements":
 
-![](atomic-design.png)
+![](./atomic-design.png)
 
 ## Element Details
 

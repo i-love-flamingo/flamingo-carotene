@@ -62,7 +62,7 @@ The generated frontend build artefacts plays well together with the flamingo `pu
 
 The following picture illustrates this:
 
-![](carotene-overview.png)
+![](./carotene-overview.png)
 
 # Getting started
 
