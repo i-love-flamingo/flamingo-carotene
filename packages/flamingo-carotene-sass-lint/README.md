@@ -1,11 +1,3 @@
-# `flamingo-carotene-pug`
+# Module `flamingo-carotene-sass-lint`
 
-> TODO: description
-
-## Usage
-
-```
-const flamingoCarotenePug = require('flamingo-carotene-pug');
-
-// TODO: DEMONSTRATE API
-```
+Provides linting for your sass files.

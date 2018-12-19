@@ -1,4 +1,4 @@
-# Module flamingo-carotene-pug
+# Module `flamingo-carotene-pug`
 
 This module provides the basic build features for pug templates. It does:
 * Build Pug: The result is stored as AST (abstract syntax tree) in the configured dist folder. Ast is understood by flamingo.

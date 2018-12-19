@@ -1,4 +1,4 @@
-# `eslint-config-flamingo-carotene`
+# Module `eslint-config-flamingo-carotene`
 
 This package provides Flamingo Carotene .eslintrc as an extensible shared config.
 

@@ -1,4 +1,4 @@
-# `flamingo-carotene-behavior`
+# Module `flamingo-carotene-behavior`
 
 ## Description
 

@@ -1,4 +1,4 @@
-# `flamingo-carotene-state-manager`
+# Module `flamingo-carotene-state-manager`
 
 ## Description
 

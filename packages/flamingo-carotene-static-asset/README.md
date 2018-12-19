@@ -1,6 +1,6 @@
-# Module flamingo-carotene-static-asset
+# Module `flamingo-carotene-static-asset`
 
-This module provides the basic build features to copy Assets
+This module provides the basic build features to copy Assets from "src" to "dist" folder.
 
 ## Adjust configurations
 

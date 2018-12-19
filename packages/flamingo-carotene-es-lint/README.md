@@ -1,4 +1,4 @@
-# `flamingo-carotene-es-lint`
+# Module `flamingo-carotene-es-lint`
 
 This package makes usage of a Javascript linter to ensure a basic level of code quality and coding standards within a project.
 

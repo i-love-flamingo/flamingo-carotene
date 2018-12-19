@@ -1,11 +1,12 @@
-# `flamingo-carotene-webpack`
+# Module `flamingo-carotene-webpack`
 
-> TODO: description
+Requirement for other packages.
+Includes webpack to the build.
 
 ## Usage
 
 ```
 const flamingoCaroteneWebpack = require('flamingo-carotene-webpack');
 
-// TODO: DEMONSTRATE API
+
 ```

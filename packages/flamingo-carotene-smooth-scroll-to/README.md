@@ -1,4 +1,4 @@
-# `flamingo-carotene-smooth-scroll-to`
+# Module `flamingo-carotene-smooth-scroll-to`
 
 ## Description
 

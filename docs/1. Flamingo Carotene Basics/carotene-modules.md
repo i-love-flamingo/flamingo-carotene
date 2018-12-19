@@ -1,11 +1,9 @@
-# How to Module
+# How to Carotene Module
 This is a guide to understand how the modules work and how you can develop and use your own ones.
 
 ## Modules for Tooling
 A module that is used for your tooling process will typically go into the `devDependencies` of your project and with
 that will not end up in the code you will serve to the client.
-
-
 
 
 

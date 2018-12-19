@@ -1,4 +1,4 @@
-# Module flamingo-carotene-dev-server
+# Module `flamingo-carotene-dev-server`
 
 Adds a new flamingo-carotene command that watches for changes in the src folder and recompiles templates.
 

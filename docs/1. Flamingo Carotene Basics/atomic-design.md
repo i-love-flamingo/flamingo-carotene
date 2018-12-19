@@ -1,5 +1,4 @@
-Overview
-========
+# About Atomic Design
 
 Atomic design ([http://atomicdesign.bradfrost.com/](http://atomicdesign.bradfrost.com/)) is an approach to build the pages for your web application where:
 
@@ -9,8 +8,8 @@ Atomic design distiguishs between the following "atomic design elements":
 
 ![](atomic-design.png)
 
- Element Details
-----------------
+## Element Details
+
 
 *   atom: 
     *   **atoms of our interfaces serve as the foundational building blocks that comprise all our user interfaces**
@@ -33,11 +32,10 @@ Atomic design distiguishs between the following "atomic design elements":
     *   ******Pages are specific instances of templates that show what a UI looks like with real representative content in place**
         ****
 
-Dependency Rules
-================
+## Dependency Rules
 
-Public and Private Molecules
-----------------------------
+
+### Public and Private Molecules
 
 *   The first folder level is considered the main design system and includes public elements
 *   Each element may have a second folder level, which can be used to define PRIVATE elements
@@ -46,8 +44,8 @@ Public and Private Molecules
 *   It is good to have private elements:
     *    especially under templates and pages that helps having an overview and not to "pollute" the public elements with elements that are anyhow just intented to be used on THAT template or THAT page
 
-Dependency Rules
-----------------
+### Dependency Rules
+
 
 Only higher level elements are allowed to include or use lower level elements:
 
@@ -55,8 +53,7 @@ Overview
 
 ![](atomic-design-structure.png)
 
-Example structure:
-------------------
+### Example structure:
 
 
 *   atom
@@ -80,8 +77,8 @@ Example structure:
     *   product (e.g. use template/base)
     *   checkout (e.g. use template/checkout)
 
-Rules
-=====
+### Rules
+
 
 *   Each element should live in a FOLDER, the Foldername matches the elementname
     *   The folder contains the definitons in seperate files:
