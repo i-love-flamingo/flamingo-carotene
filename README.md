@@ -1,4 +1,4 @@
-# Flamingo-Carotene
+# Flamingo Carotene Introduction
 
 ## What is it ?
 Flamingo-Carotene is an easy to use frontend (-tooling) for projects with the Flamingo framework.
