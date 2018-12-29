@@ -17,8 +17,9 @@ yarn add flamingo-carotene-pug
 ```
 
 This initializes your frontend project:
-* flamingo-carotene-core - includes the basic commands and core logic
-* flamingo-carotene-pug - includes the Build logi to work with pug
+
+* *flamingo-carotene-core* - includes the basic commands and core logic
+* *flamingo-carotene-pug* - includes the Build logi to work with pug
 
 
 You now can add your first page template with pug:
@@ -74,16 +75,20 @@ After the first steps you can continue with:
 Read more about the tools used in flamingo carotene packages:
 
 *Yarn and NPM*
+
 - https://yarnpkg.com/en/
 - https://www.npmjs.com/
 
 *PUG for templating*
+
 - https://pugjs.org/api/getting-started.html
 
 *Sass for CSS*
+
 - http://sass-lang.com/
 
 *Webpack for Build*
+
 - http://andrewhfarmer.com/webpack-hmr-tutorial/
 
 
