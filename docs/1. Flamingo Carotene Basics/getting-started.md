@@ -25,7 +25,7 @@ This initializes your frontend project:
 You now can add your first page template with pug:
 
 ```
-cat frontend/src/page/index.pug
+echo "Hello World" >  src/page/index.pug
 ```
 
 And with this command you can start building your frontend:
