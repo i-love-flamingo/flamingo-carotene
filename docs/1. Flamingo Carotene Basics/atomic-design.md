@@ -2,14 +2,11 @@
 
 Atomic design ([http://atomicdesign.bradfrost.com/](http://atomicdesign.bradfrost.com/)) is an approach to build the pages for your web application where:
 
-*   The goal is to build a "design system" with clear defined and reusable components
+* The goal is to build a "design system" with clear defined and reusable components
 
-Atomic design distiguishs between the following "atomic design elements":
-
-![](./atomic-design.png)
+Atomic design distiguishs between the following "atomic design elements": atoms, molecules, organism and templates and pages.
 
 ## Element Details
-
 
 *   atom: 
     *   **atoms of our interfaces serve as the foundational building blocks that comprise all our user interfaces**
@@ -20,20 +17,15 @@ Atomic design distiguishs between the following "atomic design elements":
     *   Example: searchbox with input and button
 *   organism
     *   **Organisms are relatively complex UI components composed of groups of molecules and/or atoms and/or other organisms**
-    *   **example: complex Slider, menustructure**
+    *   example: complex Slider, menustructure
 *   **template:**
-    *   ****Templates are page-level objects that place components into a layout and articulate the design’s underlying content structure.**
-        **
-    *   ******provides context for these relatively abstract molecules and organisms**
-        ****
-    *   ********focus on the page’s underlying content structure** rather than the page’s final content
-        ******
-*   ****page****
-    *   ******Pages are specific instances of templates that show what a UI looks like with real representative content in place**
-        ****
+    *   **Templates are page-level objects that place components into a layout and articulate the design’s underlying content structure.**
+    *   They provide context for these relatively abstract molecules and organisms
+    *   focus on the page’s underlying content structure rather than the page’s final content
+*   **page**
+    *   **Pages are specific instances of templates that show what a UI looks like with real representative content in place**
 
 ## Dependency Rules
-
 
 ### Public and Private Molecules
 
@@ -46,10 +38,9 @@ Atomic design distiguishs between the following "atomic design elements":
 
 ### Dependency Rules
 
-
 Only higher level elements are allowed to include or use lower level elements:
 
-Overview
+Overview:
 
 ![](atomic-design-structure.png)
 
@@ -78,7 +69,6 @@ Overview
     *   checkout (e.g. use template/checkout)
 
 ### Rules
-
 
 *   Each element should live in a FOLDER, the Foldername matches the elementname
     *   The folder contains the definitons in seperate files:
