@@ -3,7 +3,7 @@
   "version": "6.0.16",
   "description": "Add the babel loader to your webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "ISC",
+  "license": "OSL-3.0",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-babel",
   "keywords": [
     "flamingo-carotene",

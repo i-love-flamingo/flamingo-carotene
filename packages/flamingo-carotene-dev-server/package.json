@@ -3,7 +3,7 @@
   "version": "6.0.22",
   "description": "> TODO: description",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "MIT",
+  "license": "OSL-3.0",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-dev-server",
   "keywords": [
     "flamingo-carotene",

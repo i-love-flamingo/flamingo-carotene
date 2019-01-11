@@ -3,7 +3,7 @@
   "version": "6.0.17",
   "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "ISC",
+  "license": "OSL-3.0",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-es-lint",
   "keywords": [
     "flamingo-carotene",

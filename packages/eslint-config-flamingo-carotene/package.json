@@ -4,7 +4,7 @@
   "description": "Flamingo carotene ESLint config, following our styleguide",
   "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
-  "license": "ISC",
+  "license": "OSL-3.0",
   "main": ".eslintrc",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/eslint-config-flamingo-carotene",
   "dependencies": {

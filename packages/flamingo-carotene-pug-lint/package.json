@@ -3,7 +3,7 @@
   "version": "6.0.21",
   "description": "Preconfigured pug linter for flamingo carotene",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "ISC",
+  "license": "OSL-3.0",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-pug-lint",
   "keywords": [
     "flamingo-carotene",
