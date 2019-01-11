@@ -10,8 +10,8 @@ Flamingo-Carotene features pug based templating using [atomic design](atomic-des
 The basic goals for flamingo-carotene are:
 
 * Provide independent frontend development with productivity tools (pug, sass, ES6, …)
-* Provide a standalone build of the frontend to build JS, CSS, Asset etc. This build logic is not depending on flamingo and can develop independently from flamingo.
-* We prefer a  a styleguide driven development approach, featuring atomic design and following concepts of progressive enhancement
+* Provide a standalone build of the frontend to build JS, CSS, Asset etc. This build logic is not depending on flamingo and can be developed independently from flamingo.
+* We prefer a styleguide driven development approach, featuring atomic design and following concepts of progressive enhancement
 
 The basic technical design targets of flamingo-carotene are:
 
