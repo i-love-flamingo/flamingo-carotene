@@ -1,15 +1,25 @@
-const io = require('socket.io')()
-const FlamingoWatcher = require('./lib/flamingoWatcher')
+const FileWatcher = require('./lib/fileWatcher')
+const Socket = require('./lib/socket')
 
-class CaroteneDevServer {
+class DevServer {
   constructor (core) {
     this.core = core
     this.config = core.getConfig()
     this.cliTools = core.getCliTools()
-    this.dispatcher = null // Get dispatcher after module initialization!! Currently the dispatcher initializes all modules and would step into infinite loop
     this.watcherList = [] // List of all flamingoWatcher Classes.
 
     this.listeners = [
+      {
+        command: 'config',
+        priority: 100,
+        handler: function (core) {
+          const config = core.getConfig()
+
+          config.devServer = {
+            port: 3000
+          }
+        }
+      },
       {
         command: 'config',
         priority: 10,
@@ -25,15 +35,13 @@ class CaroteneDevServer {
       {
         command: 'dev',
         handler: (core) => {
+          const socket = new Socket(core)
+          socket.init()
+
           const watcherConfigList = this.getWatcherConfiguration()
 
-          io.on('connection', (client) => {
-            // console.info(`Connected to client: ${client.id}`)
-          })
-          io.listen(3000)
-
           for (const watcherConfig of watcherConfigList) {
-            this.watcherList.push(new FlamingoWatcher(this, this.core, watcherConfig.watchId, watcherConfig.path, watcherConfig.command, watcherConfig.callbackKey))
+            this.watcherList.push(new FileWatcher(socket, core, watcherConfig))
           }
         }
       }
@@ -42,19 +50,18 @@ class CaroteneDevServer {
 
   getWatcherConfiguration () {
     const modules = this.core.getModules()
-    let watcherList = []
-    for (const module of modules) {
-      if (typeof module.getWatcherForDevServer === 'function') {
-        const watcher = module.getWatcherForDevServer()
-        watcherList = [...watcherList, ...watcher]
-      }
-    }
-    return watcherList
-  }
+    const watchers = []
 
-  // report build state to client
-  reportBuildStateToClient () {
-    io.emit('built')
+    for (const module of modules) {
+      if (typeof module.getWatcherForDevServer !== 'function') {
+        continue
+      }
+
+      const moduleWatchers = module.getWatcherForDevServer()
+      watchers.push(...moduleWatchers)
+    }
+
+    return watchers
   }
 
   getListeners () {
@@ -62,4 +69,4 @@ class CaroteneDevServer {
   }
 }
 
-module.exports = CaroteneDevServer
+module.exports = DevServer

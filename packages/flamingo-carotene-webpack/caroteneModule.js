@@ -21,16 +21,16 @@ class CaroteneWebpack {
           config.paths.webpack['src'] = config.paths.src
           config.paths.webpack['dist'] = config.paths.dist
 
-          config['webpack'] = {}
-          config.webpack['dist'] = {}
-          config.webpack.dist['jsFolderName'] = 'js'
-          config.webpack.dist['cssFolderName'] = 'css'
-          config.webpack.dist['fontFolderName'] = 'font'
-          config.webpack.dist['imageFolderName'] = 'image'
-
-          config.webpack['rulesInclude'] = null
-
-          config.webpack['callback'] = null
+          config['webpack'] = {
+            dist: {
+              jsFolderName: 'js',
+              cssFolderName: 'css',
+              fontFolderName: 'font',
+              imageFolderName: 'image'
+            },
+            rulesInclude: null,
+            buildCallback: null
+          }
         }
       },
       {

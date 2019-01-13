@@ -5,21 +5,28 @@ const fs = require('fs')
 /**
  * This class is a wrapper for a watcher instance
  */
-class FlamingoWatcher {
+class FileWatcher {
   /**
-   *
-   * @param core - flamingo carotene core
-   * @param watchId - a unique watchId
-   * @param watchPaths - Array of paths with globbing to be watched
-   * @param command - flamingo carotene command, that will be triggered
-   * @param callbackKey - key of config[KEY].callback function, that will be called
+   * @param socket  - The socket instance
+   * @param core    - Flamingo-carotene core
+   * @param config  - Config object for the file watcher
+   *    watchId     - a unique watchId
+   *    watchPaths  - Array of paths with globbing to be watched
+   *    command     - flamingo carotene command, that will be triggered
+   *    callbackKey - key of config[KEY].callback function, that will be called
    */
-  constructor (watcherCaroteneModule, core, watchId, watchPaths, command, callbackKey) {
-    this.watcherCaroteneModule = watcherCaroteneModule
-    this.watchId = watchId
-    this.watchPaths = watchPaths
-    this.callbackKey = callbackKey
-    this.command = command
+  constructor (socket, core, config) {
+    // Socket to client
+    this.socket = socket
+
+    // flamingo-carotene-core
+    this.core = core
+
+    config = config || {}
+    this.watchId = config.watchId
+    this.watchPaths = config.path
+    this.command = config.command
+    this.callbackKey = config.callbackKey
 
     // instance of chokidar
     this.watcher = null
@@ -30,11 +37,8 @@ class FlamingoWatcher {
     // flag, if the watcher needs to rerun after the build is finished
     this.rerunAfterBuild = false
 
-    // flamingo-carotene-core
-    this.core = core
-
     // buffer, where a original callback is stored, as long as it is overwritten
-    this.oldCallback = null
+    this.originalBuildCallback = null
 
     // carotene dispatcher
     this.dispatcher = core.getDispatcher()
@@ -95,7 +99,7 @@ class FlamingoWatcher {
       // check if current dist build IS already a dev build...
       // - If not trigger build.
       if (!fs.existsSync(this.getDevBuildFileName())) {
-        this.cliTools.info(`Rebuilding JS to inject socketIoClient`, true)
+        this.cliTools.info(`Rebuilding JS to inject socketClient`, true)
         this.dispatcher.dispatchCommand(this.command)
         fs.writeFileSync(this.getDevBuildFileName(), '1')
       }
@@ -127,7 +131,7 @@ class FlamingoWatcher {
       // Add the socket client to the beginning of every multi file entry
       if (Array.isArray(config.webpackConfig.entry[entryName])) {
         config.webpackConfig.entry[entryName].unshift(
-          path.join(__dirname, 'socketIoClient.js')
+          path.join(__dirname, 'socketClient.js')
         )
       }
     }
@@ -146,21 +150,22 @@ class FlamingoWatcher {
     if (this.isBuildInProgress()) {
       this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`, true)
       this.rerunAfterBuild = true
-    } else {
-      // no build in progress? so - build it!
-      const config = this.core.getConfig()
-
-      // save original callback...
-      this.oldCallback = config[this.callbackKey].callback
-
-      // overwrite callback...
-      config[this.callbackKey].callback = this.watcherFinishBuildCallback.bind(this)
-
-      // start building
-      this.rerunAfterBuild = false
-      this.buildInProgress = true
-      this.dispatcher.dispatchCommand(this.command)
+      return
     }
+
+    // no build in progress? so - build it!
+    const config = this.core.getConfig()
+
+    // save original callback...
+    this.originalBuildCallback = config[this.callbackKey].buildCallback
+
+    // overwrite callback...
+    config[this.callbackKey].buildCallback = this.watcherFinishBuildCallback.bind(this)
+
+    // start building
+    this.rerunAfterBuild = false
+    this.buildInProgress = true
+    this.dispatcher.dispatchCommand(this.command)
   }
 
   /**
@@ -172,12 +177,12 @@ class FlamingoWatcher {
     const config = this.core.getConfig()
 
     // restore old, original callback...
-    config[this.callbackKey].callback = this.oldCallback
+    config[this.callbackKey].buildCallback = this.originalBuildCallback
 
     this.buildInProgress = false
 
     // reload browser
-    this.watcherCaroteneModule.reportBuildStateToClient()
+    this.socket.emit('built')
 
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {
@@ -188,4 +193,4 @@ class FlamingoWatcher {
   }
 }
 
-module.exports = FlamingoWatcher
+module.exports = FileWatcher

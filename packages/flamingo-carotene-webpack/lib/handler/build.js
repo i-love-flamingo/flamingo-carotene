@@ -38,8 +38,8 @@ const webpackBuild = function (core) {
 
     cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
-    if (config.webpack && typeof config.webpack.callback === 'function') {
-      config.webpack.callback(core)
+    if (config.webpack && typeof config.webpack.buildCallback === 'function') {
+      config.webpack.buildCallback(core)
     }
   })
 }

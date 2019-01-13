@@ -21,7 +21,7 @@ class CarotenePug {
 
           config.pug = {
             filesPattern: '/{*,.,*/page/*}/{.,*,*/*.partial}/*.pug',
-            callback: null,
+            buildCallback: null,
             breakOnError: false
           }
         }

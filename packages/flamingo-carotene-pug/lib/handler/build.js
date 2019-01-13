@@ -75,8 +75,8 @@ const pugBuild = (core) => {
       }
     }
 
-    if (config.pug && typeof config.pug.callback === 'function') {
-      config.pug.callback(core)
+    if (config.pug && typeof config.pug.buildCallback === 'function') {
+      config.pug.buildCallback(core)
     }
   }
 
