@@ -8,7 +8,11 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  const cmd = `yarn`
+  let cmd = `yarn`
+  if (process.platform === 'win32') {
+    cmd = `yarn.cmd`
+  }
+
   const parameters = getCommandParameters(config)
 
   cliTools.info('ESLint - start')

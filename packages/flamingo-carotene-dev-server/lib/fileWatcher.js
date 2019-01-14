@@ -78,7 +78,7 @@ class FileWatcher {
     // chokidar dont like windows \ in paths
     // replacing them with / works
     if (process.platform === 'win32') {
-      var windowsPaths = [];
+      const windowsPaths = [];
       for (let watchPath of this.watchPaths) {
         windowsPaths.push(watchPath.split('\\').join('/'));
       }

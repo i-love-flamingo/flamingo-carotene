@@ -14,7 +14,11 @@ const sassLint = (core) => {
     configFile = path.join(config.paths.sassLint, '.sass-lint.yml')
   }
 
-  const cmd = `yarn`
+  let cmd = `yarn`
+  if (process.platform === 'win32') {
+    cmd = `yarn.cmd`
+  }
+
   const parameters = ['sass-lint', '--config', `${configFile}`, '--no-exit', '-v']
 
   cliTools.info('SassLint - start')
