@@ -1,19 +1,13 @@
 # Module `flamingo-carotene-state-manager`
-
-## Description
-
 The state-manager gives you the possibility to set and get states, and watch changes.
-
 
 ## How to initialize
 ### Import state manager
-
 ```
 import state from 'flamingo-carotene-state-manager'
 ```
 
 Note: The state-manager is a singleton and already returns an instance but a class.
-
 
 ### Creating initial state
 ```
@@ -30,16 +24,13 @@ const initialState = {
 }
 ```
 
-### Initialize class with initial state 
-
+### Initialize class with initial state
 ```
 state.init(initialState)
 ```
 
 ## How to use
-
 ### Getting a state
-
 You can get a value of a state by using "get()".
 The first parameter is a '.'-notated path of the value inside the state object.
 ```
