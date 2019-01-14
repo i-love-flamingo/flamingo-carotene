@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
@@ -11,8 +10,6 @@ class WebpackConfig {
   constructor(core) {
     this.config = core.getConfig()
     this.cliTools = core.getCliTools()
-
-    this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
 
     return this.getWebpackConfig()
   }
