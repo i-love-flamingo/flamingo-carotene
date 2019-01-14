@@ -18,7 +18,6 @@ location.
 
 
 ## Adjust configurations
-
 The module comes with useful defaults, but you can of course adjust them in your theme:
 ```
   // Where are the pug pages

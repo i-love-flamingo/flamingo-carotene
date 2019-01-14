@@ -1,11 +1,7 @@
 # Module `flamingo-carotene-behavior`
-
-## Description
-
 The behavior Module is a "DOM-aware" component loader, which loads js-classes automatically and attaches them to dom-elements.
 
 ## What it is for
-
 Given, you've got a DOM structure like this: 
 ```
 <div>
@@ -45,13 +41,11 @@ The DOM element with the data-behavior attribute is passed to the constructor of
 Initialisation is easy.
 
 ### Load the behavior module 
-
 ```
 import Behavior from 'flamingo-carotene-behavior'
 ```
 
 ### Loading your behaviors
-
 * Load all your behaviors with globbing (the babel-way)
 
 ```
@@ -74,9 +68,8 @@ const behaviorModules = {
   'anotherBehavior': anotherBehavior
 }
 ```
-  
-### Create a behavior instance and pass your behaviors to the constructor
 
+### Create a behavior instance and pass your behaviors to the constructor
 ```
 const behavior = new Behavior(behaviorModules)
 behavior.attachBehaviors() 
@@ -85,11 +78,9 @@ behavior.attachBehaviors()
 Done! 
 
 ## Debugging
-
 If you've got strange results or behaviors of the behavior module, it is worth to turn on debugging console messages.
 Simply add
 ```
 behavior.setDebug(true)
 ```
 after creating the behavior instance.
-

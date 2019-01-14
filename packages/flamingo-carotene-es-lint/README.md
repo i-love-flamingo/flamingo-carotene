@@ -15,7 +15,6 @@ compile.
 The ESLint module will listen to the following commands: `lint`, `build`, `watchWebpackJs`
 
 ## How it works
-
 The ESLint module will provide the default `eslint-config-flamingo-carotene` ESLint config and a default .eslintignore
 to let you start right away.
 

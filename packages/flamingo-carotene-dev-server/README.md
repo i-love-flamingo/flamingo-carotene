@@ -1,12 +1,10 @@
 # Module `flamingo-carotene-dev-server`
-
 The dev server module is there to make the development of a Flamingo-Carotene frontend easier.
 It includes the functionality to register file watchers and dispatch commands when these noticed a change.
 In addition to that a socket will be opened and its client will be injected into the webpack config (if available) to
 automatically reload the browser after a potential successful rebuild.
 
 ## How to use
-
 Get the module by running:
 ```
 yarn add flamingo-carotene-dev-server -D
@@ -21,7 +19,6 @@ yarn flamingo-carotene dev
 the dev server will start gathering all configured watchers used inside your project and start separate file watchers.
 
 ## Setup File Watchers
-
 To set up file watchers you can easily add a `watcher` config to your module definition with the following structure
 ```
 {

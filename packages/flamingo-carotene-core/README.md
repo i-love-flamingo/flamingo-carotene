@@ -1,10 +1,8 @@
 # Module `flamingo-carotene-core`
-
 This is the core module of the flamingo-carotene library. It provides the "flamingo-carotene" command and the logic to
 load all the other modules.
 
 ## How to use
-
 Run:
 
 ```
@@ -24,7 +22,6 @@ $ yarn flamingo-carotene {command} [option(s)]
 ```
 
 ## How it works
-
 The core provides the flamingo-carotene 'binary'. The binary allows you to execute the flamingo-carotene command via
 yarn or npx.
 
@@ -33,13 +30,11 @@ In general the binary does a couple of things.
 2. It executes commands to which all the previously registered flamingo-carotene modules can apply handlers to.
 
 ### Gathering flamingo-carotene modules
-
 To gather the modules, the binary runs trough your dependencies to find the flamingo-carotene ones and registers all
 modules that have a `caroteneModule.js`. Additional to that, you can place a `carotene-module.js` file in your project
 root to apply project logic, just like in any other module you are using.
 
 ### Execute Commands
-
 When executing commands, the binary gathers all handlers from the registered modules, get those for the specified
 command, bring them into order and dispatch them.
 
@@ -64,7 +59,6 @@ order
 - `modules` A collection of the actual used flamingo-carotene modules
 
 ## Config
-
 Every module can expose the config that it uses to e.g. build its artifacts, so that it can be edited by other modules,
 or your project.
 For example there is a path config provided by default with some defaults for e.g. the source and dist folder. If your
