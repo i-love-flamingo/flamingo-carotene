@@ -1,12 +1,6 @@
 # Module `flamingo-carotene-webpack`
 
-Requirement for other packages.
-Includes webpack to the build.
-
-## Usage
-
+## How to use
 ```
-const flamingoCaroteneWebpack = require('flamingo-carotene-webpack');
-
-
+yarn add flamingo-carotene-webpack -D
 ```
