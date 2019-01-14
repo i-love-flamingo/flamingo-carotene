@@ -4,3 +4,5 @@
 ```
 yarn add flamingo-carotene-webpack-svg-sprite -D
 ```
+
+## How it works

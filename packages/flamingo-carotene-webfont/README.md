@@ -4,3 +4,5 @@
 ```
 yarn add flamingo-carotene-webfont -D
 ```
+
+## How it works

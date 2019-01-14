@@ -4,3 +4,5 @@
 ```
 yarn add flamingo-carotene-webpack -D
 ```
+
+## How it works
