@@ -1,8 +1,21 @@
 # Module `flamingo-carotene-pug`
+The pug module compiles the pug templates in a flamingo-carotene project. It takes all the files defined by a glob
+pattern and saves the AST (abstract syntax tree) compilation to the configured dist folder.
 
-This module provides the basic build features for pug templates. It does:
-* Build Pug: The result is stored as AST (abstract syntax tree) in the configured dist folder. Ast is understood by flamingo.
-* Copy Assets
+The flamingo framework will then take care of rendering these AST files to HTML.
+
+## How to use
+```
+yarn add flamingo-carotene-pug -D
+```
+
+The pug module will listen to the following commands: `buildTemplates`, `build`, `watchPug`.
+
+## How it works
+A child process will be opened to execute the compilation of the pug files and store the AST to the configured dist
+location.
+
+
 
 ## Adjust configurations
 
