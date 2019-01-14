@@ -1,11 +1,9 @@
 const path = require('path')
 
-// const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
 const buildHandlerJs = require('./lib/handler/buildJs')
 const buildHandlerCss = require('./lib/handler/buildCss')
 
-// class CaroteneWebpack extends CaroteneModule {
 class CaroteneWebpack {
   constructor (core) {
     // super(core)

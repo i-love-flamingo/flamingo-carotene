@@ -1,9 +1,7 @@
 const path = require('path')
 
-// const CaroteneModule = require('../flamingo-carotene-module')
 const buildHandler = require('./lib/handler/build')
 
-// class CaroteneStaticAssets extends CaroteneModule {
 class CaroteneStaticAsset {
   constructor (core) {
     // super(core)
