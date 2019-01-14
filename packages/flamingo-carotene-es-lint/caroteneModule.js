@@ -37,21 +37,23 @@ class ESLint {
           const config = core.getConfig()
           const cliTools = core.getCliTools()
 
-          if (config.eslint.useWebpackLoader) {
-            if (!config.webpackConfig || !config.webpackConfig.module || !config.webpackConfig.module.rules) {
-              cliTools.warn('ESLint is configured to use a webpack loader but there is no webpack config availbale')
-              return
-            }
-
-            config.webpackConfig.module.rules.push({
-              enforce: 'pre',
-              test: /\.js$/,
-              use: [
-                'eslint-loader'
-              ],
-              exclude: /node_modules/
-            })
+          if (!config.eslint.useWebpackLoader) {
+            return
           }
+
+          if (!config.webpackConfig || !config.webpackConfig.module || !config.webpackConfig.module.rules) {
+            cliTools.warn('ESLint is configured to use a webpack loader but there is no webpack config availbale')
+            return
+          }
+
+          config.webpackConfig.module.rules.push({
+            enforce: 'pre',
+            test: /\.js$/,
+            use: [
+              'eslint-loader'
+            ],
+            exclude: /node_modules/
+          })
         }
       },
       {
