@@ -1,10 +1,14 @@
 # Module `eslint-config-flamingo-carotene`
 
-This package provides Flamingo Carotene .eslintrc as an extensible shared config.
+This package provides a Flamingo-Carotene ESLint config that can also be extended inside the projects.
 
-## Usage
+## How to use
 
-In your .eslintrc.js you've to add the following:
+```
+yarn add eslint-config-flamingo-carotene -D
+```
+
+To extend the config simply use the extend property of the ESLint config file.
 
 ```
 module.exports = {
