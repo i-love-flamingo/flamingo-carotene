@@ -3,7 +3,7 @@
 This is the core module of the flamingo-carotene library. It provides the "flamingo-carotene" command and the logic to
 load all the other modules.
 
-## Usage
+## How to use
 
 Run:
 
