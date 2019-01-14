@@ -39,8 +39,9 @@ To set up file watchers you can easily add a `watcher` config to your module def
 
 `command` The command that will be dispatched when a file change was recognized
 
-`callbackKey` (optional) A key from the config where to find a buildCallback function. Only one level supported yet,
-e.g. when your callback function is located here: config.myKey.buildCallback the callbackKey would be 'myKey'.
+`callbackKey` A key from the config where to find a buildCallback function. Only one level supported yet,
+e.g. when your callback function is located here: config.myKey.buildCallback the callbackKey would be 'myKey'. This
+function is also used to allow the rebuild functionality when changes are made during a running build.
 
 The watcher configurations will be automatically gathered by the dev server by calling the `getWatcherForDevServer`
 function, that must be provided by your module to expose your watcher configs.
