@@ -6,8 +6,6 @@ const buildHandlerCss = require('./lib/handler/buildCss')
 
 class CaroteneWebpack {
   constructor (core) {
-    // super(core)
-
     const config = core.getConfig()
 
     this.listeners = [

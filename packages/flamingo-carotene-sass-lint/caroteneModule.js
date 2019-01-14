@@ -1,9 +1,7 @@
 const lintHandler = require('./lib/handler/lint')
 
-// class CarotenePug extends CaroteneModule {
 class SassLint {
   constructor (core) {
-    // super(core)
     this.listeners = [
       {
         command: 'config',

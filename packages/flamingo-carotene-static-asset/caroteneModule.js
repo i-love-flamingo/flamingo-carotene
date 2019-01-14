@@ -4,7 +4,6 @@ const buildHandler = require('./lib/handler/build')
 
 class CaroteneStaticAsset {
   constructor (core) {
-    // super(core)
     const config = core.getConfig()
 
     this.listeners = [

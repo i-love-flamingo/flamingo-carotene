@@ -1,8 +1,5 @@
-// class CaroteneWebpack extends CaroteneModule {
 class FlamingoCaroteneWebpackSvgSprite {
   constructor (core) {
-    // super(core)
-
     this.listeners = [
       {
         command: 'config',
