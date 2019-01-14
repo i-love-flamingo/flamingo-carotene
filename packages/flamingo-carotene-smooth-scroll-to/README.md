@@ -1,15 +1,11 @@
 # Module `flamingo-carotene-smooth-scroll-to`
-
-## Description
-
-SmoothScrollTo is a small libary, which allows the developer to scroll a page smoothly to a given Y coordinate or to a given dom element.
+SmoothScrollTo is a small libary, which allows the developer to scroll a page smoothly to a given Y coordinate or to a
+given dom element.
 
 ## What it is for
-
-Programmaticly scrolling a page in a fancy, sparkling, smooth way 
+Programmaticly scrolling a page in a fancy, sparkling, smooth way
 
 ## How to use
-
 Import the library
 ```
 import SmoothScrollTo from 'flamingo-carotene-smooth-scroll-to'
@@ -45,7 +41,6 @@ In this case you can use ```setOffset()``` to set an offset
 new SmoothScrollTo().setOffset(50).scrollTo(500)
 ```
 In this example the scrolling position will be at 450.
-
 
 ## Interrupt, stopping or restarting
 You can easily stop the animation by using ```stop()```  
@@ -85,8 +80,3 @@ const sst = new SmoothScrollTo()
   })
   .scrollTo(500)
 ```
-
-
-
-
-
