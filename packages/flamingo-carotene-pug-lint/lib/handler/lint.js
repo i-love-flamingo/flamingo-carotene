@@ -38,7 +38,6 @@ const pugLint = (core) => {
     cmd = `pug-lint.cmd`
   }
 
-  cliTools.info(`PugLint - start (${files.length} files`)
 
   const spawnEnv = process.env
   spawnEnv.FORCE_COLOR = true
@@ -57,7 +56,7 @@ const pugLint = (core) => {
     lintFilePacks[packNumber].push(file)
   }
 
-
+  cliTools.info(`PugLint - start (${files.length} files in ${lintFilePacks.length} packages)`)
 
   const results = []
   const errors = []
@@ -67,7 +66,7 @@ const pugLint = (core) => {
   for (let lintFilePackIndex in lintFilePacks) {
     const lintFilePack = lintFilePacks[lintFilePackIndex];
     const lintPackNumber = parseInt(lintFilePackIndex, 10) + 1;
-    cliTools.info(`Start PugLint-Pack ${lintPackNumber} with ${lintFilePack.length} files...`);
+    cliTools.info(`Start PugLint-Pack ${lintPackNumber} with ${lintFilePack.length} files...`, true);
 
     const childProcess = spawn(cmd, ['--config', configFile].concat(lintFilePack), {env: spawnEnv})
 
@@ -88,7 +87,7 @@ const pugLint = (core) => {
 
     childProcess.on('exit', (code) => {
       finishedPacks++;
-      cliTools.info(`Finished PugLint-Pack ${lintPackNumber} - (${finishedPacks} of ${lintFilePacks.length})`);
+      cliTools.info(`Finished PugLint-Pack ${lintPackNumber} - (${finishedPacks} of ${lintFilePacks.length})`, true);
 
       // if every pack is finished
       if (finishedPacks >= lintFilePacks.length) {

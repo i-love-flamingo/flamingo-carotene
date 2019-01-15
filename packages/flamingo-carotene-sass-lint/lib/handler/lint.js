@@ -50,7 +50,7 @@ const sassLint = (core) => {
     }
 
     // dont need current cmd
-    if (data.toString().trim().search('/.bin/sass-lint --config') !== -1) {
+    if (data.toString().trim().search(/[\/\\]\.bin[\/\\]sass-lint --config/) !== -1) {
       skipLine = true
     }
 
