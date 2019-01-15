@@ -21,6 +21,10 @@ class PugLint {
         handler: lintHandler
       },
       {
+        command: 'lintPug',
+        handler: lintHandler
+      },
+      {
         command: 'build',
         handler: function (core) {
           const config = core.getConfig()
@@ -29,8 +33,8 @@ class PugLint {
         }
       },
       {
-          command: 'watchPug',
-          handler: lintHandler
+        command: 'watchPug',
+        handler: lintHandler
       }
     ]
   }

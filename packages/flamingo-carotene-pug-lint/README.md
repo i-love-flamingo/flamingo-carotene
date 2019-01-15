@@ -5,7 +5,7 @@ Flamingo carotene module for linting pug files. Based on official [pug-lint](htt
 ```
 yarn add flamingo-carotene-pug-lint -D
 ```
-The pug-lint module will listen to the following commands: `lint`, `build`, `watchPug`
+The pug-lint module will listen to the following commands: `lint`, `lintPug`, `build`, `watchPug`
 
 ## How it works
 A child process will be opened to execute the linting of the pug files.
