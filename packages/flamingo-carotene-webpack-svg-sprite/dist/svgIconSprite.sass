@@ -1,3 +1,6 @@
+.svgIconSprite
+  display: none
+
 @mixin svgSpriteIcon($width: false, $height: false, $useRatio: false)
   @if $useRatio and $width and $height
     padding-top: percentage($height/$width)

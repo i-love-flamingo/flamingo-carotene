@@ -6,7 +6,16 @@
   "license": "OSL-3.0",
   "main": "lib/index.js",
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-webpack-svg-sprite",
+  "scripts": {
+    "build": "mkdir -p dist & yarn babel src/svgIconSprite.behavior.js -o dist/svgIconSprite.behavior.js"
+  },
   "dependencies": {
-    "external-svg-sprite-loader": "^3.4.1"
+    "external-svg-sprite-loader": "^3.4.1",
+    "unfetch": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "flamingo-carotene-babel": "^6.0.25"
   }
 }

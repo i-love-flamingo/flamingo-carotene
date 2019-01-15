@@ -7,23 +7,41 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- *
- */
+ * Scroll the page to a given Y Coordinate or to a dom element
+ * Animation is timebased, animation will skip frames, if client could not handle the speed
+ * */
 var SmoothScrollTo =
 /*#__PURE__*/
 function () {
   function SmoothScrollTo() {
     _classCallCheck(this, SmoothScrollTo);
 
-    this.duration = 500;
-    this.offset = 0;
-    this.updateInterval = 25;
-    this.animationStartTime = null;
-    this.timer = null;
-    this.currentTargetY = null;
-    this.currentStartY = null;
-    this.animationStepCallback = null;
+    // animation duration
+    this.duration = 500; // Y Position offset to browsers top
+
+    this.offset = 0; // animation update interval
+
+    this.updateInterval = 25; // internal property - starttime of the animation
+
+    this.animationStartTime = null; // interval reference
+
+    this.timer = null; // internal property - when animation was started - target position
+
+    this.currentTargetY = null; // internal property - when animation was started - start position
+
+    this.currentStartY = null; // callback that is called when a animation step was done
+
+    this.animationStepCallback = null; // callback that is called when a animation is finished
+
+    this.finishCallback = null;
   }
+  /**
+   * Change the overall animation duration
+   *
+   * @param {number} duration
+   * @returns {SmoothScrollTo}
+   */
+
 
   _createClass(SmoothScrollTo, [{
     key: "setDuration",
@@ -31,44 +49,80 @@ function () {
       this.duration = duration;
       return this;
     }
+    /**
+     * Set Scrolling target Offset
+     * @param {number} offset
+     * @returns {SmoothScrollTo}
+     */
+
   }, {
     key: "setOffset",
     value: function setOffset(offset) {
       this.offset = offset;
       return this;
     }
+    /**
+     * Set AnimationStep Callback
+     * Function will be called with one parameter, which is the instance of this class -> callback(this)
+     * @param {function} callback
+     * @returns {SmoothScrollTo}
+     */
+
   }, {
     key: "setAnimationStepCallback",
     value: function setAnimationStepCallback(callback) {
       this.animationStepCallback = callback;
       return this;
     }
+    /**
+     * Sets the currentTargetY
+     * This function can be used inside AnimationStepCallback to correct the targetPosition while animation is running
+     * @param {number} currentTargetY
+     * @returns {SmoothScrollTo}
+     */
+
   }, {
     key: "setCurrentTargetY",
     value: function setCurrentTargetY(currentTargetY) {
       this.currentTargetY = currentTargetY;
       return this;
     }
+    /**
+     * Returns the current scroll Targetposition if animation is running
+     * @returns {number}
+     */
+
   }, {
     key: "getCurrentTargetY",
     value: function getCurrentTargetY() {
       return this.currentTargetY;
     }
+    /**
+     * Scrolls to a domNode or a position
+     * @param {HTMLElement|number} target
+     * @returns {SmoothScrollTo}
+     */
+
   }, {
     key: "scrollTo",
-    value: function scrollTo(anything) {
-      if (anything instanceof HTMLElement) {
-        this.scrollToElement(anything);
+    value: function scrollTo(target) {
+      if (target instanceof HTMLElement) {
+        this.scrollToElement(target);
         return this;
       }
 
-      if (typeof anything === 'number') {
-        this.scrollToY(anything);
+      if (typeof target === 'number') {
+        this.scrollToY(target);
         return this;
       }
 
       return this;
     }
+    /**
+     * Scrolls to position
+     * @param {number} scrollY
+     */
+
   }, {
     key: "scrollToY",
     value: function scrollToY(scrollY) {
@@ -77,6 +131,11 @@ function () {
 
       this._startAnimation(this.animationStepCallback);
     }
+    /**
+     * Scrolls to a domNode
+     * @param {HTMLElement} domElement
+     */
+
   }, {
     key: "scrollToElement",
     value: function scrollToElement(domElement) {
@@ -91,28 +150,50 @@ function () {
         }
       }.bind(this));
     }
+    /**
+     * Stops the current animation
+     */
+
   }, {
     key: "stop",
     value: function stop() {
       if (this.timer !== null) {
         clearInterval(this.timer);
+
+        if (typeof finishCallback === 'function') {
+          this.finishCallback(this);
+        }
       }
     }
+    /**
+     * Returns the Y-position (relative to page)
+     * @param {HTMLElement} domElement
+     * @returns {number}
+     * @private
+     */
+
   }, {
     key: "_getElementY",
     value: function _getElementY(domElement) {
       var bounds = domElement.getBoundingClientRect();
       return bounds.top + window.pageYOffset;
     }
+    /**
+     * Starts the Animation
+     * @param {function} afterAnimationStepCallback
+     * @private
+     */
+
   }, {
     key: "_startAnimation",
     value: function _startAnimation(afterAnimationStepCallback) {
       var _this = this;
 
-      console.log('_startAnimation', this.currentStartY, this.currentTargetY); // stopping running animation (if any)
+      // stopping running animation (if any)
+      this.stop(); // sets animation start time
 
-      this.stop();
-      this.animationStartTime = new Date().getTime();
+      this.animationStartTime = new Date().getTime(); // start timer
+
       this.timer = setInterval(function () {
         var currentTime = new Date().getTime();
         var startTime = _this.animationStartTime;
@@ -121,8 +202,10 @@ function () {
         var scrollToY = _this.currentTargetY; // animation time is up - jump directly to target
 
         if (currentTime > endTime) {
-          clearInterval(_this.timer);
           window.scrollTo(scrollToX, scrollToY);
+
+          _this.stop(_this.timer);
+
           return;
         } // animation time is in bounds - calculate timing fraction
 
@@ -141,6 +224,15 @@ function () {
         }
       }, this.updateInterval);
     }
+    /**
+     * Calculates the position of the animation by time
+     * @param {number} startY Start position
+     * @param {number} targetY Target position
+     * @param {number} fraction Position of the animation (value between 0-1) 0 is start, 1 is end
+     * @returns {number}
+     * @private
+     */
+
   }, {
     key: "_lerp",
     value: function _lerp(startY, targetY, fraction) {
