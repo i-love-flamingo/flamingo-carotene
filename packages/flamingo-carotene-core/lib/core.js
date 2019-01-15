@@ -70,28 +70,29 @@ class Core {
       const modulePath = path.join(config.paths.project, 'node_modules', moduleName, 'caroteneModule.js')
 
       if (!fs.existsSync(modulePath)) {
-        cliTools.log(cliTools.chalk.dim(`No carotene module file found in module ${moduleName}`), true)
+        cliTools.log(cliTools.chalk.dim(`No carotene module file found in module ${moduleName}`))
         continue
       }
 
       const Module = require(modulePath)
-
-      modules.push(new Module(this))
+      let moduleInstance = new Module(this)
+      moduleInstance.caroteneModuleName = moduleName
+      modules.push(moduleInstance)
     }
 
     // Get carotene module of project
     const projectModulePath = path.join(config.paths.project, 'caroteneModule.js')
 
     if (!fs.existsSync(projectModulePath)) {
-      cliTools.log(cliTools.chalk.dim(`No carotene module file found in project`), true)
+      cliTools.log(cliTools.chalk.dim(`No carotene module file found in project`))
     } else {
       const Module = require(projectModulePath)
-
-      modules.push(new Module(this))
+      let moduleInstance = new Module(this)
+      moduleInstance.caroteneModuleName = 'Project'
+      modules.push(moduleInstance)
     }
 
     cliTools.info(`Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
-
     return modules
   }
 }

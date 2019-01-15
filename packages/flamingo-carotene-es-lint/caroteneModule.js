@@ -1,6 +1,4 @@
 const path = require('path')
-const fs = require('fs')
-
 const lintHandler = require('./lib/handler/lint')
 
 const configFileNames = ['.eslintrc', '.eslintrc.js', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json']
@@ -101,6 +99,7 @@ class ESLint {
   }
 
   isOneOfFilesExistingInProjectRoot (fileNames) {
+    const fs = require('fs')
     for (const fileName of fileNames) {
       if (fs.existsSync(path.join(this.config.paths.project, fileName))) {
         return true

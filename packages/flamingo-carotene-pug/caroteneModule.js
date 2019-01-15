@@ -1,5 +1,4 @@
 const path = require('path')
-
 const buildHandler = require('./lib/handler/build')
 
 class CarotenePug {

@@ -3,7 +3,6 @@ const async = require('async')
 const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
-const pug = require('pug')
 
 let config
 let cliTools
@@ -29,6 +28,7 @@ const generateAst = (file, callback) => {
   const templateFilename = path.relative(config.paths.pug.src, file)
   const astFile = path.join(config.paths.pug.dist, templateFilename.replace('.pug', '.ast.json'))
   const content = fs.readFileSync(file, 'utf8')
+  const pug = require('pug')
   try {
     pug.compile(content, {
       filename,

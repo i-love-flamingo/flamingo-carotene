@@ -10,6 +10,8 @@ const pugLint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
+  const timeStarted = new Date().getTime()
+
   // trying to find sass lint in project folder..
   let configFile = path.join(config.paths.project, '.pug-lintrc.js')
 
@@ -91,7 +93,7 @@ const pugLint = (core) => {
 
       // if every pack is finished
       if (finishedPacks >= lintFilePacks.length) {
-        const output = [`PugLint-Lint End`].concat(results, errors).join('\n').trim()
+        const output = [`PugLint-Lint End\r\n    Finished after ${new Date().getTime() - timeStarted}ms`].concat(results, errors).join('\n').trim()
 
         if (code !== 0) {
           cliTools.warn(output)

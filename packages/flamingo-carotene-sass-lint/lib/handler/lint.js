@@ -6,6 +6,8 @@ const sassLint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
+  const timeStarted = new Date().getTime()
+
   // trying to find sass lint in project folder..
   let configFile = path.join(config.paths.project, '.sass-lint.yml')
 
@@ -69,7 +71,7 @@ const sassLint = (core) => {
   })
 
   childProcess.on('exit', (code) => {
-    const output = ['SassLint - end'].concat(results, errors).join('\n').trim()
+    const output = [`SassLint - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {
       cliTools.warn(output)

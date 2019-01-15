@@ -1,6 +1,3 @@
-const FileWatcher = require('./lib/fileWatcher')
-const Socket = require('./lib/socket')
-
 class DevServer {
   constructor (core) {
     this.core = core
@@ -35,12 +32,14 @@ class DevServer {
       {
         command: 'dev',
         handler: (core) => {
+          const Socket = require('./lib/socket.js')
           const socket = new Socket(core)
           socket.init()
 
           const watcherConfigList = this.getWatcherConfiguration()
 
           for (const watcherConfig of watcherConfigList) {
+            const FileWatcher = require('./lib/fileWatcher.js')
             this.watcherList.push(new FileWatcher(socket, core, watcherConfig))
           }
         }

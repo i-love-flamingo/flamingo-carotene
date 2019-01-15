@@ -1,6 +1,3 @@
-// import WebfontPlugin from 'webfont-webpack-plugin'
-const WebfontPlugin = require('webfont-webpack-plugin').default
-
 class CaroteneWebfont {
   constructor (core) {
     this.listeners = [
@@ -8,6 +5,7 @@ class CaroteneWebfont {
         command: 'config',
         priority: -100,
         handler: function (core) {
+          const WebfontPlugin = require('webfont-webpack-plugin').default
           const config = core.getConfig()
 
           // Webfont config - post config creation

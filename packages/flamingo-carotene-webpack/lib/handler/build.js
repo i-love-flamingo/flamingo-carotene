@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 
 const webpackBuild = function (core) {
   const config = core.getConfig()
@@ -16,7 +15,7 @@ const webpackBuild = function (core) {
   cliTools.info(`Running webpack in mode: ${config.webpackConfig.mode}`, true)
 
   const timeStarted = new Date().getTime()
-
+  const webpack = require('webpack')
   webpack(config.webpackConfig, (error, stats) => {
     if (error) {
       cliTools.warn(error.stack || error)

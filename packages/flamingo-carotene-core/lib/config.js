@@ -11,9 +11,7 @@ const caroteneLibPattern = 'flamingo-carotene-'
 class Config {
   constructor () {
     cliTools.info(`Initialize config`)
-
     this.config = initialConfig
-
     this.config.caroteneModuleNames = this.getCaroteneModuleNames()
   }
 
