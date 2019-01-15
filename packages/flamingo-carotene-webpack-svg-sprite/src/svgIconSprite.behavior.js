@@ -1,4 +1,4 @@
-const fetch = require('unfetch')
+import fetch from 'unfetch'
 
 export default class SvgIconSprite {
     refs = {}
@@ -10,7 +10,6 @@ export default class SvgIconSprite {
     constructor (element) {
       this.refs.element = element
       const url = element.dataset.spriteUrl
-
       fetch(url).then(this.success.bind(this))
     }
 

@@ -15,7 +15,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "flamingo-carotene-babel": "^6.0.27"
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.3"
+  },
+  "peerDependencies": {
+    "flamingo-carotene-webpack": "^6.0.25"
   }
 }
