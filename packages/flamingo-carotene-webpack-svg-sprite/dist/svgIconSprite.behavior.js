@@ -51,7 +51,7 @@ function () {
   }, {
     key: "success",
     value: function success(data) {
-      this.refs.$element[0].innerHTML = data;
+      this.refs.element.innerHTML = data;
     }
   }]);
 

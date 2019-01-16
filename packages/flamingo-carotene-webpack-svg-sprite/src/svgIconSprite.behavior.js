@@ -25,6 +25,6 @@ export default class SvgIconSprite {
      * @param data
      */
     success (data) {
-      this.refs.$element[0].innerHTML = data
+      this.refs.element.innerHTML = data
     }
 }
