@@ -15,12 +15,11 @@
     "test": "echo \"No tests present\""
   },
   "dependencies": {
-    "eslint": "^5.7.0",
-    "eslint-config-flamingo-carotene": "^6.0.28",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1"
   },
   "peerDependencies": {
-    "flamingo-carotene-webpack": "^6.0.25"
+    "flamingo-carotene-webpack": "^6.0.28",
+    "eslint-config-flamingo-carotene": "^6.0.28"
   }
 }

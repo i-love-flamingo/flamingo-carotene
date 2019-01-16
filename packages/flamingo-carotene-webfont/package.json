@@ -18,6 +18,6 @@
     "webfont-webpack-plugin": "^0.2.2"
   },
   "peerDependencies": {
-    "flamingo-carotene-webpack": "^6.0.25"
+    "flamingo-carotene-webpack": "^6.0.28"
   }
 }

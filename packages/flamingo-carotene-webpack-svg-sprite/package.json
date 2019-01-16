@@ -13,12 +13,9 @@
     "external-svg-sprite-loader": "^3.4.1",
     "unfetch": "^4.0.1"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.3"
-  },
   "peerDependencies": {
-    "flamingo-carotene-webpack": "^6.0.25"
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "flamingo-carotene-webpack": "^6.0.28",
+    "flamingo-carotene-babel": "^6.0.28"
   }
 }
