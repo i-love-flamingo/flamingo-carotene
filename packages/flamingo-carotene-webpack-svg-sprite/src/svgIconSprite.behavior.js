@@ -10,7 +10,15 @@ export default class SvgIconSprite {
     constructor (element) {
       this.refs.element = element
       const url = element.dataset.spriteUrl
-      fetch(url).then(this.success.bind(this))
+      this.fetch(url)
+    }
+
+    /**
+     * Fetch sprite url
+     * @param url
+     */
+    fetch (url) {
+      fetch(url).then( r => r.text() ).then(this.success.bind(this))
     }
 
     /**

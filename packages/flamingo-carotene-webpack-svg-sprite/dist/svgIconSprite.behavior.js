@@ -31,14 +31,26 @@ function () {
 
     this.refs.element = element;
     var url = element.dataset.spriteUrl;
-    (0, _unfetch.default)(url).then(this.success.bind(this));
+    this.fetch(url);
   }
   /**
-   * dispose
+   * Fetch sprite url
+   * @param url
    */
 
 
   _createClass(SvgIconSprite, [{
+    key: "fetch",
+    value: function fetch(url) {
+      (0, _unfetch.default)(url).then(function (r) {
+        return r.text();
+      }).then(this.success.bind(this));
+    }
+    /**
+     * dispose
+     */
+
+  }, {
     key: "dispose",
     value: function dispose() {
       this.refs = null;
