@@ -1,0 +1,8 @@
+//-
+  param: iconName [String] - The name of the SVG icon
+
+mixin svgIcon(iconName)
+  - var svgIconClass = 'svgIcon' + capitalize(iconName)
+  .svgIcon(class=svgIconClass aria-hidden='true')&attributes(attributes)
+    svg
+      use.svgIconUse(xlink:href='#' + iconName)
