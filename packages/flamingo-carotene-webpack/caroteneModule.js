@@ -13,11 +13,12 @@ class CaroteneWebpack {
         command: 'config',
         priority: 100,
         handler: function (core) {
-          config.paths['webpack'] = {}
-          config.paths.webpack['src'] = config.paths.src
-          config.paths.webpack['dist'] = config.paths.dist
+          config.paths.webpack = {
+            src: config.paths.src,
+            dist: config.paths.dist
+          }
 
-          config['webpack'] = {
+          config.webpack = {
             dist: {
               jsFolderName: 'js',
               cssFolderName: 'css',

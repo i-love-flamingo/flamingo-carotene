@@ -1,5 +1,6 @@
 # Module `flamingo-carotene-webpack`
-This module abstracts webpack to have a quite good featured webpack config ready to use with your project.
+This module abstracts [webpack](https://github.com/webpack/webpack) to have a quite good featured webpack config ready
+to use with your project.
 
 An initial webpack config will be provided by this module.
 
@@ -28,7 +29,40 @@ command.
 Every webpack configuration that is supported by the used webpack version can be applied that way.
 
 ## How to configure
+This module exposes the following config
+```
+config.paths.webpack = {
+  src: config.paths.src,
+  dist: config.paths.dist
+}
+```
+`src` Path that this module uses as source path
 
+`dist` Path that this module uses as dist path
+
+```
+config.webpack = {
+  dist: {
+    jsFolderName: 'js',
+    cssFolderName: 'css',
+    fontFolderName: 'font',
+    imageFolderName: 'image'
+  },
+  rulesInclude: null || [],
+  buildCallback: null || function
+}
+```
+`dist.jsFolderName` Additional path from the webpack dist to the js output files
+
+`dist.cssFolderName` Additional path from the webpack dist to the css output files
+
+`dist.fontFolderName` Additional path from the webpack dist to the font output files
+
+`dist.imageFolderName`Additional path from the webpack dist to the image output files
+
+`rulesInclude` Array of paths to use in the include property of module rules inside the webpack config
+
+`buildCallback` The callback function to execute when the webpack compiler was finished
 
 ## List of flamingo-carotene webpack modules
 - flamingo-carotene-babel

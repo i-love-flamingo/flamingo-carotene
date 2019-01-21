@@ -8,11 +8,12 @@ class SassLint {
         priority: 100,
         handler: function (core) {
           const config = core.getConfig()
+
           config.paths.sassLint = __dirname
-          if (!config.sassLint) {
-            config.sassLint = {}
+
+          config.sassLint = {
+            breakOnError: false
           }
-          config.sassLint.breakOnError = false
         }
       },
       {

@@ -1,15 +1,14 @@
 # Module `flamingo-carotene-core`
 This is the core module of the flamingo-carotene library. It provides the "flamingo-carotene" command and the logic to
-load all the other modules.
+load all the other modules and dispatch commands.
 
 ## How to use
 Run:
-
 ```
 yarn add flamingo-carotene-core -D
 ```
-And you will be able to use the cli tool of flamingo-carotene.
 
+And you will be able to use the cli tool of flamingo-carotene.
 ```
 $ yarn flamingo-carotene {command} [option(s)]
 
@@ -20,6 +19,23 @@ $ yarn flamingo-carotene {command} [option(s)]
     Options:
         -v        verbose output
 ```
+
+## How to configure
+This module exposes the following config
+```
+{
+  paths: {
+    carotene: carotenePath,
+    project: projectPath,
+    src: path.join(projectPath, 'src'),
+    dist: path.join(projectPath, 'dist')
+  }
+}
+```
+Where `carotenePath` points to this very module in your project and `projectPath` points to the root of your project.
+
+These paths can be changed to your needs via the `config` command and used for other paths that you need inside your
+project.
 
 ## How it works
 The core provides the flamingo-carotene 'binary'. The binary allows you to execute the flamingo-carotene command via

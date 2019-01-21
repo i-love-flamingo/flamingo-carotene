@@ -10,8 +10,6 @@ Setup the webfont configuration as you see in the section below.
 
 Run the webpack compiler by e.g. executing `yarn flamingo-carotene build`.
 
-## How to configure
-
 ## How it works
 The webfont module adds the [webfont-webpack-plugin](https://github.com/itgalaxy/webfont-webpack-plugin) to the
 flamingo-carotene webpack config. With that done the webpack plugin is doing its job whenever the webpack compiler runs.

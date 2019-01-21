@@ -1,8 +1,14 @@
 # Module `flamingo-carotene-dev-server`
-The dev server module is there to make the development of a Flamingo-Carotene frontend easier.
-It includes the functionality to register file watchers and dispatch commands when these noticed a change.
-In addition to that a socket will be opened and its client will be injected into the webpack config (if available) to
-automatically reload the browser after a potential successful rebuild.
+The dev server module is there to make the development of a flamingo-carotene frontend easier.
+
+It includes the functionality to register [chokidar](https://github.com/paulmillr/chokidar) file watchers and dispatch
+commands when these noticed a change.
+
+In addition to that a [socket.io](https://github.com/socketio/socket.io) socket will be opened and its client will be
+injected into the webpack config (if available) to automatically reload the browser after a potential successful
+rebuild.
+
+The `NODE_ENV` is set to `development` when executing the dev servers command.
 
 ## How to use
 Get the module by running:
@@ -50,3 +56,18 @@ function is also used to allow the rebuild functionality when changes are made d
 
 The watcher configurations will be automatically gathered by the dev server by calling the `getWatchers`
 function, that must be provided by your module to expose your watcher configs.
+
+## How to configure
+This module exposes the following config
+```
+config.devServer = {
+  port: 3000
+}
+```
+`port` The port of the dev server is used for the socket connection to the client.
+
+## How socket client injection works
+The socket client will be injected into the webpack config's entries. If you have more that one entry for js, every
+will get the ability to open its socket to the server on execution. When the dev command was dispatched and the last
+build was no dev build - no socket client was injected - the js watcher command will be triggered right away to ensure
+that the next page load will have the ability to communicate via the socket.

@@ -1,7 +1,12 @@
 # Module `flamingo-carotene-state-manager`
-The state-manager gives you the possibility to set and get states, and watch changes.
+The state-manager gives you the possibility to set and get states, and watch changes. Under the hood
+[redux](https://github.com/reduxjs/redux) is used.
 
 ## How to initialize
+```
+yarn add flamingo-carotene-state-manager -D
+```
+
 ### Import state manager
 ```
 import state from 'flamingo-carotene-state-manager'

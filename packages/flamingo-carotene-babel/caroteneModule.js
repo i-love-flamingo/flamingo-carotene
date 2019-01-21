@@ -17,7 +17,7 @@ class Babel {
           const cliTools = core.getCliTools()
 
           if (!config.webpackConfig || !config.webpackConfig.module || !config.webpackConfig.module.rules) {
-            cliTools.warn('Babel is configured to integrate into webpack but there is no webpack config availbale')
+            cliTools.warn('Babel is configured to integrate into webpack but there is no webpack config available')
             return
           }
 

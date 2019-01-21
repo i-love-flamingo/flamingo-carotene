@@ -11,9 +11,11 @@ The static asset module will listen to the following commands: `buildTemplates`,
 ## How it works
 The module copies all the files that are found by the configured glob pattern to the dist folder.
 
-## Config
-The module comes with useful defaults, but you can of course adjust them in your needs:
+## How to configure
+This module exposes the following config
 ```
-  //which assets should be copied (relative to "asset" folder!)
-  config.staticAsset.staticAssetPattern: '/*'
+config.staticAsset = {
+  staticAssetPattern: '/*',
+}
 ```
+`staticAssetPattern` Glob pattern to find the files inside the src path

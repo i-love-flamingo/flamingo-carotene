@@ -1,6 +1,13 @@
 # Module `flamingo-carotene-behavior`
 The behavior Module is a "DOM-aware" component loader, which loads js-classes automatically and attaches them to dom-elements.
 
+## How to use
+```
+yarn add flamingo-carotene-behavior -D
+```
+
+See 'How to initialize' below.
+
 ## What it is for
 Given, you've got a DOM structure like this: 
 ```

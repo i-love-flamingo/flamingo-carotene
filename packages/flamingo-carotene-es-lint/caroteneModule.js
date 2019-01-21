@@ -21,11 +21,12 @@ class ESLint {
 
           config.paths.eslint = __dirname
 
-          config.eslint = {}
-          config.eslint.useWebpackLoader = true
-          config.eslint.breakOnError = false
-          config.eslint.configFilePath = this.isConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultConfigFileName)
-          config.eslint.ignoreFilePath = this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName)
+          config.eslint = {
+            useWebpackLoader: true,
+            breakOnError: false,
+            configFilePath: this.isConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultConfigFileName),
+            ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName)
+          }
         }
       },
       {

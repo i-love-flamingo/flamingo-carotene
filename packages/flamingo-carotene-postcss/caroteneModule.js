@@ -6,7 +6,6 @@ const configFileNames = ['.postcssrc', '.postcssrc.json', '.postcssrc.yml', '.po
 class PostCSS {
   constructor (core) {
     this.config = core.getConfig()
-    this.projectPackageJson = require(path.join(this.config.paths.project, 'package.json'))
 
     this.listeners = [
       {
