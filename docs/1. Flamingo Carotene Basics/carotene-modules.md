@@ -132,7 +132,7 @@ class MyModuleClass {
     return this.listeners
   }
 
-  getWatcherForDevServer () {
+  getWatchers () {
     return this.watcher
   }
 }

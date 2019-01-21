@@ -22,23 +22,31 @@ the dev server will start gathering all configured watchers used inside your pro
 To set up file watchers you can easily add a `watcher` config to your module definition with the following structure
 ```
 {
-    'watchId': 'myId',
-    'path': [
-      path.join(config.paths.src, '**', '*.myExt')
-    ],
-    'command': 'myCommand',
-    'callbackKey': 'configKey'
+  'watchId': 'myId',
+  'path': [
+    path.join(config.paths.src, '**', '*.ext')
+  ],
+  'command': 'commandName',
+  'callbackKey': 'configKey',
+  'watcherConfig': {
+    ignored: /(^|[/\\])\../ // dot files or folders
+  },
+  'unwatchConfig': path.join(config.paths.src, '**', 'special.ext')
 }
 ```
 `watchId` A unique id (at least in your project) to identify the file watcher.
 
-`path` The glob paths that the file watcher should check for file changes
+`path` The glob paths that the file watcher should check for file changes.
 
-`command` The command that will be dispatched when a file change was recognized
+`command` The command that will be dispatched when a file change was recognized.
 
 `callbackKey` A key from the config where to find a buildCallback function. Only one level supported yet,
 e.g. when your callback function is located here: config.myKey.buildCallback the callbackKey would be 'myKey'. This
 function is also used to allow the rebuild functionality when changes are made during a running build.
 
-The watcher configurations will be automatically gathered by the dev server by calling the `getWatcherForDevServer`
+`watcherConfig` (optional) A custom config object for this chokidar file watcher.
+
+`unwatchConfig` (optional) string or array of strings of file-, folder-, or glob-paths
+
+The watcher configurations will be automatically gathered by the dev server by calling the `getWatchers`
 function, that must be provided by your module to expose your watcher configs.
