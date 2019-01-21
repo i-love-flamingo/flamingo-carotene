@@ -35,12 +35,12 @@ class CaroteneStaticAsset {
 
     this.watcher = [
       {
-        'watchId': 'static-asset',
-        'path': [
+        watchId: 'static-asset',
+        path: [
           path.join(config.paths.src, 'asset', '**', '*.*')
         ],
-        'command': 'watchAsset',
-        'callbackKey': 'static-asset'
+        command: 'watchAsset',
+        callbackKey: 'static-asset'
       }
     ]
   }
@@ -49,7 +49,7 @@ class CaroteneStaticAsset {
     return this.listeners
   }
 
-  getWatcherForDevServer () {
+  getWatchers () {
     return this.watcher
   }
 }

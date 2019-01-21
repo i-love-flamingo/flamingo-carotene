@@ -7,26 +7,39 @@ const fs = require('fs')
  */
 class FileWatcher {
   /**
-   * @param socket  - The socket instance
-   * @param core    - Flamingo-carotene core
-   * @param config  - Config object for the file watcher
+   * @param socket        - The socket instance
+   * @param core          - Flamingo-carotene core
+   * @param watcherConfig - Config object for the file watcher
    *    watchId     - a unique watchId
    *    watchPaths  - Array of paths with globbing to be watched
    *    command     - flamingo carotene command, that will be triggered
    *    callbackKey - key of config[KEY].callback function, that will be called
+   *    watcherConfig - (optional) config object to be passed to the chokidar file watcher
+   *    unwatchConfig - (optional) string or array of strings of file-, folder-, or glob-paths
    */
-  constructor (socket, core, config) {
+  constructor (socket, core, watcherConfig) {
     // Socket to client
     this.socket = socket
 
-    // flamingo-carotene-core
-    this.core = core
+    // carotene dispatcher
+    this.dispatcher = core.getDispatcher()
 
-    config = config || {}
-    this.watchId = config.watchId
-    this.watchPaths = config.path
-    this.command = config.command
-    this.callbackKey = config.callbackKey
+    // carotene cliTools
+    this.cliTools = core.getCliTools()
+
+    // carotene config
+    this.config = core.getConfig()
+
+    watcherConfig = watcherConfig || {}
+    this.watchId = watcherConfig.watchId
+    this.watchPaths = watcherConfig.path
+    this.command = watcherConfig.command
+    this.callbackKey = watcherConfig.callbackKey
+    this.watcherConfig = Object.assign(
+      this.config.devServer.watcherConfig || {},
+      watcherConfig.watcherConfig || {}
+    )
+    this.unwatchConfig = watcherConfig.unwatchConfig
 
     // instance of chokidar
     this.watcher = null
@@ -39,12 +52,6 @@ class FileWatcher {
 
     // buffer, where a original callback is stored, as long as it is overwritten
     this.originalBuildCallback = null
-
-    // carotene dispatcher
-    this.dispatcher = core.getDispatcher()
-
-    // carotene cliTools
-    this.cliTools = core.getCliTools()
 
     // if a build is triggered, the file-path, which has trigger the change
     this.currentChangedPath = ''
@@ -61,8 +68,7 @@ class FileWatcher {
   }
 
   removeBasePathFromPath (path) {
-    const config = this.core.getConfig()
-    const basePath = config.paths.src
+    const basePath = this.config.paths.src
     if (path.substr(0, basePath.length) === basePath) {
       path = path.substr(basePath.length)
     }
@@ -73,8 +79,6 @@ class FileWatcher {
    * Setup watcher
    */
   initialize () {
-    const config = this.core.getConfig()
-
     // chokidar dont like windows \ in paths
     // replacing them with / works
     if (process.platform === 'win32') {
@@ -86,13 +90,11 @@ class FileWatcher {
     }
 
     // setup watcher
-    // const usePolling = (process.platform === 'win32' || process.platform === 'linux')
-    this.watcher = chokidar.watch(this.watchPaths, {
-      ignored: /(^|[/\\])\../, // dot files or folders
-      // usePolling: usePolling
-    })
+    this.watcher = chokidar.watch(this.watchPaths, this.watcherConfig)
 
-    this.watcher.unwatch(path.join(config.paths.src, '**', 'fontIcon.sass'))
+    if (this.unwatchConfig) {
+      this.watcher.unwatch(this.unwatchConfig)
+    }
 
     // start watcher
     this.watcher.on('change', this.buildOnChange.bind(this))
@@ -104,47 +106,8 @@ class FileWatcher {
       showWatchPaths.push(this.removeBasePathFromPath(watchPath))
     }
 
-    // append SocketIO to webpackJs
-    if (this.watchId === 'webpackJs') {
-      // check if current dist build IS already a dev build...
-      // - If not trigger build.
-      if (!fs.existsSync(this.getDevBuildFileName())) {
-        this.cliTools.info(`Rebuilding JS to inject socketClient`, true)
-        this.dispatcher.dispatchCommand(this.command)
-        fs.writeFileSync(this.getDevBuildFileName(), '1')
-      }
-
-      this.appendSocketId()
-    }
-
     // output state in CLI
     this.cliTools.info(`Watcher-${this.watchId}: listens to ${showWatchPaths.join(', ')} `, true)
-  }
-
-  /**
-   * Get the FQ-Path for the devBuild "lock"-file
-   * @returns {*}
-   */
-  getDevBuildFileName () {
-    const config = this.core.getConfig()
-    return path.join(config.paths.dist, 'isDevBuild')
-  }
-
-  /**
-   * Appends SocketIO lib to JS
-   * This is needed to autoreload Browser via Websocket on buildchange.
-   */
-  appendSocketId () {
-    const config = this.core.getConfig()
-    const entryNames = Object.keys(config.webpackConfig.entry)
-    for (const entryName of entryNames) {
-      // Add the socket client to the beginning of every multi file entry
-      if (Array.isArray(config.webpackConfig.entry[entryName])) {
-        config.webpackConfig.entry[entryName].unshift(
-          path.join(__dirname, 'socketClient.js')
-        )
-      }
-    }
   }
 
   /**
@@ -164,13 +127,11 @@ class FileWatcher {
     }
 
     // no build in progress? so - build it!
-    const config = this.core.getConfig()
-
     // save original callback...
-    this.originalBuildCallback = config[this.callbackKey].buildCallback
+    this.originalBuildCallback = this.config[this.callbackKey].buildCallback
 
     // overwrite callback...
-    config[this.callbackKey].buildCallback = this.watcherFinishBuildCallback.bind(this)
+    this.config[this.callbackKey].buildCallback = this.watcherFinishBuildCallback.bind(this)
 
     // start building
     this.rerunAfterBuild = false
@@ -184,10 +145,8 @@ class FileWatcher {
   watcherFinishBuildCallback () {
     this.cliTools.info(`Watcher-${this.watchId}: Build finished`, true)
 
-    const config = this.core.getConfig()
-
     // restore old, original callback...
-    config[this.callbackKey].buildCallback = this.originalBuildCallback
+    this.config[this.callbackKey].buildCallback = this.originalBuildCallback
 
     this.buildInProgress = false
 

@@ -66,20 +66,21 @@ class CaroteneWebpack {
 
     this.watcher = [
       {
-        'watchId': 'webpackSass',
-        'path': [
+        watchId: 'webpackSass',
+        path: [
           path.join(config.paths.src, '**', '*.sass')
         ],
-        'command': 'watchWebpackCss',
-        'callbackKey': 'webpack'
+        command: 'watchWebpackCss',
+        callbackKey: 'webpack',
+        unwatchConfig: path.join(config.paths.src, '**', 'fontIcon.sass')
       },
       {
-        'watchId': 'webpackJs',
-        'path': [
+        watchId: 'webpackJs',
+        path: [
           path.join(config.paths.src, '**', '*.js')
         ],
-        'command': 'watchWebpackJs',
-        'callbackKey': 'webpack'
+        command: 'watchWebpackJs',
+        callbackKey: 'webpack'
       }
     ]
   }
@@ -88,7 +89,7 @@ class CaroteneWebpack {
     return this.listeners
   }
 
-  getWatcherForDevServer () {
+  getWatchers () {
     return this.watcher
   }
 }

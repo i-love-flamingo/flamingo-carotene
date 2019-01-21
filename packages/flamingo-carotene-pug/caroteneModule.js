@@ -42,12 +42,12 @@ class CarotenePug {
 
     this.watcher = [
       {
-        'watchId': 'pug',
-        'path': [
+        watchId: 'pug',
+        path: [
           path.join(config.paths.src, '**', '*.pug')
         ],
-        'command': 'watchPug',
-        'callbackKey': 'pug'
+        command: 'watchPug',
+        callbackKey: 'pug'
       }
     ]
   }
@@ -56,7 +56,7 @@ class CarotenePug {
     return this.listeners
   }
 
-  getWatcherForDevServer () {
+  getWatchers () {
     return this.watcher
   }
 }
