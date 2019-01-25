@@ -65,8 +65,8 @@ config.webpack = {
 `buildCallback` The callback function to execute when the webpack compiler was finished
 
 ## List of flamingo-carotene webpack modules
-- flamingo-carotene-babel
-- flamingo-carotene-es-lint
-- flamingo-carotene-postcss
-- flamingo-carotene-webfont
-- flamingo-carotene-webpack-svg-sprite
+- [flamingo-carotene-babel](../flamingo-carotene-babel)
+- [flamingo-carotene-es-lint](../flamingo-carotene-es-lint)
+- [flamingo-carotene-postcss](../flamingo-carotene-postcss)
+- [flamingo-carotene-webfont](../flamingo-carotene-webfont)
+- [flamingo-carotene-webpack-svg-sprite](../flamingo-carotene-webpack-svg-sprite)
