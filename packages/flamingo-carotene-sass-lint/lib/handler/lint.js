@@ -16,9 +16,9 @@ const sassLint = (core) => {
     configFile = path.join(config.paths.sassLint, '.sass-lint.yml')
   }
 
-  let cmd = `yarn`
+  let cmd = `npm run`
   if (process.platform === 'win32') {
-    cmd = `yarn.cmd`
+    cmd = `npm.cmd run`
   }
 
   const parameters = ['sass-lint', '--config', `${configFile}`, '--no-exit', '-v']

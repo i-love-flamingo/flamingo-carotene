@@ -8,9 +8,9 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  let cmd = `yarn`
+  let cmd = `npm run`
   if (process.platform === 'win32') {
-    cmd = `yarn.cmd`
+    cmd = `npm.cmd run`
   }
 
   const parameters = getCommandParameters(config)
