@@ -10,7 +10,7 @@ stages:
     - .npm
   before_script:
   - export npm_config_cache=$(pwd -P)/.npm
-  - npm i
+  - npx lerna bootstrap
 
 Test Packages:
   stage: test
