@@ -22,6 +22,7 @@ Publish Packages:
   stage: publish
   <<: *prepare_npm
   script:
+    - npm ci
     - npm run publish-packages
   only:
     - /master/
