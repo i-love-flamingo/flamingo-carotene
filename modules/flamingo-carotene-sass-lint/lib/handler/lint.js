@@ -1,4 +1,4 @@
-const { spawn } = require('child_process')
+const { spawn, execSync } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
@@ -25,6 +25,8 @@ const sassLint = (core) => {
 
   cliTools.info('SassLint - start')
 
+  const npmVersion = execSync('npm -v')
+
   const spawnEnv = process.env
   spawnEnv.FORCE_COLOR = true
 
@@ -45,6 +47,11 @@ const sassLint = (core) => {
     // ignore first result line... - cause its the cmd itself
 
     let skipLine = false
+
+    // Remove npm version from output
+    if (data.toString().trim().search(npmVersion) !== -1) {
+      skipLine = true
+    }
 
     // dont need "yarn run" info
     if (data.toString().trim().search('yarn run v') !== -1) {
