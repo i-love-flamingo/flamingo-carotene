@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-sass-lint/README.md
+../../modules/flamingo-carotene-sass-lint/README.md

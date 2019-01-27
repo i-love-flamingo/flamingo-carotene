@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-babel/README.md
+../../modules/flamingo-carotene-babel/README.md

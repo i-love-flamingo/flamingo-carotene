@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-es-lint/README.md
+../../modules/flamingo-carotene-es-lint/README.md

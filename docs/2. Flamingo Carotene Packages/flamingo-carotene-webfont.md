@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-webfont/README.md
+../../modules/flamingo-carotene-webfont/README.md

@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-webpack-svg-sprite/README.md
+../../modules/flamingo-carotene-webpack-svg-sprite/README.md

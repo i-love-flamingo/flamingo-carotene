@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-pug/README.md
+../../modules/flamingo-carotene-pug/README.md

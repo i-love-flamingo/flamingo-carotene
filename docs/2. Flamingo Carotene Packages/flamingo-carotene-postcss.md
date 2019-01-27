@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-postcss/README.md
+../../modules/flamingo-carotene-postcss/README.md

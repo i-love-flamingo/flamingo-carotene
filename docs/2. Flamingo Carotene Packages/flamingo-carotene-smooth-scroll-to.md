@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-smooth-scroll-to/README.md
+../../modules/flamingo-carotene-smooth-scroll-to/README.md

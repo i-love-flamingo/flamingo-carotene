@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-dev-server/README.md
+../../modules/flamingo-carotene-dev-server/README.md

@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-state-manager/README.md
+../../modules/flamingo-carotene-state-manager/README.md

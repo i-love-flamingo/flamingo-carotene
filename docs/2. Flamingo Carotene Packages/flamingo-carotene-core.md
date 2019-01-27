@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-core/README.md
+../../modules/flamingo-carotene-core/README.md

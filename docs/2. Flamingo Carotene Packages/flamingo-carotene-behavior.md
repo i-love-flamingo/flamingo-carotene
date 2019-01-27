@@ -1,1 +1,1 @@
-../../packages/flamingo-carotene-behavior/README.md
+../../modules/flamingo-carotene-behavior/README.md

@@ -1,1 +1,1 @@
-../../packages/eslint-config-flamingo-carotene/README.md
+../../modules/eslint-config-flamingo-carotene/README.md
