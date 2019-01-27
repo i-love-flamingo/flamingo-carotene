@@ -1,0 +1,19 @@
+{
+  "name": "eslint-config-flamingo-carotene",
+  "version": "6.0.29",
+  "description": "Flamingo carotene ESLint config, following our styleguide",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "homepage": "",
+  "license": "OSL-3.0",
+  "main": ".eslintrc",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/eslint-config-flamingo-carotene",
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
+}

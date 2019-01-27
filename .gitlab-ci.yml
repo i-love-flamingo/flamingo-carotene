@@ -4,24 +4,24 @@ stages:
 - test
 - publish
 
-.prepare-yarn: &prepare_yarn
+.prepare-npm: &prepare_npm
   cache:
     paths:
-    - .yarn
+    - .npm
   before_script:
-  - export YARN_CACHE_FOLDER=$(pwd -P)/.yarn
-  - yarn
+  - export npm_config_cache=$(pwd -P)/.npm
+  - npm ci
 
 Test Packages:
   stage: test
-  <<: *prepare_yarn
+  <<: *prepare_npm
   script:
-  - yarn test
+  - npm t
 
 Publish Packages:
   stage: publish
-  <<: *prepare_yarn
+  <<: *prepare_npm
   script:
-    - yarn publish-packages
+    - npm run publish-packages
   only:
     - /master/

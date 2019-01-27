@@ -9,11 +9,10 @@ Inside your flamingo project folder:
 ```
 mkdir -p frontend/src
 cd frontend
-yarn init
+npm run init
 
-yarn add flamingo-carotene-core
-yarn add flamingo-carotene-pug
-
+npm i -D flamingo-carotene-core
+npm i -D flamingo-carotene-pug
 ```
 
 This initializes your frontend project:
@@ -31,7 +30,7 @@ echo "Hello World" >  src/page/index.pug
 And with this command you can start building your frontend:
 
 ```
-yarn flamingo-carotene build
+npx flamingo-carotene build
 ```
 
 The result is stored in the folder ```frontend/dist```
@@ -80,7 +79,7 @@ html
         pre.errorDebugContent.center= error
 ```
 
-Then dont forget to recompile the templates with: `yarn flamingo-carotene build`
+Then dont forget to recompile the templates with: `npx flamingo-carotene build`
 
 ## Next Steps
 
@@ -97,9 +96,8 @@ After the first steps you can continue with:
 
 Read more about the tools used in flamingo carotene packages:
 
-*Yarn and NPM*
+*NPM*
 
-- https://yarnpkg.com/en/
 - https://www.npmjs.com/
 
 *PUG for templating*

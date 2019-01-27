@@ -1,0 +1,23 @@
+{
+  "name": "flamingo-carotene-webfont",
+  "version": "6.0.29",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-webfont",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "webfont-webpack-plugin": "^0.2.2"
+  },
+  "peerDependencies": {
+    "flamingo-carotene-webpack": "^6.0.28"
+  }
+}

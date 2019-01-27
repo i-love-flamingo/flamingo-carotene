@@ -1,0 +1,25 @@
+{
+  "name": "flamingo-carotene-core",
+  "version": "6.0.31",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-core",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "main": "lib/core.js",
+  "bin": {
+    "flamingo-carotene": "./bin/flamingoCarotene.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "shelljs": "^0.8.2"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "flamingo-carotene-behavior",
+  "version": "6.0.25",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-behavior",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "main": "dist/behavior.js",
+  "scripts": {
+    "build": "mkdir -p dist & npx babel src/behavior.js -o dist/behavior.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-import-glob": "^2.0.0",
+    "jest": "^23.5.0",
+    "jsdom": "^12.0.0"
+  }
+}

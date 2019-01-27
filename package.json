@@ -16,9 +16,10 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "yarn lerna run test",
-    "lint": "yarn lerna run lint",
-    "publish-packages": "./script/publish"
+    "test": "npx lerna run test",
+    "lint": "npx lerna run lint",
+    "publish-packages": "./script/publish",
+    "link-modules": "make link"
   },
   "devDependencies": {
     "glob": "^7.1.2",

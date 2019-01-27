@@ -120,27 +120,12 @@ Please check, if node reports v9.4.0 or higher
 node -v
 ```
 
-#### Install YARN
-
-```bash
-cd ~
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get update && sudo apt-get install yarn
-```
-
-Please check, yarn should report 1.3.2 or higher
-
-```bash
-yarn -v
-```
-
 #### Initial Frontend setup
 
 ```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
-yarn
-yarn build
+cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
+npm i
+npx flamingo-carotene build
 ```
 
 after this, your go server can be run with:
@@ -156,7 +141,7 @@ Frontent Watcher & HotReloading Frontend Server
 
 ```bash
 cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
-yarn dev
+npx flamingo-carotene dev
 ```
 
 Check if the dev server is available [http://localhost:1337/](http://localhost:1337/)
@@ -186,14 +171,14 @@ dep ensure -v -update flamingo.me/flamingo
 
 ```bash
 cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
-yarn build
+npx flamingo-carotene build
 ```
 
 #### Start Frontend Dev-Server and watch on file changes 
 
 ```bash
 cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
-yarn dev
+npx flamingo-carotene dev
 ```
 
 
@@ -201,7 +186,7 @@ yarn dev
 
 This is a strange behaviour of node/watch/webpack on lxss
 Install lsyncd and sync files from frontend to frontend-sync locally.
-Start yarn dev in frontend-sync
+Start npx flamingo-carotene dev in frontend-sync
 
 -   
   ```bash
@@ -212,7 +197,7 @@ Start yarn dev in frontend-sync
   
 - Add the following config to your `lsyncd.conf`  
 
-    ```json
+    ```
     settings {
         logfile = "/var/log/lsyncd.log",
         statusFile = "/var/log/lsyncd.status",

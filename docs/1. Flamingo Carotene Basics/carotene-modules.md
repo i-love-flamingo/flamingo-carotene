@@ -32,11 +32,11 @@ There are basicly 2 kind of flamingo-carotene packages:
   
 You can easly add a package to your project with:
 ```
-yarn add [PACKAGE-NAME]
+npm i [-D] [PACKAGE-NAME]
 ``` 
 Example:
 ```
-yarn add flamingo-carotene-es-lint  
+npm i -D flamingo-carotene-es-lint  
 ``` 
 
 ## How to create a new module
@@ -148,13 +148,13 @@ Lint and Test your Stuff 1st!
 
 Inside the main package (flamingo-carotene, the folder where this MD exists) simply run
 ```
-yarn lint
+npm run lint
 ```
 
 ### Test all Packages
 If there are no linting errors you may call
 ```
-yarn test
+npm t
 ```
 which iterates over all packages and executes the test script which is defined in the package.json of every package
 
@@ -166,7 +166,7 @@ You can only publish versions if:
 
 To publish a new version of flamingo-carotene simply execute
 ```
-yarn lerna version
+npx lerna version
 ```
 It will show you the current version and gives you the ability to select a new one.
 While we're in alpha mode, you need to select "Custom Version" - and type in the version number you want to publish.

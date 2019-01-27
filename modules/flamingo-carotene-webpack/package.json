@@ -1,0 +1,31 @@
+{
+  "name": "flamingo-carotene-webpack",
+  "version": "6.0.30",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-webpack",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
+    "import-glob": "^1.5.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.22.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.17.0",
+    "webpack-manifest-plugin": "^2.0.3"
+  }
+}

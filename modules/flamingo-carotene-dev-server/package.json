@@ -1,0 +1,22 @@
+{
+  "name": "flamingo-carotene-dev-server",
+  "version": "6.0.26",
+  "description": "> TODO: description",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-dev-server",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "debounce": "^1.2.0",
+    "socket.io": "^2.1.1"
+  }
+}
