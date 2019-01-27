@@ -8,9 +8,9 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  let cmd = `npm run`
+  let cmd = 'npm'
   if (process.platform === 'win32') {
-    cmd = `npm.cmd run`
+    cmd = 'npm.cmd'
   }
 
   const parameters = getCommandParameters(config)
@@ -82,6 +82,7 @@ const eslint = (core) => {
  */
 getCommandParameters = function (config) {
   const parameters = [
+    'run',
     'eslint'
   ]
 
