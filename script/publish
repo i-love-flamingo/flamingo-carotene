@@ -54,4 +54,4 @@ const publishPackage = package => {
 }
 
 // options is optional
-glob("packages/*", publishPackages)
+glob("modules/*", publishPackages)
