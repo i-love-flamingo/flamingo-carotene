@@ -9,10 +9,9 @@ Inside your flamingo project folder:
 ```
 mkdir -p frontend/src
 cd frontend
-npm run init
+npx flamingo-carotene init // To be implemented
 
-npm i -D flamingo-carotene-core
-npm i -D flamingo-carotene-pug
+npm i -D flamingo-carotene-core flamingo-carotene-pug
 ```
 
 This initializes your frontend project:
