@@ -1,5 +1,5 @@
 # Module `flamingo-carotene-core`
-This is the core module of the flamingo-carotene library. It provides the "flamingo-carotene" command and the logic to
+This is the core module of the Flamingo Carotene library. It provides the "flamingo-carotene" command and the logic to
 load all the other modules and dispatch commands.
 
 ## How to use
@@ -8,7 +8,7 @@ Run:
 npm i -D flamingo-carotene-core
 ```
 
-And you will be able to use the cli tool of flamingo-carotene.
+And you will be able to use the cli tool of Flamingo Carotene.
 ```
 npx flamingo-carotene {command} [option(s)]
 
@@ -25,14 +25,14 @@ This module exposes the following config
 ```
 {
   paths: {
-    carotene: carotenePath,
+    carotene: flamingoCarotenePath,
     project: projectPath,
     src: path.join(projectPath, 'src'),
     dist: path.join(projectPath, 'dist')
   }
 }
 ```
-Where `carotenePath` points to this very module in your project and `projectPath` points to the root of your project.
+Where `carotene` points to this very module in your project and `project` points to the root of your project.
 
 These paths can be changed to your needs via the `config` command and used for other paths that you need inside your
 project.
@@ -42,13 +42,13 @@ The core provides the flamingo-carotene 'binary'. The binary allows you to execu
 npx.
 
 In general the binary does a couple of things.
-1. It gathers all flamingo-carotene modules used in your project.
-2. It executes commands to which all the previously registered flamingo-carotene modules can apply handlers to.
+1. It gathers all Flamingo Carotene modules used in your project.
+2. It executes commands to which all the previously registered Flamingo Carotene modules can apply handlers to.
 
-### Gathering flamingo-carotene modules
-To gather the modules, the binary runs trough your dependencies to find the flamingo-carotene ones and registers all
-modules that have a `caroteneModule.js`. Additional to that, you can place a `carotene-module.js` file in your project
-root to apply project logic, just like in any other module you are using.
+### Gathering Flamingo Carotene modules
+To gather the modules, the binary runs trough your dependencies to find the Flamingo Carotene ones and registers all
+modules that have a `flamingo-carotene-module.js`. Additional to that, you can place a `flamingo-carotene-module.js`
+file in your project root to apply project logic, just like in any other module you are using.
 
 ### Execute Commands
 When executing commands, the binary gathers all handlers from the registered modules, get those for the specified
@@ -72,7 +72,7 @@ When a handler is executed it gets a core object provided as argument. The core 
 - `cliTools` Some basic tooling for the ease of use of the terminal, such as logging
 - `dispatcher` The dispatcher gives the possibility to dispatch a command. It executes every handler in the configured
 order
-- `modules` A collection of the actual used flamingo-carotene modules
+- `modules` A collection of the actual used Flamingo Carotene modules
 
 ## Config
 Every module can expose the config that it uses to e.g. build its artifacts, so that it can be edited by other modules,

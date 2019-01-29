@@ -1,5 +1,5 @@
 # Module `flamingo-carotene-pug-lint`
-Flamingo carotene module for linting pug files. Based on official [pug-lint](https://github.com/pugjs/pug-lint) package.
+Flamingo Carotene module for linting pug files. Based on official [pug-lint](https://github.com/pugjs/pug-lint) package.
 
 ## How to use
 ```

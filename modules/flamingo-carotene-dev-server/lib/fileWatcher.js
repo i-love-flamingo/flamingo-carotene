@@ -8,11 +8,11 @@ const fs = require('fs')
 class FileWatcher {
   /**
    * @param socket        - The socket instance
-   * @param core          - Flamingo-carotene core
+   * @param core          - Flamingo Carotene core
    * @param watcherConfig - Config object for the file watcher
    *    watchId     - a unique watchId
    *    watchPaths  - Array of paths with globbing to be watched
-   *    command     - flamingo carotene command, that will be triggered
+   *    command     - Flamingo Carotene command, that will be triggered
    *    callbackKey - key of config[KEY].callback function, that will be called
    *    watcherConfig - (optional) config object to be passed to the chokidar file watcher
    *    unwatchConfig - (optional) string or array of strings of file-, folder-, or glob-paths
@@ -21,13 +21,13 @@ class FileWatcher {
     // Socket to client
     this.socket = socket
 
-    // carotene dispatcher
+    // Flamingo Carotene dispatcher
     this.dispatcher = core.getDispatcher()
 
-    // carotene cliTools
+    // Flamingo Carotene cliTools
     this.cliTools = core.getCliTools()
 
-    // carotene config
+    // Flamingo Carotene config
     this.config = core.getConfig()
 
     watcherConfig = watcherConfig || {}

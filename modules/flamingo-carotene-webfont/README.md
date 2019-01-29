@@ -12,4 +12,4 @@ Run the webpack compiler by e.g. executing `npx flamingo-carotene build`.
 
 ## How it works
 The webfont module adds the [webfont-webpack-plugin](https://github.com/itgalaxy/webfont-webpack-plugin) to the
-flamingo-carotene webpack config. With that done the webpack plugin is doing its job whenever the webpack compiler runs.
+Flamingo Carotene webpack config. With that done the webpack plugin is doing its job whenever the webpack compiler runs.

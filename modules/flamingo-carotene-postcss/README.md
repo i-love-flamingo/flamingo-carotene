@@ -1,6 +1,6 @@
 # Module `flamingo-carotene-postcss`
 The [postcss](https://github.com/postcss/postcss) module injects the
-[postcss-loader](https://github.com/postcss/postcss-loader) into the webpack config of the flamingo-carotene module.
+[postcss-loader](https://github.com/postcss/postcss-loader) into the webpack config of the Flamingo Carotene module.
 
 When you want to have your css automatically enriched with postcss, this tiny module helps injecting the corresponding
 loader.

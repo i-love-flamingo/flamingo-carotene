@@ -1,5 +1,5 @@
 # Module `eslint-config-flamingo-carotene`
-This package provides a Flamingo-Carotene [ESLint](https://github.com/eslint/eslint) config that can also be used and
+This package provides a Flamingo Carotene [ESLint](https://github.com/eslint/eslint) config that can also be used and
 extended inside your projects.
 
 ## How to use

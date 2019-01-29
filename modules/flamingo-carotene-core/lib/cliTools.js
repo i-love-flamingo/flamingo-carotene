@@ -67,7 +67,7 @@ class CliTools {
    */
   showUsage () {
     this.info(
-      `Usage: carotene {command} [option(s)]
+      `Usage: flamingo-carotene {command} [option(s)]
     
     Commands:
         config

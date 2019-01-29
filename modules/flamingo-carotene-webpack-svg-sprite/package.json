@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-webpack-svg-sprite",
   "version": "6.0.37",
-  "description": "Flamingo carotene svg sprite solution",
+  "description": "Flamingo Carotene svg sprite solution",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "main": "lib/index.js",

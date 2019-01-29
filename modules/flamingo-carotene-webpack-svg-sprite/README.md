@@ -1,5 +1,8 @@
 # Module `flamingo-carotene-webpack-svg-sprite`
-This module simplifies the setup, generating and using svg sprites for icons in the flamingo-carotene environment. During the build step of flamingo-carotene we use [external-svg-sprite-loader](https://github.com/Karify/external-svg-sprite-loader) webpack module to extract all required svg files into an single svg sprite.  
+This module simplifies the setup, generating and using svg sprites for icons in the Flamingo Carotene environment.
+During the build step of Flamingo Carotene we use
+[external-svg-sprite-loader](https://github.com/Karify/external-svg-sprite-loader) webpack module to extract all
+required svg files into an single svg sprite.
 
 ## How to setup
 

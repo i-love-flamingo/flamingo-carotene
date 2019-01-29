@@ -93,7 +93,7 @@ After the first steps you can continue with:
 
 ## Links to used tools
 
-Read more about the tools used in flamingo carotene packages:
+Read more about the tools used in Flamingo Carotene modules:
 
 *NPM*
 
@@ -107,9 +107,6 @@ Read more about the tools used in flamingo carotene packages:
 
 - http://sass-lang.com/
 
-*Webpack for Build*
+*Webpack for JS / CSS Build*
 
-- http://andrewhfarmer.com/webpack-hmr-tutorial/
-
-
-
+- https://webpack.js.org/

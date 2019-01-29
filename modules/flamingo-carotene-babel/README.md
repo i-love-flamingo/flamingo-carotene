@@ -1,6 +1,6 @@
 # Module `flamingo-carotene-babel`
 The [babel](https://github.com/babel/babel) module injects the [babel loader](https://github.com/babel/babel-loader)
-into the webpack config of the flamingo-carotene module.
+into the webpack config of the Flamingo Carotene module.
 
 When you want to write ES code that needs to be transpiled to use it in the client, this tiny module helps injecting the
 corresponding loader.

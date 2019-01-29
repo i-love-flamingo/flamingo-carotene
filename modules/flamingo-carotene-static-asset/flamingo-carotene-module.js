@@ -1,7 +1,7 @@
 const path = require('path')
 const buildHandler = require('./lib/handler/build')
 
-class CaroteneStaticAsset {
+class FlamingoCaroteneStaticAsset {
   constructor (core) {
     const config = core.getConfig()
 
@@ -54,4 +54,4 @@ class CaroteneStaticAsset {
   }
 }
 
-module.exports = CaroteneStaticAsset
+module.exports = FlamingoCaroteneStaticAsset

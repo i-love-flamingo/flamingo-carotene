@@ -1,8 +1,8 @@
 # Module `flamingo-carotene-pug`
-The pug module compiles the [pug](https://github.com/pugjs/pug) templates in a flamingo-carotene project. It takes all
+The pug module compiles the [pug](https://github.com/pugjs/pug) templates in a Flamingo Carotene project. It takes all
 the files defined by a glob pattern and saves the AST (abstract syntax tree) compilation to the configured dist folder.
 
-The flamingo framework will then take care of rendering these AST files to HTML.
+The Flamingo framework will then take care of rendering these AST files to HTML.
 
 ## How to use
 ```

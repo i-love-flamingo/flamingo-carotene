@@ -1,7 +1,7 @@
 const path = require('path')
 const buildHandler = require('./lib/handler/build')
 
-class CarotenePug {
+class FlamingoCarotenePug {
   constructor (core) {
     const config = core.getConfig()
 
@@ -61,4 +61,4 @@ class CarotenePug {
   }
 }
 
-module.exports = CarotenePug
+module.exports = FlamingoCarotenePug

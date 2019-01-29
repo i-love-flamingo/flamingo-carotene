@@ -6,13 +6,13 @@ const core = require('./core')
 
 const cliTools = core.getCliTools()
 
-const caroteneLibPattern = 'flamingo-carotene-'
+const modulePattern = 'flamingo-carotene-'
 
 class Config {
   constructor () {
     cliTools.info(`Initialize config`)
     this.config = initialConfig
-    this.config.caroteneModuleNames = this.getCaroteneModuleNames()
+    this.config.moduleNames = this.getModuleNames()
   }
 
   getConfig () {
@@ -20,10 +20,10 @@ class Config {
   }
 
   /**
-   * Get all carotene module names used in the project
+   * Get all Flamingo Carotene module names used in the project
    * @returns {Array}
    */
-  getCaroteneModuleNames () {
+  getModuleNames () {
     const projectPackageJson = this.getProjectPackageJson()
 
     const dependencies = []
@@ -40,17 +40,17 @@ class Config {
       }
     }
 
-    const caroteneModuleNames = []
+    const moduleNames = []
 
     for (const dependency of dependencies) {
-      if (dependency.startsWith(caroteneLibPattern) && dependency !== `${caroteneLibPattern}core`) {
-        caroteneModuleNames.push(dependency)
+      if (dependency.startsWith(modulePattern) && dependency !== `${modulePattern}core`) {
+        moduleNames.push(dependency)
       }
     }
 
-    cliTools.info(`Used flamingo-carotene modules:\r\n${cliTools.inspect(caroteneModuleNames)}`, true)
+    cliTools.info(`Used Flamingo Carotene modules:\r\n${cliTools.inspect(moduleNames)}`, true)
 
-    return caroteneModuleNames
+    return moduleNames
   }
 
   /**

@@ -135,7 +135,7 @@ go run main.go serve
 
 Browse to [http://localhost:3322/](http://localhost:3322/)
 
-#### Carotene CLI Dev Server
+#### Flamingo Carotene Dev Server
 
 Frontent Watcher & HotReloading Frontend Server
 
@@ -148,7 +148,7 @@ Check if the dev server is available [http://localhost:1337/](http://localhost:1
 
 ## Help / Pitfalls
 
-### Help - i cant save files in my Intelli IDE if the carotene-cli watcher listen to changes
+### Help - i cant save files in my Intelli IDE if the Flamingo Carotene watcher listen to changes
 
 - Dont Panic!
 - Open your IDE 

@@ -22,7 +22,7 @@ class Dispatcher {
           listener.priority = 0
         }
 
-        listener.caroteneModule = module;
+        listener.module = module
         listenerQue.push(listener)
       }
     }
@@ -41,7 +41,7 @@ class Dispatcher {
       const listenerLoadTime = new Date().getTime() - listenerLoadStartTime
 
       if (command === 'config' && listenerLoadTime > 100) {
-        initializeWarnings.push(`${listener.caroteneModule.caroteneModuleName}: ${listenerLoadTime}ms`)
+        initializeWarnings.push(`${listener.module.name}: ${listenerLoadTime}ms`)
       }
     }
 

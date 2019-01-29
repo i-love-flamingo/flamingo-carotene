@@ -1,4 +1,4 @@
-class CaroteneWebfont {
+class FlamingoCaroteneWebfont {
   constructor (core) {
     this.listeners = [
       {
@@ -29,4 +29,4 @@ class CaroteneWebfont {
   }
 }
 
-module.exports = CaroteneWebfont
+module.exports = FlamingoCaroteneWebfont

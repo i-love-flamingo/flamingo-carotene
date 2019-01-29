@@ -4,7 +4,7 @@ const buildHandler = require('./lib/handler/build')
 const buildHandlerJs = require('./lib/handler/buildJs')
 const buildHandlerCss = require('./lib/handler/buildCss')
 
-class CaroteneWebpack {
+class FlamingoCaroteneWebpack {
   constructor (core) {
     const config = core.getConfig()
 
@@ -95,4 +95,4 @@ class CaroteneWebpack {
   }
 }
 
-module.exports = CaroteneWebpack
+module.exports = FlamingoCaroteneWebpack

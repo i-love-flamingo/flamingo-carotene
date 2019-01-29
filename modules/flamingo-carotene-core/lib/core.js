@@ -65,34 +65,34 @@ class Core {
 
     modules = []
 
-    // Get carotene modules of dependencies
-    for (const moduleName of config.caroteneModuleNames) {
-      const modulePath = path.join(config.paths.project, 'node_modules', moduleName, 'caroteneModule.js')
+    // Get Flamingo Carotene modules of dependencies
+    for (const moduleName of config.moduleNames) {
+      const modulePath = path.join(config.paths.project, 'node_modules', moduleName, 'flamingo-carotene-module.js')
 
       if (!fs.existsSync(modulePath)) {
-        cliTools.log(cliTools.chalk.dim(`No carotene module file found in module ${moduleName}`))
+        cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in module ${moduleName}`))
         continue
       }
 
       const Module = require(modulePath)
       let moduleInstance = new Module(this)
-      moduleInstance.caroteneModuleName = moduleName
+      moduleInstance.name = moduleName
       modules.push(moduleInstance)
     }
 
-    // Get carotene module of project
-    const projectModulePath = path.join(config.paths.project, 'caroteneModule.js')
+    // Get Flamingo Carotene module of project
+    const projectModulePath = path.join(config.paths.project, 'flamingo-carotene-module.js')
 
     if (!fs.existsSync(projectModulePath)) {
-      cliTools.log(cliTools.chalk.dim(`No carotene module file found in project`))
+      cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in project`))
     } else {
       const Module = require(projectModulePath)
       let moduleInstance = new Module(this)
-      moduleInstance.caroteneModuleName = 'Project'
+      moduleInstance.name = 'Project'
       modules.push(moduleInstance)
     }
 
-    cliTools.info(`Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
+    cliTools.info(`Flamingo Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
     return modules
   }
 }

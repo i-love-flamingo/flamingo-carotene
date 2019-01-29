@@ -1,5 +1,5 @@
 # Module `flamingo-carotene-dev-server`
-The dev server module is there to make the development of a flamingo-carotene frontend easier.
+The dev server module is there to make the development of a Flamingo Carotene frontend easier.
 
 It includes the functionality to register [chokidar](https://github.com/paulmillr/chokidar) file watchers and dispatch
 commands when these noticed a change.
