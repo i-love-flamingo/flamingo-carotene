@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene",
   "version": "6.0.0",
-  "description": "Flamingo Carotene is a tool to build Flamingo themes",
+  "description": "Flamingo Carotene is a tool to build frontends for Flamingo",
   "repository": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
