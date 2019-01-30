@@ -49,7 +49,8 @@ config.eslint = {
 `useWebpackLoader` True (default) to use the webpack loader, false to use it standalone
 
 `breakOnError` True to exit the process with code 1 when an error was found and in case the webpack loader is in use,
- break the webpack compile. False to only write it to output. Will be set to true for production build automatically.
+break the webpack compile. False to only write it to output (default). Will be set to true for production build
+automatically.
 
 `configFilePath` Path to an ESLint config file. Does not have to be provided when using the standard config options
 supported by ESLint (see 'How it works').

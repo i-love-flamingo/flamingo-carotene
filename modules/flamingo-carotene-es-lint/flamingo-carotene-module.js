@@ -55,10 +55,9 @@ class ESLint {
             }
           }
 
-          // When break on error config is set, set configs to break the webpack compiler and fail the process
+          // When break on error config is set, set configs to break the webpack compiler
           if (config.eslint.breakOnError) {
             loaderConfig.options.emitWarning = false
-            loaderConfig.options.failOnError = true
           }
 
           config.webpackConfig.module.rules.push(loaderConfig)
@@ -75,19 +74,8 @@ class ESLint {
           // Set break on error configs to true for production build
           const config = core.getConfig()
 
+          config.eslint.useWebpackLoader = false
           config.eslint.breakOnError = true
-
-          if (config.eslint.useWebpackLoader) {
-            for (const rule of config.webpackConfig.module.rules) {
-              if (rule.loader && rule.loader === 'eslint-loader') {
-                rule.options = rule.options || {}
-                rule.options.emitWarning = false
-                rule.options.failOnError = true
-
-                break
-              }
-            }
-          }
         }
       },
       {
