@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-pug-lint",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "Preconfigured pug linter for Flamingo Carotene",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
