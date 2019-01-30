@@ -9,7 +9,6 @@
   "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/eslint-config-flamingo-carotene",
   "dependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.7.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
