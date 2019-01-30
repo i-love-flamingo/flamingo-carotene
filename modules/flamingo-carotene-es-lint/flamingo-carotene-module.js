@@ -45,14 +45,23 @@ class ESLint {
             return
           }
 
-          config.webpackConfig.module.rules.push({
+          const loaderConfig = {
             enforce: 'pre',
             test: /\.js$/,
-            use: [
-              'eslint-loader'
-            ],
-            exclude: /node_modules/
-          })
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
+            options: {
+              emitWarning: true
+            }
+          }
+
+          // When break on error config is set, set configs to break the webpack compiler and fail the process
+          if (config.eslint.breakOnError) {
+            loaderConfig.options.emitWarning = false
+            loaderConfig.options.failOnError = true
+          }
+
+          config.webpackConfig.module.rules.push(loaderConfig)
         }
       },
       {
@@ -61,11 +70,33 @@ class ESLint {
       },
       {
         command: 'build',
+        priority: 10,
         handler: function (core) {
+          // Set break on error configs to true for production build
+          const config = core.getConfig()
+
+          config.eslint.breakOnError = true
+
+          if (config.eslint.useWebpackLoader) {
+            for (const rule of config.webpackConfig.module.rules) {
+              if (rule.loader && rule.loader === 'eslint-loader') {
+                rule.options = rule.options || {}
+                rule.options.emitWarning = false
+                rule.options.failOnError = true
+
+                break
+              }
+            }
+          }
+        }
+      },
+      {
+        command: 'build',
+        handler: function (core) {
+          // Run the standalone linter
           const config = core.getConfig()
 
           if (!config.eslint.useWebpackLoader) {
-            config.eslint.breakOnError = true
             lintHandler(core)
           }
         }
@@ -73,6 +104,7 @@ class ESLint {
       {
         command: 'watchWebpackJs',
         handler: function (core) {
+          // Run the standalone linter
           const config = core.getConfig()
 
           if (!config.eslint.useWebpackLoader) {

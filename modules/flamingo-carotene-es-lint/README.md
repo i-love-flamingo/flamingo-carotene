@@ -8,7 +8,8 @@ npm i -D flamingo-carotene-es-lint
 ```
 The ESLint module knows of 2 types of working.
 1. It integrates into the webpack config by adding the [eslint-loader](https://github.com/webpack-contrib/eslint-loader)
-as a preloader for js files. That way it will break the webpack compiler when the linting fails. That is the default.
+as a preloader for js files. By default this will not break the webpack compiler as it would normally do, even if
+linting errors were found, unless you set the `breakOnError` config to true. That is the default.
 2. It runs in a child process that will run in parallel to the webpack process. This one will not break the webpack
 compile.
 
@@ -47,8 +48,8 @@ config.eslint = {
 ```
 `useWebpackLoader` True (default) to use the webpack loader, false to use it standalone
 
-`breakOnError` True to let the standalone version break the process when an error was found, false to only write it to
-output. Will be set to true for production build automatically.
+`breakOnError` True to exit the process with code 1 when an error was found and in case the webpack loader is in use,
+ break the webpack compile. False to only write it to output. Will be set to true for production build automatically.
 
 `configFilePath` Path to an ESLint config file. Does not have to be provided when using the standard config options
 supported by ESLint (see 'How it works').
