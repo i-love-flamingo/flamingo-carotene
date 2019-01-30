@@ -8,11 +8,7 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  let cmd = 'npm'
-  if (process.platform === 'win32') {
-    cmd = 'npm.cmd'
-  }
-
+  const cmd = 'npx'
   const parameters = getCommandParameters(config)
 
   cliTools.info('ESLint - start')
@@ -44,7 +40,7 @@ const eslint = (core) => {
     }
 
     // dont need "yarn run" info
-    if (data.toString().trim().search('yarn run v') !== -1) {
+    if (data.toString().trim().search('npm run v') !== -1) {
       skipLine = true
     }
 
@@ -89,7 +85,6 @@ const eslint = (core) => {
  */
 getCommandParameters = function (config) {
   const parameters = [
-    'run',
     'eslint'
   ]
 
