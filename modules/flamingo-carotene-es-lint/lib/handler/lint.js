@@ -40,7 +40,7 @@ const eslint = (core) => {
     }
 
     // dont need "yarn run" info
-    if (data.toString().trim().search('npm run v') !== -1) {
+    if (data.toString().trim().search('yarn run v') !== -1) {
       skipLine = true
     }
 
