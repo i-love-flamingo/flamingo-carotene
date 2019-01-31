@@ -10,9 +10,12 @@ class FlamingoCaroteneStaticAsset {
         command: 'config',
         priority: 110,
         handler: function (core) {
-
           config.staticAsset = {
-            staticAssetPattern: '/*',
+            link: [],
+            paths: {
+              dist: config.paths.dist,
+              src: config.paths.src
+            }
           }
         }
       },
@@ -23,24 +26,12 @@ class FlamingoCaroteneStaticAsset {
       {
         command: 'build',
         handler: function (core) {
-          const config = core.getConfig()
           buildHandler(core)
         }
       },
       {
         command: 'watchAsset',
         handler: buildHandler
-      }
-    ]
-
-    this.watcher = [
-      {
-        watchId: 'static-asset',
-        path: [
-          path.join(config.paths.src, 'asset', '**', '*.*')
-        ],
-        command: 'watchAsset',
-        callbackKey: 'static-asset'
       }
     ]
   }
