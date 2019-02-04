@@ -1,54 +1,66 @@
-const glob = require('glob')
-const async = require('async')
 const mkdirp = require('mkdirp')
 const path = require('path')
 const shell = require('shelljs')
-const os = require('os')
 
-let config
-let cliTools
+const messages = []
+const errors = []
 
 /**
- * Creates an anonymous function for the async mapLimit that takes a destination path as an additional parameter. It then proceeds to copy the file to the destination path
- * @param destPath
- * @returns {Function}
+ * Logs out all messages and errors added to the respective arrays
+ * @param cliTools
  */
-const generateCopyAsset = (destPath) => {
-  return (srcFilePath, callback) => {
-    try {
-      mkdirp(path.dirname(destPath), () => {
-        shell.cp('-r', srcFilePath, destPath)
-      })
-    } catch (e) {
-      cliTools.warn(e)
-      callback(e, null)
-    }
+const complete = (cliTools) => {
+  messages.forEach(message => {
+    cliTools.info(message)
+  })
+
+  errors.forEach(error => {
+    cliTools.warn(error)
+  })
+}
+
+/**
+ * Tries to copy recursively all files from source path to a destination path
+ * @param srcPath
+ * @param destPath
+ * @returns {*}
+ */
+const copyFromSrcToDest = (srcPath, destPath) => {
+  try {
+    mkdirp(path.dirname(destPath), () => {
+      shell.cp('-r', srcPath, destPath)
+    })
+  } catch (e) {
+    return e
   }
 }
 
 /**
- * Globs all files of srcPath and iterates through each of them asynchronously to copy them to destination path
- * @param srcPath
- * @param destPath
- * @returns {Promise<any>}
+ * Builds all source and destination paths, calls a copy function and collects messages and errors. Returns total number of paths processed
+ * @param srcBasePath
+ * @param destBasePath
+ * @param allConfigPaths
+ * @returns {number}
  */
-const globFiles = (srcPath, destPath) => {
-  return new Promise((resolve, reject) => {
-    glob(srcPath, (error, files) => {
-      if (error) {
-        reject(error)
-        return
-      }
+const processPaths = function (srcBasePath, destBasePath, allConfigPaths) {
+  let numberOfPathsProcessed = 0
 
-      const threadCount = os.cpus().length || 2
-      async.mapLimit(files, threadCount, generateCopyAsset(destPath), (error, result) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(result)
-      })
-    })
+  // Loops through each item to copy them
+  allConfigPaths.forEach((currentPaths) => {
+    const currentSrcPath = path.join(srcBasePath, currentPaths.src)
+    const currentDestPath = path.join(destBasePath, currentPaths.dest)
+
+    // Copies source to destination path
+    const error = copyFromSrcToDest(currentSrcPath, currentDestPath)
+    if (error) {
+      errors.push(error)
+    } else {
+      messages.push(`finished copying, from ${currentSrcPath} to > ${currentDestPath}`)
+      numberOfPathsProcessed++
+    }
   })
+
+  return numberOfPathsProcessed
 }
 
 /**
@@ -56,35 +68,37 @@ const globFiles = (srcPath, destPath) => {
  * @param core
  */
 const build = (core) => {
-  config = core.getConfig()
-  cliTools = core.getCliTools()
+  const config = core.getConfig()
+  const cliTools = core.getCliTools()
 
-  if (config.staticAsset.link) {
-    const assetSrcBasePath = config.staticAsset.paths.src
-    const assetTargetBasePath = config.staticAsset.paths.dist
-
-    // Creates base directory
-    mkdirp(assetTargetBasePath, function (err) {
-      if (err) {
-        cliTools.warn(error)
-      }
-
-      cliTools.info('Copy static assets - start')
-      const timeStarted = new Date().getTime()
-
-      // Loops through each item to glob
-      config.staticAsset.link.forEach((currentLinks) => {
-        // Globs files from current iterations of paths
-        globFiles(path.join(assetSrcBasePath, currentLinks.src), path.join(assetTargetBasePath, currentLinks.dist)).then((result) => {
-          if (result) {
-            cliTools.info(`Copy static assets - end\r\n   Finished after ${new Date().getTime() - timeStarted}ms`)
-          } else {
-            cliTools.warn(result)
-          }
-        })
-      })
-    })
+  if (!config.staticAsset.configPaths) {
+    cliTools.warn('Static asset executed but no config set')
+    return
   }
+
+  const assetSrcBasePath = config.staticAsset.basePaths.src
+  const assetTargetBasePath = config.staticAsset.basePaths.dest
+
+  // Creates base directory if it doesn't exist
+  mkdirp(assetTargetBasePath, function (err) {
+    if (err) {
+      errors.push(err)
+    }
+
+    cliTools.info('Copy static assets - start')
+    const timeStarted = new Date().getTime()
+
+    // Processes all paths given to copy files
+    const numberOfPathsProcessed = processPaths(assetSrcBasePath, assetTargetBasePath, config.staticAsset.configPaths)
+    // If all paths have been processed, show success message. Or push error
+    if (numberOfPathsProcessed === config.staticAsset.configPaths.length) {
+      messages.push(`Copy static assets - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+    } else {
+      errors.push('Static assets couldn\'t process every given paths')
+    }
+
+    complete(cliTools)
+  })
 }
 
 module.exports = build
