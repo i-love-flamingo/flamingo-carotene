@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-es-lint",
-  "version": "6.1.6",
+  "version": "6.0.37",
   "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -15,8 +15,13 @@
     "test": "echo \"No tests present\""
   },
   "dependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.7.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1"
+  },
+  "peerDependencies": {
+    "eslint-config-flamingo-carotene": "^6.0.28",
+    "flamingo-carotene-webpack": "^6.0.28"
   }
 }
