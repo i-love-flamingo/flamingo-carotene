@@ -11,7 +11,7 @@ The static asset module will listen to the following commands: `build`
 ## How it works
 The module copies all the files and folders that are found inside the given source paths to the configured destinations.
 
-## How to configureå
+## How to configure
 This module exposes the following config
 ```
 config.staticAsset = {
