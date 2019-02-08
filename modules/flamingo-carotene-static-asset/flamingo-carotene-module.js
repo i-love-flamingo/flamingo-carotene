@@ -5,11 +5,11 @@ class FlamingoCaroteneStaticAsset {
     this.listeners = [
       {
         command: 'config',
-        priority: 110,
+        priority: 100,
         handler: function (core) {
           const config = core.getConfig()
           config.staticAsset = {
-            configPaths: [],
+            assetPaths: [],
             basePaths: {
               dest: config.paths.dist,
               src: config.paths.src
