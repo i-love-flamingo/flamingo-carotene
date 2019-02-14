@@ -24,7 +24,7 @@ class ESLint {
           config.eslint = {
             useWebpackLoader: true,
             breakOnError: false,
-            configFilePath: this.isConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultConfigFileName),
+            configFilePath: this.isConfigAvailableInProject() ? this.getProjectConfigFile(configFileNames) : path.join(config.paths.eslint, defaultConfigFileName),
             ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName)
           }
         }
@@ -51,7 +51,9 @@ class ESLint {
             loader: 'eslint-loader',
             exclude: /node_modules/,
             options: {
-              emitWarning: true
+              emitWarning: true,
+              useEslintrc: false,
+              configFile: config.eslint.configFilePath
             }
           }
 
@@ -117,6 +119,18 @@ class ESLint {
     }
 
     return this.isOneOfFilesExistingInProjectRoot(ignoreFileNames)
+  }
+
+  getProjectConfigFile (fileNames) {
+    const fs = require('fs')
+    for (const fileName of fileNames) {
+      const testPath = path.join(this.config.paths.project, fileName)
+      if (fs.existsSync(testPath)) {
+        return testPath
+      }
+    }
+
+    return ''
   }
 
   isOneOfFilesExistingInProjectRoot (fileNames) {
