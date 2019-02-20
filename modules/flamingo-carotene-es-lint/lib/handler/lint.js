@@ -8,7 +8,11 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  const cmd = 'npx'
+  let cmd = 'npx'
+  if (process.platform === 'win32') {
+    cmd = `npx.cmd`
+  }
+
   const parameters = getCommandParameters(config)
 
   cliTools.info('ESLint - start')
@@ -50,7 +54,7 @@ const eslint = (core) => {
     }
 
     // Skip line when only console codes should be written - should come from the prettified eslint output
-    if (data == '\u001B[2K' || data == '\u001B[1G') {
+    if (data === '\u001B[2K' || data === '\u001B[1G') {
       skipLine = true
     }
 
@@ -63,7 +67,11 @@ const eslint = (core) => {
     errors.push(data)
   })
 
-  childProcess.on('exit', (code) => {
+  childProcess.on('error', function (exception) {
+    console.log('An Error occured while ES Linting:', exception)
+  })
+
+  childProcess.on('exit', function (code) {
     const output = ['ESLint - end'].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {
@@ -83,7 +91,7 @@ const eslint = (core) => {
  * @param config
  * @returns {string[]}
  */
-getCommandParameters = function (config) {
+const getCommandParameters = function (config) {
   const parameters = [
     'eslint'
   ]
