@@ -1,6 +1,5 @@
 
 class Dispatcher {
-
   dispatchCommand (command) {
     const core = require('./core')
     const cliTools = core.getCliTools()
@@ -46,9 +45,8 @@ class Dispatcher {
     }
 
     if (initializeWarnings.length > 0) {
-      cliTools.warn([`Warning: The following Modules takes too long at config-time:\n\r`] + initializeWarnings.join('\n\r'));
+      cliTools.warn([`Warning: The following Modules takes too long at config-time:\n\r`] + initializeWarnings.join('\n\r'), true)
     }
-
   }
 }
 

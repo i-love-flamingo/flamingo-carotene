@@ -70,7 +70,7 @@ class Core {
       const modulePath = path.join(config.paths.project, 'node_modules', moduleName, 'flamingo-carotene-module.js')
 
       if (!fs.existsSync(modulePath)) {
-        cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in module ${moduleName}`))
+        cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in module ${moduleName}`), true)
         continue
       }
 
@@ -84,7 +84,7 @@ class Core {
     const projectModulePath = path.join(config.paths.project, 'flamingo-carotene-module.js')
 
     if (!fs.existsSync(projectModulePath)) {
-      cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in project`))
+      cliTools.log(cliTools.chalk.dim(`No Flamingo Carotene module file found in project`), true)
     } else {
       const Module = require(projectModulePath)
       let moduleInstance = new Module(this)
