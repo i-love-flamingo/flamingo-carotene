@@ -32,7 +32,6 @@ const pugLint = (core) => {
     cmd = `pug-lint.cmd`
   }
 
-
   const spawnEnv = process.env
   spawnEnv.FORCE_COLOR = true
 
