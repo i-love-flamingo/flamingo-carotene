@@ -26,12 +26,7 @@ const pugLint = (core) => {
   // get all files to be linted...
   const files = []
   glob.sync(`${config.paths.src}/${config.pugLint.filesPattern}`).forEach((file) => {
-    if (process.platform === 'win32') {
-      files.push(file.split('\\').join('/'))
-    }
-    else {
-      files.push(path.resolve(file))
-    }
+    files.push(path.posix.normalize(file))
   })
 
   // get cmd
