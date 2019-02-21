@@ -1,4 +1,4 @@
 .PHONY: link
 
 link:
-	find ./modules/* -type f -name package.json -maxdepth 1 -execdir npm link \;
+	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm link \;
