@@ -1,6 +1,4 @@
 const chokidar = require('chokidar')
-const path = require('path')
-const fs = require('fs')
 
 /**
  * This class is a wrapper for a watcher instance
@@ -79,12 +77,23 @@ class FileWatcher {
    * Setup watcher
    */
   initialize () {
+
+    // filter basePath in display
+    const showWatchPaths = []
+    for (const watchPath of this.watchPaths) {
+      showWatchPaths.push(this.removeBasePathFromPath(watchPath))
+    }
+
+    // output state in CLI
+    this.cliTools.info(`Watcher-${this.watchId} listens to ${showWatchPaths.join(', ')}`, true)
+
     // chokidar dont like windows \ in paths
     // replacing them with / works
+    // this cant be done via path.posix, because of globbing :D
     if (process.platform === 'win32') {
-      const windowsPaths = [];
+      const windowsPaths = []
       for (const watchPath of this.watchPaths) {
-        windowsPaths.push(path.posix.resolve(watchPath))
+        windowsPaths.push(watchPath.split('\\').join('/'))
       }
       this.watchPaths = windowsPaths
     }
@@ -99,15 +108,6 @@ class FileWatcher {
     // start watcher
     this.watcher.on('change', this.buildOnChange.bind(this))
     this.watcher.on('error', error => this.cliTools.warn(error))
-
-    // filter basePath in display
-    const showWatchPaths = []
-    for (let watchPath of this.watchPaths) {
-      showWatchPaths.push(this.removeBasePathFromPath(watchPath))
-    }
-
-    // output state in CLI
-    this.cliTools.info(`Watcher-${this.watchId}: listens to ${showWatchPaths.join(', ')} `, true)
   }
 
   /**
