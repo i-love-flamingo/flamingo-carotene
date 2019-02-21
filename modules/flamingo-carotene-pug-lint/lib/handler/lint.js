@@ -13,14 +13,11 @@ const pugLint = (core) => {
   const timeStarted = new Date().getTime()
 
   // trying to find sass lint in project folder..
-  let configFile = path.join(config.paths.project, '.pug-lintrc.js')
+  let configFile = path.posix.join(config.paths.project, '.pug-lintrc.js')
 
   // if not exists, take standard one
   if (!fs.existsSync(configFile)) {
-    configFile = path.join(config.paths.pugLint, '.pug-lintrc.js')
-  }
-  if (process.platform === 'win32') {
-    configFile = configFile.split('\\').join('/')
+    configFile = path.posix.join(config.paths.pugLint, '.pug-lintrc.js')
   }
 
   // get all files to be linted...
