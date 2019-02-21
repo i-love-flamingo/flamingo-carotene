@@ -83,10 +83,10 @@ class FileWatcher {
     // replacing them with / works
     if (process.platform === 'win32') {
       const windowsPaths = [];
-      for (let watchPath of this.watchPaths) {
-        windowsPaths.push(watchPath.split('\\').join('/'));
+      for (const watchPath of this.watchPaths) {
+        windowsPaths.push(path.posix.resolve(watchPath))
       }
-      this.watchPaths = windowsPaths;
+      this.watchPaths = windowsPaths
     }
 
     // setup watcher
