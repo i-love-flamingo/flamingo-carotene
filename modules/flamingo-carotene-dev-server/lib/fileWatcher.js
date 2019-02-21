@@ -31,13 +31,29 @@ class FileWatcher {
     watcherConfig = watcherConfig || {}
     this.watchId = watcherConfig.watchId
     this.watchPaths = watcherConfig.path
+    if (this.watchPaths) {
+      if (typeof this.watchPaths === 'string') {
+        this.watchPaths = [this.watchPaths]
+      }
+    } else {
+      this.watchPaths = []
+    }
+
+    this.unwatchConfig = watcherConfig.unwatchConfig
+    if (this.unwatchConfig) {
+      if (typeof this.unwatchConfig === 'string') {
+        this.unwatchConfig = [this.unwatchConfig]
+      }
+    } else {
+      this.unwatchConfig = []
+    }
+
     this.command = watcherConfig.command
     this.callbackKey = watcherConfig.callbackKey
     this.watcherConfig = Object.assign(
       this.config.devServer.watcherConfig || {},
       watcherConfig.watcherConfig || {}
     )
-    this.unwatchConfig = watcherConfig.unwatchConfig
 
     // instance of chokidar
     this.watcher = null
@@ -84,8 +100,17 @@ class FileWatcher {
       showWatchPaths.push(this.removeBasePathFromPath(watchPath))
     }
 
+    const showUnwatchPaths = []
+    for (const unwatchPath of this.unwatchConfig) {
+      showUnwatchPaths.push(this.removeBasePathFromPath(unwatchPath))
+    }
+
     // output state in CLI
     this.cliTools.info(`Watcher-${this.watchId} listens to ${showWatchPaths.join(', ')}`, true)
+    if (showUnwatchPaths.length > 0) {
+      this.cliTools.info(` - except: ${showUnwatchPaths.join(', ')}`, true)
+    }
+
 
     // chokidar dont like windows \ in paths
     // replacing them with / works
@@ -96,7 +121,14 @@ class FileWatcher {
         windowsPaths.push(watchPath.split('\\').join('/'))
       }
       this.watchPaths = windowsPaths
+
+      const windowsUnwatchPaths = []
+      for (const unwatchPath of this.unwatchConfig) {
+        windowsUnwatchPaths.push(unwatchPath.split('\\').join('/'))
+      }
+      this.unwatchConfig = windowsUnwatchPaths
     }
+
 
     // setup watcher
     this.watcher = chokidar.watch(this.watchPaths, this.watcherConfig)
