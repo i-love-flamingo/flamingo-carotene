@@ -123,7 +123,7 @@ class WebpackConfig {
     let fileName = isProd ? '[name].[contenthash].css' : '[name].css'
 
     if (this.config.webpack.dist.cssFolderName) {
-      fileName = path.join(this.config.webpack.dist.cssFolderName, fileName)
+      fileName = path.posix.join(this.config.webpack.dist.cssFolderName, fileName)
     }
 
     return fileName
@@ -134,7 +134,7 @@ class WebpackConfig {
     let fileName = isProd ? '[name].[hash].[ext]' : '[name].[ext]'
 
     if (this.config.webpack.dist.fontFolderName) {
-      fileName = path.join(this.config.webpack.dist.fontFolderName, fileName)
+      fileName = path.posix.join(this.config.webpack.dist.fontFolderName, fileName)
     }
 
     return fileName
@@ -145,7 +145,7 @@ class WebpackConfig {
     let fileName = isProd ? '[name].[hash].[ext]' : '[name].[ext]'
 
     if (this.config.webpack.dist.imageFolderName) {
-      fileName = path.join(this.config.webpack.dist.imageFolderName, fileName)
+      fileName = path.posix.join(this.config.webpack.dist.imageFolderName, fileName)
     }
 
     return fileName
