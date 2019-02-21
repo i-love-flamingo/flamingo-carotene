@@ -25,7 +25,7 @@ const sassLint = (core) => {
 
   cliTools.info('SassLint - start')
 
-  const npmVersion = execSync('npm -v')
+  const npmVersion = execSync('npm -v').toString().trim()
 
   const spawnEnv = process.env
   spawnEnv.FORCE_COLOR = true
@@ -59,12 +59,12 @@ const sassLint = (core) => {
     }
 
     // dont need current cmd
-    if (data.toString().trim().search(/[\/\\]\.bin[\/\\]sass-lint --config/) !== -1) {
+    if (data.toString().trim().search(/[/\\]\.bin[/\\]sass-lint --config/) !== -1) {
       skipLine = true
     }
 
     // Skip line when only console codes should be written - should come from the prettified sass-lint output
-    if (data == '\u001B[2K' || data == '\u001B[1G') {
+    if (data === '\u001B[2K' || data === '\u001B[1G') {
       skipLine = true
     }
 
