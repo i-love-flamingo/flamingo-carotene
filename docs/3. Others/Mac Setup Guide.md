@@ -10,9 +10,13 @@ To run the project's HTTP server we need to install Go first.
 
 #### Install Go on Mac
 
+**Official install**
+
 [Download the package file](https://golang.org/dl/), open it, and follow the prompts to install the Go tools. 
 The package installs the Go distribution to */usr/local/go*.
-The package should put the */usr/local/go/bin* directory in your PATH environment variable. 
+The package should put the */usr/local/go/bin* directory in your PATH environment variable.
+
+**Install using Brew**: Install [brew](https://brew.sh/) and use ```brew install go```
 
 You may need to restart any open Terminal sessions for the change to take effect.
 
@@ -20,9 +24,11 @@ Run ```go version``` to check if installation was successful.
 
 #### Configure environment variables
 
-In your ```~/.bash_profile``` or ```~/.zshrc``` insert GOPATH and GOROOT to your environment variables and add the binary directory to your binary PATHs at the end of the file.
+Check official paths by executing ```go env GOPATH GOROOT``` and if you don't want to change them, adopt those to your terminal configuration.
 
 Change GOPATH here to have a custom directory for Go packages and projects. Also change GOROOT path if you want to use a different Go version.
+
+In your ```~/.bash_profile``` or ```~/.zshrc``` insert GOPATH and GOROOT to your environment variables and add the binary directory to your binary PATHs at the end of the file.
 
 ```bash
 export GOPATH=$HOME/go
@@ -90,18 +96,21 @@ go build -i -o /dev/null
 
 #### Install NodeJS
 
-Execute the following to install NodeJS and follow the installers instructions.
-You can also download other versions at [https://nodejs.org](https://nodejs.org) or use Node Version Manager at [https://github.com/creationix/nvm](https://github.com/creationix/nvm).
+**Official install**
+
+Execute the following to install latest stable NodeJS version and follow the installers instructions.
 
 ```bash
-cd ~/Downloads
-curl https://nodejs.org/dist/v9.11.2/node-v9.11.2.pkg > node.pkg
-open node.pkg
+curl "https://nodejs.org/dist/latest/node-${VERSION:-$(curl -sL https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p')}.pkg" > "$HOME/Downloads/node-latest.pkg" && sudo installer -store -pkg "$HOME/Downloads/node-latest.pkg" -target "/"
 ```
 
 Please check, if ```npm -v``` reports 5.6.0 or higher
 
 Please check, if ```node -v``` reports v9.4.0 or higher
+
+**Install using NVM**: Install [Node Version Manager (NVM)](https://github.com/creationix/nvm) and then ```nvm install stable```.
+
+**Install using Brew**: Install [Brew](https://brew.sh/) and then ```brew install node```
 
 
 #### Initial Frontend build
