@@ -1,3 +1,5 @@
+const SvgStorePlugin  = require('external-svg-sprite-loader')
+
 class FlamingoCaroteneWebpackSvgSprite {
   constructor (core) {
     this.listeners = [
@@ -11,9 +13,9 @@ class FlamingoCaroteneWebpackSvgSprite {
               test: /\.svg$/,
               use: [
                 {
-                  loader: 'external-svg-sprite-loader',
+                  loader: SvgStorePlugin.loader,
                   options: {
-                    name: 'svgIcons/svgIconSprite[hash:5].svg',
+                    name: 'svgIcons/svgIconSprite.[hash:5].svg',
                     iconName: '[name]'
                   }
                 }
@@ -21,8 +23,7 @@ class FlamingoCaroteneWebpackSvgSprite {
             }
           ]
 
-          const SvgStorePlugin = require('external-svg-sprite-loader/lib/SvgStorePlugin')
-          config.webpackConfig.plugins.push(new SvgStorePlugin({
+          const svgSpritePluginInstance = new SvgStorePlugin({
             sprite: {
               startX: 10,
               startY: 10,
@@ -30,7 +31,8 @@ class FlamingoCaroteneWebpackSvgSprite {
               deltaY: 20,
               iconHeight: 20
             }
-          }))
+          })
+          config.webpackConfig.plugins.push(svgSpritePluginInstance)
         }
       }
     ]
