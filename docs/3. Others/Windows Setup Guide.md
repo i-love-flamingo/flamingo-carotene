@@ -137,7 +137,7 @@ Browse to [http://localhost:3322/](http://localhost:3322/)
 
 #### Flamingo Carotene Dev Server
 
-Frontent Watcher & HotReloading Frontend Server
+Frontend Watcher & HotReloading Frontend Server
 
 ```bash
 cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
@@ -148,7 +148,7 @@ Check if the dev server is available [http://localhost:1337/](http://localhost:1
 
 ## Help / Pitfalls
 
-### Help - i cant save files in my Intelli IDE if the Flamingo Carotene watcher listen to changes
+### Help - I can't save files in my Jetbrains IDE if the Flamingo Carotene watcher listen to changes
 
 - Dont Panic!
 - Open your IDE 
@@ -157,7 +157,7 @@ Check if the dev server is available [http://localhost:1337/](http://localhost:1
 - UNCHECK `Use 'safe write'`
 
 
-### Usefull Lines
+### Useful Lines
 
 #### Update Flamingo library and core
 
