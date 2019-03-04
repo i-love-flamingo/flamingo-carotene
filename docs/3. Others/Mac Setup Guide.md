@@ -33,7 +33,7 @@ In your ```~/.bash_profile``` or ```~/.zshrc``` insert GOPATH and GOROOT to your
 ```bash
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
-export $PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
 ```
 
 Restart your Terminal session or reload configuration file by running ```source ~/.bash_profile``` or ```source ~/.zshrc```.
