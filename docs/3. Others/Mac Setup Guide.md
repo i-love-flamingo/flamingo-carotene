@@ -44,14 +44,13 @@ Check if GOPATH environment variable is set by executing ```go env GOPATH```.
 
 Make sure you have Git installed by checking ```git --version```. 
 If you don't, please install it by running ```xcode-select --install```.
-SSH key may need to be installed at ```~/.ssh/id_rsa``` and  ```~/.ssh/id_rsa.pub```.
 
 **Attention**:
 In newer project, where the project has to be located outside the GOPATH directory, is no need for *dep*.
 
 ```bash
-rm -rf $GOPATH/pkg/
-rm -rf $GOPATH/src/github.com/golang/dep
+sudo rm -rf $GOPATH/pkg/
+sudo rm -rf $GOPATH/src/github.com/golang/dep
 go get -v -u github.com/golang/dep/cmd/dep
 ```
 
@@ -69,7 +68,10 @@ Use *dep* to load all dependencies.
 In newer project, where the project has to be located outside the GOPATH directory, 
 skip directly to running the project with server. All dependencies will load during compile time.
 
+Add SSH key if not yet done. SSH key may need to be installed at ```~/.ssh/id_rsa``` and  ```~/.ssh/id_rsa.pub```.
+
 ```bash
+ssh-add
 cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
 dep ensure -v
 ```
