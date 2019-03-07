@@ -1,4 +1,4 @@
-const { spawn, execSync } = require('child_process')
+const { execSync } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
@@ -16,29 +16,11 @@ const sassLint = (core) => {
     configFile = path.join(config.paths.sassLint, '.sass-lint.yml')
   }
 
-  let cmd = 'npm'
-  if (process.platform === 'win32') {
-    cmd = 'npm.cmd'
-  }
-
-  const parameters = ['run', 'sass-lint', '--config', `${configFile}`, '--no-exit', '-v']
-
   cliTools.info('SassLint - start')
 
   const npmVersion = execSync('npm -v').toString().trim()
 
-  const spawnEnv = process.env
-  spawnEnv.FORCE_COLOR = true
-
-  const childProcess = spawn(
-    cmd,
-    parameters,
-    {
-      env: spawnEnv
-    }
-  )
-
-  // this is new
+  const childProcess = core.getSpawner().spawnJobNpx(['sass-lint', '--config', `${configFile}`, '--no-exit', '-v'])
 
   const results = []
   const errors = []

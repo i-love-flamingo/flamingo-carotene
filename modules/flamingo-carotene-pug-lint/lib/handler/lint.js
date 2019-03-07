@@ -26,15 +26,6 @@ const pugLint = (core) => {
     files.push(path.posix.normalize(file))
   })
 
-  // get cmd
-  let cmd = 'pug-lint'
-  if (process.platform === 'win32') {
-    cmd = `pug-lint.cmd`
-  }
-
-  const spawnEnv = process.env
-  spawnEnv.FORCE_COLOR = true
-
   // create shell cmd "packages" (respect maxShellCmdLimit)
   const lintFilePacks = []
   let packNumber = 0
@@ -61,7 +52,7 @@ const pugLint = (core) => {
     const lintPackNumber = parseInt(lintFilePackIndex, 10) + 1;
     cliTools.info(`Start PugLint-Pack ${lintPackNumber} with ${lintFilePack.length} files...`, true);
 
-    const childProcess = spawn(cmd, ['--config', configFile].concat(lintFilePack), {env: spawnEnv})
+    const childProcess = core.getSpawner().spawnJobNpx(['pug-lint', '--config', configFile].concat(lintFilePack))
 
     childProcess.stdout.on('data', function (data) {
       results.push(data)

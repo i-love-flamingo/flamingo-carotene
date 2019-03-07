@@ -13,22 +13,11 @@ const eslint = (core) => {
     cmd = `npx.cmd`
   }
 
-  const parameters = getCommandParameters(config)
-
   cliTools.info('ESLint - start')
 
   const npmVersion = execSync('npm -v')
 
-  const spawnEnv = process.env
-  spawnEnv.FORCE_COLOR = true
-
-  const childProcess = spawn(
-    cmd,
-    parameters,
-    {
-      env: spawnEnv
-    }
-  )
+  const childProcess = core.getSpawner().spawnJobNpx(getCommandParameters(config))
 
   // this is new
   const results = []
