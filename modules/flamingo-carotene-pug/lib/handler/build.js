@@ -7,6 +7,8 @@ const path = require('path')
 let config
 let cliTools
 
+let allTimeCompile = 0
+
 /**
  * Resolves extended and included template paths.
  * Paths that start with a tilde `~` will resolve to the projects `/node_modules/` folder. (usage: `~module-name/path/to/template`)
@@ -29,12 +31,17 @@ function StopCompileException(message) {
 StopCompileException.prototype = new Error()
 
 const generateAst = (file, callback) => {
+  const startComp = new Date().getTime();
+
   const filename = path.relative(config.paths.src, file)
   const templateFilename = path.relative(config.paths.pug.src, file)
   const astFile = path.join(config.paths.pug.dist, templateFilename.replace('.pug', '.ast.json'))
   const content = fs.readFileSync(file, 'utf8')
   const pug = require('pug')
   try {
+
+
+
     pug.compile(content, {
       filename,
       basedir: config.paths.src,
@@ -64,6 +71,12 @@ const generateAst = (file, callback) => {
       callback(e, null)
     }
   }
+
+  const endComp = new Date().getTime();
+  const compTime =endComp - startComp
+
+  allTimeCompile+= compTime
+  console.log(`Build Time ${compTime}ms for ${templateFilename} - alltime: ${allTimeCompile}`)
 }
 
 const pugBuild = (core) => {
@@ -92,16 +105,32 @@ const pugBuild = (core) => {
     }
   }
 
+  // config.pug.filesPattern = '/{*,.,*/page/*}/{*,.,*/*.partial}/category.pug'
+
   glob(config.paths.pug.src + config.pug.filesPattern, (error, files) => {
     if (error) {
       complete(error)
       return
     }
 
-    const threadCount = require('os').cpus().length || 2
-
+    // SYNC
+    // ########################################################
     cliTools.info(`Processing template files`, true)
+    for (const file of files) {
+      generateAst(file, function(error, results) {
+        if (error) {
+          complete(error)
+          return
+        }
+      })
+    }
+    cliTools.info(`Pug - end\r\n    Generated ${files.length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+    complete()
 
+
+    // ASYNC
+    // ########################################################
+    /*
     async.mapLimit(files, threadCount, generateAst, (error, results) => {
       if (error) {
         complete(error)
@@ -112,6 +141,7 @@ const pugBuild = (core) => {
 
       complete()
     })
+    */
   })
 }
 
