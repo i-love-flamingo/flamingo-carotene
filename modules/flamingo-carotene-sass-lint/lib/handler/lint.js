@@ -16,10 +16,12 @@ const sassLint = (core) => {
     configFile = path.join(config.paths.sassLint, '.sass-lint.yml')
   }
 
-  cliTools.info('SassLint - start')
+
 
   const npmVersion = execSync('npm -v').toString().trim()
 
+  core.getJobmanager().addJob('sasslint', 'SASS-Lint')
+  cliTools.info('SassLint - start')
   const childProcess = core.getSpawner().spawnJobNpx(['sass-lint', '--config', `${configFile}`, '--no-exit', '-v'])
 
   const results = []
@@ -60,6 +62,7 @@ const sassLint = (core) => {
   })
 
   childProcess.on('exit', (code) => {
+    core.getJobmanager().finishJob('sasslint')
     const output = [`SassLint - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {

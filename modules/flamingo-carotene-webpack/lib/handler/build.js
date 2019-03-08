@@ -12,6 +12,7 @@ const webpackBuild = function (core) {
 
   cliTools.info('Webpack - start')
 
+  core.getJobmanager().addJob('webpack', 'Webpack')
   cliTools.info(`Running webpack in mode: ${config.webpackConfig.mode}`, true)
 
   const timeStarted = new Date().getTime()
@@ -35,6 +36,7 @@ const webpackBuild = function (core) {
       cliTools.warn(info.warnings)
     }
 
+    core.getJobmanager().finishJob('webpack')
     cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {

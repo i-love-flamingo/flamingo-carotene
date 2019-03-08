@@ -13,10 +13,12 @@ const eslint = (core) => {
     cmd = `npx.cmd`
   }
 
-  cliTools.info('ESLint - start')
+
 
   const npmVersion = execSync('npm -v')
 
+  core.getJobmanager().addJob('eslint', 'ES-Lint')
+  cliTools.info('ESLint - start')
   const childProcess = core.getSpawner().spawnJobNpx(getCommandParameters(config))
 
   // this is new
@@ -61,6 +63,7 @@ const eslint = (core) => {
   })
 
   childProcess.on('exit', function (code) {
+    core.getJobmanager().finishJob('eslint')
     const output = ['ESLint - end'].concat(results, errors).join('\n').trim()
 
     if (code !== 0) {

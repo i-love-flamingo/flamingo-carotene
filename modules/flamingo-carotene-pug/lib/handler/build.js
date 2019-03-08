@@ -76,7 +76,7 @@ const generateAst = (file, callback) => {
   const compTime =endComp - startComp
 
   allTimeCompile+= compTime
-  console.log(`Build Time ${compTime}ms for ${templateFilename} - alltime: ${allTimeCompile}`)
+  console.log(`Build Time ${compTime}ms for ${file} - alltime: ${allTimeCompile}`)
 }
 
 const pugBuild = (core) => {
@@ -116,15 +116,24 @@ const pugBuild = (core) => {
     // SYNC
     // ########################################################
     cliTools.info(`Processing template files`, true)
+
+    const compiledFiles = {}
+
     for (const file of files) {
-      generateAst(file, function(error, results) {
-        if (error) {
-          complete(error)
-          return
-        }
-      })
+
+      const normFile = path.normalize(file)
+      if (!compiledFiles[normFile]) {
+        generateAst(normFile, function(error, results) {
+          if (error) {
+            complete(error)
+            return
+          }
+
+        })
+        compiledFiles[normFile] = true;
+      }
     }
-    cliTools.info(`Pug - end\r\n    Generated ${files.length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+    cliTools.info(`Pug - end\r\n    Generated ${Object.keys(compiledFiles).length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
     complete()
 
 

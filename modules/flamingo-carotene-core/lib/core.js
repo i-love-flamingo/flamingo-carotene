@@ -6,7 +6,7 @@ let spawner = null
 let cliTools = null
 let dispatcher = null
 let modules = null
-
+let jobmanager = null
 let errors = []
 
 class Core {
@@ -28,6 +28,15 @@ class Core {
 
     spawner = require('./spawner')
     return spawner
+  }
+
+  getJobmanager () {
+    if (jobmanager !== null) {
+      return jobmanager
+    }
+
+    jobmanager = require('./jobmanager')
+    return jobmanager
   }
 
   getCliTools () {

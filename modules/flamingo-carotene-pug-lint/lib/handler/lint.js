@@ -40,6 +40,7 @@ const pugLint = (core) => {
     lintFilePacks[packNumber].push(file)
   }
 
+  core.getJobmanager().addJob('puglint', 'Pug-Lint')
   cliTools.info(`PugLint - start (${files.length} files in ${lintFilePacks.length} packages)`)
 
   const results = []
@@ -75,6 +76,7 @@ const pugLint = (core) => {
 
       // if every pack is finished
       if (finishedPacks >= lintFilePacks.length) {
+        core.getJobmanager().finishJob('puglint')
         const output = [`PugLint-Lint End\r\n    Finished after ${new Date().getTime() - timeStarted}ms`].concat(results, errors).join('\n').trim()
 
         if (code !== 0) {

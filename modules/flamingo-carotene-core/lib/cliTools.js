@@ -7,6 +7,8 @@ class CliTools {
     this.verbose = this.args.indexOf('-v') > -1
 
     this.chalk = chalk
+    this.doBufferOut = false;
+    this.buffer = ''
   }
 
   /**
@@ -25,6 +27,15 @@ class CliTools {
     return this.args.slice(1)
   }
 
+  startBuffer () {
+    this.doBufferOut = true
+  }
+
+  getBuffer () {
+    this.doBufferOut = false
+    return this.buffer
+  }
+
   /**
    * Cli logger
    * @param message
@@ -35,19 +46,30 @@ class CliTools {
     type = type || 'default'
     verbose = !!verbose
 
+    let outMessage = ''
     if (this.verbose || this.verbose === verbose) {
       switch (type) {
         case 'info':
-          process.stdout.write(`\n${verbose ? 'ℹ️ ' : '🥕'}  ${message}\n`)
+          outMessage = `\n${verbose ? 'ℹ️ ' : '🥕'}  ${message}\n`
           break
         case 'warn':
-          process.stdout.write(`\n⚠️   ${message}\n`)
+          outMessage = `\n⚠️   ${message}\n`
           break
         case 'default':
         default:
-          process.stdout.write(`${message}\n`)
+          outMessage = `${message}\n`
       }
     }
+
+
+    if (this.doBufferOut) {
+      this.buffer+= outMessage
+    }
+    else {
+      process.stdout.write(outMessage)
+    }
+
+
   }
 
   log (message, verbose) {
