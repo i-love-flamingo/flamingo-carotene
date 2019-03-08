@@ -23,6 +23,11 @@ const resolveTemplatePath = (filename, source, options) => {
   return path.join(filename[0] === '/' ? options.basedir : path.dirname(source.trim()), filename)
 }
 
+function StopCompileException(message) {
+  this.message = 'Enough work for Flamingo Carotene. AST Received. Save time. Quit Compile! '+ message;
+}
+StopCompileException.prototype = new Error()
+
 const generateAst = (file, callback) => {
   const filename = path.relative(config.paths.src, file)
   const templateFilename = path.relative(config.paths.pug.src, file)
@@ -33,11 +38,11 @@ const generateAst = (file, callback) => {
     pug.compile(content, {
       filename,
       basedir: config.paths.src,
-      compileDebug: true,
+      compileDebug: false,
       plugins: [
         {
           resolve: resolveTemplatePath,
-          preCodeGen (ast, options) {
+          preCodeGen(ast, options) {
             cliTools.log(`        > ${filename}`, true)
 
             mkdirp(path.dirname(astFile), () => {
@@ -47,16 +52,19 @@ const generateAst = (file, callback) => {
               })
             })
 
-            return ast
+            throw new StopCompileException()
           }
         }
       ]
     })
   } catch (e) {
-    callback(e, null)
+    if (e instanceof StopCompileException) {
+      // DONT CATCH
+    } else {
+      callback(e, null)
+    }
   }
 }
-
 
 const pugBuild = (core) => {
   config = core.getConfig()
@@ -65,8 +73,12 @@ const pugBuild = (core) => {
   const timeStarted = new Date().getTime()
 
   cliTools.info('Pug - start')
+  core.getJobmanager().addJob('pug', 'Pug Compile')
 
   const complete = (error) => {
+
+    core.getJobmanager().finishJob('pug')
+
     if (error) {
       cliTools.warn(`Pug error:\n${error}`)
 
