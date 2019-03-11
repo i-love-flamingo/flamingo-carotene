@@ -76,7 +76,7 @@ const generateAst = (file, callback) => {
   const compTime =endComp - startComp
 
   allTimeCompile+= compTime
-  console.log(`Build Time ${compTime}ms for ${file} - alltime: ${allTimeCompile}`)
+  // console.log(`Build Time ${compTime}ms for ${file} - alltime: ${allTimeCompile}`)
 }
 
 const pugBuild = (core) => {
@@ -107,51 +107,30 @@ const pugBuild = (core) => {
 
   // config.pug.filesPattern = '/{*,.,*/page/*}/{*,.,*/*.partial}/category.pug'
 
-  glob(config.paths.pug.src + config.pug.filesPattern, (error, files) => {
-    if (error) {
-      complete(error)
-      return
-    }
+  const files = glob.sync(config.paths.pug.src + config.pug.filesPattern)
 
-    // SYNC
-    // ########################################################
+  // removing duplicates...
+  const normalizedFiles = {}
+  for (const file of files) {
+    const normFile = path.normalize(file)
+    normalizedFiles[normFile] = true
+  }
+  const allFiles = Object.keys(normalizedFiles);
+
+  // compile all files...
+  for (const file of allFiles) {
     cliTools.info(`Processing template files`, true)
-
-    const compiledFiles = {}
-
-    for (const file of files) {
-
-      const normFile = path.normalize(file)
-      if (!compiledFiles[normFile]) {
-        generateAst(normFile, function(error, results) {
-          if (error) {
-            complete(error)
-            return
-          }
-
-        })
-        compiledFiles[normFile] = true;
-      }
-    }
-    cliTools.info(`Pug - end\r\n    Generated ${Object.keys(compiledFiles).length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
-    complete()
-
-
-    // ASYNC
-    // ########################################################
-    /*
-    async.mapLimit(files, threadCount, generateAst, (error, results) => {
+    generateAst(file, function(error, results) {
       if (error) {
         complete(error)
         return
       }
-
-      cliTools.info(`Pug - end\r\n    Generated ${results.length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
-
-      complete()
     })
-    */
-  })
+  }
+
+  cliTools.info(`Pug - end\r\n    Generated ${Object.keys(allFiles).length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+  complete()
+
 }
 
 module.exports = pugBuild
