@@ -6,49 +6,51 @@ class Jobmanager {
     this.cliTools = this.core.getCliTools()
 
     this.jobs = {}
-    /*
-    const _cliProgress = require('cli-progress');
-    this.progressBar = new _cliProgress.Bar({
-      format: 'progress [{bar}] | Jobs:  {value}/{total} {openJobList}',
-      barCompleteChar: '#',
-      barIncompleteChar: '.',
-      stopOnComplete: true,
-      clearOnComplete: true,
-      fps: 5,
-      stream: process.stdout,
-      barsize: 65,
-      position: 'center'
-    });
 
-    this.cliTools.startBuffer();
-    this.progressBar.start(1, 0);
-    */
+    this.useProgress = false
+    for (const option of this.cliTools.getOptions()) {
+      if (option === '--progress') {
+        this.useProgress = true
+      }
+    }
+
+    if (this.useProgress) {
+      const _cliProgress = require('cli-progress');
+      this.progressBar = new _cliProgress.Bar({
+        format: 'progress [{bar}] | Jobs:  {value}/{total} {openJobList}',
+        barCompleteChar: '#',
+        barIncompleteChar: '.',
+        stopOnComplete: true,
+        clearOnComplete: true,
+        fps: 5,
+        stream: process.stdout,
+        barsize: 65,
+        position: 'center'
+      });
+
+      this.cliTools.startBuffer();
+      this.progressBar.start(1, 0);
+    }
   }
 
   addJob(id, label) {
-
     this.jobs[id] = {label:label, finished: false};
-    // console.log(`addJob ${id}`)
-    /*
-    this.progressBar.setTotal(this.getTotalJobCount())
-    this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
-    */
+
+    if (this.useProgress) {
+      this.progressBar.setTotal(this.getTotalJobCount())
+      this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
+    }
   }
 
   finishJob(id){
     this.jobs[id].finished = true;
-    /*
-    this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
-
-    if (this.getOpenJobs().length < 1) {
-
-      const buffer = this.cliTools.getBuffer();
-      process.stdout.write(buffer);
+    if (this.useProgress) {
+      this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
+      if (this.getOpenJobs().length < 1) {
+        const buffer = this.cliTools.getBuffer();
+        process.stdout.write(buffer);
+      }
     }
-    */
-
-    // console.log(`finishJob ${id}`)
-    // console.log(`open jobs: ${this.getOpenJobs().join(', ')}`)
   }
 
   getTotalJobCount () {
