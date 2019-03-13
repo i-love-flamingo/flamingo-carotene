@@ -25,6 +25,8 @@ class FileWatcher {
     // Flamingo Carotene cliTools
     this.cliTools = core.getCliTools()
 
+    this.jobManager = core.getJobmanager();
+
     // Flamingo Carotene config
     this.config = core.getConfig()
 
@@ -168,6 +170,8 @@ class FileWatcher {
     // start building
     this.rerunAfterBuild = false
     this.buildInProgress = true
+
+    this.jobManager.reset()
     this.dispatcher.dispatchCommand(this.command)
   }
 

@@ -5,8 +5,6 @@ class Jobmanager {
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
 
-    this.jobs = {}
-
     this.useProgress = false
     for (const option of this.cliTools.getOptions()) {
       if (option === '--progress') {
@@ -15,8 +13,17 @@ class Jobmanager {
     }
 
     if (this.useProgress) {
-      const _cliProgress = require('cli-progress');
-      this.progressBar = new _cliProgress.Bar({
+      this.CliProgress = require('cli-progress');
+    }
+    this.reset()
+  }
+
+  reset() {
+    this.jobs = {}
+    if (this.useProgress) {
+      this.cliTools.startBuffer();
+
+      this.progressBar = new this.CliProgress.Bar({
         format: 'progress [{bar}] {value}/{total} {openJobList}',
         barCompleteChar: '#',
         barIncompleteChar: '.',
@@ -28,7 +35,6 @@ class Jobmanager {
         position: 'center'
       });
 
-      this.cliTools.startBuffer();
       this.progressBar.start(1, 0);
     }
   }
@@ -52,8 +58,11 @@ class Jobmanager {
   }
 
   setSubJobProgress(id, subjobs) {
-    this.jobs[id].subProgress = subjobs
-    const jobData = this.jobs[id]
+    if (this.jobs[id]) {
+      this.jobs[id].subProgress = subjobs
+      const jobData = this.jobs[id]
+    }
+
     // this.cliTools.info(`Job SubProgress: ${id} ${subjobs}`)
     this.updateProgressBar()
   }
@@ -63,12 +72,14 @@ class Jobmanager {
   }
 
   finishJob(id){
-    this.jobs[id].finished = true;
+    if (this.jobs[id]) {
+      this.jobs[id].finished = true;
+      const duration = new Date().getTime() - jobData.start
+    }
 
     const jobData = this.jobs[id]
-    const duration = new Date().getTime() - jobData.start
-
     this.cliTools.info(`Job finished: ${jobData.label} in ${duration}ms`)
+
     // this.cliTools.info(`Generated ${Object.keys(allFiles).length} AST file(s)\n`)
     this.updateProgressBar()
   }

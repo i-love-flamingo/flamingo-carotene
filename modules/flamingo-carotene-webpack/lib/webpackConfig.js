@@ -105,7 +105,7 @@ class WebpackConfig {
 
     if (this.cliTools.isExperimental()) {
       webpackConfig.plugins.push(new HardSourceWebpackPlugin({
-        cacheDirectory: path.join(this.config.paths.project, 'hard-source-cache'),
+        cacheDirectory: path.join(this.config.paths.project, '.cache'),
         info: {
           // 'none' or 'test'.
           mode: 'none',
