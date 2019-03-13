@@ -41,7 +41,9 @@ const pugLint = (core) => {
   }
 
   core.getJobmanager().addJob('puglint', 'Pug-Lint')
-  cliTools.info(`PugLint - start (${files.length} files in ${lintFilePacks.length} packages)`)
+  core.getJobmanager().setSubJobTotalCount('puglint', lintFilePacks.length)
+
+  // cliTools.info(`PugLint - start (${files.length} files in ${lintFilePacks.length} packages)`)
 
   const results = []
   const errors = []
@@ -72,17 +74,20 @@ const pugLint = (core) => {
 
     childProcess.on('exit', (code) => {
       finishedPacks++;
-      cliTools.info(`Finished PugLint-Pack ${lintPackNumber} - (${finishedPacks} of ${lintFilePacks.length})`, true);
+      // cliTools.info(`Finished PugLint-Pack ${lintPackNumber} - (${finishedPacks} of ${lintFilePacks.length})`, true);
+      core.getJobmanager().setSubJobProgress('puglint', finishedPacks)
 
       // if every pack is finished
       if (finishedPacks >= lintFilePacks.length) {
         core.getJobmanager().finishJob('puglint')
-        const output = [`PugLint-Lint End\r\n    Finished after ${new Date().getTime() - timeStarted}ms`].concat(results, errors).join('\n').trim()
+        const output = [].concat(results, errors).join('\n').trim()
 
-        if (code !== 0) {
-          cliTools.warn(output)
-        } else {
-          cliTools.info(output)
+        if (output.length > 0) {
+          if (code !== 0) {
+            cliTools.warn(output)
+          } else {
+            cliTools.info(output)
+          }
         }
 
         if (config.pugLint.breakOnError && errors.length > 0) {

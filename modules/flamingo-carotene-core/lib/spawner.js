@@ -3,11 +3,9 @@ const { spawn } = require('child_process')
 class Spawner {
 
   constructor () {
-    const Config = require('./config')
-    const packageJson = new Config().getProjectPackageJson()
-
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
+    const packageJson = this.core.getConfigObject().getProjectPackageJson()
 
     this.usedPackageManager = Object.keys(packageJson.engines)[0];
     if (!this.usedPackageManager) {

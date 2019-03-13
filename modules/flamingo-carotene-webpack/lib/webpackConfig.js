@@ -11,7 +11,6 @@ class WebpackConfig {
   constructor(core) {
     this.config = core.getConfig()
     this.cliTools = core.getCliTools()
-
     return this.getWebpackConfig()
   }
 
@@ -103,7 +102,6 @@ class WebpackConfig {
         new ManifestPlugin()
       ]
     }
-
 
     if (this.cliTools.isExperimental()) {
       webpackConfig.plugins.push(new HardSourceWebpackPlugin({

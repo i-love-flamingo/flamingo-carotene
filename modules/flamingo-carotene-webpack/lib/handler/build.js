@@ -3,6 +3,8 @@ const webpackBuild = function (core) {
   const config = core.getConfig()
   const cliTools = core.getCliTools()
 
+
+
   if (!config.webpackConfig) {
     cliTools.warn('No webpack config found')
     return
@@ -10,13 +12,22 @@ const webpackBuild = function (core) {
 
   // cliTools.info(`Webpack config used to build:\r\n${cliTools.inspect(config.webpackConfig)}`, true)
 
-  cliTools.info('Webpack - start')
+  // cliTools.info('Webpack - start')
 
   core.getJobmanager().addJob('webpack', 'Webpack')
+  core.getJobmanager().setSubJobTotalCount('webpack', 100)
+
   cliTools.info(`Running webpack in mode: ${config.webpackConfig.mode}`, true)
 
   const timeStarted = new Date().getTime()
   const webpack = require('webpack')
+
+  const ProgressPlugin = require('webpack/lib/ProgressPlugin');
+  config.webpackConfig.plugins.push(new ProgressPlugin(function(percentage, message, ...args) {
+    // console.info(percentage, message, ...args);
+    core.getJobmanager().setSubJobProgress('webpack', Math.round(percentage * 100 ))
+  }))
+
   webpack(config.webpackConfig, (error, stats) => {
     if (error) {
       cliTools.warn(error.stack || error)
@@ -37,7 +48,7 @@ const webpackBuild = function (core) {
     }
 
     core.getJobmanager().finishJob('webpack')
-    cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
+    // cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {
       config.webpack.buildCallback(core)

@@ -18,7 +18,7 @@ const eslint = (core) => {
   const npmVersion = execSync('npm -v')
 
   core.getJobmanager().addJob('eslint', 'ES-Lint')
-  cliTools.info('ESLint - start')
+  // cliTools.info('ESLint - start')
   const childProcess = core.getSpawner().spawnJobNpx(getCommandParameters(config))
 
   // this is new
@@ -64,12 +64,14 @@ const eslint = (core) => {
 
   childProcess.on('exit', function (code) {
     core.getJobmanager().finishJob('eslint')
-    const output = ['ESLint - end'].concat(results, errors).join('\n').trim()
+    const output = [].concat(results, errors).join('\n').trim()
 
-    if (code !== 0) {
-      cliTools.warn(output)
-    } else {
-      cliTools.info(output)
+    if (output.length > 0) {
+      if (code !== 0) {
+        cliTools.warn(output)
+      } else {
+        cliTools.info(output)
+      }
     }
 
     if (config.eslint.breakOnError && errors.length > 0) {

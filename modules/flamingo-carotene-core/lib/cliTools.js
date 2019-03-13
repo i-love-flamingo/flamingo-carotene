@@ -68,11 +68,11 @@ class CliTools {
           outMessage = `${verbose ? iconWarn : iconCarrot} ${message}\n`
           break
         case 'warn':
-          outMessage = `${iconWarn}${message}\n`
+          outMessage = `${iconWarn} ${message}\n`
           break
         case 'default':
         default:
-          outMessage = `${message}\n`
+          outMessage = `  ${message}\n`
       }
     }
 

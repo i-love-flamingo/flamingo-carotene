@@ -16,8 +16,7 @@ class Core {
       return config
     }
 
-    const Config = require('./config')
-    config = new Config().getConfig()
+    config = this.getConfigObject().getConfig()
 
     return config
   }
