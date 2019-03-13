@@ -74,11 +74,10 @@ class Jobmanager {
   finishJob(id){
     if (this.jobs[id]) {
       this.jobs[id].finished = true;
+      const jobData = this.jobs[id]
       const duration = new Date().getTime() - jobData.start
+      this.cliTools.info(`Job finished: ${jobData.label} in ${duration}ms`)
     }
-
-    const jobData = this.jobs[id]
-    this.cliTools.info(`Job finished: ${jobData.label} in ${duration}ms`)
 
     // this.cliTools.info(`Generated ${Object.keys(allFiles).length} AST file(s)\n`)
     this.updateProgressBar()
