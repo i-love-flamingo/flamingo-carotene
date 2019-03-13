@@ -1,4 +1,4 @@
-const SvgStorePlugin  = require('external-svg-sprite-loader')
+const SvgStorePlugin  = require('./lib/SvgStorePlugin.js')
 
 class FlamingoCaroteneWebpackSvgSprite {
   constructor (core) {
