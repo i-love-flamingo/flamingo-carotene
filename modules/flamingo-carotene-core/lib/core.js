@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 let config = null
+let configObject = null
 let spawner = null
 let cliTools = null
 let dispatcher = null
@@ -19,6 +20,17 @@ class Core {
     config = new Config().getConfig()
 
     return config
+  }
+
+  getConfigObject() {
+    if (configObject !== null) {
+      return configObject
+    }
+
+    const Config = require('./config')
+    configObject = new Config()
+
+    return configObject
   }
 
   getSpawner () {

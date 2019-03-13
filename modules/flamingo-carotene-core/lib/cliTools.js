@@ -1,5 +1,6 @@
 const util = require('util')
 const chalk = require('chalk')
+var emoji = require('node-emoji')
 
 class CliTools {
   constructor () {
@@ -27,6 +28,15 @@ class CliTools {
     return this.args.slice(1)
   }
 
+  isExperimental () {
+    for (const option of this.getOptions()) {
+      if (option === '--experimental') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   startBuffer () {
     this.doBufferOut = true
   }
@@ -47,13 +57,18 @@ class CliTools {
     verbose = !!verbose
 
     let outMessage = ''
+
+    const iconCarrot = emoji.get('carrot')
+    const iconInfo = emoji.get('information_source')
+    const iconWarn = emoji.get('warning')
+
     if (this.verbose || this.verbose === verbose) {
       switch (type) {
         case 'info':
-          outMessage = `\n${verbose ? 'ℹ️ ' : '🥕'}  ${message}\n`
+          outMessage = `${verbose ? iconWarn : iconCarrot} ${message}\n`
           break
         case 'warn':
-          outMessage = `\n⚠️   ${message}\n`
+          outMessage = `${iconWarn}${message}\n`
           break
         case 'default':
         default:

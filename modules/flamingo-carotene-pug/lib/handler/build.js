@@ -79,6 +79,22 @@ const generateAst = (file, callback) => {
   // console.log(`Build Time ${compTime}ms for ${file} - alltime: ${allTimeCompile}`)
 }
 
+const compileAllFiles = (allFiles, complete) => {
+
+  // compile all files...
+  for (const file of allFiles) {
+    cliTools.info(`Processing template files`, file)
+    generateAst(file, function(error, results) {
+      if (error) {
+        complete(error)
+        return
+      }
+
+      complete()
+    })
+  }
+}
+
 const pugBuild = (core) => {
   config = core.getConfig()
   cliTools = core.getCliTools()
@@ -89,7 +105,7 @@ const pugBuild = (core) => {
   core.getJobmanager().addJob('pug', 'Pug Compile')
 
   const complete = (error) => {
-
+    cliTools.info(`Pug - end\r\n    Generated ${Object.keys(allFiles).length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
     core.getJobmanager().finishJob('pug')
 
     if (error) {
@@ -117,19 +133,9 @@ const pugBuild = (core) => {
   }
   const allFiles = Object.keys(normalizedFiles);
 
-  // compile all files...
-  for (const file of allFiles) {
-    cliTools.info(`Processing template files`, true)
-    generateAst(file, function(error, results) {
-      if (error) {
-        complete(error)
-        return
-      }
-    })
-  }
-
-  cliTools.info(`Pug - end\r\n    Generated ${Object.keys(allFiles).length} AST file(s)\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
-  complete()
+  setTimeout(function() {
+    compileAllFiles(allFiles, complete)
+  })
 
 }
 

@@ -3,6 +3,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
 
@@ -17,6 +18,7 @@ class WebpackConfig {
   getWebpackConfig () {
     const webpackConfig = {
       target: 'web',
+      stats: 'verbose',
       // context: config.paths.src,
       mode: isProd ? 'production' : 'development',
       entry: path.join(this.config.paths.webpack.src, 'index.js'),
@@ -100,6 +102,29 @@ class WebpackConfig {
         }),
         new ManifestPlugin()
       ]
+    }
+
+
+    if (this.cliTools.isExperimental()) {
+      webpackConfig.plugins.push(new HardSourceWebpackPlugin({
+        cacheDirectory: path.join(this.config.paths.project, 'hard-source-cache'),
+        info: {
+          // 'none' or 'test'.
+          mode: 'none',
+          // 'debug', 'log', 'info', 'warn', or 'error'.
+          level: (isProd ? 'error' : 'debug'),
+        },
+        // Clean up large, old caches automatically.
+        cachePrune: {
+          // Caches younger than `maxAge` are not considered for deletion. They must
+          // be at least this (default: 2 days) old in milliseconds.
+          maxAge: 2 * 24 * 60 * 60 * 1000,
+          // All caches together must be larger than `sizeThreshold` before any
+          // caches will be deleted. Together they must be at least this
+          // (default: 50 MB) big in bytes.
+          sizeThreshold: 50 * 1024 * 1024
+        }
+      }));
     }
 
     if (!isProd) {
