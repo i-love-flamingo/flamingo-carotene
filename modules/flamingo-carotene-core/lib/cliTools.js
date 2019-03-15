@@ -28,17 +28,27 @@ class CliTools {
     return this.args.slice(1)
   }
 
+  hasOption(possibleOptions) {
+    if (!Array.isArray(possibleOptions)) {
+      possibleOptions = [possibleOptions]
+    }
+
+    for (const searchOption of possibleOptions) {
+      for (const option of this.getOptions()) {
+        if (searchOption === option) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
   isVerbose() {
     return this.args.indexOf('-v') > -1
   }
 
   isExperimental () {
-    for (const option of this.getOptions()) {
-      if (option === '--experimental') {
-        return true;
-      }
-    }
-    return false;
+    return this.hasOption('--experimental')
   }
 
   startBuffer () {

@@ -6,12 +6,8 @@ class Jobmanager {
     this.cliTools = this.core.getCliTools()
     this.callbackOnFinish = function() {}
 
-    this.useProgress = false
-    for (const option of this.cliTools.getOptions()) {
-      if (option === '--progress') {
-        this.useProgress = true
-      }
-    }
+    this.useProgress = this.cliTools.hasOption(['--progress', '--forceProgress'])
+    this.forceProgress = this.cliTools.hasOption('--forceProgress')
 
     if (this.useProgress) {
       this.CliProgress = require('cli-progress');
@@ -23,6 +19,12 @@ class Jobmanager {
     if (this.useProgress) {
       this.cliTools.startBuffer();
 
+
+      const output = process.stdout
+      if (this.forceProgress) {
+        output.isTTY = true
+      }
+
       this.progressBar = new this.CliProgress.Bar({
         format: `Build [{bar}] {value}/{total} {openJobList}`,
         barCompleteChar: '#',
@@ -30,12 +32,13 @@ class Jobmanager {
         stopOnComplete: true,
         clearOnComplete: true,
         fps: 5,
-        stream: process.stdout,
+        stream: output,
         barsize: 65,
         position: 'center'
       });
 
       this.progressBar.start(1, 0);
+      this.progressBar.update(0, {'openJobList': ''});
     }
   }
 

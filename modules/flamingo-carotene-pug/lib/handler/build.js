@@ -24,7 +24,7 @@ const pugBuild = (core) => {
   let finishedSubJobs = 0;
   const basedir = path.normalize(config.paths.src)
 
-  for (const file of [allFiles[0]]) {
+  for (const file of allFiles) {
 
     const sourceFile = path.resolve(config.paths.src, file)
     const templateFilename = path.relative(config.paths.pug.src, file)
