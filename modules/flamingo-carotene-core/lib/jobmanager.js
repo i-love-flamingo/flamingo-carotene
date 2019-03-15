@@ -16,7 +16,6 @@ class Jobmanager {
     if (this.useProgress) {
       this.CliProgress = require('cli-progress');
     }
-    this.reset()
   }
 
   reset() {
@@ -41,6 +40,10 @@ class Jobmanager {
   }
 
   addJob(id, label, info) {
+    if (this.getTotalJobCount() === 0) {
+      this.reset()
+    }
+
     this.cliTools.info(`Job start: ${label} ${info ? ' - '+info : ''}`)
     this.jobs[id] = {label:label, finished: false, subjobs: 0, subProgress: 0, info:info, start:new Date().getTime()};
 

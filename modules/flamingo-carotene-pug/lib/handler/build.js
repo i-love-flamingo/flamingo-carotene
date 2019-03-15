@@ -17,19 +17,20 @@ const pugBuild = (core) => {
   }
   const allFiles = Object.keys(normalizedFiles);
 
+
   core.getJobmanager().setSubJobTotalCount('pug', allFiles.length)
-  let allErrors = [];
   let results = [];
   let errors = [];
   let finishedSubJobs = 0;
+  const basedir = path.normalize(config.paths.src)
 
-
-  for (const file of allFiles) {
+  for (const file of [allFiles[0]]) {
 
     const sourceFile = path.resolve(config.paths.src, file)
     const templateFilename = path.relative(config.paths.pug.src, file)
     const targetFile = path.resolve(path.join(config.paths.pug.dist, templateFilename.replace('.pug', '.ast.json')))
-    const childProcess = core.getSpawner().spawnJobNpx(['pugCompile', sourceFile, targetFile]);
+    const nodeModulesPath = path.join(config.paths.project, 'node_modules')
+    const childProcess = core.getSpawner().spawnJobNpx(['pugCompile', basedir, templateFilename, sourceFile, targetFile, nodeModulesPath]);
 
     childProcess.stdout.on('data', function (data) {
       results.push(data)
