@@ -110,7 +110,7 @@ class WebpackConfig {
           // 'none' or 'test'.
           mode: 'none',
           // 'debug', 'log', 'info', 'warn', or 'error'.
-          level: (isProd ? 'error' : 'debug'),
+          level: (this.cliTools.isVerbose() ? 'debug' : 'error'),
         },
         // Clean up large, old caches automatically.
         cachePrune: {

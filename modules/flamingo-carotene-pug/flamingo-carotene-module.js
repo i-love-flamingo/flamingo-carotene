@@ -28,14 +28,14 @@ class FlamingoCarotenePug {
       },
       {
         command: 'build',
-        handler: function (core) {
-          const config = core.getConfig()
-          config.pug.breakOnError = true
-          buildHandler(core)
-        }
+        handler: buildHandler
       },
       {
         command: 'watchPug',
+        handler: buildHandler
+      },
+      {
+        command: 'pug-async-compile',
         handler: buildHandler
       }
     ]

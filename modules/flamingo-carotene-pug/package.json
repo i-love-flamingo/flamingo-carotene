@@ -11,13 +11,16 @@
     "carotene",
     "om3"
   ],
+  "bin": {
+    "pugCompile": "./bin/pugCompile.js"
+  },
   "scripts": {
     "test": "echo \"No tests present\""
   },
   "dependencies": {
     "async": "^2.6.1",
     "glob": "^7.1.2",
-    "mkdirp": "^0.5.1",
+    "mkdirp-sync": "0.0.3",
     "pug": "^2.0.3"
   }
 }

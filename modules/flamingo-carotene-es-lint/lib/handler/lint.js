@@ -8,13 +8,6 @@ const eslint = (core) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
-  let cmd = 'npx'
-  if (process.platform === 'win32') {
-    cmd = `npx.cmd`
-  }
-
-
-
   const npmVersion = execSync('npm -v')
 
   core.getJobmanager().addJob('eslint', 'ES-Lint')

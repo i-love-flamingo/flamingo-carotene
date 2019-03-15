@@ -4,6 +4,7 @@ class Jobmanager {
   constructor () {
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
+    this.callbackOnFinish = function() {}
 
     this.useProgress = false
     for (const option of this.cliTools.getOptions()) {
@@ -24,7 +25,7 @@ class Jobmanager {
       this.cliTools.startBuffer();
 
       this.progressBar = new this.CliProgress.Bar({
-        format: 'progress [{bar}] {value}/{total} {openJobList}',
+        format: `Build [{bar}] {value}/{total} {openJobList}`,
         barCompleteChar: '#',
         barIncompleteChar: '.',
         stopOnComplete: true,
@@ -81,6 +82,10 @@ class Jobmanager {
 
     // this.cliTools.info(`Generated ${Object.keys(allFiles).length} AST file(s)\n`)
     this.updateProgressBar()
+
+    if (this.getOpenJobs() < 1) {
+      this.callbackOnFinish()
+    }
   }
 
   updateProgressBar() {
@@ -138,6 +143,10 @@ class Jobmanager {
       }
     }
     return openJobs;
+  }
+
+  setCallbackOnFinish(callback) {
+    this.callbackOnFinish = callback
   }
 }
 

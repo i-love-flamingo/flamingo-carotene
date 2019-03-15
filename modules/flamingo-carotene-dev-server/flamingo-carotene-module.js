@@ -67,7 +67,7 @@ class DevServer {
           const devBuildIndicator = path.join(config.paths.dist, 'isDevBuild')
 
           if (!fs.existsSync(devBuildIndicator)) {
-            core.getCliTools().info(`Rebuilding JS to inject socketClient`, true)
+            core.getCliTools().info(`Rebuilding JS to inject socketClient`)
             core.getDispatcher().dispatchCommand(jsWatcherCommand)
             fs.writeFileSync(devBuildIndicator, '\r')
           }

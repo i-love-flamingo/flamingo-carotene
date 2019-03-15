@@ -5,7 +5,7 @@ var emoji = require('node-emoji')
 class CliTools {
   constructor () {
     this.args = process.argv.slice(2)
-    this.verbose = this.args.indexOf('-v') > -1
+    this.verbose = this.isVerbose()
 
     this.chalk = chalk
     this.doBufferOut = false;
@@ -26,6 +26,10 @@ class CliTools {
    */
   getOptions () {
     return this.args.slice(1)
+  }
+
+  isVerbose() {
+    return this.args.indexOf('-v') > -1
   }
 
   isExperimental () {
@@ -65,7 +69,7 @@ class CliTools {
     if (this.verbose || this.verbose === verbose) {
       switch (type) {
         case 'info':
-          outMessage = `${verbose ? iconWarn : iconCarrot} ${message}\n`
+          outMessage = `${verbose ? iconInfo : iconCarrot} ${message}\n`
           break
         case 'warn':
           outMessage = `${iconWarn} ${message}\n`
@@ -83,8 +87,6 @@ class CliTools {
     else {
       process.stdout.write(outMessage)
     }
-
-
   }
 
   log (message, verbose) {

@@ -160,18 +160,12 @@ class FileWatcher {
       return
     }
 
-    // no build in progress? so - build it!
-    // save original callback...
-    this.originalBuildCallback = this.config[this.callbackKey].buildCallback
-
-    // overwrite callback...
-    this.config[this.callbackKey].buildCallback = this.watcherFinishBuildCallback.bind(this)
-
     // start building
     this.rerunAfterBuild = false
     this.buildInProgress = true
 
     this.jobManager.reset()
+    this.jobManager.setCallbackOnFinish(this.watcherFinishBuildCallback.bind(this))
     this.dispatcher.dispatchCommand(this.command)
   }
 
@@ -180,9 +174,6 @@ class FileWatcher {
    */
   watcherFinishBuildCallback () {
     this.cliTools.info(`Watcher-${this.watchId}: Build finished`, true)
-
-    // restore old, original callback...
-    this.config[this.callbackKey].buildCallback = this.originalBuildCallback
 
     this.buildInProgress = false
 
