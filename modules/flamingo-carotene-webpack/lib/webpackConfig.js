@@ -99,30 +99,27 @@ class WebpackConfig {
         new MiniCssExtractPlugin({
           filename: this.getCssFileName()
         }),
-        new ManifestPlugin()
+        new ManifestPlugin(),
+        new HardSourceWebpackPlugin({
+          cacheDirectory: path.join(this.config.paths.project, '.cache'),
+          info: {
+            // 'none' or 'test'.
+            mode: 'none',
+            // 'debug', 'log', 'info', 'warn', or 'error'.
+            level: (this.cliTools.isVerbose() ? 'debug' : 'error'),
+          },
+          // Clean up large, old caches automatically.
+          cachePrune: {
+            // Caches younger than `maxAge` are not considered for deletion. They must
+            // be at least this (default: 2 days) old in milliseconds.
+            maxAge: 2 * 24 * 60 * 60 * 1000,
+            // All caches together must be larger than `sizeThreshold` before any
+            // caches will be deleted. Together they must be at least this
+            // (default: 50 MB) big in bytes.
+            sizeThreshold: 50 * 1024 * 1024
+          }
+        })
       ]
-    }
-
-    if (this.cliTools.isExperimental()) {
-      webpackConfig.plugins.push(new HardSourceWebpackPlugin({
-        cacheDirectory: path.join(this.config.paths.project, '.cache'),
-        info: {
-          // 'none' or 'test'.
-          mode: 'none',
-          // 'debug', 'log', 'info', 'warn', or 'error'.
-          level: (this.cliTools.isVerbose() ? 'debug' : 'error'),
-        },
-        // Clean up large, old caches automatically.
-        cachePrune: {
-          // Caches younger than `maxAge` are not considered for deletion. They must
-          // be at least this (default: 2 days) old in milliseconds.
-          maxAge: 2 * 24 * 60 * 60 * 1000,
-          // All caches together must be larger than `sizeThreshold` before any
-          // caches will be deleted. Together they must be at least this
-          // (default: 50 MB) big in bytes.
-          sizeThreshold: 50 * 1024 * 1024
-        }
-      }));
     }
 
     if (!isProd) {
