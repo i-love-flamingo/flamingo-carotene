@@ -28,6 +28,17 @@ class CliTools {
     return this.args.slice(1)
   }
 
+  getOptionValue (optionName) {
+    let findOptionStr = `--${optionName}=`
+
+    for (const option of this.getOptions()) {
+      if (option.substr(0, findOptionStr.length) == findOptionStr)  {
+        return option.substr(findOptionStr.length)
+      }
+    }
+
+  }
+
   hasOption(possibleOptions) {
     if (!Array.isArray(possibleOptions)) {
       possibleOptions = [possibleOptions]

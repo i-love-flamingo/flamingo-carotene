@@ -15,8 +15,19 @@ const pugBuild = (core) => {
     const normFile = path.normalize(file)
     normalizedFiles[normFile] = true
   }
-  const allFiles = Object.keys(normalizedFiles);
+  let allFiles = Object.keys(normalizedFiles);
 
+
+  if (cliTools.getOptionValue('page')) {
+    const pageFilter = new RegExp(cliTools.getOptionValue('page'))
+    const filteredFiles = []
+    for (const file of allFiles) {
+      if (pageFilter.test(file)) {
+        filteredFiles.push(file)
+      }
+    }
+    allFiles = filteredFiles
+  }
 
   core.getJobmanager().setSubJobTotalCount('pug', allFiles.length)
   let results = [];
