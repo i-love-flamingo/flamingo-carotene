@@ -29,19 +29,34 @@ const pugBuild = (core) => {
     allFiles = filteredFiles
   }
 
-  core.getJobmanager().setSubJobTotalCount('pug', allFiles.length)
+  const jobParameters = []
+  jobParameters.push('pugCompile')
+  jobParameters.push(path.resolve(config.paths.src)) // sourceDir
+  jobParameters.push(path.resolve(config.paths.pug.dist)) // distDir
+  jobParameters.push(path.join(config.paths.project, 'node_modules')) // nodeDir
+
+
+  // leave 1 cpu core unused...
+  const threadCount = (require('os').cpus().length || 2) - 1
+
+  const jobArrays = chunkifyArray(allFiles, threadCount)
+
+
+  core.getJobmanager().setSubJobTotalCount('pug', jobArrays.length)
   let results = [];
   let errors = [];
   let finishedSubJobs = 0;
-  const basedir = path.normalize(config.paths.src)
 
-  for (const file of allFiles) {
 
-    const sourceFile = path.resolve(config.paths.src, file)
-    const templateFilename = path.relative(config.paths.pug.src, file)
-    const targetFile = path.resolve(path.join(config.paths.pug.dist, templateFilename.replace('.pug', '.ast.json')))
-    const nodeModulesPath = path.join(config.paths.project, 'node_modules')
-    const childProcess = core.getSpawner().spawnJobNpx(['pugCompile', basedir, templateFilename, sourceFile, targetFile, nodeModulesPath]);
+  // starting jobs...
+  for (const jobArray of jobArrays) {
+
+    const jobFileList = []
+    for (const file of jobArray) {
+      jobFileList.push(path.relative(path.resolve(config.paths.src), file)) // nodeDir
+    }
+
+    const childProcess = core.getSpawner().spawnJobNpx(jobParameters.concat(jobFileList))
 
     childProcess.stdout.on('data', function (data) {
       results.push(data)
@@ -55,11 +70,9 @@ const pugBuild = (core) => {
       finishedSubJobs++
       core.getJobmanager().setSubJobProgress('pug', finishedSubJobs)
 
-      if (finishedSubJobs >= allFiles.length) {
+      if (finishedSubJobs >= jobArrays.length) {
         core.getJobmanager().finishJob('pug')
-
         const output = [].concat(results, errors).join('\n').trim()
-
         if (output.length > 0) {
           if (code !== 0) {
             cliTools.warn(output)
@@ -70,6 +83,53 @@ const pugBuild = (core) => {
       }
     })
   }
+
+
 }
+
+
+function chunkifyArray(a, n, balanced) {
+
+  if (n < 2)
+    return [a];
+
+  var len = a.length,
+    out = [],
+    i = 0,
+    size;
+
+  if (len % n === 0) {
+    size = Math.floor(len / n);
+    while (i < len) {
+      out.push(a.slice(i, i += size));
+    }
+  }
+
+  else if (balanced) {
+    while (i < len) {
+      size = Math.ceil((len - i) / n--);
+      out.push(a.slice(i, i += size));
+    }
+  }
+
+  else {
+
+    n--;
+    size = Math.floor(len / n);
+    if (len % size === 0)
+      size--;
+    while (i < size * n) {
+      out.push(a.slice(i, i += size));
+    }
+    out.push(a.slice(size * n));
+
+  }
+
+  return out;
+}
+
+
+
+
 
 module.exports = pugBuild
