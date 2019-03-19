@@ -15,6 +15,10 @@ dispatcher.dispatchCommand('config')
 
 if (command === 'build') {
   shell.rm('-rf', config.paths.dist)
+
+  if (config.paths.webpackCache) {
+    shell.rm('-rf', config.paths.webpackCache)
+  }
 }
 
 if (command !== 'config') {

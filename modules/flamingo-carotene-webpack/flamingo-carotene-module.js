@@ -28,6 +28,8 @@ class FlamingoCaroteneWebpack {
             rulesInclude: null,
             buildCallback: null
           }
+
+          config.paths.webpackCache = path.join(config.paths.project, '.cache')
         }
       },
       {

@@ -101,7 +101,7 @@ class WebpackConfig {
         }),
         new ManifestPlugin(),
         new HardSourceWebpackPlugin({
-          cacheDirectory: path.join(this.config.paths.project, '.cache'),
+          cacheDirectory: this.config.paths.webpackCache,
           info: {
             // 'none' or 'test'.
             mode: 'none',
