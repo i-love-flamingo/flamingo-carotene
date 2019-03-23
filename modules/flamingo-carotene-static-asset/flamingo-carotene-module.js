@@ -9,7 +9,12 @@ class FlamingoCaroteneStaticAsset {
         handler: function (core) {
           const config = core.getConfig()
           config.staticAsset = {
-            assetPaths: [],
+            assetPaths: [
+              {
+                dest: 'asset',
+                src: 'asset'
+              }
+            ],
             basePaths: {
               dest: config.paths.dist,
               src: config.paths.src
