@@ -12,7 +12,7 @@ class FlamingoCarotenePug {
         handler: function (core) {
           config.paths.pug = {
             src: path.join(config.paths.src, 'page'),
-            dist: path.join(config.paths.dist, 'template', 'page')
+            dist: path.join(config.paths.dist, 'template')
           }
 
           config.pug = {
