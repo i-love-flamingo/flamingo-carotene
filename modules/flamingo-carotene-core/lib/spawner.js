@@ -7,7 +7,9 @@ class Spawner {
     this.cliTools = this.core.getCliTools()
     const packageJson = this.core.getConfigObject().getProjectPackageJson()
 
-    this.usedPackageManager = Object.keys(packageJson.engines)[0];
+    if ('engines' in packageJson) {
+      this.usedPackageManager = Object.keys(packageJson.engines)[0];
+    }
     if (!this.usedPackageManager) {
       this.usedPackageManager = 'npm'
     }
