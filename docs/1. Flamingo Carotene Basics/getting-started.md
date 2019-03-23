@@ -9,12 +9,14 @@ Inside your flamingo project folder:
 ```
 mkdir -p frontend/src
 cd frontend
-npx flamingo-carotene init // To be implemented
+npm init
+
+(currently beeing implemented: `npx flamingo-carotene init`)
 
 npm i -D flamingo-carotene-core flamingo-carotene-pug
 ```
 
-This initializes your frontend project:
+This initializes your frontend project with the following npm modules:
 
 * *flamingo-carotene-core* - includes the basic commands and core logic
 * *flamingo-carotene-pug* - includes the Build logi to work with pug
