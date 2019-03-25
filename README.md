@@ -12,4 +12,5 @@ The individual package README.md files are linked in the "docs" folder as soon a
 This repo contains many subpackages - use "lerna" to manage them.
 ```
 npx lerna list
+npx lerna version
 ```

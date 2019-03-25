@@ -1,0 +1,150 @@
+0 silly argv { _: [ 'version' ],
+0 silly argv   lernaVersion: '3.13.1',
+0 silly argv   '$0': '../../../../.npm/_npx/85769/bin/lerna',
+0 silly argv   bump: 'v6.1.22' }
+1 notice cli v3.13.1
+2 verbose rootPath /Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene
+3 info current version 6.1.22
+4 silly isAnythingCommitted
+5 verbose isAnythingCommitted 1
+6 silly currentBranch
+7 verbose currentBranch master
+8 silly remoteBranchExists
+9 silly isBehindUpstream
+10 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 1
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v6.1.20-7-g47b8654" => {"lastTagName":"v6.1.20","lastVersion":"v6.1.20","refCount":"7","sha":"47b8654","isDirty":false}
+14 info Looking for changed packages since v6.1.20
+15 silly checking diff modules/eslint-config-flamingo-carotene
+16 silly no diff found in eslint-config-flamingo-carotene
+17 silly checking diff modules/flamingo-carotene-babel
+18 silly no diff found in flamingo-carotene-babel
+19 silly checking diff modules/flamingo-carotene-behavior
+20 silly no diff found in flamingo-carotene-behavior
+21 silly checking diff modules/flamingo-carotene-core
+22 silly found diff in modules/flamingo-carotene-core/lib/flamingoCarotene.js
+22 silly found diff in modules/flamingo-carotene-core/lib/spawner.js
+23 verbose filtered diff [ 'modules/flamingo-carotene-core/lib/flamingoCarotene.js',
+23 verbose filtered diff   'modules/flamingo-carotene-core/lib/spawner.js' ]
+24 silly checking diff modules/flamingo-carotene-dev-server
+25 silly no diff found in flamingo-carotene-dev-server
+26 silly checking diff modules/flamingo-carotene-es-lint
+27 silly no diff found in flamingo-carotene-es-lint
+28 silly checking diff modules/flamingo-carotene-postcss
+29 silly no diff found in flamingo-carotene-postcss
+30 silly checking diff modules/flamingo-carotene-pug-lint
+31 silly no diff found in flamingo-carotene-pug-lint
+32 silly checking diff modules/flamingo-carotene-pug
+33 silly found diff in modules/flamingo-carotene-pug/flamingo-carotene-module.js
+34 verbose filtered diff [ 'modules/flamingo-carotene-pug/flamingo-carotene-module.js' ]
+35 silly checking diff modules/flamingo-carotene-sass-lint
+36 silly no diff found in flamingo-carotene-sass-lint
+37 silly checking diff modules/flamingo-carotene-smooth-scroll-to
+38 silly no diff found in flamingo-carotene-smooth-scroll-to
+39 silly checking diff modules/flamingo-carotene-state-manager
+40 silly no diff found in flamingo-carotene-state-manager
+41 silly checking diff modules/flamingo-carotene-static-asset
+42 silly found diff in modules/flamingo-carotene-static-asset/flamingo-carotene-module.js
+43 verbose filtered diff [ 'modules/flamingo-carotene-static-asset/flamingo-carotene-module.js' ]
+44 silly checking diff modules/flamingo-carotene-webpack-svg-sprite
+45 silly no diff found in flamingo-carotene-webpack-svg-sprite
+46 silly checking diff modules/flamingo-carotene-webpack
+47 silly found diff in modules/flamingo-carotene-webpack/flamingo-carotene-module.js
+47 silly found diff in modules/flamingo-carotene-webpack/lib/webpackConfig.js
+48 verbose filtered diff [ 'modules/flamingo-carotene-webpack/flamingo-carotene-module.js',
+48 verbose filtered diff   'modules/flamingo-carotene-webpack/lib/webpackConfig.js' ]
+49 verbose updated flamingo-carotene-core
+50 verbose updated flamingo-carotene-pug
+51 verbose updated flamingo-carotene-static-asset
+52 verbose updated flamingo-carotene-webpack-svg-sprite
+53 verbose updated flamingo-carotene-webpack
+54 verbose git-describe undefined => "v6.1.20-7-g47b8654"
+55 silly git-describe parsed => {"lastTagName":"v6.1.20","lastVersion":"v6.1.20","refCount":"7","sha":"47b8654","isDirty":false}
+56 silly batched [ PackageGraphNode {
+56 silly batched     name: 'flamingo-carotene-core',
+56 silly batched     externalDependencies:
+56 silly batched      Map {
+56 silly batched        'chalk' => [Object],
+56 silly batched        'cli-progress' => [Object],
+56 silly batched        'intercept-stdout' => [Object],
+56 silly batched        'node-emoji' => [Object],
+56 silly batched        'progress' => [Object],
+56 silly batched        'shelljs' => [Object] },
+56 silly batched     localDependencies: Map {},
+56 silly batched     localDependents: Map {} },
+56 silly batched   PackageGraphNode {
+56 silly batched     name: 'flamingo-carotene-pug',
+56 silly batched     externalDependencies:
+56 silly batched      Map {
+56 silly batched        'async' => [Object],
+56 silly batched        'glob' => [Object],
+56 silly batched        'mkdirp-sync' => [Object],
+56 silly batched        'pug' => [Object] },
+56 silly batched     localDependencies: Map {},
+56 silly batched     localDependents: Map {} },
+56 silly batched   PackageGraphNode {
+56 silly batched     name: 'flamingo-carotene-static-asset',
+56 silly batched     externalDependencies:
+56 silly batched      Map { 'async' => [Object], 'glob' => [Object], 'mkdirp' => [Object] },
+56 silly batched     localDependencies: Map {},
+56 silly batched     localDependents: Map {} },
+56 silly batched   PackageGraphNode {
+56 silly batched     name: 'flamingo-carotene-webpack',
+56 silly batched     externalDependencies:
+56 silly batched      Map {
+56 silly batched        'css-loader' => [Object],
+56 silly batched        'file-loader' => [Object],
+56 silly batched        'hard-source-webpack-plugin' => [Object],
+56 silly batched        'import-glob' => [Object],
+56 silly batched        'mini-css-extract-plugin' => [Object],
+56 silly batched        'node-sass' => [Object],
+56 silly batched        'optimize-css-assets-webpack-plugin' => [Object],
+56 silly batched        'sass-loader' => [Object],
+56 silly batched        'style-loader' => [Object],
+56 silly batched        'uglifyjs-webpack-plugin' => [Object],
+56 silly batched        'url-loader' => [Object],
+56 silly batched        'webpack' => [Object],
+56 silly batched        'webpack-manifest-plugin' => [Object] },
+56 silly batched     localDependencies: Map {},
+56 silly batched     localDependents:
+56 silly batched      Map {
+56 silly batched        'flamingo-carotene-webpack-svg-sprite' => [PackageGraphNode] } } ]
+57 silly batched [ PackageGraphNode {
+57 silly batched     name: 'flamingo-carotene-webpack-svg-sprite',
+57 silly batched     externalDependencies:
+57 silly batched      Map {
+57 silly batched        '@babel/plugin-proposal-class-properties' => [Object],
+57 silly batched        'flamingo-carotene-babel' => [Object],
+57 silly batched        'external-svg-sprite-loader' => [Object],
+57 silly batched        'unfetch' => [Object] },
+57 silly batched     localDependencies: Map {},
+57 silly batched     localDependents: Map {} } ]
+58 info execute Skipping GitHub releases
+59 silly lifecycle No script for "preversion" in "flamingo-carotene", continuing
+60 silly lifecycle No script for "preversion" in "flamingo-carotene-core", continuing
+61 silly lifecycle No script for "preversion" in "flamingo-carotene-pug", continuing
+62 silly lifecycle No script for "preversion" in "flamingo-carotene-static-asset", continuing
+63 silly lifecycle No script for "preversion" in "flamingo-carotene-webpack", continuing
+64 silly lifecycle No script for "version" in "flamingo-carotene-pug", continuing
+65 silly lifecycle No script for "version" in "flamingo-carotene-webpack", continuing
+66 silly lifecycle No script for "version" in "flamingo-carotene-static-asset", continuing
+67 silly lifecycle No script for "version" in "flamingo-carotene-core", continuing
+68 silly lifecycle No script for "preversion" in "flamingo-carotene-webpack-svg-sprite", continuing
+69 silly lifecycle No script for "version" in "flamingo-carotene-webpack-svg-sprite", continuing
+70 silly lifecycle No script for "version" in "flamingo-carotene", continuing
+71 silly gitAdd [ '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/modules/flamingo-carotene-pug/package.json',
+71 silly gitAdd   '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/modules/flamingo-carotene-webpack/package.json',
+71 silly gitAdd   '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/modules/flamingo-carotene-static-asset/package.json',
+71 silly gitAdd   '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/modules/flamingo-carotene-core/package.json',
+71 silly gitAdd   '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/modules/flamingo-carotene-webpack-svg-sprite/package.json',
+71 silly gitAdd   '/Users/daniel.poetzinger/Development/GOMOD/flamingo/flamingo-carotene/lerna.json' ]
+72 silly gitCommit v6.1.22
+73 verbose git [ 'commit', '-m', 'v6.1.22' ]
+74 silly gitTag v6.1.22
+75 verbose git [ 'tag', 'v6.1.22', '-m', 'v6.1.22' ]
+76 error Error: Command failed: git tag v6.1.22 -m v6.1.22
+76 error fatal: tag 'v6.1.22' already exists
+76 error
+76 error     at makeError (/Users/daniel.poetzinger/node_modules/execa/index.js:174:9)
+76 error     at Promise.all.then.arr (/Users/daniel.poetzinger/node_modules/execa/index.js:278:16)
