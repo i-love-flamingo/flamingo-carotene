@@ -1,4 +1,5 @@
 # Module `flamingo-carotene-babel`
+
 The [babel](https://github.com/babel/babel) module injects the [babel loader](https://github.com/babel/babel-loader)
 into the webpack config of the Flamingo Carotene module.
 
@@ -6,7 +7,8 @@ When you want to write ES code that needs to be transpiled to use it in the clie
 corresponding loader.
 
 ## How to use
-```
+
+```bash
 npm i -D flamingo-carotene-babel
 ```
 
@@ -21,6 +23,7 @@ you can use it right away.
 Babel will respond to the [browserslist](https://github.com/browserslist/browserslist) config.
 
 ## How it works
+
 The module will check if there is a babel config available. When found it will look into the compiled webpack config for
 a rule with a test of `\.js$` (exact match only for now) and inject its loader config.
 

@@ -1,14 +1,16 @@
 # Module `flamingo-carotene-webpack`
+
 This module abstracts [webpack](https://github.com/webpack/webpack) to have a quite good featured webpack config ready
 to use with your project.
 
 An initial webpack config will be provided by this module.
 
-When triggered by a command the module creates the webpack compiler and run the config that can be extended through
+When triggered by a command, the module creates the webpack compiler and run the config that can be extended through
 any other module and your own project config.
 
 ## How to use
-```
+
+```bash
 npm i -D flamingo-carotene-webpack
 ```
 
@@ -22,25 +24,27 @@ This module will build the webpack config at the config commands priority 0 with
 1. By a config command handler with a priority between 0 and 100, that overrides entries of the webpack modules
 config. Every config made to `config.webpack` before priority 0 will be taken into account when creating the webpack
 config.
-2. By a config command handler with a priority lower than 0, that overrides entries of the webpack config. Every config
+1. By a config command handler with a priority lower than 0, that overrides entries of the webpack config. Every config
 made to `config.webpackConfig` after priority 0 will be taken into account when running the webpack compiler by a
 command.
 
 Every webpack configuration that is supported by the used webpack version can be applied that way.
 
 ## How to configure
+
 This module exposes the following config
-```
+```js
 config.paths.webpack = {
   src: config.paths.src,
   dist: config.paths.dist
 }
 ```
+
 `src` Path that this module uses as source path
 
 `dist` Path that this module uses as dist path
 
-```
+```js
 config.webpack = {
   dist: {
     jsFolderName: 'js',
@@ -52,6 +56,7 @@ config.webpack = {
   buildCallback: null || function
 }
 ```
+
 `dist.jsFolderName` Additional path from the webpack dist to the js output files
 
 `dist.cssFolderName` Additional path from the webpack dist to the css output files
@@ -68,5 +73,4 @@ config.webpack = {
 - [flamingo-carotene-babel](../flamingo-carotene-babel)
 - [flamingo-carotene-es-lint](../flamingo-carotene-es-lint)
 - [flamingo-carotene-postcss](../flamingo-carotene-postcss)
-- [flamingo-carotene-webfont](../flamingo-carotene-webfont)
 - [flamingo-carotene-webpack-svg-sprite](../flamingo-carotene-webpack-svg-sprite)

@@ -1,16 +1,16 @@
 # Windows 10 Setup guide
 
-
-## Preparation of go in the Windows Subsystem
+## Preparation of Go in the Windows Subsystem
 
 ### Install Ubuntu Bash on Windows
 
-See: https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
+See: [https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
   
 If you want to install the app from cmd line:
 
 Ensure the feature "Windows Subsystem for Linux" is activated under Windows-Features and run the following command: 
-```
+
+```bash
 lxrun /install
 ```
 
@@ -20,7 +20,7 @@ lxrun /install
 ln -s "/mnt/c/Users/<your.user.folder>/.ssh" ~
 ```
 
-### Install and configure go on Ubuntu Subsystem
+### Install and configure Go on Ubuntu Subsystem
 
 #### Install Go on Ubuntu Subsystem
 
@@ -32,50 +32,30 @@ sudo apt-get install golang-1.10-go
    
 #### Configure go Paths
 
--  Edit `~/.profile` and insert at the end of file:  
+* Edit `~/.profile` and insert at the end of file:  
     ```bash
     PATH="$PATH:/usr/lib/go-1.10/bin"
     ```
 
--  Set GoEnvVars  
+* Set GoEnvVars  
    Edit  `~/.bashrc` and insert at the end of file:
    ```bash
    export GOROOT=/usr/lib/go-1.9/
    export GOPATH=/mnt/c/projects/go
    ```
 
-- Make changes happen  
-   <b>Close and reopen bash</b>
+* Make changes happen  
+   **Close and reopen bash**
 
-- Validate correct paths in bash  
+* Validate correct paths in bash  
    ```bash
    go env
    ```
    and double check `GOPATH` value. 
-   
-#### Install dep
-
-```bash
-rm -rf $GOPATH/pkg/
-rm -rf $GOPATH/src/github.com/golang/dep
-go get -v -u github.com/golang/dep/cmd/dep
-```
-
-You can test if dep is available now correctly by running
-```bash
-dep version
-```
     
 ## Install Flamingo Dependencies
     
-
 ### Check the base setup
-
-```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
-eval `ssh-agent -s` && ssh-add <(cat PATH_TO_YOUR_ID_RSA)
-dep ensure -v
-```
 
 Your Project will compile and run now, try:
 
@@ -92,7 +72,7 @@ go run main.go serve
 ```
 
 and browse to [http://localhost:3322](http://localhost:3322)
-which will result in warning and erros, which is ok at this stage.
+which will result in warning and errors, which is ok at this stage.
 
 To speed up the project (with precompile dependencies):
 
@@ -123,7 +103,7 @@ node -v
 #### Initial Frontend setup
 
 ```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
+cd [PROJECT-DIR]/frontend
 npm i
 npx flamingo-carotene build
 ```
@@ -140,7 +120,6 @@ Browse to [http://localhost:3322/](http://localhost:3322/)
 Frontend Watcher & HotReloading Frontend Server
 
 ```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
 npx flamingo-carotene dev
 ```
 
@@ -150,54 +129,46 @@ Check if the dev server is available [http://localhost:1337/](http://localhost:1
 
 ### Help - I can't save files in my Jetbrains IDE if the Flamingo Carotene watcher listen to changes
 
-- Dont Panic!
-- Open your IDE 
-- `File` -> `Settings`
-- `Appearance & Behaviours` -> `System Settings`
-- UNCHECK `Use 'safe write'`
-
+* Dont Panic!
+* Open your IDE 
+* `File` -> `Settings`
+* `Appearance & Behaviours` -> `System Settings`
+* UNCHECK `Use 'safe write'`
 
 ### Useful Lines
 
-#### Update Flamingo library and core
-
-```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo
-eval `ssh-agent -s` && ssh-add ~/.ssh/id_rsa
-dep ensure -v -update flamingo.me/flamingo
-```
 
 #### Completely build the Frontend
 
 ```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
+cd [PROJECT-DIR]/frontend
 npx flamingo-carotene build
 ```
 
 #### Start Frontend Dev-Server and watch on file changes 
 
 ```bash
-cd $GOPATH/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend
+cd [PROJECT-DIR]/frontend
 npx flamingo-carotene dev
 ```
 
 
-### WARNING: DATA LOSS on "Git Push -> Stash -> Rebase -> Stash Commit"chain
+### WARNING: DATA LOSS on "Git Push -> Stash -> Rebase -> Stash Commit chain
 
 This is a strange behaviour of node/watch/webpack on lxss
 Install lsyncd and sync files from frontend to frontend-sync locally.
 Start npx flamingo-carotene dev in frontend-sync
 
--   
+*   
   ```bash
   sudo apt-get install lsyncd
   sudo mkdir /etc/lsyncd
   touch /etc/lsyncd/lsyncd.conf.lua
   ```
   
-- Add the following config to your `lsyncd.conf`  
+* Add the following config to your `lsyncd.conf`  
 
-    ```
+    ```conf
     settings {
         logfile = "/var/log/lsyncd.log",
         statusFile = "/var/log/lsyncd.status",
@@ -220,13 +191,13 @@ Start npx flamingo-carotene dev in frontend-sync
     }
     ```
 
-- start lsyncd
+* start lsyncd
 
   ```bash
   sudo service lsyncd start
   ```
 
-- use the `resync.sh` script to completely rebuild
+* use the `resync.sh` script to completely rebuild
 
   ```bash
   #!/bin/bash
@@ -235,7 +206,7 @@ Start npx flamingo-carotene dev in frontend-sync
   sudo service lsyncd stop
   
   # goto sync folder
-  cd /mnt/c/projects/go/src/[PROJECT-DOMAIN]/[PROJECT-NAME]/flamingo/frontend-synced
+  cd [PROJECT-DIR]/frontend-synced
   
   # kill everything
   sudo rm -rv *

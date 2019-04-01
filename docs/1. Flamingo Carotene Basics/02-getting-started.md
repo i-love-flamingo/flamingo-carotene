@@ -1,12 +1,12 @@
 # Getting Started with Flamingo Carotene
 
-If you have an new flamingo project this are the steps to do, to use flamingo-carotene:
+If you have an new Flamingo project this are the steps to do, to use flamingo-carotene:
 
 ## Prepare the Frontend
 
-Inside your flamingo project folder:
+Inside your Flamingo project folder:
 
-```
+```bash
 mkdir -p frontend/src
 cd frontend
 npm init
@@ -18,23 +18,23 @@ npm i -D flamingo-carotene-core flamingo-carotene-pug
 
 This initializes your frontend project with the following npm modules:
 
-* *flamingo-carotene-core* - includes the basic commands and core logic
-* *flamingo-carotene-pug* - includes the Build logi to work with pug
+* `flamingo-carotene-core` - includes the basic commands and core logic
+* `flamingo-carotene-pug` - includes the Build logic to work with pug
 
 
 You now can add your first page template with pug:
 
-```
+```bash
 echo "Hello World" >  src/page/index.pug
 ```
 
 And with this command you can start building your frontend:
 
-```
+```bash
 npx flamingo-carotene build
 ```
 
-The result is stored in the folder ```frontend/dist```
+The result is stored in the folder `frontend/dist`.
 
 
 ## Prepare the Flamingo project
@@ -43,25 +43,25 @@ If you already have a running Flamingo project, this are the steps you need to a
 ### Add the pugtemplate module in your projects main go file:
 
 ```go
-...
 import (
-    ...
-	"flamingo.me/flamingo/core/pugtemplate"
-	...
+  // ...
+	"flamingo.me/pugtemplate"
+	// ...
 )
 
-...
-    []dingo.Module{
-        ...
-        new(pugtemplate.Module),
-        ...
-    }
-
+func main() {
+    // ...
+    flamingo.App([]dingo.Module{
+      // ...
+      new(pugtemplate.Module),
+      // ...
+    })
+}
 ```
 
 ### Add the default error templates
-`
-Add the templates for the default error pages - inside *frontend/src/page/error/*
+
+Add the templates for the default error pages - inside `frontend/src/page/error/`
 
 * 404.pug
 * 403.pug
@@ -80,16 +80,16 @@ html
         pre.errorDebugContent.center= error
 ```
 
-Then dont forget to recompile the templates with: `npx flamingo-carotene build`
+Then don't forget to recompile the templates with: `npx flamingo-carotene build`
 
 ## Next Steps
 
 After the first steps you can continue with:
 
-* [Read more about Atomic Design](/docs/atomic-design.md)
+* [Read more about Atomic Design](03-atomic-design.md)
 * Use the `flamingo-carotene-webpack` package to use webpack to build JS and CSS
 * Use the `flamingo-carotene-dev-server` package to benefit from Hot reloading during development
-* Use the `flamingo-carotene-behavior` package to add dynmic javascript for your design components
+* Use the `flamingo-carotene-behavior` package to add dynamic javascript for your design components
 * Use the `flamingo-carotene-state-manager` package to use the page state pattern to communicate and manage state between design components.
 
 
@@ -97,18 +97,14 @@ After the first steps you can continue with:
 
 Read more about the tools used in Flamingo Carotene modules:
 
-*NPM*
+* *NPM*
+  * https://www.npmjs.com/
 
-- https://www.npmjs.com/
+* *PUG for templating*
+  * https://pugjs.org/api/getting-started.html
 
-*PUG for templating*
+* *Sass for CSS*
+  * http://sass-lang.com/
 
-- https://pugjs.org/api/getting-started.html
-
-*Sass for CSS*
-
-- http://sass-lang.com/
-
-*Webpack for JS / CSS Build*
-
-- https://webpack.js.org/
+* *Webpack for JS / CSS Build*
+  * https://webpack.js.org/

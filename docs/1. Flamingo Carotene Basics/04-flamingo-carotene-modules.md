@@ -5,10 +5,6 @@ This is a guide to understand how the modules work and how you can develop and u
 A module that is used for your tooling process will typically go into the `devDependencies` of your project and with
 that will not end up in the code you will serve to the client.
 
-
-
-// Copied content from the README to work on from here -----
-
 Flamingo Carotene is a collection of modules, which are "self-registered" - and can be combined by personal or project
 needs.
 
@@ -16,7 +12,7 @@ There are basically 2 kind of Flamingo Carotene modules:
 
 * __Builder and Build-Helper__
   
-  Which can handle some jobs in you build process.
+  Which can handle some jobs in your build process.
 
   Examples:
   * flamingo-carotene-es-lint
@@ -30,12 +26,12 @@ There are basically 2 kind of Flamingo Carotene modules:
   * flamingo-carotene-behavior
   * flamingo-carotene-state-manager
   
-You can easly add a module to your project with:
-```
+You can easily add a module to your project with:
+```bash
 npm i [-D] [MODULE-NAME]
 ``` 
 Example:
-```
+```bash
 npm i -D flamingo-carotene-es-lint  
 ``` 
 
@@ -45,8 +41,7 @@ If you want to create a new module, the best way to start is to copy one module,
 
 You need to be sure, that following exists:
 * `.npmrc`
-* `package.json`
-  with 
+* `package.json` with 
   * `publishConfig`
   * `scripts`
     * `test`
@@ -59,7 +54,7 @@ It's simple and its easy!
 
 #### Example Simple Module Skeleton
 
-```
+```js
 class MyModuleClass {
   constructor (core) {
     this.listeners = [
@@ -68,7 +63,7 @@ class MyModuleClass {
         priority: 100,
         handler: function (core) {
           const config = core.getConfig()
-          // add, change or maniplulate some config values here
+          // add, change or manipulate some config values here
         }
       },
       {
@@ -77,7 +72,7 @@ class MyModuleClass {
           // do some stuff here
         }
       },
-      ...
+      // ...
     ]
   }
 
@@ -91,7 +86,7 @@ module.exports = MyModuleClass
 
 #### Example Module with fileWatcher
 
-```
+```js
 class MyModuleClass {
   constructor (core) {
     this.listeners = [
@@ -100,7 +95,7 @@ class MyModuleClass {
         priority: 100,
         handler: function (core) {
           const config = core.getConfig()
-          // add, change or maniplulate some config values here
+          // add, change or manipulate some config values here
           
           config.myModule = {
             callback: null
@@ -113,7 +108,7 @@ class MyModuleClass {
           // do some stuff here when a file has changed
         }
       },
-      ...
+      // ...
     ]
 
     this.watcher = [
@@ -142,21 +137,21 @@ module.exports = MyModuleClass
 
 ## How to publish
 
-Lint and Test your Stuff 1st!
+Lint and Test your Stuff first!
 
 ### Lint all modules
 
-Inside the root folder (flamingo-carotene, the folder where this MD exists) simply run
-```
+Inside the root directory (flamingo-carotene, the directory where this MD exists) simply run
+```bash
 npm run lint
 ```
 
 ### Test all modules
 If there are no linting errors you may call
-```
+```bash
 npm t
 ```
-which iterates over all moduless and executes the test script which is defined in the package.json of every module
+which iterates over all modules and executes the test script which is defined in the `package.json` of each module
 
 ### Publish with lerna
 You can only publish versions if: 
@@ -175,8 +170,7 @@ While we're in alpha mode, you need to select "Custom Version" - and type in the
 So - as an example - if the current version is
 `v6.0.0-alpha.29` you may want to select `Custom Version` and type in `6.0.0-alpha.30`
 
-The new Version tag will be pushed, and the CIGitlab /CD Pipeline will start
-https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/pipelines
+The new Version tag will be pushed, and the CI/CD Pipeline will start.
 
 If there are no errors while building, the module will be pushed in the artifactory and is ready to use as dependency
 in other projects
