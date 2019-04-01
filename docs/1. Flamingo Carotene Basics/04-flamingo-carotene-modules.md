@@ -8,17 +8,17 @@ that will not end up in the code you will serve to the client.
 Flamingo Carotene is a collection of modules, which are "self-registered" - and can be combined by personal or project
 needs.
 
-There are basically 2 kind of Flamingo Carotene modules:
+There are basically 2 kinds of Flamingo Carotene modules:
 
-* __Builder and Build-Helper__
+* __Build and Build-Helper Modules__
   
   Which can handle some jobs in your build process.
 
   Examples:
   * flamingo-carotene-es-lint
-  * flamingo-carotene-webfont
+  * flamingo-carotene-webpack
   
-* __Browser Modules__
+* __Client Modules__
 
   Which runs in the browser, and should be part of your project (if needed)
 
@@ -40,11 +40,10 @@ npm i -D flamingo-carotene-es-lint
 If you want to create a new module, the best way to start is to copy one module, which has the same scope.
 
 You need to be sure, that following exists:
-* `.npmrc`
 * `package.json` with 
-  * `publishConfig`
   * `scripts`
     * `test`
+    * `lint`
     * `build` (optional, for browser module)
 * `flamingo-carotene-module.js` (this is where the magic happens)
 
@@ -145,13 +144,14 @@ Inside the root directory (flamingo-carotene, the directory where this MD exists
 ```bash
 npm run lint
 ```
+Lerna will take care of running the lint script in all modules (if available)
 
 ### Test all modules
 If there are no linting errors you may call
 ```bash
 npm t
 ```
-which iterates over all modules and executes the test script which is defined in the `package.json` of each module
+Lerna will take care of running the test script in all modules (if available)
 
 ### Publish with lerna
 You can only publish versions if: 
@@ -159,18 +159,20 @@ You can only publish versions if:
 * You've executed all tests (and there are no issues)
 * `git-status` reports no dirty workspace
 
-To publish a new version of flamingo-carotene modules simply execute
+To bump the version of flamingo-carotene modules simply execute
 ```
 npx lerna version
 ```
 It will show you the current version and gives you the ability to select a new one.
-While we're in alpha mode, you need to select "Custom Version" - and type in the version number you want to publish.
-(without the "v" in front).
 
 So - as an example - if the current version is
-`v6.0.0-alpha.29` you may want to select `Custom Version` and type in `6.0.0-alpha.30`
+`v6.0.1` you may want to select `Patch Version` to bump the version to `v6.0.2`.
 
-The new Version tag will be pushed, and the CI/CD Pipeline will start.
 
-If there are no errors while building, the module will be pushed in the artifactory and is ready to use as dependency
-in other projects
+After bumping the version of modules you should publish them to the registry.
+
+To do this, execute
+```
+npx lerna publish
+```
+This will try to publish all modules.

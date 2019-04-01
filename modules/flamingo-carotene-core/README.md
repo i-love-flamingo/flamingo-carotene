@@ -10,7 +10,7 @@ Run:
 npm i -D flamingo-carotene-core
 ```
 
-And you will be able to use the cli tool of Flamingo Carotene.
+After that you will be able to use the cli tool of Flamingo Carotene.
 ```text
 npx flamingo-carotene {command} [option(s)]
 
@@ -35,7 +35,7 @@ module.exports = {
   }
 }
 ```
-Where `carotene` points to this very module in your project and `project` points to the root of your project.
+Where `flamingoCarotene` points to this very module in your project and `project` points to the root of your project.
 
 These paths can be changed to your needs via the `config` command and used for other paths that you need inside your
 project.
