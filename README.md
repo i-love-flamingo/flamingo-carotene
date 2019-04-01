@@ -1,16 +1,15 @@
 # Flamingo Carotene
 
-Documentation is inside "docs" folder:
+This repository is managed as a monorepo using [lerna](https://github.com/lerna/lerna).
 
-[Introduction](./docs/1. Flamingo Carotene Basics/Introduction.md)
+The general documentation lives inside the "docs" directory:
 
-The structure inside the "docs" folder is also used on docs.flamingo.me
+[Introduction](./blob/master/docs/1. Flamingo Carotene Basics/01-Introduction.md)
+[Getting started](./blob/master/docs/1. Flamingo Carotene Basics/02-getting-started.md)
+[Atomic design](./blob/master/docs/1. Flamingo Carotene Basics/03-atomic-design.md)
+[Flamingo Carotene Modules](./blob/master/docs/1. Flamingo Carotene Basics/04-flamingo-carotene-modules.md)
 
-The individual package README.md files are linked in the "docs" folder as soon as they should be "published".
+The structure inside the "docs" directory is also used on docs.flamingo.me
 
-# Development
-This repo contains many subpackages - use "lerna" to manage them.
-```
-npx lerna list
-npx lerna version
-```
+You will find all the published packages with their individual documentation in the modules directory. The documentation
+is also available inside the [docs directory](./tree/master/docs/2. Flamingo Carotene Modules/).
