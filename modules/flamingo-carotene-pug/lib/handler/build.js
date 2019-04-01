@@ -30,7 +30,7 @@ const pugBuild = (core) => {
   }
 
   const jobParameters = []
-  jobParameters.push('pugCompile')
+  jobParameters.push('flamingo-carotene-pug')
   jobParameters.push(path.resolve(config.paths.src)) // sourceDir
   jobParameters.push(path.resolve(config.paths.pug.dist)) // distDir
   jobParameters.push(path.join(config.paths.project, 'node_modules')) // nodeDir

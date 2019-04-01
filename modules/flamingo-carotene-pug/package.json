@@ -12,7 +12,7 @@
     "om3"
   ],
   "bin": {
-    "pugCompile": "./bin/pugCompile.js"
+    "flamingo-carotene-pug": "./bin/flamingoCarotenePug.js"
   },
   "scripts": {
     "test": "echo \"No tests present\""
