@@ -1,0 +1,42 @@
+{
+  "name": "flamingo-carotene-webpack",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Dominik Dumont <dominik.dumont@aoe.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/flamingo-carotene-webpack.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-webpack",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.1.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.4.0",
+    "eslint-loader": "^2.1.0",
+    "file-loader": "^1.1.11",
+    "import-glob": "^1.5.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.22.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.17.0",
+    "webpack-manifest-plugin": "^2.0.3"
+  }
+}

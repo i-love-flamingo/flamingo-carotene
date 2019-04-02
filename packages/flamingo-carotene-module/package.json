@@ -1,0 +1,20 @@
+{
+  "name": "flamingo-carotene-module",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Dominik Dumont <dominik.dumont@aoe.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/flamingo-carotene-module.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/packages/flamingo-carotene-pug",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}

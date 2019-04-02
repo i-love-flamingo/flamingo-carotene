@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+const cliTools = require('../src/class/cliTools')
+
+const command = cliTools.getCommand()
+
+if (!command || command.charAt(0) === '-') {
+  cliTools.showUsage()
+  cliTools.exit()
+}
+
+const Carotene = require('../src/class/carotene')
+
+new Carotene()
