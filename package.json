@@ -2,7 +2,7 @@
   "name": "flamingo-carotene",
   "version": "6.0.0",
   "description": "Flamingo Carotene is a tool to build frontends for Flamingo",
-  "repository": "git@gitlab.aoe.com:shared/i-love-flamingo/flamingo-carotene.git",
+  "repository": "https://github.com/i-love-flamingo/flamingo-carotene.git",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "private": true,
@@ -13,12 +13,11 @@
     "om3"
   ],
   "workspaces": [
-    "packages/*"
+    "modules/*"
   ],
   "scripts": {
     "test": "npx lerna run test",
     "lint": "npx lerna run lint",
-    "publish-packages": "./script/publish",
     "link-modules": "make link"
   },
   "devDependencies": {

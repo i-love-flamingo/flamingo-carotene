@@ -4,7 +4,7 @@
   "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
-  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-es-lint",
+  "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-es-lint",
   "keywords": [
     "flamingo-carotene",
     "flamingo",

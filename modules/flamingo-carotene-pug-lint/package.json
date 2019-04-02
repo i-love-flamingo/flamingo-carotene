@@ -4,7 +4,7 @@
   "description": "Preconfigured pug linter for Flamingo Carotene",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
-  "repository": "https://gitlab.aoe.com/shared/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-pug-lint",
+  "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-pug-lint",
   "keywords": [
     "flamingo-carotene",
     "flamingo",
