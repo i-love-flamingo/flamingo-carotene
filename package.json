@@ -1,6 +1,5 @@
 {
   "name": "flamingo-carotene",
-  "version": "6.2.0",
   "description": "Flamingo Carotene is a tool to build frontends for Flamingo",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene.git",
   "author": "team-frontend <team-frontend@aoe.com>",

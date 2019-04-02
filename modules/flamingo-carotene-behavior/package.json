@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-behavior",
   "version": "6.2.0",
-  "description": "> TODO: description",
+  "description": "The behavior module enables to initialize javascript behaviors on html elements",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-behavior",

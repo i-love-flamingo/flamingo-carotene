@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-dev-server",
   "version": "6.2.0",
-  "description": "> TODO: description",
+  "description": "Provide the functionality to add file watchers for developing projects with the Flamingo Carotene tooling",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-dev-server",

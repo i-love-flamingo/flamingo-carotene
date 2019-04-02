@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-sass-lint",
   "version": "6.2.0",
-  "description": "> TODO: description",
+  "description": "Preconfigured sass linter for Flamingo Carotene",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-sass-lint",

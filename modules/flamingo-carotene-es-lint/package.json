@@ -1,7 +1,7 @@
 {
   "name": "flamingo-carotene-es-lint",
   "version": "6.2.0",
-  "description": "Executes the es linter. If no config file is found in the project folder, a default config will be used.",
+  "description": "Provide the standalone version and flamingo-carotene-webpack loader of es lint",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-es-lint",
