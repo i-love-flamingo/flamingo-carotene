@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-pug",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "description": "Provide the pug compiler used in a setup using the flamingo.me/pugtemplate render engine with integration into the flamingo-carotene-dev-server module",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
