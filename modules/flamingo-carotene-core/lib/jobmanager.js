@@ -101,7 +101,7 @@ class Jobmanager {
       const group = jobData.group;
 
       if (group) {
-        if (this.getOpenJobsByGroup(group) < 1) {
+        if (this.getOpenJobsByGroup(group).length < 1) {
           if (this.callbackOnFinishForGroups.hasOwnProperty(group)) {
             if (typeof this.callbackOnFinishForGroups[group] === 'function') {
               this.callbackOnFinishForGroups[group]()
@@ -114,7 +114,7 @@ class Jobmanager {
     // this.cliTools.info(`Generated ${Object.keys(allFiles).length} AST file(s)\n`)
     this.updateProgressBar()
 
-    if (this.getOpenJobs() < 1) {
+    if (this.getOpenJobs().length < 1) {
       this.callbackOnFinish()
     }
   }
