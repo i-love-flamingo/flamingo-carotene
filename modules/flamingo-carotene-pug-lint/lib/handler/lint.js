@@ -40,7 +40,7 @@ const pugLint = (core) => {
     lintFilePacks[packNumber].push(file)
   }
 
-  core.getJobmanager().addJob('puglint', 'Pug-Lint')
+  core.getJobmanager().addJob('puglint', 'Pug-Lint', 'pug')
   core.getJobmanager().setSubJobTotalCount('puglint', lintFilePacks.length)
 
   // cliTools.info(`PugLint - start (${files.length} files in ${lintFilePacks.length} packages)`)

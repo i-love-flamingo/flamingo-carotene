@@ -1,6 +1,6 @@
 const path = require('path')
 
-const buildHandler = require('./build')
+const webpackBuildHandler = require('../build')
 
 const webpackBuildJs = function (core) {
   const config = core.getConfig()
@@ -34,7 +34,7 @@ const webpackBuildJs = function (core) {
     // config.entry = jsEntries
   }
 
-  buildHandler(core)
+  webpackBuildHandler(core, 'webpackJs', 'Webpack (Js)', 'webpackJs')
 }
 
 module.exports = webpackBuildJs

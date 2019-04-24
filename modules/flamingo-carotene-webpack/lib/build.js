@@ -1,5 +1,5 @@
 
-const webpackBuild = function (core) {
+const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
   const config = core.getConfig()
   const cliTools = core.getCliTools()
 
@@ -14,8 +14,8 @@ const webpackBuild = function (core) {
 
   // cliTools.info('Webpack - start')
 
-  core.getJobmanager().addJob('webpack', 'Webpack')
-  core.getJobmanager().setSubJobTotalCount('webpack', 100)
+  core.getJobmanager().addJob(jobId, jobLabel, jobGroup)
+  core.getJobmanager().setSubJobTotalCount(jobId, 100)
 
   cliTools.info(`Running webpack in mode: ${config.webpackConfig.mode}`, true)
 
@@ -25,7 +25,7 @@ const webpackBuild = function (core) {
   const ProgressPlugin = require('webpack/lib/ProgressPlugin');
   config.webpackConfig.plugins.push(new ProgressPlugin(function(percentage, message, ...args) {
     // console.info(percentage, message, ...args);
-    core.getJobmanager().setSubJobProgress('webpack', Math.round(percentage * 100 ))
+    core.getJobmanager().setSubJobProgress(jobId, Math.round(percentage * 100 ))
   }))
 
   webpack(config.webpackConfig, (error, stats) => {
@@ -47,7 +47,7 @@ const webpackBuild = function (core) {
       cliTools.warn(info.warnings)
     }
 
-    core.getJobmanager().finishJob('webpack')
+    core.getJobmanager().finishJob(jobId)
     // cliTools.info(`Webpack - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
 
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {

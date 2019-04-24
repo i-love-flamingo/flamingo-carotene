@@ -30,6 +30,8 @@ class FileWatcher {
     // Flamingo Carotene config
     this.config = core.getConfig()
 
+    this.watcherVerbose = this.cliTools.hasOption('--verboseWatch')
+
     watcherConfig = watcherConfig || {}
     this.watchId = watcherConfig.watchId
     this.watchPaths = watcherConfig.path
@@ -52,6 +54,10 @@ class FileWatcher {
 
     this.command = watcherConfig.command
     this.callbackKey = watcherConfig.callbackKey
+    if (!this.callbackKey) {
+      this.cliTools.error('Filewatcher was started without callbackKey (jobmanager groupid)')
+    }
+
     this.watcherConfig = Object.assign(
       this.config.devServer.watcherConfig || {},
       watcherConfig.watcherConfig || {}
@@ -108,11 +114,10 @@ class FileWatcher {
     }
 
     // output state in CLI
-    this.cliTools.info(`Watcher-${this.watchId} listens to ${showWatchPaths.join(', ')}`, true)
+    this.cliTools.info(`Watcher-${this.watchId} listens to ${showWatchPaths.join(', ')}`, !this.watcherVerbose)
     if (showUnwatchPaths.length > 0) {
-      this.cliTools.info(` - except: ${showUnwatchPaths.join(', ')}`, true)
+      this.cliTools.info(` - except: ${showUnwatchPaths.join(', ')}`, !this.watcherVerbose)
     }
-
 
     // chokidar dont like windows \ in paths
     // replacing them with / works
@@ -141,7 +146,12 @@ class FileWatcher {
 
     // start watcher
     this.watcher.on('change', this.buildOnChange.bind(this))
-    this.watcher.on('error', error => this.cliTools.warn(error))
+    this.watcher.on('error', this.watchError.bind(this))
+  }
+
+  watchError (error) {
+    this.cliTools.error('WATCHER ERROR')
+    this.cliTools.error(error)
   }
 
   /**
@@ -151,11 +161,11 @@ class FileWatcher {
   buildOnChange (changedPath) {
     this.currentChangedPath = changedPath
     const displayChangedPath = this.removeBasePathFromPath(changedPath)
-    this.cliTools.info(`Watcher-${this.watchId}: Change ${displayChangedPath}`, true)
+    this.cliTools.info(`Watcher-${this.watchId}: Change ${displayChangedPath}`, !this.watcherVerbose)
 
     // if there is a build in progress - que the change and do nothing.
     if (this.isBuildInProgress()) {
-      this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`, true)
+      this.cliTools.info(`Watcher-${this.watchId}: Change detected, but build is in Progress, will rebuild after finish`, !this.watcherVerbose)
       this.rerunAfterBuild = true
       return
     }
@@ -164,8 +174,8 @@ class FileWatcher {
     this.rerunAfterBuild = false
     this.buildInProgress = true
 
-    this.jobManager.reset()
-    this.jobManager.setCallbackOnFinish(this.watcherFinishBuildCallback.bind(this))
+    this.jobManager.reset(this.callbackKey)
+    this.jobManager.setCallbackOnFinish(this.watcherFinishBuildCallback.bind(this), this.callbackKey)
     this.dispatcher.dispatchCommand(this.command)
   }
 
@@ -173,7 +183,7 @@ class FileWatcher {
    * watcher build is finish.
    */
   watcherFinishBuildCallback () {
-    this.cliTools.info(`Watcher-${this.watchId}: Build finished`, true)
+    this.cliTools.info(`Watcher-${this.watchId}: Build finished`, !this.watcherVerbose)
 
     this.buildInProgress = false
 
@@ -183,7 +193,7 @@ class FileWatcher {
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {
       this.rerunAfterBuild = false
-      this.cliTools.info(`Watcher-${this.watchId}: Rebuilding, cause of change while building...`, true)
+      this.cliTools.info(`Watcher-${this.watchId}: Rebuilding, cause of change while building...`, !this.watcherVerbose)
       this.buildOnChange(this.currentChangedPath)
     }
   }

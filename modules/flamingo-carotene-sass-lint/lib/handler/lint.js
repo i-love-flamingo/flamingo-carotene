@@ -20,7 +20,7 @@ const sassLint = (core) => {
 
   const npmVersion = execSync('npm -v').toString().trim()
 
-  core.getJobmanager().addJob('sasslint', 'SASS-Lint')
+  core.getJobmanager().addJob('sasslint', 'SASS-Lint', 'webpackCss')
   // cliTools.info('SassLint - start')
   const childProcess = core.getSpawner().spawnJobNpx(['sass-lint', '--config', `${configFile}`, '--no-exit', '-v'])
 

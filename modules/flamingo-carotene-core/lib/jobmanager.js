@@ -5,6 +5,7 @@ class Jobmanager {
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
     this.callbackOnFinish = function() {}
+    this.callbackOnFinishForGroups = {}
 
     this.useProgress = this.cliTools.hasOption(['--progress', '--forceProgress'])
     this.forceProgress = this.cliTools.hasOption('--forceProgress')
@@ -14,8 +15,20 @@ class Jobmanager {
     }
   }
 
-  reset() {
-    this.jobs = {}
+  reset(group) {
+    if (!group) {
+      this.jobs = {}
+    }
+    else {
+      const newJobs = {}
+      for (const jobId in this.jobs) {
+        if (this.jobs[jobId].group !== group) {
+          newJobs[jobId] = this.jobs[jobId]
+        }
+      }
+      this.jobs = newJobs
+    }
+
     if (this.useProgress) {
       this.cliTools.startBuffer();
 
@@ -37,18 +50,19 @@ class Jobmanager {
         position: 'center'
       });
 
+
       this.progressBar.start(1, 0);
       this.progressBar.update(0, {'openJobList': ''});
     }
   }
 
-  addJob(id, label, info) {
+  addJob(id, label, group, info ) {
     if (this.getTotalJobCount() === 0) {
       this.reset()
     }
 
     this.cliTools.info(`Job start: ${label} ${info ? ' - '+info : ''}`)
-    this.jobs[id] = {label:label, finished: false, subjobs: 0, subProgress: 0, info:info, start:new Date().getTime()};
+    this.jobs[id] = {label:label, group: group, finished: false, subjobs: 0, subProgress: 0, info:info, start:new Date().getTime()};
 
     if (this.useProgress) {
       this.progressBar.setTotal(this.getTotalJobCount())
@@ -84,6 +98,17 @@ class Jobmanager {
       const jobData = this.jobs[id]
       const duration = new Date().getTime() - jobData.start
       this.cliTools.info(`Job finished: ${jobData.label} in ${duration}ms`)
+      const group = jobData.group;
+
+      if (group) {
+        if (this.getOpenJobsByGroup(group) < 1) {
+          if (this.callbackOnFinishForGroups.hasOwnProperty(group)) {
+            if (typeof this.callbackOnFinishForGroups[group] === 'function') {
+              this.callbackOnFinishForGroups[group]()
+            }
+          }
+        }
+      }
     }
 
     // this.cliTools.info(`Generated ${Object.keys(allFiles).length} AST file(s)\n`)
@@ -151,8 +176,24 @@ class Jobmanager {
     return openJobs;
   }
 
-  setCallbackOnFinish(callback) {
-    this.callbackOnFinish = callback
+  getOpenJobsByGroup (group) {
+    const openJobs = []
+    for (const jobId in this.jobs) {
+      const job = this.jobs[jobId]
+      if (!job.finished && job.group === group) {
+        openJobs.push(job.label)
+      }
+    }
+    return openJobs;
+  }
+
+  setCallbackOnFinish(callback, group) {
+    if (!group) {
+      this.callbackOnFinish = callback
+    }
+    else {
+      this.callbackOnFinishForGroups[group] = callback
+    }
   }
 }
 

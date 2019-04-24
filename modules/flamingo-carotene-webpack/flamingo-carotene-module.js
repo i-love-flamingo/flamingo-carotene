@@ -1,6 +1,6 @@
 const path = require('path')
 
-const buildHandler = require('./lib/handler/build')
+const buildHandlerAll = require('./lib/handler/buildAll')
 const buildHandlerJs = require('./lib/handler/buildJs')
 const buildHandlerCss = require('./lib/handler/buildCss')
 
@@ -43,11 +43,11 @@ class FlamingoCaroteneWebpack {
       },
       {
         command: 'build',
-        handler: buildHandler
+        handler: buildHandlerAll
       },
       {
         command: 'buildWebpack',
-        handler: buildHandler
+        handler: buildHandlerAll
       },
       {
         command: 'buildWebpackJs',
@@ -74,7 +74,7 @@ class FlamingoCaroteneWebpack {
           path.join(config.paths.src, '**', '*.sass')
         ],
         command: 'watchWebpackCss',
-        callbackKey: 'webpack',
+        callbackKey: 'webpackCss',
         unwatchConfig: path.join(config.paths.src, '**', 'fontIcon.sass')
       },
       {
@@ -83,7 +83,7 @@ class FlamingoCaroteneWebpack {
           path.join(config.paths.src, '**', '*.js')
         ],
         command: 'watchWebpackJs',
-        callbackKey: 'webpack'
+        callbackKey: 'webpackJs'
       }
     ]
   }

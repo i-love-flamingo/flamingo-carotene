@@ -1,6 +1,6 @@
 const path = require('path')
 
-const buildHandler = require('./build')
+const webpackBuildHandler = require('../build')
 
 const cssExtensions = [ '.css', '.scss', '.sass' ]
 
@@ -36,7 +36,7 @@ const webpackBuildCss = function (core) {
     // config.entry = cssEntries
   }
 
-  buildHandler(core)
+  webpackBuildHandler(core, 'webpackCss', 'Webpack (Css)', 'webpackCss')
 }
 
 module.exports = webpackBuildCss

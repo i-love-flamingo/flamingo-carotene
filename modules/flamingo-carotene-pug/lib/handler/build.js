@@ -5,7 +5,7 @@ const pugBuild = (core) => {
 
   const config = core.getConfig()
   const cliTools = core.getCliTools()
-  core.getJobmanager().addJob('pug', 'Pug Compile', )
+  core.getJobmanager().addJob('pug', 'Pug Compile', 'pug')
 
   const files = glob.sync(config.paths.pug.src + config.pug.filesPattern)
 
