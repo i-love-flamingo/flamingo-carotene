@@ -3,7 +3,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require('webpack-manifest-plugin')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
 
@@ -99,26 +98,7 @@ class WebpackConfig {
         new MiniCssExtractPlugin({
           filename: this.getCssFileName()
         }),
-        new ManifestPlugin(),
-        new HardSourceWebpackPlugin({
-          cacheDirectory: this.config.paths.webpackCache,
-          info: {
-            // 'none' or 'test'.
-            mode: 'none',
-            // 'debug', 'log', 'info', 'warn', or 'error'.
-            level: (this.cliTools.isVerbose() ? 'debug' : 'error'),
-          },
-          // Clean up large, old caches automatically.
-          cachePrune: {
-            // Caches younger than `maxAge` are not considered for deletion. They must
-            // be at least this (default: 2 days) old in milliseconds.
-            maxAge: 2 * 24 * 60 * 60 * 1000,
-            // All caches together must be larger than `sizeThreshold` before any
-            // caches will be deleted. Together they must be at least this
-            // (default: 50 MB) big in bytes.
-            sizeThreshold: 50 * 1024 * 1024
-          }
-        })
+        new ManifestPlugin()
       ]
     }
 
