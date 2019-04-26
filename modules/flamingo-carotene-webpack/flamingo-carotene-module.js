@@ -37,8 +37,10 @@ class FlamingoCaroteneWebpack {
         handler: function (core) {
           const config = core.getConfig()
           const WebpackConfig = require('./lib/webpackConfig')
+          const webpackConfig = new WebpackConfig(core)
 
-          config['webpackConfig'] = new WebpackConfig(core)
+          config['webpackConfig'] = webpackConfig.getWebpackConfig()
+          config['webpackCacheConfig'] = webpackConfig.getCacheConfig()
         }
       },
       {
