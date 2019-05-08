@@ -73,11 +73,12 @@ class FlamingoCaroteneWebpack {
       {
         watchId: 'webpackSass',
         path: [
-          path.join(config.paths.src, '**', '*.sass')
+          path.join(config.paths.src, '**', '*.{sass,scss}')
         ],
         command: 'watchWebpackCss',
         callbackKey: 'webpackCss',
-        unwatchConfig: path.join(config.paths.src, '**', 'fontIcon.sass')
+        // example, if you need to unwatch specific files:
+        // unwatchConfig: path.join(config.paths.src, '**', 'fontIcon.sass')
       },
       {
         watchId: 'webpackJs',
