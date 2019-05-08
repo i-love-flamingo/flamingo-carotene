@@ -35,17 +35,28 @@ function () {
 
     this.finishCallback = null; // config switch - cancel scroll animation, if users manually scrolls while smooth scrolling is active
 
-    this.cancelAnimationOnUserScroll = true; //
-    this.scrollingInProgress = false;
-    this.lastScrollPosition = null;
+    this.cancelAnimationOnUserScroll = true; // internal state - is a scrolling currently in progress
+
+    this.scrollingInProgress = false; // the last position to which scrolling happens
+
+    this.lastScrollPosition = null; // direction to which the current scrolling will take place
+
     this.scrollDirection = null;
     window.onscroll = this.onScrollHandler.bind(this);
   }
+  /**
+   * Determines the Scroll Direction (up/down)
+   *
+   * @param fromY
+   * @param toY
+   * @returns {string}
+   */
+
 
   _createClass(SmoothScrollTo, [{
     key: "getScrollDirection",
-    value: function getScrollDirection(from, to) {
-      if (from < to) {
+    value: function getScrollDirection(fromY, toY) {
+      if (fromY < toY) {
         return 'down';
       } else {
         return 'up';
@@ -59,16 +70,20 @@ function () {
   }, {
     key: "onScrollHandler",
     value: function onScrollHandler(event) {
+      // if no scrolling is in progress by this function - get outta here
       if (!this.scrollingInProgress) {
-        console.log('Not Scrolling');
+        return;
+      } // if scrolling is cancelable on manual scrolling
+
+
+      if (!this.cancelAnimationOnUserScroll) {
         return;
       }
 
       var currentY = window.scrollY;
-      var direction = this.getScrollDirection(this.lastScrollPosition, currentY);
+      var direction = this.getScrollDirection(this.lastScrollPosition, currentY); // scrolling direction changed - stop automatic scrolling
 
       if (this.scrollDirection !== direction) {
-        console.log('INTERCEPT!');
         this.stop();
       }
 
@@ -85,6 +100,19 @@ function () {
     key: "setDuration",
     value: function setDuration(duration) {
       this.duration = duration;
+      return this;
+    }
+    /**
+     * Sets the behaviour, that manually scrolling cancels automatic scrolling
+     *
+     * @param {boolean} state
+     * @returns {SmoothScrollTo}
+     */
+
+  }, {
+    key: "setCancelAnimationOnUserScroll",
+    value: function setCancelAnimationOnUserScroll(state) {
+      this.cancelAnimationOnUserScroll = state;
       return this;
     }
     /**
