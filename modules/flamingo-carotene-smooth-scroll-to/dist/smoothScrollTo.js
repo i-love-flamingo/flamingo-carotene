@@ -33,17 +33,55 @@ function () {
 
     this.animationStepCallback = null; // callback that is called when a animation is finished
 
-    this.finishCallback = null;
-  }
-  /**
-   * Change the overall animation duration
-   *
-   * @param {number} duration
-   * @returns {SmoothScrollTo}
-   */
+    this.finishCallback = null; // config switch - cancel scroll animation, if users manually scrolls while smooth scrolling is active
 
+    this.cancelAnimationOnUserScroll = true; //
+    this.scrollingInProgress = false;
+    this.lastScrollPosition = null;
+    this.scrollDirection = null;
+    window.onscroll = this.onScrollHandler.bind(this);
+  }
 
   _createClass(SmoothScrollTo, [{
+    key: "getScrollDirection",
+    value: function getScrollDirection(from, to) {
+      if (from < to) {
+        return 'down';
+      } else {
+        return 'up';
+      }
+    }
+    /**
+     * Event Listener for "onscroll", to detect when user is scrolling...
+     * @param event
+     */
+
+  }, {
+    key: "onScrollHandler",
+    value: function onScrollHandler(event) {
+      if (!this.scrollingInProgress) {
+        console.log('Not Scrolling');
+        return;
+      }
+
+      var currentY = window.scrollY;
+      var direction = this.getScrollDirection(this.lastScrollPosition, currentY);
+
+      if (this.scrollDirection !== direction) {
+        console.log('INTERCEPT!');
+        this.stop();
+      }
+
+      this.lastScrollPosition = currentY;
+    }
+    /**
+     * Change the overall animation duration
+     *
+     * @param {number} duration
+     * @returns {SmoothScrollTo}
+     */
+
+  }, {
     key: "setDuration",
     value: function setDuration(duration) {
       this.duration = duration;
@@ -157,6 +195,10 @@ function () {
   }, {
     key: "stop",
     value: function stop() {
+      this.lastScrollPosition = null;
+      this.scrollDirection = null;
+      this.scrollingInProgress = false;
+
       if (this.timer !== null) {
         clearInterval(this.timer);
 
@@ -192,7 +234,11 @@ function () {
       // stopping running animation (if any)
       this.stop(); // sets animation start time
 
-      this.animationStartTime = new Date().getTime(); // start timer
+      this.animationStartTime = new Date().getTime();
+      var currentY = window.scrollY;
+      this.lastScrollPosition = currentY;
+      this.scrollingInProgress = true;
+      this.scrollDirection = this.getScrollDirection(currentY, this.currentTargetY); // start timer
 
       this.timer = setInterval(function () {
         var currentTime = new Date().getTime();

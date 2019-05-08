@@ -32,6 +32,60 @@ class SmoothScrollTo {
     // callback that is called when a animation is finished
     this.finishCallback = null
 
+    // config switch - cancel scroll animation, if users manually scrolls while smooth scrolling is active
+    this.cancelAnimationOnUserScroll = true
+
+    // internal state - is a scrolling currently in progress
+    this.scrollingInProgress = false
+
+    // the last position to which scrolling happens
+    this.lastScrollPosition = null
+
+    // direction to which the current scrolling will take place
+    this.scrollDirection = null
+    window.onscroll = this.onScrollHandler.bind(this)
+  }
+
+  /**
+   * Determines the Scroll Direction (up/down)
+   *
+   * @param fromY
+   * @param toY
+   * @returns {string}
+   */
+  getScrollDirection (fromY, toY) {
+    if (fromY < toY) {
+      return 'down'
+    }
+    else {
+      return 'up'
+    }
+  }
+
+
+  /**
+   * Event Listener for "onscroll", to detect when user is scrolling...
+   * @param event
+   */
+  onScrollHandler (event) {
+    // if no scrolling is in progress by this function - get outta here
+    if (!this.scrollingInProgress) {
+      return
+    }
+
+    // if scrolling is cancelable on manual scrolling
+    if (!this.cancelAnimationOnUserScroll) {
+      return
+    }
+
+    const currentY =  window.scrollY
+    const direction = this.getScrollDirection(this.lastScrollPosition, currentY)
+    // scrolling direction changed - stop automatic scrolling
+    if (this.scrollDirection !== direction) {
+      this.stop()
+    }
+
+    this.lastScrollPosition = currentY
   }
 
   /**
@@ -42,6 +96,17 @@ class SmoothScrollTo {
    */
   setDuration (duration) {
     this.duration = duration
+    return this
+  }
+
+  /**
+   * Sets the behaviour, that manually scrolling cancels automatic scrolling
+   *
+   * @param {boolean} state
+   * @returns {SmoothScrollTo}
+   */
+  setCancelAnimationOnUserScroll (state) {
+    this.cancelAnimationOnUserScroll = state
     return this
   }
 
@@ -135,6 +200,9 @@ class SmoothScrollTo {
    * Stops the current animation
    */
   stop () {
+    this.lastScrollPosition = null
+    this.scrollDirection = null
+    this.scrollingInProgress = false
     if (this.timer !== null) {
       clearInterval(this.timer)
       if (typeof finishCallback === 'function') {
@@ -165,6 +233,11 @@ class SmoothScrollTo {
 
     // sets animation start time
     this.animationStartTime = new Date().getTime()
+
+    const currentY = window.scrollY
+    this.lastScrollPosition = currentY
+    this.scrollingInProgress = true
+    this.scrollDirection = this.getScrollDirection(currentY, this.currentTargetY)
 
     // start timer
     this.timer = setInterval(() => {

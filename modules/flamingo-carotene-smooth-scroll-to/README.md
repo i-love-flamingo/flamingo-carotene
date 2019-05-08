@@ -59,6 +59,11 @@ The current animation will be stopped automatically if you call `scrollTo()` whi
 
 Note: the FinishCallback will be fired at both situations.
 
+
+## Autointerrupt on manual scrolling
+By default, the scrolling animation is automatically stopped and canceled if the user (or other code) is scrolling in an opposite direction while the library is scrolling.
+Use ```.setCancelAnimationOnUserScroll(false)``` to disable this feature. 
+
 ## Animation Callbacks
 
 You can provide 2 callbacks:

@@ -6,6 +6,5 @@ module.exports = {
     ]
   ],
   plugins: [
-    "import-glob"
   ]
 }
