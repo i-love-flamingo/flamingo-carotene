@@ -73,7 +73,7 @@ class SmoothScrollTo {
       return
     }
 
-    // if scrolling is cancelable on manual scrolling
+    // if scrolling is not cancelable on manual scrolling - leave instantly
     if (!this.cancelAnimationOnUserScroll) {
       return
     }
