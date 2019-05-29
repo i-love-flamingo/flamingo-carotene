@@ -76,7 +76,7 @@ class FileWatcher {
     this.originalBuildCallback = null
 
     // if a build is triggered, the file-path, which has trigger the change
-    this.currentChangedPath = ''
+    this.changedPaths = []
 
     this.initialize()
   }
@@ -159,9 +159,11 @@ class FileWatcher {
    * @param changedPath
    */
   buildOnChange (changedPath) {
-    this.currentChangedPath = changedPath
-    const displayChangedPath = this.removeBasePathFromPath(changedPath)
-    this.cliTools.info(`Watcher-${this.watchId}: Change ${displayChangedPath}`, !this.watcherVerbose)
+    if (!Array.isArray(changedPath)) {
+      const displayChangedPath = this.removeBasePathFromPath(changedPath)
+      this.cliTools.info(`Watcher-${this.watchId}: Change ${displayChangedPath}`, !this.watcherVerbose)
+      this.changedPaths.push(changedPath)
+    }
 
     // if there is a build in progress - que the change and do nothing.
     if (this.isBuildInProgress()) {
@@ -176,7 +178,8 @@ class FileWatcher {
 
     this.jobManager.reset(this.callbackKey)
     this.jobManager.setCallbackOnFinish(this.watcherFinishBuildCallback.bind(this), this.callbackKey)
-    this.dispatcher.dispatchCommand(this.command)
+    this.dispatcher.dispatchCommand(this.command, this.changedPaths)
+    this.changedPaths = []
   }
 
   /**
@@ -194,7 +197,7 @@ class FileWatcher {
     if (this.rerunAfterBuild) {
       this.rerunAfterBuild = false
       this.cliTools.info(`Watcher-${this.watchId}: Rebuilding, cause of change while building...`, !this.watcherVerbose)
-      this.buildOnChange(this.currentChangedPath)
+      this.buildOnChange(this.changedPaths)
     }
   }
 }

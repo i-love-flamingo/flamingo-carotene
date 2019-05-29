@@ -1,13 +1,13 @@
 const glob = require('glob')
 const path = require('path')
 
-const pugBuild = (core) => {
+const pugBuild = (core, files) => {
 
   const config = core.getConfig()
   const cliTools = core.getCliTools()
   core.getJobmanager().addJob('pug', 'Pug Compile', 'pug')
 
-  const files = glob.sync(config.paths.pug.src + config.pug.filesPattern)
+  files = files || glob.sync(config.paths.pug.src + config.pug.filesPattern)
 
   // removing duplicates...
   const normalizedFiles = {}

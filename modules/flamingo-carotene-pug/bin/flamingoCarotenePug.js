@@ -2,7 +2,7 @@
 const mkdirp = require('mkdirp-sync')
 const fs = require('fs')
 const path = require('path')
-const pug = require('pug-async')
+const pug = require('pug')
 const walk = require('pug-walk')
 
 const arguments = process.argv;
@@ -18,18 +18,28 @@ const pugFilesToCompile = arguments
 
 
 function StopCompileException(message) {
-  this.message = 'Enough work for Flamingo Carotene. AST Received. Save time. Quit Compile! ' + message;
+  this.message = 'Enough work for Flamingo Carotene. AST Received. Save time. Quit Compile! '+ message;
 }
 StopCompileException.prototype = new Error()
+
+
+let error
 
 for(const pugFile of pugFilesToCompile) {
   const pugFilePath = path.resolve(sourceDir, pugFile)
   let targetAstFilePath = path.resolve(targetDir, pugFile)
   targetAstFilePath = targetAstFilePath.split('.pug').join('.ast.json')
-
-  compilePugFile(pugFilePath, targetAstFilePath, path.basename(pugFilePath), sourceDir, nodeDir)
-    .catch(err => console.log(err))
+  error = compilePugFile(pugFilePath, targetAstFilePath, path.basename(pugFilePath), sourceDir, nodeDir)
+  if (error) {
+    break
+  }
 }
+
+if (error) {
+  console.log(error)
+  process.exit(1);
+}
+process.exit(0);
 
 
 function cleanFilename(filename, basedir) {
@@ -115,39 +125,40 @@ function optimizeAst(ast, basedir) {
 }
 
 function compilePugFile(sourcePugFilePath, targetAstFilePath, filename, basedir, nodeDir, done) {
-  return new Promise((_, reject) => {
-    fs.readFile(sourcePugFilePath, 'utf8', (err, content) => {
-      if (err) throw err;
-
-      pug.compile(content, {
-        filename,
-        basedir: basedir,
-        compileDebug: false,
-        plugins: [
-          {
-            resolve(filename, source, options) {
-              if (filename[0] === '~') {
-                return path.join(path.join(nodeDir), filename.slice(1))
-              }
-              return path.join(filename[0] === '/' ? options.basedir : path.dirname(source.trim()), filename)
-            },
-            preCodeGen(ast, options) {
-              ast = optimizeAst(ast, basedir)
-              const astJson = JSON.stringify(ast, null, ' ')
-              mkdirp(path.dirname(targetAstFilePath))
-              fs.writeFile(targetAstFilePath, astJson, err => { if (err) throw err })
-              throw new StopCompileException()
+  let error = null
+  try {
+    const content = fs.readFileSync(sourcePugFilePath, 'utf8')
+    pug.compile(content, {
+      filename,
+      basedir: basedir,
+      compileDebug: false,
+      plugins: [
+        {
+          resolve(filename, source, options) {
+            if (filename[0] === '~') {
+              return path.join(path.join(nodeDir), filename.slice(1))
             }
+            return path.join(filename[0] === '/' ? options.basedir : path.dirname(source.trim()), filename)
+          },
+          preCodeGen(ast, options) {
+
+            ast = optimizeAst(ast, basedir)
+            const astJson = JSON.stringify(ast, null, ' ')
+            mkdirp(path.dirname(targetAstFilePath))
+            fs.writeFileSync(targetAstFilePath, astJson)
+            throw new StopCompileException()
           }
-        ]
-      })
-        .catch((err) => {
-          if (err instanceof StopCompileException) {
-            // ignore
-          } else {
-            reject(`ERROR Compiling ${sourcePugFilePath} to ${targetAstFilePath} \n${err}`)
-          }
-        })
+        }
+      ]
     })
-  })
+  } catch (e) {
+    if (e instanceof StopCompileException) {
+
+    } else {
+      error = console.log(`ERROR Compiling ${sourcePugFilePath} to ${targetAstFilePath}`)
+      error+= e;
+    }
+  }
+
+  return error;
 }

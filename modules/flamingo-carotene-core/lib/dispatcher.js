@@ -1,6 +1,6 @@
 
 class Dispatcher {
-  dispatchCommand (command) {
+  dispatchCommand (command, changedFiles) {
     const core = require('./core')
     const cliTools = core.getCliTools()
 
@@ -36,7 +36,7 @@ class Dispatcher {
 
     for (const listener of listenerQue) {
       const listenerLoadStartTime = new Date().getTime()
-      listener.handler(core)
+      listener.handler(core, changedFiles)
       const listenerLoadTime = new Date().getTime() - listenerLoadStartTime
 
       if (command === 'config' && listenerLoadTime > 100) {

@@ -6,7 +6,7 @@ const glob = require('glob')
 // limit cmd length (note: windows cmd has a limit of 8000 chars)
 const maxShellCmdLimit = 7000;
 
-const pugLint = (core) => {
+const pugLint = (core, files) => {
   const cliTools = core.getCliTools()
   const config = core.getConfig()
 
@@ -20,11 +20,13 @@ const pugLint = (core) => {
     configFile = path.posix.join(config.paths.pugLint, '.pug-lintrc.js')
   }
 
-  // get all files to be linted...
-  const files = []
-  glob.sync(`${config.paths.src}/${config.pugLint.filesPattern}`).forEach((file) => {
-    files.push(path.posix.normalize(file))
-  })
+  if (!files) {
+    files = []
+    // get all files to be linted...
+    glob.sync(`${config.paths.src}/${config.pugLint.filesPattern}`).forEach((file) => {
+      files.push(path.posix.normalize(file))
+    })
+  }
 
   // create shell cmd "packages" (respect maxShellCmdLimit)
   const lintFilePacks = []
