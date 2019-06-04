@@ -26,10 +26,22 @@ class FlamingoCaroteneWebpack {
               imageFolderName: 'image'
             },
             rulesInclude: null,
-            buildCallback: null
+            buildCallback: null,
+            watcher: {
+              sass: {
+                unwatchConfig: []
+              }
+            }
           }
 
           config.paths.webpackCache = path.join(config.paths.project, '.cache')
+        }
+      },
+      {
+        command: 'config',
+        handler: function (core) {
+          sassWatcher.unwatchConfig = config.webpack.watcher.sass.unwatchConfig
+          watcher.push(sassWatcher)
         }
       },
       {
@@ -69,17 +81,17 @@ class FlamingoCaroteneWebpack {
       }
     ]
 
-    this.watcher = [
-      {
-        watchId: 'webpackSass',
-        path: [
-          path.join(config.paths.src, '**', '*.{sass,scss}')
-        ],
-        command: 'watchWebpackCss',
-        callbackKey: 'webpackCss',
-        // example, if you need to unwatch specific files:
-        // unwatchConfig: path.join(config.paths.src, '**', 'fontIcon.sass')
-      },
+    const sassWatcher =  {
+      watchId: 'webpackSass',
+      path: [
+        path.join(config.paths.src, '**', '*.{sass,scss}')
+      ],
+      command: 'watchWebpackCss',
+      callbackKey: 'webpackCss',
+      unwatchConfig: null // if you need to unwatch specific files
+    }
+
+    const watcher = this.watcher = [
       {
         watchId: 'webpackJs',
         path: [
