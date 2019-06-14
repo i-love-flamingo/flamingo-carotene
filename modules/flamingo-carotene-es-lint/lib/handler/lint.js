@@ -91,6 +91,12 @@ const getCommandParameters = function (config) {
     parameters.push('--ignore-path', config.eslint.ignoreFilePath)
   }
 
+  if (config.eslint.additionalShellParameters !== null) {
+    for (const param of config.eslint.additionalShellParameters) {
+      parameters.push(param)
+    }
+  }
+
   return parameters.concat([
     '--ext',
     '.js',
