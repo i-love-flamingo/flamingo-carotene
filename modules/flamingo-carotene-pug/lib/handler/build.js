@@ -80,6 +80,10 @@ const pugBuild = (core) => {
             cliTools.info(output)
           }
         }
+
+        if (config.pug.breakOnError && errors.length > 0) {
+          core.reportError(`Pug reported errors.`)
+        }
       }
     })
   }

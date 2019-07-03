@@ -28,7 +28,11 @@ class FlamingoCarotenePug {
       },
       {
         command: 'build',
-        handler: buildHandler
+        handler: function (core) {
+          const config = core.getConfig()
+          config.pug.breakOnError = true
+          buildHandler(core)
+        }
       },
       {
         command: 'watchPug',
