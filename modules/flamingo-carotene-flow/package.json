@@ -1,0 +1,19 @@
+{
+  "name": "flamingo-carotene-flow",
+  "version": "1.0.0",
+  "description": "Provide flow support",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-flow",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\""
+  },
+  "dependencies": {
+    "flow-bin": "^0.98.1"
+  }
+}
