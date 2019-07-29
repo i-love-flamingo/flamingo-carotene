@@ -4,6 +4,7 @@ var emoji = require('node-emoji')
 
 class CliTools {
   constructor () {
+    this.dictionary = require('./commandDictionary')
     this.args = process.argv.slice(2)
     this.verbose = this.isVerbose()
 
@@ -135,6 +136,7 @@ class CliTools {
     
     Options:
         -v        verbose output`)
+    this.info(this.dictionary.printDictionary())
   }
 
   inspect (json, options) {
