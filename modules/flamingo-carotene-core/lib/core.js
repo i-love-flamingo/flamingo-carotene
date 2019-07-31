@@ -55,8 +55,9 @@ class Core {
     if (dictionary !== null) {
       return dictionary
     }
-
-    dictionary = require('./commandDictionary')
+    // Force initialisation of Job Manager to get options in dictionary
+    this.getJobmanager()
+    dictionary = require('./commanddictionary')
     return dictionary
   }
 
@@ -133,8 +134,6 @@ class Core {
     }
 
     cliTools.info(`Flamingo Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
-
-    this.getDictionary()
 
     return modules
   }
