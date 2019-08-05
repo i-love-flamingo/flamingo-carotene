@@ -2,21 +2,13 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const shell = require('shelljs')
 
-const messages = []
 const errors = []
-let timeStarted
 
 /**
  * Logs out all messages and errors added to the respective arrays
  * @param cliTools
  */
-const complete = (cliTools) => {
-  messages.push(`Copy static assets - end\r\n    Finished after ${new Date().getTime() - timeStarted}ms`)
-
-  messages.forEach(message => {
-    cliTools.info(message)
-  })
-
+const logErrors = (cliTools) => {
   if (errors.length > 0) {
     errors.push('Static assets couldn\'t process every given paths')
   }
@@ -71,6 +63,7 @@ const processPaths = function (staticAssetCfg) {
 const build = (core) => {
   const config = core.getConfig()
   const cliTools = core.getCliTools()
+  const jobManager = core.getJobmanager()
 
   if (!config.staticAsset.assetPaths) {
     cliTools.warn('Static asset executed but no config set')
@@ -83,12 +76,12 @@ const build = (core) => {
       errors.push(err)
     }
 
-    cliTools.info('Copy static assets - start')
-    timeStarted = new Date().getTime()
+    jobManager.addJob('staticAssets', 'Copy static assets')
     // Processes all paths given to copy files
     processPaths(config.staticAsset)
 
-    complete(cliTools)
+    logErrors(cliTools)
+    jobManager.finishJob('staticAssets')
   })
 }
 

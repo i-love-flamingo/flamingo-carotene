@@ -1,12 +1,15 @@
-
 class Dispatcher {
+
+  constructor () {
+    this.core = require('./core')
+  }
+
   dispatchCommand (command) {
-    const core = require('./core')
-    const cliTools = core.getCliTools()
+    const cliTools = this.core.getCliTools()
 
     cliTools.info(`Dispatch command: ${command}`)
 
-    const modules = core.getModules()
+    const modules = this.core.getModules()
     const listenerQue = []
 
     for (const module of modules) {
@@ -36,7 +39,7 @@ class Dispatcher {
 
     for (const listener of listenerQue) {
       const listenerLoadStartTime = new Date().getTime()
-      listener.handler(core)
+      listener.handler(this.core)
       const listenerLoadTime = new Date().getTime() - listenerLoadStartTime
 
       if (command === 'config' && listenerLoadTime > 100) {
@@ -47,6 +50,20 @@ class Dispatcher {
     if (initializeWarnings.length > 0) {
       cliTools.warn([`Warning: The following Modules takes too long at config-time:\n\r`] + initializeWarnings.join('\n\r'), true)
     }
+  }
+
+  commandExists (command) {
+    const modules = this.core.getModules()
+
+    for (const module of modules) {
+      const listeners = module.getListeners()
+      const hasCommand = listeners.some(listener => listener.command === command)
+
+      if (hasCommand) {
+        return true
+      }
+    }
+    return false
   }
 }
 

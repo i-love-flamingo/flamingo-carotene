@@ -1,14 +1,17 @@
 const util = require('util')
 const chalk = require('chalk')
-var emoji = require('node-emoji')
+const emoji = require('node-emoji')
 
 class CliTools {
   constructor () {
+    const core = require('./core')
+    this.dictionary = core.getDictionary()
+
     this.args = process.argv.slice(2)
     this.verbose = this.isVerbose()
 
     this.chalk = chalk
-    this.doBufferOut = false;
+    this.doBufferOut = false
     this.buffer = ''
   }
 
@@ -126,15 +129,9 @@ class CliTools {
    * Show how to use the cli
    */
   showUsage () {
-    this.info(
-      `Usage: flamingo-carotene {command} [option(s)]
-    
-    Commands:
-        config
-        build
-    
-    Options:
-        -v        verbose output`)
+    this.info(`Usage: flamingo-carotene {command} [option(s)]`)
+    this.info(this.dictionary.printCommands())
+    this.info(this.dictionary.printOptions())
   }
 
   inspect (json, options) {

@@ -6,12 +6,10 @@ const config = core.getConfig()
 const dispatcher = core.getDispatcher()
 const command = cliTools.getCommand()
 
-if (!command || command.charAt(0) === '-') {
+if (command === 'help' || typeof command === "undefined" || command.charAt(0) === '-') {
   cliTools.showUsage()
   cliTools.exit()
 }
-
-dispatcher.dispatchCommand('config')
 
 if (command === 'build') {
   shell.rm('-rf', config.paths.dist)
@@ -21,7 +19,19 @@ if (command === 'build') {
   }
 }
 
-if (command !== 'config') {
+if (!dispatcher.commandExists(command)) {
+  cliTools.warn(`Command doesn't exist`)
+  cliTools.exit()
+}
+
+dispatcher.dispatchCommand('config')
+
+// Print the current configuration if config is run
+if (command === 'config') {
+  cliTools.log(cliTools.inspect(config))
+}
+// If the command is not config, run it too
+else {
   dispatcher.dispatchCommand(command)
 }
 
