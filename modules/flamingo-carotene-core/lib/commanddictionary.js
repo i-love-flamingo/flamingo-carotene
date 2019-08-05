@@ -17,7 +17,7 @@ class CommandDictionary {
 
     for (const module of modules) {
       const listeners = module.getListeners()
-      listeners.sort((l1, l2) => {
+      listeners.sort(function(l1, l2) {
         if (!Number.isSafeInteger(l1.priority)) {
           l1.priority = 0
         }
@@ -43,7 +43,10 @@ class CommandDictionary {
    * @param description {String}
    */
   addCommand (command, description) {
-    const commandIndex = this.options.findIndex(option => option.command === command)
+    const commandIndex = this.options.findIndex(function(option) {
+      return option.command === command
+    })
+
     if (commandIndex > -1) {
       this.commands[commandIndex].description.push(description)
       return
@@ -57,7 +60,9 @@ class CommandDictionary {
    * @param description {String}
    */
   addOption (command, description) {
-    const optionIndex = this.options.findIndex(option => option.command === command)
+    const optionIndex = this.options.findIndex(function(option) {
+      return option.command === command
+    })
     if (optionIndex > -1) {
       this.options[optionIndex].description = description
       return
@@ -89,7 +94,7 @@ class CommandDictionary {
    * @returns {string | *}
    */
   toString(array) {
-    return array.map(object => {
+    return array.map(function (object) {
         if (Array.isArray(object.description)) {
           object.description.join(',')
         }
