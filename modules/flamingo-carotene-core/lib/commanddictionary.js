@@ -1,9 +1,10 @@
 
 class CommandDictionary {
-  commands = []
-  options = []
 
   constructor () {
+    this.commands = []
+    this.options = []
+
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
     this.setCommands()
