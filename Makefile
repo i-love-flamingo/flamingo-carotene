@@ -1,7 +1,13 @@
 .PHONY: link
 
 link:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm link \;
+	npx lerna run link
+
+build:
+	npx lerna run build
+
+test:
+	npx lerna run test
 
 updateModules:
 	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm update \;

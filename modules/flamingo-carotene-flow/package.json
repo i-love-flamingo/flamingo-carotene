@@ -11,7 +11,8 @@
     "carotene"
   ],
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
     "flow-bin": "^0.98.1"

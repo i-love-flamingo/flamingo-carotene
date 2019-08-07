@@ -7,7 +7,8 @@
   "main": "lib/index.js",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-webpack-svg-sprite",
   "scripts": {
-    "build": "mkdir -p dist & npx babel src/svgIconSprite.behavior.js -o dist/svgIconSprite.behavior.js"
+    "build": "mkdir -p dist & npx babel src/svgIconSprite.behavior.js -o dist/svgIconSprite.behavior.js",
+    "link": "npm link"
   },
   "dependencies": {
     "external-svg-sprite-loader": "^4.0.1",

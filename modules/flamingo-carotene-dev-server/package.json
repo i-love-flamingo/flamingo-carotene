@@ -12,7 +12,8 @@
     "om3"
   ],
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
     "chokidar": "^2.0.4",

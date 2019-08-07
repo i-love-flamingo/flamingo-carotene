@@ -14,7 +14,8 @@
   "main": "dist/stateManager.js",
   "scripts": {
     "build": "mkdir -p dist & npx babel src/stateManager.js -o dist/stateManager.js",
-    "test": "jest"
+    "test": "jest",
+    "link": "npm link"
   },
   "dependencies": {
     "deep-equal": "^1.0.1",

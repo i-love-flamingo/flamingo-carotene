@@ -73,14 +73,14 @@ function () {
       // if no scrolling is in progress by this function - get outta here
       if (!this.scrollingInProgress) {
         return;
-      } // if scrolling is cancelable on manual scrolling
+      } // if scrolling is not cancelable on manual scrolling - leave instantly
 
 
       if (!this.cancelAnimationOnUserScroll) {
         return;
       }
 
-      var currentY = window.scrollY;
+      var currentY = window.pageYOffset;
       var direction = this.getScrollDirection(this.lastScrollPosition, currentY); // scrolling direction changed - stop automatic scrolling
 
       if (this.scrollDirection !== direction) {
@@ -263,7 +263,7 @@ function () {
       this.stop(); // sets animation start time
 
       this.animationStartTime = new Date().getTime();
-      var currentY = window.scrollY;
+      var currentY = window.pageYOffset;
       this.lastScrollPosition = currentY;
       this.scrollingInProgress = true;
       this.scrollDirection = this.getScrollDirection(currentY, this.currentTargetY); // start timer

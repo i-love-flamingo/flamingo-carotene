@@ -14,7 +14,8 @@
   "main": "dist/behavior.js",
   "scripts": {
     "build": "mkdir -p dist & npx babel src/behavior.js -o dist/behavior.js",
-    "test": "jest"
+    "test": "jest",
+    "link": "npm link"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

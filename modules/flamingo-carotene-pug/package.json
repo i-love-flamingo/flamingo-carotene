@@ -15,7 +15,8 @@
     "flamingo-carotene-pug": "./bin/flamingoCarotenePug.js"
   },
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
     "async": "^2.6.1",

@@ -14,7 +14,8 @@
   "main": "lib/core.js",
   "bin": {
     "flamingo-carotene": "./bin/flamingoCarotene.js",
-    "fc": "./bin/flamingoCarotene.js"
+    "fc": "./bin/flamingoCarotene.js",
+    "link": "npm link"
   },
   "scripts": {
     "test": "echo \"No tests present\""
