@@ -14,11 +14,11 @@
   "main": "lib/core.js",
   "bin": {
     "flamingo-carotene": "./bin/flamingoCarotene.js",
-    "fc": "./bin/flamingoCarotene.js",
-    "link": "npm link"
+    "fc": "./bin/flamingoCarotene.js"
   },
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
     "chalk": "^2.4.1",
