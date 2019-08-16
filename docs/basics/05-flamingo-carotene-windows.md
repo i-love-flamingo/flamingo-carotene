@@ -1,4 +1,4 @@
-## Frontend Development for Windows 10
+# Frontend Development for Windows 10
 
 For fresh maschines:
 
