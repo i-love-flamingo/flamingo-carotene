@@ -1,11 +1,11 @@
 # Flamingo Carotene Introduction
 
 ## What is it ?
-Flamingo Carotene is an easy to use frontend (-tooling) for projects with the Flamingo framework.
+Flamingo Carotene provides an easy to use frontend build pipeline for Flamingo projects that are using the "pugtemplate" engine for serverside rendering. 
 
-It introduces a modular concept to provide reusable modules and comes with a collection of npm packages, that provide useful features for frontend development.
+It introduces a modular concept and provide a collection of reusable of npm packages (modules), that provide features required in frontend development.
 
-Flamingo Carotene features pug based templating using [atomic design](03-atomic-design.md) as well as having the option to use webpack and sass for the frontend build.
+Flamingo Carotene features "pug" based templating using [atomic design pattern](03-atomic-design.md) and uses webpack and sass for the frontend build.
 
 The basic goals for Flamingo Carotene are:
 
@@ -17,8 +17,8 @@ The basic technical design targets of Flamingo Carotene are:
 
 1. Independent packages: Your are not forced to use "one default" for your project. Instead you can select which feature you want to use. 
 The Flamingo Carotene packages are well split (having an individual purpose and following high cohesion low coupling principles).
-1. No library lock in: By intention Flamingo Carotene does not force you to use some specific frontend framework (like jquery, vue, angular or react).
-1. Freedom: As a result of 2. it is possible to use any javascript framework you might consider useful for your project.
+2. No library lock in: By intention Flamingo Carotene does not force you to use some specific frontend framework (like jquery, vue, angular or react).
+3. Freedom: As a result of 2. it is possible to use any javascript framework you might consider useful for your project.
 
 ## Getting started:
 

@@ -21,14 +21,18 @@ The webpack module will listen to the following commands: `build`, `buildWebpack
 
 This module will build the webpack config at the config commands priority 0 with the webpack config object available in
 `config.webpack`. That means that the webpack config can be edited in two ways.
+
 1. By a config command handler with a priority between 0 and 100, that overrides entries of the webpack modules
 config. Every config made to `config.webpack` before priority 0 will be taken into account when creating the webpack
 config.
-1. By a config command handler with a priority lower than 0, that overrides entries of the webpack config. Every config
+
+2. By a config command handler with a priority lower than 0, that overrides entries of the webpack config. Every config
 made to `config.webpackConfig` after priority 0 will be taken into account when running the webpack compiler by a
 command.
 
 Every webpack configuration that is supported by the used webpack version can be applied that way.
+
+The entry point is the file `index.js` inside the `config.paths.webpack.src` folder.
 
 ## How to configure
 
@@ -68,6 +72,8 @@ config.webpack = {
 `rulesInclude` Array of paths to use in the include property of module rules inside the webpack config
 
 `buildCallback` The callback function to execute when the webpack compiler was finished
+
+
 
 ## List of Flamingo Carotene webpack modules
 - [flamingo-carotene-babel](../flamingo-carotene-babel)
