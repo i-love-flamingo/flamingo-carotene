@@ -131,7 +131,8 @@ class CommandDictionary {
       style: {
         'padding-left': 0,
         'padding-right': 0,
-        border: []
+        border: [],
+        head: []
       },
       chars: {
         'top': '',
