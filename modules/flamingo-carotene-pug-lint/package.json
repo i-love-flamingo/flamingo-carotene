@@ -18,6 +18,6 @@
     "link": "npm link"
   },
   "dependencies": {
-    "pug-lint": "^2.5.0"
+    "pug-lint": "^2.6.0"
   }
 }

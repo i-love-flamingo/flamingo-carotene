@@ -16,6 +16,6 @@
     "link": "npm link"
   },
   "dependencies": {
-    "sass-lint": "^1.10.2"
+    "sass-lint": "^1.13.1"
   }
 }

@@ -19,9 +19,9 @@
     "link": "npm link"
   },
   "dependencies": {
-    "async": "^2.6.1",
-    "glob": "^7.1.2",
+    "async": "^2.6.3",
+    "glob": "^7.1.4",
     "mkdirp-sync": "0.0.3",
-    "pug": "^2.0.3"
+    "pug": "^2.0.4"
   }
 }
