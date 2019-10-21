@@ -1,28 +1,29 @@
 .PHONY: link
 
-link:
-	npx lerna run link
-
 build:
 	npx lerna run build
+
+install:
+	npx lerna clean --yes
+	npx lerna bootstrap
+
+link:
+	npx lerna run link
 
 test:
 	npx lerna run test
 
 updateModules:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm update \;
+	npx lerna exec -- npm update
 
 fixAudit:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm audit fix \;
+	npx lerna exec -- npm audit fix
 
 cleanDep:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir rm -rf node_modules \;
+	npx lerna clean --yes
 
 ci:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm ci \;
-
-install:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir npm install \;
+	npx lerna exec -- npm ci
 
 yarn-link:
-	find ./modules/* -maxdepth 1 -type f -name package.json -execdir yarn link \;
+	lerna exec -- yarn link
