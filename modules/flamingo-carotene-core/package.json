@@ -23,9 +23,11 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "cli-progress": "^2.1.1",
+    "cli-table3": "^0.5.1",
     "intercept-stdout": "^0.1.2",
     "node-emoji": "^1.10.0",
     "progress": "^2.0.3",
-    "shelljs": "^0.8.2"
+    "shelljs": "^0.8.2",
+    "word-wrap": "^1.2.3"
   }
 }

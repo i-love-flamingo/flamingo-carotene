@@ -27,10 +27,12 @@ class Flow {
       },
       {
         command: 'flow',
+        description: 'ADD DESCRIPTION HERE',
         handler: flowHandler
       },
       {
         command: 'build',
+        description: 'ADD "flow" DESCRIPTION HERE',
         handler: function (core) {
           flowHandler(core)
         }

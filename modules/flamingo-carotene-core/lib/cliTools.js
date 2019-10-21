@@ -130,8 +130,8 @@ class CliTools {
    */
   showUsage () {
     this.info(`Usage: flamingo-carotene {command} [option(s)]`)
-    this.info(this.dictionary.printCommands())
-    this.info(this.dictionary.printOptions())
+    process.stdout.write(this.dictionary.prettyCommands())
+    process.stdout.write(this.dictionary.prettyOptions())
   }
 
   inspect (json, options) {

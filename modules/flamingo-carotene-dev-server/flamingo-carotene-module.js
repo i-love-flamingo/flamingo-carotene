@@ -7,6 +7,8 @@ class DevServer {
     this.watchers = [] // List of all flamingoWatcher Classes.
     this.watcherConfigs = null
 
+    const that = this
+
     this.listeners = [
       {
         command: 'config',
@@ -37,6 +39,24 @@ class DevServer {
       {
         command: 'dev',
         priority: 10,
+        description: function () {
+          let desc = 'Start a watcher process, which watches filechanges, and start build target automaticly:\n'
+
+          const config = core.getConfig()
+          const watcherConfigs = that.getWatcherConfigs()
+          for (const watcherConfig of watcherConfigs) {
+
+            const basePath = config.paths.src
+            for (let path of watcherConfig.path) {
+              if (path.substr(0, basePath.length) === basePath) {
+                path = path.substr(basePath.length)
+              }
+              desc += `- ${path}\n`
+            }
+          }
+
+          return desc
+        },
         handler: (core) => {
           // This will add the socket client to the js entries in the webpack config and force a rebuild when the actual
           // build of the js has not already included the client, so that as soon as the dev command is ready, the

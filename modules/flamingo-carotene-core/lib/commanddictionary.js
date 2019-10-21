@@ -1,3 +1,6 @@
+const CliTable = require('cli-table3');
+var wrap = require('word-wrap');
+
 
 class CommandDictionary {
 
@@ -75,18 +78,23 @@ class CommandDictionary {
    * Builds a string out of the list of commands
    * @returns {string}
    */
-  printCommands () {
-    const commandsString = this.toString(this.commands) || 'No commands are available'
-    return `Commands: \n \t${commandsString}`
+  prettyCommands () {
+    return this.createCLITable(this.commands, 'Commands') || 'No commands are available\n'
   }
 
   /**
    * Builds a string out of the list of options
    * @returns {string}
    */
-  printOptions () {
-    const optionsString = this.toString(this.options) || 'No options are available'
-    return `Options: \n \t${optionsString}`
+  prettyOptions () {
+    return this.createCLITable(this.options, 'Options') || 'No options are available\n'
+  }
+
+  resolveDescription (data) {
+    if (typeof data === 'function') {
+      return data()
+    }
+    return data
   }
 
   /**
@@ -94,16 +102,63 @@ class CommandDictionary {
    * @param array {Array}
    * @returns {string | *}
    */
-  toString(array) {
-    return array.map(function (object) {
-        if (Array.isArray(object.description)) {
-          object.description.join(',')
-        }
+  createCLITable(array, headline) {
+    const collectedObjects = {}
 
-        return `${object.command} \t ${object.description}`
+    for (const item of array) {
+      if (Array.isArray(item.description)) {
+        const newDescArray = []
+        for (const desc of item.description) {
+          newDescArray.push(this.resolveDescription(desc))
+        }
+        item.description = newDescArray.join(',')
+      } else {
+        item.description = this.resolveDescription(item.description)
       }
-    ).join('\n\t')
+
+      if (!collectedObjects.hasOwnProperty(item.command)) {
+        collectedObjects[item.command] = []
+      }
+      collectedObjects[item.command].push(item.description)
+    }
+
+    var terminalSize = process.stdout.columns
+    var maxWidth = terminalSize - 3
+    var commandWidth = 26
+    var descWidth = maxWidth - commandWidth
+    var table = new CliTable({
+      head: [headline, ''],
+      style: {
+        'padding-left': 0,
+        'padding-right': 0,
+        border: []
+      },
+      chars: {
+        'top': '',
+        'top-mid': '' ,
+        'top-left': '' ,
+        'top-right': '',
+        'bottom': '',
+        'bottom-mid': '',
+        'bottom-left': '',
+        'bottom-right': '',
+        'left': '',
+        'left-mid': '',
+        'mid': '',
+        'mid-mid': '',
+        'right': '',
+        'right-mid': '',
+        'middle': ' '
+      },
+      colWidths:[commandWidth, descWidth]
+    })
+    for (const key in collectedObjects) {
+      const desc = wrap(collectedObjects[key].join(', '), {width: descWidth, newline: '\n', trim: true, indent:''})
+      table.push([key, desc])
+    }
+    return table.toString()+'\n\n'
   }
+
 
 }
 
