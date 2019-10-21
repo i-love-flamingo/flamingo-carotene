@@ -36,6 +36,7 @@ class Spawner {
 
     const spawnEnv = process.env
     spawnEnv.FORCE_COLOR = true
+    spawnEnv.NO_UPDATE_NOTIFIER = true
 
     this.cliTools.info(`Spawning new process: "${cmd} ${parameters.join(' ')}"`, true)
     return spawn(cmd, parameters, {env: spawnEnv});
