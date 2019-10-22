@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-state-manager",
-  "version": "6.2.1",
+  "version": "6.2.15",
   "description": "The state manager enables to decouple the interaction between dom components using a global state",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -14,20 +14,21 @@
   "main": "dist/stateManager.js",
   "scripts": {
     "build": "mkdir -p dist & npx babel src/stateManager.js -o dist/stateManager.js",
-    "test": "jest"
+    "test": "jest",
+    "link": "npm link"
   },
   "dependencies": {
-    "deep-equal": "^1.0.1",
+    "deep-equal": "^1.1.0",
     "object-path": "^0.11.4",
     "object-path-immutable": "^1.0.1",
     "redux": "^3.7.2",
     "redux-watch": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "babel-plugin-import-glob": "^2.0.0",

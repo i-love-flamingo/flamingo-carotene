@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-babel",
-  "version": "6.2.1",
+  "version": "6.2.15",
   "description": "Provide the babel loader for a flamingo-carotene-webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -12,13 +12,14 @@
     "om3"
   ],
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-loader": "^8.0.2"
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6"
   }
 }

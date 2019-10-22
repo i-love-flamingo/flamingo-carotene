@@ -78,7 +78,7 @@ class SmoothScrollTo {
       return
     }
 
-    const currentY =  window.scrollY
+    const currentY =  window.pageYOffset
     const direction = this.getScrollDirection(this.lastScrollPosition, currentY)
     // scrolling direction changed - stop automatic scrolling
     if (this.scrollDirection !== direction) {
@@ -234,7 +234,7 @@ class SmoothScrollTo {
     // sets animation start time
     this.animationStartTime = new Date().getTime()
 
-    const currentY = window.scrollY
+    const currentY = window.pageYOffset
     this.lastScrollPosition = currentY
     this.scrollingInProgress = true
     this.scrollDirection = this.getScrollDirection(currentY, this.currentTargetY)

@@ -24,11 +24,17 @@ class FlamingoCarotenePug {
       },
       {
         command: 'buildTemplates',
+        description: 'Build all PUG Templates',
         handler: buildHandler
       },
       {
         command: 'build',
-        handler: buildHandler
+        description: 'Build all PUG Templates',
+        handler: function (core) {
+          const config = core.getConfig()
+          config.pug.breakOnError = true
+          buildHandler(core)
+        }
       },
       {
         command: 'watchPug',

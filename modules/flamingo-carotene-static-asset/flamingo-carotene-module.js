@@ -24,10 +24,18 @@ class FlamingoCaroteneStaticAsset {
       },
       {
         command: 'build',
+        description: 'Copy static assets',
         handler: function (core) {
           buildHandler(core)
         }
-      }
+      },
+      {
+        command: 'copyAssets',
+        description: 'Copy static assets',
+        handler: function (core) {
+          buildHandler(core)
+        }
+      },
     ]
   }
 

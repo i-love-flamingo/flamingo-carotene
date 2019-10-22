@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-postcss",
-  "version": "6.2.1",
+  "version": "6.2.15",
   "description": "Provide the postcss loader for a flamingo-carotene-webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -12,10 +12,11 @@
     "om3"
   ],
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
-    "autoprefixer": "^9.1.2",
+    "autoprefixer": "^9.6.5",
     "postcss-loader": "^3.0.0"
   }
 }

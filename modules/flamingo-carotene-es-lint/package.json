@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-es-lint",
-  "version": "6.2.11",
+  "version": "6.2.15",
   "description": "Provide the standalone version and flamingo-carotene-webpack loader of es lint",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -12,13 +12,14 @@
     "om3"
   ],
   "scripts": {
-    "test": "echo \"No tests present\""
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "dependencies": {
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.0.3",
     "eslint": "^5.7.0",
     "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.1"
+    "eslint-loader": "^2.2.1"
   },
   "peerDependencies": {
     "eslint-config-flamingo-carotene": "^6.0.28",

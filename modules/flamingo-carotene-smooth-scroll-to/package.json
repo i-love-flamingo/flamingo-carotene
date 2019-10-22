@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-smooth-scroll-to",
-  "version": "6.2.6",
+  "version": "6.2.15",
   "description": "The smooth scroll module enables to scroll smoothly to a given y coordinate or dom element",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -13,13 +13,15 @@
   ],
   "main": "dist/smoothScrollTo.js",
   "scripts": {
-    "build": "rm -rf ./dist & mkdir dist & npx babel src/smoothScrollTo.js -o dist/smoothScrollTo.js"
+    "build": "rm -rf ./dist & mkdir dist & npx babel src/smoothScrollTo.js -o dist/smoothScrollTo.js",
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
     "babel-core": "7.0.0-bridge.0"
   }
 }

@@ -6,9 +6,12 @@ class Jobmanager {
     this.cliTools = this.core.getCliTools()
     this.callbackOnFinish = function() {}
     this.callbackOnFinishForGroups = {}
+    const dictionary = this.core.getDictionary()
 
     this.useProgress = this.cliTools.hasOption(['--progress', '--forceProgress'])
+    dictionary.addOption('progress', 'Show progress bar in CLI')
     this.forceProgress = this.cliTools.hasOption('--forceProgress')
+    dictionary.addOption('forceProgress', 'Show progress bar in CLI without checking for TTY')
 
     if (this.useProgress) {
       this.CliProgress = require('cli-progress');

@@ -67,11 +67,13 @@ class ESLint {
       },
       {
         command: 'lint',
+        description: 'Lint Javascript with ES Lint',
         handler: lintHandler
       },
       {
         command: 'build',
         priority: 10,
+        description: 'Lint Javascript with ES Lint',
         handler: function (core) {
           // Set break on error configs to true for production build
           const config = core.getConfig()

@@ -18,10 +18,12 @@ class SassLint {
       },
       {
         command: 'lint',
+        description: 'Lint all SASS Templates',
         handler: lintHandler
       },
       {
         command: 'build',
+        description: 'Lint all SASS Templates',
         handler: function (core) {
           const config = core.getConfig()
           config.sassLint.breakOnError = true

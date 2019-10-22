@@ -57,18 +57,22 @@ class FlamingoCaroteneWebpack {
       },
       {
         command: 'build',
+        description: 'Build CSS and JS with Webpack',
         handler: buildHandlerAll
       },
       {
         command: 'buildWebpack',
+        description: 'Build CSS and JS with Webpack',
         handler: buildHandlerAll
       },
       {
         command: 'buildWebpackJs',
+        description: 'Build JS with Webpack',
         handler: buildHandlerJs
       },
       {
         command: 'buildWebpackCss',
+        description: 'Build CSS with Webpack',
         handler: buildHandlerCss
       },
       {

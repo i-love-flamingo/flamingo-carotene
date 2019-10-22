@@ -18,14 +18,17 @@ class PugLint {
       },
       {
         command: 'lint',
+        description: 'Lint all PUG Templates',
         handler: lintHandler
       },
       {
         command: 'lintPug',
+        description: 'Lint all PUG Templates',
         handler: lintHandler
       },
       {
         command: 'build',
+        description: 'Lint all PUG Templates',
         handler: function (core) {
           const config = core.getConfig()
           config.pugLint.breakOnError = true

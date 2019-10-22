@@ -8,6 +8,7 @@ let cliTools = null
 let dispatcher = null
 let modules = null
 let jobmanager = null
+let dictionary = null
 let errors = []
 
 class Core {
@@ -48,6 +49,16 @@ class Core {
 
     jobmanager = require('./jobmanager')
     return jobmanager
+  }
+
+  getDictionary () {
+    if (dictionary !== null) {
+      return dictionary
+    }
+    // Force initialisation of Job Manager to get options in dictionary
+    this.getJobmanager()
+    dictionary = require('./commanddictionary')
+    return dictionary
   }
 
   getCliTools () {
@@ -123,6 +134,7 @@ class Core {
     }
 
     cliTools.info(`Flamingo Carotene modules:\r\n${cliTools.inspect(modules, {depth: 0})}`, true)
+
     return modules
   }
 }

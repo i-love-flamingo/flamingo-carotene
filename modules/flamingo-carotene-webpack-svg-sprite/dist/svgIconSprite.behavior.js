@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _unfetch = _interopRequireDefault(require("unfetch"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42,7 +42,7 @@ function () {
   _createClass(SvgIconSprite, [{
     key: "fetch",
     value: function fetch(url) {
-      (0, _unfetch.default)(url).then(function (r) {
+      (0, _unfetch["default"])(url).then(function (r) {
         return r.text();
       }).then(this.success.bind(this));
     }
@@ -70,4 +70,4 @@ function () {
   return SvgIconSprite;
 }();
 
-exports.default = SvgIconSprite;
+exports["default"] = SvgIconSprite;

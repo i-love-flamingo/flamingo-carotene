@@ -155,7 +155,7 @@ function compilePugFile(sourcePugFilePath, targetAstFilePath, filename, basedir,
     if (e instanceof StopCompileException) {
 
     } else {
-      error = console.log(`ERROR Compiling ${sourcePugFilePath} to ${targetAstFilePath}`)
+      error = console.error(`ERROR Compiling ${sourcePugFilePath} to ${targetAstFilePath}`)
       error+= e;
     }
   }
