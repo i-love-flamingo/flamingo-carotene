@@ -27,12 +27,12 @@ class Flow {
       },
       {
         command: 'flow',
-        description: 'ADD DESCRIPTION HERE',
+        description: 'Flow checks for errors through static type annotations',
         handler: flowHandler
       },
       {
         command: 'build',
-        description: 'ADD "flow" DESCRIPTION HERE',
+        description: 'Flow checks for errors through static type annotations',
         handler: function (core) {
           flowHandler(core)
         }
