@@ -79,7 +79,7 @@ function () {
 
         if (behaviorClassObject.hasOwnProperty('__esModule') && behaviorClassObject.__esModule === true) {
           if (behaviorClassObject.hasOwnProperty('default')) {
-            behaviorClass = behaviorClassObject.default;
+            behaviorClass = behaviorClassObject["default"];
           }
         } else {
           // Support for globbing: import * as behaviorModules from '...'
@@ -123,8 +123,8 @@ function () {
         _iteratorError = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
           }
         } finally {
           if (_didIteratorError) {
@@ -158,8 +158,8 @@ function () {
         _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-            _iterator2.return();
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
           }
         } finally {
           if (_didIteratorError2) {

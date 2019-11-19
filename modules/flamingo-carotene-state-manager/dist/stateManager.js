@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _redux = require("redux");
 
@@ -15,7 +15,7 @@ var _deepEqual = _interopRequireDefault(require("deep-equal"));
 
 var _objectPathImmutable = _interopRequireDefault(require("object-path-immutable"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -36,7 +36,7 @@ var rootReducer = function rootReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   if (action.type.startsWith('SET:') && action.path !== undefined) {
-    return _objectPathImmutable.default.set(state, action.path, action.value);
+    return _objectPathImmutable["default"].set(state, action.path, action.value);
   }
 
   return state;
@@ -50,7 +50,7 @@ var rootReducer = function rootReducer() {
 
 
 function deepEqualStrict(value1, value2) {
-  return (0, _deepEqual.default)(value1, value2, {
+  return (0, _deepEqual["default"])(value1, value2, {
     strict: true
   });
 }
@@ -97,7 +97,7 @@ function () {
       var callbackFunc = typeof path === 'function' ? path : callback;
       var pathStr = typeof path === 'string' ? path : ''; // create watcher and subscribe to store
 
-      var watchFunc = (0, _reduxWatch.default)(this.store.getState, pathStr, deepEqualStrict);
+      var watchFunc = (0, _reduxWatch["default"])(this.store.getState, pathStr, deepEqualStrict);
       return this.store.subscribe(watchFunc(callbackFunc));
     }
     /**
@@ -141,4 +141,4 @@ function () {
 
 var _default = new State();
 
-exports.default = _default;
+exports["default"] = _default;

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "async": "^2.6.3",
-    "glob": "^7.1.4",
+    "glob": "^7.1.6",
     "mkdirp-sync": "0.0.3",
     "pug": "^2.0.4"
   }
