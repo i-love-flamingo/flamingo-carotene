@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-sass-lint",
-  "version": "6.2.16",
+  "version": "6.2.17",
   "description": "Preconfigured sass linter for Flamingo Carotene",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
