@@ -2,6 +2,8 @@
 const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
   const config = core.getConfig()
   const cliTools = core.getCliTools()
+  const fs = require('fs');
+
 
   if (!config.webpackConfig) {
     cliTools.warn('No webpack config found')
@@ -57,6 +59,12 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     }
 
     core.getJobmanager().finishJob(jobId)
+
+    fs.writeFile("stats.json", JSON.stringify(info), function(err) {
+      if(err) {
+        return cliTools.warn('Cant output stats.json');
+      }
+    });
 
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {
       config.webpack.buildCallback(core)
