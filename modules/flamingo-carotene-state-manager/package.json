@@ -13,7 +13,7 @@
   ],
   "main": "dist/stateManager.js",
   "scripts": {
-    "build": "mkdir -p dist & npx babel src/stateManager.js -o dist/stateManager.js",
+    "build": "rm -rf ./dist & mkdir dist & npx babel src/stateManager.js -o dist/stateManager.js",
     "test": "jest",
     "link": "npm link"
   },

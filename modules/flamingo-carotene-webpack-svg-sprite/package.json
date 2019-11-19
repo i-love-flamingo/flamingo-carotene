@@ -1,22 +1,24 @@
 {
-  "name": "flamingo-carotene-webpack-svg-sprite",
-  "version": "6.2.16",
-  "description": "Flamingo Carotene svg sprite solution",
-  "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "OSL-3.0",
-  "main": "lib/index.js",
-  "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-webpack-svg-sprite",
-  "scripts": {
-    "build": "mkdir -p dist & npx babel src/svgIconSprite.behavior.js -o dist/svgIconSprite.behavior.js",
-    "link": "npm link"
-  },
-  "dependencies": {
-    "external-svg-sprite-loader": "^4.0.1",
-    "unfetch": "^4.0.1"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "flamingo-carotene-babel": "^6.2.16",
-    "flamingo-carotene-webpack": "^6.2.16"
-  }
+	"name": "flamingo-carotene-webpack-svg-sprite",
+	"version": "6.2.16",
+	"description": "Flamingo Carotene svg sprite solution",
+	"author": "team-frontend <team-frontend@aoe.com>",
+	"license": "OSL-3.0",
+	"main": "lib/index.js",
+	"repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-webpack-svg-sprite",
+	"scripts": {
+		"build": "rm -rf ./dist & mkdir dist & npx babel src/svgIconSprite.behavior.js -o dist/svgIconSprite.behavior.js",
+		"link": "npm link"
+	},
+	"dependencies": {
+		"external-svg-sprite-loader": "^4.0.1",
+		"unfetch": "^4.0.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.7.0",
+		"@babel/core": "^7.7.2",
+		"@babel/plugin-proposal-class-properties": "^7.5.5",
+		"flamingo-carotene-babel": "^6.2.16",
+		"flamingo-carotene-webpack": "^6.2.16"
+	}
 }

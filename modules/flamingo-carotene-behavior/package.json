@@ -13,7 +13,7 @@
   ],
   "main": "dist/behavior.js",
   "scripts": {
-    "build": "mkdir -p dist & npx babel src/behavior.js -o dist/behavior.js",
+    "build": "rm -rf ./dist & mkdir dist & npx babel src/behavior.js -o dist/behavior.js",
     "test": "jest",
     "link": "npm link"
   },
