@@ -176,7 +176,7 @@ class WebpackConfig {
   }
 
   getRulesInclude () {
-    const include = [this.config.paths.src]
+    const include = [path.posix.normalize(this.config.paths.src)]
 
     if (this.config.webpack.rulesInclude && Array.isArray(this.config.webpack.rulesInclude)) {
       // Concat the arrays and remove doubles
