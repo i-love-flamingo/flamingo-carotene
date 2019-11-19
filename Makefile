@@ -3,6 +3,9 @@
 build:
 	npx lerna run build
 
+publishToNpm:
+	npx lerna publish
+
 install:
 	npx lerna clean --yes
 	npx lerna bootstrap
