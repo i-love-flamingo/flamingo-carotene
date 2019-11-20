@@ -11,6 +11,7 @@ class CommandDictionary {
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
     this.setCommands()
+    this.setOptions()
   }
 
   /**
@@ -36,6 +37,22 @@ class CommandDictionary {
         if (listener.command && listener.description) {
           const {command, description} = (listener)
           this.addCommand(command, description)
+        }
+      }
+    }
+  }
+
+  /**
+   * Retrieves all options from the modules getDictionaryOptions
+   */
+  setOptions() {
+    const modules = this.core.getModules()
+
+    for (const module of modules) {
+      if (typeof module.getDictionaryOptions == 'function' ) {
+        const options = module.getDictionaryOptions()
+        for (const option of options) {
+          this.addOption(option.option, option.description)
         }
       }
     }
