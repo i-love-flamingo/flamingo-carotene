@@ -15,6 +15,8 @@ var _deepEqual = _interopRequireDefault(require("deep-equal"));
 
 var _objectPathImmutable = _interopRequireDefault(require("object-path-immutable"));
 
+require("ie-string-startswith-polyfill");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
