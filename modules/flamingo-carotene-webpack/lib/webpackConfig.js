@@ -38,11 +38,17 @@ class WebpackConfig {
   }
 
   getWebpackConfig () {
+
+    let mode = isProd ? 'production' : 'development'
+    if (this.cliTools.hasOption(['--forceDev'])) {
+      mode = 'development'
+    }
+
     const webpackConfig = {
       target: 'web',
       stats: 'verbose',
       // context: config.paths.src,
-      mode: isProd ? 'production' : 'development',
+      mode: mode,
       entry: path.join(this.config.paths.webpack.src, 'index.js'),
       output: {
         path: this.config.paths.webpackDist,

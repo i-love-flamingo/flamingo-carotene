@@ -114,6 +114,13 @@ class FlamingoCaroteneWebpack {
   getWatchers () {
     return this.watcher
   }
+
+  getDictionaryOptions() {
+    return [{
+      option: 'forceDev',
+      description: 'Force webpack to use "development" as buildMode'
+    }]
+  }
 }
 
 module.exports = FlamingoCaroteneWebpack
