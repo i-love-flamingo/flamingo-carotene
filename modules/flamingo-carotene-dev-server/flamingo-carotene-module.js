@@ -124,6 +124,13 @@ class DevServer {
     ]
   }
 
+  getDictionaryOptions() {
+    return [{
+      option: '--verboseWatch',
+      description: 'Display folders and globs to watch, displays reasons why build targets were called.'
+    }]
+  }
+
   getWatcherConfigs () {
     if (this.watcherConfigs) {
       return this.watcherConfigs

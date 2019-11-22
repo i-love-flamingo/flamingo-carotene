@@ -58,7 +58,7 @@ class CliTools {
   }
 
   isVerbose() {
-    return this.args.indexOf('-v') > -1
+    return this.hasOption('--verbose') || this.hasOption('-v')
   }
 
   isExperimental () {
@@ -130,6 +130,9 @@ class CliTools {
    */
   showUsage () {
     this.info(`Usage: flamingo-carotene {command} [option(s)]`)
+    this.dictionary.addOption('--verbose,  -v', 'Displays much more output.')
+    this.dictionary.addOption('--experimental', 'Enables experimental flag to enable experimental features (if there are any)')
+
     process.stdout.write(this.dictionary.prettyCommands())
     process.stdout.write(this.dictionary.prettyOptions())
   }

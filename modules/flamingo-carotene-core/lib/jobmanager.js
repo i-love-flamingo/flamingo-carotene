@@ -8,13 +8,13 @@ class Jobmanager {
     this.callbackOnFinishForGroups = {}
     const dictionary = this.core.getDictionary()
 
-    dictionary.addOption('progress', 'Show progress bar in CLI')
+    dictionary.addOption('--progress', 'Show progress bar in CLI')
     this.useProgress = this.cliTools.hasOption(['--progress', '--forceProgress'])
     if (this.useProgress) {
       this.cliTools.info(`Showing Progressbar`)
     }
 
-    dictionary.addOption('forceProgress', 'Show progress bar in CLI without checking for TTY')
+    dictionary.addOption('--forceProgress', 'Show progress bar in CLI without checking for TTY')
     this.forceProgress = this.cliTools.hasOption('--forceProgress')
     if (this.forceProgress) {
       this.cliTools.info(`Forcing Progressbar`)
