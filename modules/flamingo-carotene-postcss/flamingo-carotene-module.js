@@ -48,7 +48,7 @@ class PostCSS {
 
               // Lookup the css-loader to place PostCSS loader after it
               let postcssLoaderIndex = null
-              for (let loaderIndex = 0; rule.use.length -1; loaderIndex++) {
+              for (let loaderIndex = 0; loaderIndex < rule.use.length; loaderIndex++) {
                 const loader = rule.use[loaderIndex]
                 if (typeof(loader) === 'string') {
                   if (loader === 'css-loader') {
