@@ -33,7 +33,6 @@ const copyFromSrcToDest = (srcPath, destPath) => {
     }
 
     mkdirp(destPath, () => {
-      console.log('cp', '-r', srcPath, destPath)
       shell.cp('-r', srcPath, destPath)
     })
   } catch (e) {
