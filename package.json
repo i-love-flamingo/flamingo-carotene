@@ -20,6 +20,6 @@
     "link-modules": "make link"
   },
   "devDependencies": {
-    "lerna": "^3.1.2"
+    "lerna": "^3.19.0"
   }
 }
