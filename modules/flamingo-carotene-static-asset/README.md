@@ -37,4 +37,6 @@ config.staticAsset = {
 ```
 
 `basePaths` Takes root paths for a source and a destination paths
+
 `assetPaths` Lists all configured asset paths composed of source and destination paths
+src can be a folder or a filename.

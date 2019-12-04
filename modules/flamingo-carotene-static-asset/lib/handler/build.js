@@ -1,5 +1,7 @@
 const mkdirp = require('mkdirp')
 const path = require('path')
+const fs = require('fs')
+
 const shell = require('shelljs')
 
 const errors = []
@@ -26,7 +28,12 @@ const logErrors = (cliTools) => {
  */
 const copyFromSrcToDest = (srcPath, destPath) => {
   try {
-    mkdirp(path.dirname(destPath), () => {
+    if (fs.lstatSync(srcPath).isDirectory()) {
+      srcPath = path.join(srcPath, '*')
+    }
+
+    mkdirp(destPath, () => {
+      console.log('cp', '-r', srcPath, destPath)
       shell.cp('-r', srcPath, destPath)
     })
   } catch (e) {
@@ -86,3 +93,4 @@ const build = (core) => {
 }
 
 module.exports = build
+

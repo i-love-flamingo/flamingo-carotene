@@ -16,7 +16,7 @@
     "link": "npm link"
   },
   "dependencies": {
-    "async": "^2.6.3",
+    "async": "^3.1.0",
     "glob": "^7.1.6",
     "mkdirp": "^0.5.1",
     "shelljs": "^0.8.2"
