@@ -21,8 +21,8 @@
     "link": "npm link"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "cli-progress": "^2.1.1",
+    "chalk": "^3.0.0",
+    "cli-progress": "^3.4.0",
     "cli-table3": "^0.5.1",
     "intercept-stdout": "^0.1.2",
     "node-emoji": "^1.10.0",

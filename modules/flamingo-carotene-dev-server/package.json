@@ -16,7 +16,7 @@
     "link": "npm link"
   },
   "dependencies": {
-    "chokidar": "^2.1.8",
+    "chokidar": "^3.3.0",
     "debounce": "^1.2.0",
     "socket.io": "^2.3.0"
   }
