@@ -15,7 +15,7 @@ var _deepEqual = _interopRequireDefault(require("deep-equal"));
 
 var _objectPathImmutable = _interopRequireDefault(require("object-path-immutable"));
 
-require("ie-string-startswith-polyfill");
+require("core-js/features/string/starts-with");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 

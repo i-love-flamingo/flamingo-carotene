@@ -3,7 +3,7 @@ import { get } from 'object-path'
 import watch from 'redux-watch'
 import deepEqual from 'deep-equal'
 import objectPathImmutable from 'object-path-immutable'
-import "ie-string-startswith-polyfill";
+import 'core-js/features/string/starts-with';
 
 /**
  * Generic reducer with the ability to set values in the state tree
