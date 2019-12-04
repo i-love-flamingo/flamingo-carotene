@@ -213,9 +213,11 @@ class WebpackConfig {
       {
         loader: 'sass-loader',
         options: {
-          includePaths: [
-            path.join(this.config.paths.project, 'node_modules')
-          ]
+          sassOptions: {
+            includePaths: [
+              path.join(this.config.paths.project, 'node_modules')
+            ]
+          }
         }
       },
       {
@@ -229,7 +231,6 @@ class WebpackConfig {
         styleLoader.options.sourceMap = true
       })
     }
-
     return styleLoaders
   }
 
