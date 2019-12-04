@@ -28,5 +28,8 @@ cleanDep:
 ci:
 	npx lerna exec -- npm ci
 
+outdated:
+	npx lerna exec -- npm outdated
+
 yarn-link:
 	lerna exec -- yarn link
