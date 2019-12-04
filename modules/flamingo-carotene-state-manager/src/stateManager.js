@@ -2,8 +2,9 @@ import { createStore } from 'redux'
 import { get } from 'object-path'
 import watch from 'redux-watch'
 import deepEqual from 'deep-equal'
-import objectPathImmutable from 'object-path-immutable'
+import immutable from 'object-path-immutable'
 import 'core-js/features/string/starts-with';
+
 
 /**
  * Generic reducer with the ability to set values in the state tree
@@ -15,7 +16,7 @@ import 'core-js/features/string/starts-with';
  */
 const rootReducer = function rootReducer (state = {}, action) {
   if (action.type.startsWith('SET:') && action.path !== undefined) {
-    return objectPathImmutable.set(state, action.path, action.value)
+    return immutable.wrap(state).set(action.path, action.value).value()
   }
   return state
 }
@@ -88,6 +89,7 @@ class State {
 
     // Only dispatch action if change occurs
     if (!newValueEqualsCurrentValue) {
+      console.log({type: 'SET: ' + path, path, value})
       this.store.dispatch({type: 'SET: ' + path, path, value})
     }
   }

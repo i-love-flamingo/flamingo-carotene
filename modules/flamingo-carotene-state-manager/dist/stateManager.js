@@ -38,7 +38,7 @@ var rootReducer = function rootReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   if (action.type.startsWith('SET:') && action.path !== undefined) {
-    return _objectPathImmutable["default"].set(state, action.path, action.value);
+    return _objectPathImmutable["default"].wrap(state).set(action.path, action.value).value();
   }
 
   return state;
@@ -128,6 +128,11 @@ function () {
       var newValueEqualsCurrentValue = deepEqualStrict(currentValue, value); // Only dispatch action if change occurs
 
       if (!newValueEqualsCurrentValue) {
+        console.log({
+          type: 'SET: ' + path,
+          path: path,
+          value: value
+        });
         this.store.dispatch({
           type: 'SET: ' + path,
           path: path,
