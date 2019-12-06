@@ -116,7 +116,7 @@ class WebpackConfig {
           new UglifyJsPlugin({
             cache: true,
             parallel: true,
-            sourceMap: true,
+            sourceMap: (mode === 'development'),
             uglifyOptions: {
               keep_fnames: true // Needed for IE11 and behaviors - otherwise the IE cannot differentiate the behavior names
             }
@@ -134,6 +134,15 @@ class WebpackConfig {
 
     if (!isProd) {
       webpackConfig['devtool'] = 'source-map'
+    }
+
+    if (this.cliTools.hasOption(['--analyzeBundle'])) {
+      const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+      webpackConfig.plugins.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: path.join(this.config.paths.project, 'webpackBundleAnalyze.html'),
+        openAnalyzer: true
+      }))
     }
 
     return webpackConfig
