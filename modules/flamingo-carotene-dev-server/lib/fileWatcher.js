@@ -189,7 +189,6 @@ class FileWatcher {
 
     this.buildInProgress = false
 
-    console.log('watcherFinishBuildCallback', this.socketCommand)
     // reload browser
     this.socket.emit(this.socketCommand, this.config)
 
