@@ -63,7 +63,7 @@ class FileWatcher {
       watcherConfig.watcherConfig || {}
     )
 
-    this.socketCommand =  watcherConfig.socketCommand || 'build'
+    this.socketCommand =  watcherConfig.socketCommand || 'built'
 
     // instance of chokidar
     this.watcher = null
@@ -189,6 +189,7 @@ class FileWatcher {
 
     this.buildInProgress = false
 
+    console.log('watcherFinishBuildCallback', this.socketCommand)
     // reload browser
     this.socket.emit(this.socketCommand, this.config)
 
