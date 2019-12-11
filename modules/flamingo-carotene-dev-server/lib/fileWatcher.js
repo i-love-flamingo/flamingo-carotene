@@ -63,6 +63,8 @@ class FileWatcher {
       watcherConfig.watcherConfig || {}
     )
 
+    this.socketCommand =  watcherConfig.socketCommand || 'build'
+
     // instance of chokidar
     this.watcher = null
 
@@ -188,7 +190,7 @@ class FileWatcher {
     this.buildInProgress = false
 
     // reload browser
-    this.socket.emit('built')
+    this.socket.emit(this.socketCommand, this.config)
 
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {

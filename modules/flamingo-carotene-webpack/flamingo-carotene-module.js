@@ -91,6 +91,7 @@ class FlamingoCaroteneWebpack {
         path.join(config.paths.src, '**', '*.{sass,scss}')
       ],
       command: 'watchWebpackCss',
+      socketCommand: 'reloadCSS',
       callbackKey: 'webpackCss',
       unwatchConfig: null // if you need to unwatch specific files
     }
@@ -102,6 +103,7 @@ class FlamingoCaroteneWebpack {
           path.join(config.paths.src, '**', '*.js')
         ],
         command: 'watchWebpackJs',
+        socketCommand: 'reloadJS',
         callbackKey: 'webpackJs'
       }
     ]
