@@ -16,7 +16,7 @@
     "link": "npm link"
   },
   "dependencies": {
-    "css-loader": "^3.2.1",
+    "css-loader": "^3.3.0",
     "file-loader": "^5.0.2",
     "hard-source-webpack-plugin": "^0.13.1",
     "import-glob": "^1.5.0",
