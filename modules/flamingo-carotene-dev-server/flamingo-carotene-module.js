@@ -99,7 +99,7 @@ class DevServer {
             // Add the socket client to the beginning of every multi file entry
             if (Array.isArray(config.webpackConfig.entry[entryName])) {
               config.webpackConfig.entry[entryName].unshift(
-                path.join(__dirname, 'lib', 'socketClient.js')
+                path.join(__dirname, 'client', 'socketClient.js')
               )
             }
           }

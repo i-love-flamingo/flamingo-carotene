@@ -4,6 +4,7 @@ class Jobmanager {
   constructor () {
     this.core = require('./core')
     this.cliTools = this.core.getCliTools()
+    this.reportCallback = function() {}
     this.callbackOnFinish = function() {}
     this.callbackOnFinishForGroups = {}
     const dictionary = this.core.getDictionary()
@@ -63,6 +64,7 @@ class Jobmanager {
 
       this.progressBar.start(1, 0);
       this.progressBar.update(0, {'openJobList': ''});
+      this.reportJobChange()
     }
   }
 
@@ -86,6 +88,7 @@ class Jobmanager {
     if (this.useProgress) {
       this.progressBar.setTotal(this.getTotalJobCount())
     }
+    this.reportJobChange()
   }
 
   setSubJobProgress(id, subjobs) {
@@ -137,6 +140,7 @@ class Jobmanager {
         process.stdout.write(buffer);
       }
     }
+    this.reportJobChange()
   }
 
   getTotalJobCount () {
@@ -204,6 +208,20 @@ class Jobmanager {
     else {
       this.callbackOnFinishForGroups[group] = callback
     }
+  }
+
+  reportJobChange () {
+    if (typeof this.reportCallback === 'function') {
+      this.reportCallback({
+        total: this.getTotalJobCount(),
+        finished: this.getFinishedJobCount(),
+        openJobs: this.getOpenJobs()
+      })
+    }
+  }
+
+  setReportCallback(callback) {
+    this.reportCallback = callback
   }
 }
 

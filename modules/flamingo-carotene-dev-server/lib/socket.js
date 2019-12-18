@@ -3,6 +3,7 @@ class Socket {
     this.config = core.getConfig()
     this.cliTools = core.getCliTools()
     this.io = null
+    core.getJobmanager().setReportCallback(this.report.bind(this))
   }
 
   init () {
@@ -17,6 +18,12 @@ class Socket {
     // })
 
     this.io.listen(this.config.devServer.port)
+  }
+
+  report (reportData) {
+    if (this.io) {
+      this.io.emit('report', reportData)
+    }
   }
 
   emit (eventName, eventData) {
