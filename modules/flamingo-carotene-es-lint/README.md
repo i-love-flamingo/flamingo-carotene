@@ -48,7 +48,8 @@ config.eslint = {
   useWebpackLoader: true,
   breakOnError: false,
   configFilePath: null when found in project || default from module,
-  ignoreFilePath: null when found in project || default from module
+  ignoreFilePath: null when found in project || default from module,
+  fixErrors: null when found in project || default from module,
 }
 ```
 
@@ -62,4 +63,7 @@ automatically.
 supported by ESLint (see 'How it works').
 
 `ignoreFilePath` Path to an ESLint ignore file. Does not have to be provided when using the standard ignore options
+supported by ESLint (see 'How it works').
+
+`fixErrors` boolean - uses the '--fix' option for esLint (default = false)
 supported by ESLint (see 'How it works').

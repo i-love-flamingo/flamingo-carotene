@@ -97,6 +97,10 @@ const getCommandParameters = function (config) {
     }
   }
 
+  if (config.eslint.hasOwnProperty('fixErrors') && config.eslint.fixErrors === true) {
+    parameters.push('--fix')
+  }
+
   return parameters.concat([
     '--ext',
     '.js',

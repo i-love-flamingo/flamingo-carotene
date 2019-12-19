@@ -25,7 +25,8 @@ class ESLint {
             useWebpackLoader: true,
             breakOnError: false,
             configFilePath: this.isConfigAvailableInProject() ? this.getProjectConfigFile(configFileNames) : path.join(config.paths.eslint, defaultConfigFileName),
-            ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName)
+            ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName),
+            fixErrors: false
           }
         }
       },
