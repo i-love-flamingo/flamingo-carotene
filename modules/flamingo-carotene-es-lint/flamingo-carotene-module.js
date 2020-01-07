@@ -26,7 +26,9 @@ class ESLint {
             breakOnError: false,
             configFilePath: this.isConfigAvailableInProject() ? this.getProjectConfigFile(configFileNames) : path.join(config.paths.eslint, defaultConfigFileName),
             ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName),
-            fixErrors: false
+            fixErrors: false,
+            cache: true,
+            cacheFile: path.join(this.config.paths.project, '.cache/eslint/cache')
           }
         }
       },
@@ -54,7 +56,10 @@ class ESLint {
             options: {
               emitWarning: true,
               useEslintrc: false,
-              configFile: config.eslint.configFilePath
+              configFile: config.eslint.configFilePath,
+              fix: false, // webpack eslint should NOT fix problems (commonly used this config in dev mode, with watcher)
+              cache: config.eslint.cache,
+              cacheFile: config.eslint.cacheFile,
             }
           }
 

@@ -101,6 +101,17 @@ const getCommandParameters = function (config) {
     parameters.push('--fix')
   }
 
+  if (config.eslint.hasOwnProperty('fixErrors') && config.eslint.fixErrors === true) {
+    parameters.push('--fix')
+  }
+
+  if (config.eslint.hasOwnProperty('cache') && config.eslint.cache === true) {
+    parameters.push('--cache')
+    parameters.push('--cache-file')
+    parameters.push(config.eslint.cacheFile)
+  }
+
+
   return parameters.concat([
     '--ext',
     '.js',
