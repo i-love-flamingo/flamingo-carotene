@@ -50,6 +50,7 @@ config.eslint = {
   configFilePath: null when found in project || default from module,
   ignoreFilePath: null when found in project || default from module,
   fixErrors: null when found in project || default from module,
+  extentions: ['.js'] when found in project || default from module,
 }
 ```
 
@@ -67,3 +68,6 @@ supported by ESLint (see 'How it works').
 
 `fixErrors` boolean - uses the '--fix' option for esLint (default = false)
 supported by ESLint (see 'How it works').
+
+'extentions: array of Strings (default = ['.js']) 
+

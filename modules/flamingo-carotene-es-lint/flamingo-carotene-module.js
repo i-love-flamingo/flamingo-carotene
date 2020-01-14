@@ -28,7 +28,8 @@ class ESLint {
             ignoreFilePath: this.isIgnoreConfigAvailableInProject() ? null : path.join(config.paths.eslint, defaultIgnoreFileName),
             fixErrors: false,
             cache: true,
-            cacheFile: path.join(this.config.paths.project, '.cache/eslint/cache')
+            cacheFile: path.join(this.config.paths.project, '.cache/eslint/cache'),
+            extentions: ['.js']
           }
         }
       },
@@ -75,6 +76,15 @@ class ESLint {
         command: 'lint',
         description: 'Lint Javascript with ES Lint',
         handler: lintHandler
+      },
+      {
+        command: 'fixLint',
+        description: 'Lint Javascript with ES Lint and automaticly fix fixable issues',
+        handler: function (core) {
+          const config = core.getConfig()
+          config.eslint.fixErrors = true
+          lintHandler(core)
+        }
       },
       {
         command: 'build',
