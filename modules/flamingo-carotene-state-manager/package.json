@@ -18,18 +18,18 @@
     "link": "npm link"
   },
   "dependencies": {
-    "core-js": "^3.4.8",
+    "core-js": "^3.6.4",
     "deep-equal": "^1.1.1",
     "object-path": "^0.11.4",
     "object-path-immutable": "^4.0.2",
-    "redux": "^4.0.4",
+    "redux": "^4.0.5",
     "redux-watch": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
     "babel-plugin-import-glob": "^2.0.0",
