@@ -61,13 +61,11 @@ class CaroteneDisplay {
 
   showMessage (milliseconds = 0) {
     this.domElement.style.transform = 'translateY(0)'
-    this.domElementCaroteneButton.style.opacity = '0'
     this.domElementCaroteneButton.style.transform = 'scale(0)'
     clearTimeout(this.messageTimeout)
     if (milliseconds > 0) {
       this.messageTimeout = setTimeout(_ => {
         this.domElement.style.transform = 'translateY(100%)'
-        this.domElementCaroteneButton.style.opacity = '1'
         this.domElementCaroteneButton.style.transform = 'scale(1)'
       }, milliseconds)
     }
@@ -83,7 +81,7 @@ class CaroteneDisplay {
     this.domElementCaroteneButton.style.left = '20px'
     this.domElementCaroteneButton.style.bottom = '10px'
     this.domElementCaroteneButton.style.transform = 'scale(1)'
-    this.domElementCaroteneButton.style.transition = 'opacity 300ms linear 300ms, transform 500ms cubic-bezier(0.515, 0.010, 0.425, 1.420) 300ms'
+    this.domElementCaroteneButton.style.transition = 'transform 500ms cubic-bezier(0.515, 0.010, 0.425, 1.420) 300ms'
     this.domElementCaroteneButton.innerHTML = this.getSVGCarrotIcon()
     this.domElementCaroteneButton.addEventListener('mouseover', _ => this.showMessage(0))
 
