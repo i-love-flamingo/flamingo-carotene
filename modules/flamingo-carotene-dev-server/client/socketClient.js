@@ -8,10 +8,12 @@ const caroteneDisplay = new CaroteneDisplay()
 
 socket.on('report', function onReport (reportData) {
   caroteneDisplay.setReport(reportData)
+  caroteneDisplay.showMessage(reportData.openJobs.length ? 0 : 2000)
 })
 
 socket.on('connect', function onConnect () {
   caroteneDisplay.setMessage('Connected socket with id: ' + socket.id)
+  caroteneDisplay.showMessage(2000)
 })
 
 socket.on('built', function () {

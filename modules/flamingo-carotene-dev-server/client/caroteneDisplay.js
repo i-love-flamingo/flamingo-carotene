@@ -4,6 +4,7 @@ class CaroteneDisplay {
     this.domElementMessage = null
     this.domElementMessageIcon = null
     this.message = null
+    this.messageTimeout = null
     this.buildProgressData = {
       finished: 0,
       total: 0,
@@ -22,6 +23,7 @@ class CaroteneDisplay {
   }
 
   setFullscreen (state) {
+    clearTimeout(this.messageTimeout)
     if (state) {
       this.domElement.style.position = 'fixed'
       this.domElement.style.top = '0px'
@@ -30,6 +32,7 @@ class CaroteneDisplay {
       this.domElement.style.position = 'sticky'
       this.domElement.style.top = 'auto'
       this.domElementIcon.style.display = 'none'
+      this.showMessage(2000)
     }
   }
 
@@ -58,7 +61,34 @@ class CaroteneDisplay {
     }
   }
 
+  showMessage (milliseconds = 0) {
+    this.domElement.style.transform = 'translateY(0)'
+    this.domElementCaroteneButton.style.opacity = '0'
+    this.domElementCaroteneButton.style.transform = 'scale(0)'
+    clearTimeout(this.messageTimeout)
+    if (milliseconds > 0) {
+      this.messageTimeout = setTimeout(_ => {
+        this.domElement.style.transform = 'translateY(100%)'
+        this.domElementCaroteneButton.style.opacity = '1'
+        this.domElementCaroteneButton.style.transform = 'scale(1)'
+      }, milliseconds)
+    }
+  }
+
   createDomElement () {
+    // carrot button
+    this.domElementCaroteneButton = document.createElement('div')
+    this.domElementCaroteneButton.style.width = '20px'
+    this.domElementCaroteneButton.style.height = '20px'
+    this.domElementCaroteneButton.style.height = '20px'
+    this.domElementCaroteneButton.style.position = 'fixed'
+    this.domElementCaroteneButton.style.left = '20px'
+    this.domElementCaroteneButton.style.bottom = '10px'
+    this.domElementCaroteneButton.style.transform = 'scale(1)'
+    this.domElementCaroteneButton.style.transition = 'opacity 300ms linear 300ms, transform 500ms cubic-bezier(0.515, 0.010, 0.425, 1.420) 300ms'
+    this.domElementCaroteneButton.innerHTML = this.getSVGCarrotIcon()
+    this.domElementCaroteneButton.addEventListener('mouseover', _ => this.showMessage(0))
+
     // Container
     this.domElement = document.createElement('div')
     this.domElement.setAttribute('id', 'caroteneDisplay')
@@ -74,6 +104,9 @@ class CaroteneDisplay {
     this.domElement.style.padding = '10px 20px'
     this.domElement.style.fontSize = '14px'
     this.domElement.style.fontFamily = '"Courier New", Courier, monospace'
+    this.domElement.style.transition = 'transform 300ms ease-in-out'
+    this.domElement.addEventListener('mouseover', _ => this.showMessage(0))
+    this.domElement.addEventListener('mouseout', _ => this.showMessage(2000))
 
     // Icon
     this.domElementIcon = document.createElement('div')
@@ -117,10 +150,12 @@ class CaroteneDisplay {
     style.appendChild(document.createTextNode(`@keyframes rotatingBigCarrot { from { transform: rotate3d(0.2, 1, 0.2, 0deg); } to { transform: rotate3d(-0.2, 1, 0.2, 360deg)  } }`))
     this.domElement.appendChild(style)
 
-    this.setFullscreen(false)
-
     const bodyElement = Array.from(document.getElementsByTagName('body'))[0]
     bodyElement.appendChild(this.domElement)
+    // add carrot button before
+    this.domElement.parentNode.insertBefore(this.domElementCaroteneButton, this.domElement)
+
+    this.setFullscreen(false)
   }
 
   getSVGCarrotIcon () {
