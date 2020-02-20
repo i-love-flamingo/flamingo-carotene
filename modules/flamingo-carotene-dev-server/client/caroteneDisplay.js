@@ -25,11 +25,9 @@ class CaroteneDisplay {
   setFullscreen (state) {
     clearTimeout(this.messageTimeout)
     if (state) {
-      this.domElement.style.position = 'fixed'
       this.domElement.style.top = '0px'
       this.domElementIcon.style.display = 'flex'
     } else {
-      this.domElement.style.position = 'sticky'
       this.domElement.style.top = 'auto'
       this.domElementIcon.style.display = 'none'
       this.showMessage(2000)
@@ -92,7 +90,7 @@ class CaroteneDisplay {
     // Container
     this.domElement = document.createElement('div')
     this.domElement.setAttribute('id', 'caroteneDisplay')
-    this.domElement.style.position = 'sticky'
+    this.domElement.style.position = 'fixed'
     this.domElement.style.zIndex = 999999
     this.domElement.style.bottom = 'auto'
     this.domElement.style.left = 0
