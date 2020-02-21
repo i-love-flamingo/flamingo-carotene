@@ -48,7 +48,7 @@ class CaroteneDisplay {
 
     if (this.buildProgressData.finished < this.buildProgressData.total) {
       const percent = Math.round(100 / this.buildProgressData.total * this.buildProgressData.finished)
-      message = `Build in progress... ${percent}% (${this.buildProgressData.total}/${this.buildProgressData.finished}) ${this.buildProgressData.openJobs.join(', ')}`
+      message = `Build in progress... ${percent}% (${this.buildProgressData.finished}/${this.buildProgressData.total}) ${this.buildProgressData.openJobs.join(', ')}`
       iconAnimation = 'rotatingBigCarrot 2s linear infinite'
     }
 
