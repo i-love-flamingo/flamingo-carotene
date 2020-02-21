@@ -8,7 +8,18 @@ const caroteneDisplay = new CaroteneDisplay()
 
 socket.on('report', function onReport (reportData) {
   caroteneDisplay.setReport(reportData)
-  caroteneDisplay.showMessage(reportData.openJobs.length ? 0 : 2000)
+  if (reportData.openJobs.length > 0) {
+    caroteneDisplay.setFullscreen(false)
+  }
+  if (!caroteneDisplay.isFullscreen()) {
+    caroteneDisplay.showMessage(reportData.openJobs.length ? 0 : 2000)
+  }
+})
+
+socket.on('buildOutput', function onReport (reportData) {
+  // caroteneDisplay.setReport(reportData)
+  caroteneDisplay.setMessage(reportData)
+  caroteneDisplay.setFullscreen(true, false)
 })
 
 socket.on('connect', function onConnect () {

@@ -53,10 +53,11 @@ const eslint = (core) => {
 
   childProcess.on('error', function (exception) {
     console.log('An Error occured while ES Linting:', exception)
+    core.reportError(`ESLint report errors.`)
   })
 
   childProcess.on('exit', function (code) {
-    core.getJobmanager().finishJob('eslint')
+    core.getJobmanager().reportFinishJob('eslint')
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
@@ -65,11 +66,13 @@ const eslint = (core) => {
       } else {
         cliTools.info(output)
       }
+      core.reportBuildNotes('ESLint report buildNotes');
     }
 
     if (config.eslint.breakOnError && errors.length > 0) {
       core.reportError(`ESLint report errors.`)
     }
+    core.getJobmanager().finishJob('eslint')
   })
 }
 

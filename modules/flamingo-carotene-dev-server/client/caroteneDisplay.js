@@ -3,8 +3,12 @@ class CaroteneDisplay {
     this.domElement = null
     this.domElementMessage = null
     this.domElementMessageIcon = null
+    this.bigCarrotIconWrapper = null
+
     this.message = null
     this.messageTimeout = null
+    this.fullscreenState = false
+
     this.buildProgressData = {
       finished: 0,
       total: 0,
@@ -22,11 +26,22 @@ class CaroteneDisplay {
     }.bind(this), 500)
   }
 
-  setFullscreen (state) {
+  isFullscreen () {
+    return this.fullscreenState
+  }
+
+  setFullscreen (state, showBigCarrot) {
     clearTimeout(this.messageTimeout)
+
+    if (typeof showBigCarrot === 'undefined') {
+      showBigCarrot = true
+    }
+
+    this.fullscreenState = state
     if (state) {
       this.domElement.style.top = '0px'
       this.domElementIcon.style.display = 'flex'
+      this.bigCarrotIconWrapper.style.display = showBigCarrot ? 'block' : 'none'
     } else {
       this.domElement.style.top = 'auto'
       this.domElementIcon.style.display = 'none'
@@ -60,14 +75,16 @@ class CaroteneDisplay {
   }
 
   showMessage (milliseconds = 0) {
-    this.domElement.style.transform = 'translateY(0)'
-    this.domElementCaroteneButton.style.transform = 'scale(0)'
-    clearTimeout(this.messageTimeout)
-    if (milliseconds > 0) {
-      this.messageTimeout = setTimeout(_ => {
-        this.domElement.style.transform = 'translateY(100%)'
-        this.domElementCaroteneButton.style.transform = 'scale(1)'
-      }, milliseconds)
+    if (this.domElement) {
+      this.domElement.style.transform = 'translateY(0)'
+      this.domElementCaroteneButton.style.transform = 'scale(0)'
+      clearTimeout(this.messageTimeout)
+      if (milliseconds > 0) {
+        this.messageTimeout = setTimeout(_ => {
+          this.domElement.style.transform = 'translateY(100%)'
+          this.domElementCaroteneButton.style.transform = 'scale(1)'
+        }, milliseconds)
+      }
     }
   }
 
@@ -114,12 +131,12 @@ class CaroteneDisplay {
     this.domElementIcon.style.alignItems = 'center'
     this.domElementIcon.style.justifyContent = 'center'
 
-    const iconWrapper = document.createElement('div')
-    iconWrapper.style.width = '100px'
-    iconWrapper.style.height = '100px'
-    iconWrapper.style.animation = 'rotatingBigCarrot 2s linear infinite'
-    iconWrapper.innerHTML = this.getSVGCarrotIcon()
-    this.domElementIcon.appendChild(iconWrapper)
+    this.bigCarrotIconWrapper = document.createElement('div')
+    this.bigCarrotIconWrapper.style.width = '100px'
+    this.bigCarrotIconWrapper.style.height = '100px'
+    this.bigCarrotIconWrapper.style.animation = 'rotatingBigCarrot 2s linear infinite'
+    this.bigCarrotIconWrapper.innerHTML = this.getSVGCarrotIcon()
+    this.domElementIcon.appendChild(this.bigCarrotIconWrapper)
 
     // Message
     this.domElementMessageContainer = document.createElement('div')

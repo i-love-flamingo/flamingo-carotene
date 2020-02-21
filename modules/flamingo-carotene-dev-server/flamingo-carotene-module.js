@@ -103,7 +103,6 @@ class DevServer {
               )
             }
           }
-          core.getCliTools().info(`Waiting for a filechange...`)
         }
       },
       {
@@ -115,10 +114,13 @@ class DevServer {
 
           const watcherConfigs = this.getWatcherConfigs()
 
+          const DevServer = require('./lib/devServer.js')
+          const devServer = new DevServer(socket, core);
           for (const watcherConfig of watcherConfigs) {
-            const FileWatcher = require('./lib/fileWatcher.js')
-            this.watchers.push(new FileWatcher(socket, core, watcherConfig))
+            devServer.addWatcher(watcherConfig)
           }
+
+          devServer.start()
         }
       }
     ]

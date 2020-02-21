@@ -62,7 +62,7 @@ const sassLint = (core) => {
   })
 
   childProcess.on('exit', (code) => {
-    core.getJobmanager().finishJob('sasslint')
+    core.getJobmanager().reportFinishJob('sasslint')
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
@@ -71,11 +71,15 @@ const sassLint = (core) => {
       } else {
         cliTools.info(output)
       }
+      core.reportBuildNotes(`SassLint report notes.`)
     }
 
     if (config.sassLint.breakOnError && errors.length > 0) {
       core.reportError(`SassLint report errors.`)
     }
+
+    core.getJobmanager().finishJob('sasslint')
+
   })
 }
 

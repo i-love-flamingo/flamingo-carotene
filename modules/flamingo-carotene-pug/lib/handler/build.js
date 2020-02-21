@@ -71,7 +71,7 @@ const pugBuild = (core) => {
       core.getJobmanager().setSubJobProgress('pug', finishedSubJobs)
 
       if (finishedSubJobs >= jobArrays.length) {
-        core.getJobmanager().finishJob('pug')
+        core.getJobmanager().reportFinishJob('pug')
         const output = [].concat(results, errors).join('\n').trim()
         if (output.length > 0) {
           if (code !== 0) {
@@ -84,6 +84,8 @@ const pugBuild = (core) => {
         if (config.pug.breakOnError && errors.length > 0) {
           core.reportError(`Pug reported errors.`)
         }
+        core.getJobmanager().finishJob('pug')
+
       }
     })
   }

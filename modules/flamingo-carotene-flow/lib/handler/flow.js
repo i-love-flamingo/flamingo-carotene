@@ -27,7 +27,7 @@ const flow = (core) => {
   })
 
   childProcess.on('exit', function (code) {
-    core.getJobmanager().finishJob('flow')
+    core.getJobmanager().reportFinishJob('flow')
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
@@ -41,6 +41,8 @@ const flow = (core) => {
     if (config.flow.breakOnError && errors.length > 0) {
       core.reportError(`Flow report errors.`)
     }
+    core.getJobmanager().finishJob('flow')
+
   })
 }
 

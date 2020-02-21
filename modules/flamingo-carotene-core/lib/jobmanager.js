@@ -106,12 +106,19 @@ class Jobmanager {
     this.setSubJobProgress(id, this.jobs[id].subProgress + 1);
   }
 
-  finishJob(id){
+  reportFinishJob(id) {
     if (this.jobs[id]) {
       this.jobs[id].finished = true;
       const jobData = this.jobs[id]
       const duration = new Date().getTime() - jobData.start
       this.cliTools.info(`Job finished: ${jobData.label} in ${duration}ms`)
+    }
+  }
+
+  finishJob(id){
+    if (this.jobs[id]) {
+      this.jobs[id].finished = true;
+      const jobData = this.jobs[id]
       const group = jobData.group;
 
       if (group) {
@@ -137,6 +144,7 @@ class Jobmanager {
     if (this.useProgress) {
       this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
       if (this.getOpenJobs().length < 1) {
+        this.cliTools.stopBuffer()
         const buffer = this.cliTools.getBuffer();
         process.stdout.write(buffer);
       }

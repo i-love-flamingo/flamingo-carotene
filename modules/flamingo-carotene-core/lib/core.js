@@ -10,6 +10,7 @@ let modules = null
 let jobmanager = null
 let dictionary = null
 let errors = []
+let buildNotes = []
 
 class Core {
   getConfig () {
@@ -83,6 +84,10 @@ class Core {
     return dispatcher
   }
 
+  clearErrors () {
+    errors = []
+  }
+
   reportError (error) {
     errors.push(error)
   }
@@ -93,6 +98,22 @@ class Core {
 
   hasErrors () {
     return (errors.length > 0)
+  }
+
+  clearBuildNotes () {
+    buildNotes = []
+  }
+
+  reportBuildNotes (error) {
+    buildNotes.push(error)
+  }
+
+  getBuildNotes () {
+    return buildNotes
+  }
+
+  hasBuildNotes () {
+    return (buildNotes.length > 0)
   }
 
   getModules () {

@@ -6,13 +6,12 @@ class CliTools {
   constructor () {
     const core = require('./core')
     this.dictionary = core.getDictionary()
-
     this.args = process.argv.slice(2)
     this.verbose = this.isVerbose()
-
     this.chalk = chalk
     this.doBufferOut = false
-    this.buffer = ''
+    this.buffer = []
+    this.maxBufferEntries = 1000;
   }
 
   /**
@@ -69,9 +68,46 @@ class CliTools {
     this.doBufferOut = true
   }
 
-  getBuffer () {
+  addToBuffer(message, type, verbose) {
+    this.buffer.push({
+      time: new Date(),
+      message: message,
+      type: type,
+      verbose: verbose
+    });
+    if (this.buffer.length > this.maxBufferEntries) {
+      this.buffer = this.buffer.slice(this.maxBufferEntries)
+    }
+  }
+
+  getBuffer (laterThan) {
+    const newBuffer = []
+    for (const bufferLine of this.buffer) {
+      if (!laterThan || bufferLine.time.getTime() > laterThan.getTime()) {
+        newBuffer.push(bufferLine)
+      }
+    }
+    return newBuffer
+  }
+
+    /**
+   *
+   * @param laterThan
+   * @returns {string}
+   */
+  getBufferAsString (laterThan, customFormatFunction) {
+    let bufferString = ''
+    for (const bufferLine of this.getBuffer(laterThan)) {
+      if (typeof(customFormatFunction) != 'function') {
+        customFormatFunction = this.formatMessage
+      }
+      bufferString+= customFormatFunction(bufferLine.message, bufferLine.type, bufferLine.verbose)
+    }
+    return bufferString
+  }
+
+  stopBuffer() {
     this.doBufferOut = false
-    return this.buffer
   }
 
   /**
@@ -84,36 +120,38 @@ class CliTools {
     type = type || 'default'
     verbose = !!verbose
 
+    if (this.verbose || this.verbose === verbose) {
+      this.addToBuffer(message, type, verbose)
+
+      if (!this.doBufferOut) {
+        process.stdout.clearLine()
+        process.stdout.cursorTo(0)
+        process.stdout.write(this.formatMessage(message, type, verbose))
+      }
+    }
+  }
+
+  formatMessage(message, type, verbose) {
     let outMessage = ''
 
     const iconCarrot = emoji.get('carrot')
     const iconInfo = emoji.get('information_source')
     const iconWarn = emoji.get('warning')
 
-    if (this.verbose || this.verbose === verbose) {
-      switch (type) {
-        case 'info':
-          outMessage = `${verbose ? iconInfo : iconCarrot} ${message}\n`
-          break
-        case 'warn':
-          outMessage = `${iconWarn} ${message}\n`
-          break
-        case 'default':
-        default:
-          outMessage = `  ${message}\n`
-      }
+    switch (type) {
+      case 'info':
+        outMessage = `${verbose ? iconInfo : iconCarrot} ${message}\n`
+        break
+      case 'warn':
+        outMessage = `${iconWarn} ${message}\n`
+        break
+      case 'default':
+      default:
+        outMessage = `  ${message}\n`
     }
-
-
-    if (this.doBufferOut) {
-      this.buffer+= outMessage
-    }
-    else {
-      process.stdout.clearLine()
-      process.stdout.cursorTo(0)
-      process.stdout.write(outMessage)
-    }
+    return outMessage
   }
+
 
   log (message, verbose) {
     this.write(message, 'default', verbose)

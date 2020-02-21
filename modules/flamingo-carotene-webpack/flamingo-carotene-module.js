@@ -123,7 +123,10 @@ class FlamingoCaroteneWebpack {
       description: 'Force webpack to use "development" as buildMode'
     }, {
       option: '--analyzeBundle',
-      description: 'Executes Webpack Bundle Analyzer and creates a visual treemap of all package contents'
+      description: 'Executes Webpack Bundle Analyzer and creates a visual treemap of all package contents.'
+    }, {
+      option: '--writeWebpackStats',
+      description: 'Write webpack statistics data to stats.json'
     }]
   }
 }

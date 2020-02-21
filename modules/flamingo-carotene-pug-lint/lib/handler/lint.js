@@ -79,7 +79,7 @@ const pugLint = (core) => {
 
       // if every pack is finished
       if (finishedPacks >= lintFilePacks.length) {
-        core.getJobmanager().finishJob('puglint')
+        core.getJobmanager().reportFinishJob('puglint')
         const output = [].concat(results, errors).join('\n').trim()
 
         if (output.length > 0) {
@@ -93,6 +93,8 @@ const pugLint = (core) => {
         if (config.pugLint.breakOnError && errors.length > 0) {
           core.reportError(`PugLint report errors.`)
         }
+        core.getJobmanager().finishJob('puglint')
+
       }
     })
   }

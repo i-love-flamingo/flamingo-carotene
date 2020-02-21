@@ -40,28 +40,32 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
   }
 
   webpack(config.webpackConfig, (error, stats) => {
+    core.getJobmanager().reportFinishJob(jobId)
+
     if (error) {
       cliTools.warn(error.stack || error)
       if (error.details) {
         cliTools.warn(error.details)
       }
-      return
+      core.reportError(`Webpack report errors.`)
     }
 
-    const info = stats.toJson()
+    const statsData = stats.toJson()
 
-    if (stats.hasErrors()) {
-      cliTools.warn(info.errors)
+    if (stats.hasErrors() || stats.hasWarnings()) {
+      for (const error of statsData.errors) {
+        cliTools.warn(error)
+      }
+      for (const warnings of statsData.warnings) {
+        cliTools.warn(warnings)
+      }
+      core.reportError(`WebpackStat report errors.`)
     }
 
-    if (stats.hasWarnings()) {
-      cliTools.warn(info.warnings)
-    }
-
-    core.getJobmanager().finishJob(jobId)
-
-    if (cliTools.hasOption(['--analyzeBundle'])) {
-      fs.writeFile("stats.json", JSON.stringify(info), function (err) {
+    if (cliTools.hasOption(['--writeWebpackStats'])) {
+      const statsFilePath =  path.resolve('./stats.json')
+      cliTools.info(`Writing statistics to ${statsFilePath}`)
+      fs.writeFile(statsFilePath, JSON.stringify(statsData), function (err) {
         if (err) {
           return cliTools.warn('Cant output stats.json');
         }
@@ -71,6 +75,8 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {
       config.webpack.buildCallback(core)
     }
+
+    core.getJobmanager().finishJob(jobId)
   })
 }
 

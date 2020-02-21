@@ -78,6 +78,8 @@ const build = (core) => {
 
   // Creates base directory if it doesn't exist
   mkdirp(config.staticAsset.basePaths.dest, function (err) {
+    jobManager.reportFinishJob('staticAssets')
+
     if (err) {
       errors.push(err)
     }

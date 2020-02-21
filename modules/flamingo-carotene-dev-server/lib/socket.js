@@ -26,6 +26,12 @@ class Socket {
     }
   }
 
+  reportBuildOutput(output) {
+    if (this.io) {
+      this.io.emit('buildOutput', output)
+    }
+  }
+
   emit (eventName, eventData) {
     this.io.emit(eventName, eventData)
   }

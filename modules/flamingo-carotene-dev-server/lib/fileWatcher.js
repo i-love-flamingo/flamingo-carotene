@@ -15,22 +15,30 @@ class FileWatcher {
    *    watcherConfig - (optional) config object to be passed to the chokidar file watcher
    *    unwatchConfig - (optional) string or array of strings of file-, folder-, or glob-paths
    */
-  constructor (socket, core, watcherConfig) {
+  constructor (socket, core, watcherConfig, devServer, beforeRunCallback, afterRunCallback) {
     // Socket to client
     this.socket = socket
 
+    this.core = core;
+
     // Flamingo Carotene dispatcher
-    this.dispatcher = core.getDispatcher()
+    this.dispatcher = this.core.getDispatcher()
 
     // Flamingo Carotene cliTools
-    this.cliTools = core.getCliTools()
+    this.cliTools = this.core.getCliTools()
 
-    this.jobManager = core.getJobmanager();
+    this.jobManager = this.core.getJobmanager();
 
     // Flamingo Carotene config
-    this.config = core.getConfig()
+    this.config = this.core.getConfig()
+
+
 
     this.watcherVerbose = this.cliTools.hasOption('--verboseWatch')
+
+    this.devServer = devServer
+    this.beforeRunCallback = beforeRunCallback;
+    this.afterRunCallback = afterRunCallback;
 
     watcherConfig = watcherConfig || {}
     this.watchId = watcherConfig.watchId
@@ -178,6 +186,10 @@ class FileWatcher {
 
     this.jobManager.reset(this.callbackKey)
     this.jobManager.setCallbackOnFinish(this.watcherFinishBuildCallback.bind(this), this.callbackKey)
+
+    if (typeof(this.afterRunCallback) === 'function') {
+      this.beforeRunCallback.apply(this.devServer)
+    }
     this.dispatcher.dispatchCommand(this.command)
   }
 
@@ -186,11 +198,16 @@ class FileWatcher {
    */
   watcherFinishBuildCallback () {
     this.cliTools.info(`Watcher-${this.watchId}: Build finished`, !this.watcherVerbose)
-
     this.buildInProgress = false
 
-    // reload browser
-    this.socket.emit(this.socketCommand, this.config)
+    if (typeof(this.afterRunCallback) === 'function') {
+      this.afterRunCallback.apply(this.devServer)
+    }
+
+    if (!this.core.hasErrors() && !this.core.hasBuildNotes()) {
+      // Success!
+      this.socket.emit(this.socketCommand, this.config)
+    }
 
     // if there was a change while building - rebuild this thing
     if (this.rerunAfterBuild) {
