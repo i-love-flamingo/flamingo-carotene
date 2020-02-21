@@ -23,6 +23,14 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+/**
+ * Generic reducer with the ability to set values in the state tree
+ * @param state {Object} The current state object
+ * @param action.type {String} Generic action type to set value. 'applicationStore.SET' ist the only available action type.
+ * @param action.path {String} Path to the part of the state object that should be changed
+ * @param action.value {Object} Value of the change
+ * @return {Object} The new state object
+ */
 var rootReducer = function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
