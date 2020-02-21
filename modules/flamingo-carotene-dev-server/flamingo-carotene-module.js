@@ -18,6 +18,8 @@ class DevServer {
 
           config.devServer = {
             port: 3000,
+            useCaroteneDisplay: true,
+            injectSocket: true,
             watcherConfig: {
               ignored: /(^|[/\\])\../ // dot files or folders
             }
@@ -58,11 +60,11 @@ class DevServer {
           return desc
         },
         handler: (core) => {
+
           // This will add the socket client to the js entries in the webpack config and force a rebuild when the actual
           // build of the js has not already included the client, so that as soon as the dev command is ready, the
           // socket will be too. This will only be done if the command of the js watcher is available in the projects
           // watcher configs.
-
           const jsWatcherCommand = 'watchWebpackJs'
 
           const watcherConfigs = this.getWatcherConfigs()
@@ -83,6 +85,11 @@ class DevServer {
           }
 
           const config = core.getConfig()
+
+          // if injectSocket is set to false - dont do anything!
+          if (!config.devServer.injectSocket) {
+            return
+          }
 
           const devBuildIndicator = path.join(config.paths.dist, 'isDevBuild')
 

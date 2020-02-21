@@ -13,9 +13,9 @@ class Socket {
 
     this.io = require('socket.io')()
 
-    // this.io.on('connection', (client) => {
-    //   console.info(`Connected to client: ${client.id}`)
-    // })
+    this.io.on('connection', (client) => {
+      this.io.emit('connected', this.config.devServer)
+    })
 
     this.io.listen(this.config.devServer.port)
   }

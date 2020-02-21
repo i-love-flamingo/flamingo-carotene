@@ -66,11 +66,18 @@ function, that must be provided by your module to expose your watcher configs.
 This module exposes the following config
 ```js
 config.devServer = {
-  port: 3000
+  port: 3000,
+  injectSocket: true,
+  useCaroteneDisplay: true,
+  watcherConfig: {
+    ignored: /(^|[/\\])\../ // dot files or folders
+  }
 }
 ```
 
 `port` The port of the dev server is used for the socket connection to the client.
+`injectSocket` Set this to false, if you dont want dev-server code to be injected into your app.js while watcher is running. Note: carotenedisplay and hot/autoreload cant be used.
+`useCaroteneDisplay` Set this to false, if you dont want to display build and/or debug information in your browser while watcher is running.
 
 ## How socket client injection works
 
