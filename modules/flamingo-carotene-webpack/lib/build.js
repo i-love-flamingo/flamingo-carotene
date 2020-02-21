@@ -60,11 +60,13 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
 
     core.getJobmanager().finishJob(jobId)
 
-    fs.writeFile("stats.json", JSON.stringify(info), function(err) {
-      if(err) {
-        return cliTools.warn('Cant output stats.json');
-      }
-    });
+    if (cliTools.hasOption(['--analyzeBundle'])) {
+      fs.writeFile("stats.json", JSON.stringify(info), function (err) {
+        if (err) {
+          return cliTools.warn('Cant output stats.json');
+        }
+      });
+    }
 
     if (config.webpack && typeof config.webpack.buildCallback === 'function') {
       config.webpack.buildCallback(core)
