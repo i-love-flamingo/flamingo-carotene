@@ -1,3 +1,4 @@
+const emoji = require('node-emoji')
 
 class Jobmanager {
 
@@ -50,7 +51,7 @@ class Jobmanager {
       }
 
       this.progressBar = new this.CliProgress.Bar({
-        format: `Build [{bar}] {value}/{total} {openJobList}`,
+        format: `${emoji.get('carrot')} Build [{bar}] {value}/{total} {openJobList}`,
         barCompleteChar: '#',
         barIncompleteChar: '.',
         stopOnComplete: true,
