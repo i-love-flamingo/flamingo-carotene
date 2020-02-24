@@ -1,4 +1,4 @@
-class HotReloading {
+export default class HotReloading {
   constructor () {
     this.elements = []
     this.loadedElements = 0
@@ -113,4 +113,4 @@ class HotReloading {
   }
 }
 
-module.exports = HotReloading
+

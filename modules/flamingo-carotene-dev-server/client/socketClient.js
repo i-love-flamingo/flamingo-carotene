@@ -1,8 +1,9 @@
 const io = require('socket.io-client')
 const sockeUri = window.location.protocol + '//' + window.location.hostname + ':3000'
 const socket = io(sockeUri)
-const CaroteneDisplay = require('./caroteneDisplay.js')
-const HotReloading = require('./hotReloading.js')
+
+import CaroteneDisplay from './caroteneDisplay.js'
+import HotReloading from './hotReloading.js'
 
 let caroteneDisplay = null
 
@@ -13,7 +14,11 @@ socket.on('connect', function onConnect () {
 socket.on('connected', function onConnected (devServerConfig) {
   if (devServerConfig.hasOwnProperty('useCaroteneDisplay')) {
     if (devServerConfig.useCaroteneDisplay) {
-      caroteneDisplay = new CaroteneDisplay()
+      let position = 'bottom'
+      if (devServerConfig.hasOwnProperty('caroteneDisplayPosition')) {
+        position = devServerConfig.caroteneDisplayPosition
+      }
+      caroteneDisplay = new CaroteneDisplay(position)
     }
   }
 

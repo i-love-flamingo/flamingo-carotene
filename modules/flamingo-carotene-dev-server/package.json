@@ -12,13 +12,22 @@
     "om3"
   ],
   "scripts": {
+    "build": "rm -rf ./dist & mkdir dist & npx rollup -c",
     "test": "echo \"No tests present\"",
     "link": "npm link"
   },
   "dependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "ansi-to-html": "^0.6.14",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-plugin-import-glob": "^2.0.0",
     "chokidar": "^3.3.1",
     "debounce": "^1.2.0",
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
     "socket.io": "^2.3.0"
   }
 }

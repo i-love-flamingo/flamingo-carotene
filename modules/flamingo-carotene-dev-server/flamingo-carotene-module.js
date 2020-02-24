@@ -1,7 +1,4 @@
-const fs = require('fs')
-const path = require('path')
-
-class DevServer {
+class DevServerModule {
   constructor (core) {
     this.modules = core.getModules()
     this.watchers = [] // List of all flamingoWatcher Classes.
@@ -19,6 +16,7 @@ class DevServer {
           config.devServer = {
             port: 3000,
             useCaroteneDisplay: true,
+            caroteneDisplayPosition: 'top',
             injectSocket: true,
             watcherConfig: {
               ignored: /(^|[/\\])\../ // dot files or folders
@@ -49,85 +47,27 @@ class DevServer {
           for (const watcherConfig of watcherConfigs) {
 
             const basePath = config.paths.src
-            for (let path of watcherConfig.path) {
-              if (path.substr(0, basePath.length) === basePath) {
-                path = path.substr(basePath.length)
+            for (let mypath of watcherConfig.path) {
+              if (mypath.substr(0, basePath.length) === basePath) {
+                mypath = mypath.substr(basePath.length)
               }
-              desc += `- ${path}\n`
+              desc += `- ${mypath}\n`
             }
           }
-
           return desc
         },
         handler: (core) => {
-
-          // This will add the socket client to the js entries in the webpack config and force a rebuild when the actual
-          // build of the js has not already included the client, so that as soon as the dev command is ready, the
-          // socket will be too. This will only be done if the command of the js watcher is available in the projects
-          // watcher configs.
-          const jsWatcherCommand = 'watchWebpackJs'
-
-          const watcherConfigs = this.getWatcherConfigs()
-
-          let jsWatcherFound = false
-
-          for (const watcherConfig of watcherConfigs) {
-            if (watcherConfig.command !== jsWatcherCommand) {
-              continue
-            }
-
-            jsWatcherFound = true
-            break
-          }
-
-          if (!jsWatcherFound) {
-            return
-          }
-
-          const config = core.getConfig()
-
-          // if injectSocket is set to false - dont do anything!
-          if (!config.devServer.injectSocket) {
-            return
-          }
-
-          const devBuildIndicator = path.join(config.paths.dist, 'isDevBuild')
-
-          if (!fs.existsSync(devBuildIndicator)) {
-            core.getCliTools().info(`Rebuilding JS to inject socketClient...`)
-
-            core.getDispatcher().dispatchCommand(jsWatcherCommand)
-            fs.writeFileSync(devBuildIndicator, '\r')
-          }
-
-          // Inject socket client into js entry
-          const entryNames = Object.keys(config.webpackConfig.entry)
-          for (const entryName of entryNames) {
-            // Add the socket client to the beginning of every multi file entry
-            if (Array.isArray(config.webpackConfig.entry[entryName])) {
-              config.webpackConfig.entry[entryName].unshift(
-                path.join(__dirname, 'client', 'socketClient.js')
-              )
-            }
-          }
-        }
-      },
-      {
-        command: 'dev',
-        handler: (core) => {
-          const Socket = require('./lib/socket.js')
-          const socket = new Socket(core)
-          socket.init()
-
-          const watcherConfigs = this.getWatcherConfigs()
-
           const DevServer = require('./lib/devServer.js')
-          const devServer = new DevServer(socket, core);
-          for (const watcherConfig of watcherConfigs) {
-            devServer.addWatcher(watcherConfig)
+          const devServer = new DevServer(core, this.getWatcherConfigs());
+
+
+          let forceInject = false;
+          if (core.getCliTools().hasOption(['--freshDevServerBuild'])) {
+            forceInject = true
           }
 
-          devServer.start()
+          devServer.handleInitialBuild(forceInject)
+
         }
       }
     ]
@@ -164,6 +104,13 @@ class DevServer {
   getListeners () {
     return this.listeners
   }
+
+  getDictionaryOptions() {
+    return [{
+      option: '--freshDevServerBuild',
+      description: 'Force DevServer to freshly build and inject Carotene-Client into frontend.'
+    }]
+  }
 }
 
-module.exports = DevServer
+module.exports = DevServerModule
