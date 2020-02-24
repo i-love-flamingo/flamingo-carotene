@@ -33,6 +33,7 @@
       this.domElementMessage = null;
       this.domElementMessageIcon = null;
       this.bigCarrotIconWrapper = null;
+      this.fullScreenCloseButton = null;
       this.message = null;
       this.messageTimeout = null;
       this.fullscreenState = false;
@@ -45,11 +46,9 @@
       };
       this.createDomElement();
       window.caroteneDisplay = this;
-      console.log('CaroteneDisplay is injected');
       this.onDocumentReady(function () {
         document.body.appendChild(this.domElement);
         document.body.insertBefore(this.domElementCaroteneButton, this.domElement);
-        console.log('CaroteneDisplay is appended');
       }.bind(this));
       this.displayedMessage = null;
       this.updateInterval = window.setInterval(function () {
@@ -83,6 +82,7 @@
           }
 
           this.bigCarrotIconWrapper.style.display = showBigCarrot ? 'block' : 'none';
+          this.fullScreenCloseButton.style.display = 'block';
         } else {
           if (this.domElement) {
             this.domElement.style[this.displayOppositPosition] = 'auto';
@@ -92,6 +92,7 @@
             this.domElementIcon.style.display = 'none';
           }
 
+          this.fullScreenCloseButton.style.display = 'none';
           this.showMessage(2000);
         }
       }
@@ -171,7 +172,9 @@
         this.domElementCaroteneButton.style.transition = 'transform 500ms cubic-bezier(0.515, 0.010, 0.425, 1.420) 300ms';
         this.domElementCaroteneButton.innerHTML = this.getSVGCarrotIcon();
         this.domElementCaroteneButton.addEventListener('mouseover', function (_) {
-          return _this2.showMessage(0);
+          if (!_this2.isFullscreen()) {
+            _this2.showMessage(0);
+          }
         }); // Container
 
         this.domElement = document.createElement('div');
@@ -190,10 +193,14 @@
         this.domElement.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black';
         this.domElement.style.transition = 'transform 300ms ease-in-out';
         this.domElement.addEventListener('mouseover', function (_) {
-          return _this2.showMessage(0);
+          if (!_this2.isFullscreen()) {
+            _this2.showMessage(0);
+          }
         });
         this.domElement.addEventListener('mouseout', function (_) {
-          return _this2.showMessage(2000);
+          if (!_this2.isFullscreen()) {
+            _this2.showMessage(2000);
+          }
         }); // Icon
 
         this.domElementIcon = document.createElement('div');
@@ -209,7 +216,23 @@
         this.bigCarrotIconWrapper.style.height = '100px';
         this.bigCarrotIconWrapper.style.animation = 'rotatingBigCarrot 2s linear infinite';
         this.bigCarrotIconWrapper.innerHTML = this.getSVGCarrotIcon();
-        this.domElementIcon.appendChild(this.bigCarrotIconWrapper); // Message
+        this.domElementIcon.appendChild(this.bigCarrotIconWrapper);
+        this.fullScreenCloseButton = document.createElement('a');
+        this.fullScreenCloseButton.href = '';
+        this.fullScreenCloseButton.style.width = '20px';
+        this.fullScreenCloseButton.style.height = '20px';
+        this.fullScreenCloseButton.style.position = 'absolute';
+        this.fullScreenCloseButton.style.top = '10px';
+        this.fullScreenCloseButton.style.right = '10px';
+        this.fullScreenCloseButton.style.fontSize = '25px';
+        this.fullScreenCloseButton.innerHTML = '×';
+        this.fullScreenCloseButton.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          _this2.setFullscreen(false);
+
+          _this2.showMessage(1);
+        }); // Message
 
         this.domElementMessageContainer = document.createElement('div');
         this.domElementMessageContainer.style.display = 'flex';
@@ -228,6 +251,7 @@
 
         this.domElement.appendChild(this.domElementIcon);
         this.domElement.appendChild(this.domElementMessageContainer);
+        this.domElement.appendChild(this.fullScreenCloseButton);
         var style = document.createElement('style');
         style.appendChild(document.createTextNode("@keyframes rotatingBigCarrot { from { transform: rotate3d(0.2, 1, 0.2, 0deg); } to { transform: rotate3d(-0.2, 1, 0.2, 360deg)  } }"));
         this.domElement.appendChild(style);

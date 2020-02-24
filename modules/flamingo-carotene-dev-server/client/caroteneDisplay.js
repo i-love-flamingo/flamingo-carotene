@@ -4,6 +4,7 @@ export default class CaroteneDisplay {
     this.domElementMessage = null
     this.domElementMessageIcon = null
     this.bigCarrotIconWrapper = null
+    this.fullScreenCloseButton = null
 
     this.message = null
     this.messageTimeout = null
@@ -51,6 +52,7 @@ export default class CaroteneDisplay {
         this.domElementIcon.style.display = 'flex'
       }
       this.bigCarrotIconWrapper.style.display = showBigCarrot ? 'block' : 'none'
+      this.fullScreenCloseButton.style.display = 'block'
     } else {
       if (this.domElement) {
         this.domElement.style[this.displayOppositPosition] = 'auto'
@@ -58,6 +60,7 @@ export default class CaroteneDisplay {
       if (this.domElementIcon) {
         this.domElementIcon.style.display = 'none'
       }
+      this.fullScreenCloseButton.style.display = 'none'
       this.showMessage(2000)
     }
   }
@@ -122,7 +125,11 @@ export default class CaroteneDisplay {
     this.domElementCaroteneButton.style.transform = 'scale(1)'
     this.domElementCaroteneButton.style.transition = 'transform 500ms cubic-bezier(0.515, 0.010, 0.425, 1.420) 300ms'
     this.domElementCaroteneButton.innerHTML = this.getSVGCarrotIcon()
-    this.domElementCaroteneButton.addEventListener('mouseover', _ => this.showMessage(0))
+    this.domElementCaroteneButton.addEventListener('mouseover', _ => {
+      if (!this.isFullscreen()) {
+        this.showMessage(0)
+      }
+    })
 
     // Container
     this.domElement = document.createElement('div')
@@ -140,8 +147,16 @@ export default class CaroteneDisplay {
     this.domElement.style.fontFamily = '"Courier New", Courier, monospace'
     this.domElement.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black'
     this.domElement.style.transition = 'transform 300ms ease-in-out'
-    this.domElement.addEventListener('mouseover', _ => this.showMessage(0))
-    this.domElement.addEventListener('mouseout', _ => this.showMessage(2000))
+    this.domElement.addEventListener('mouseover', _ => {
+      if (!this.isFullscreen()) {
+        this.showMessage(0)
+      }
+    })
+    this.domElement.addEventListener('mouseout', _ => {
+      if (!this.isFullscreen()) {
+        this.showMessage(2000)
+      }
+    })
 
     // Icon
     this.domElementIcon = document.createElement('div')
@@ -160,6 +175,21 @@ export default class CaroteneDisplay {
     this.bigCarrotIconWrapper.innerHTML = this.getSVGCarrotIcon()
     this.domElementIcon.appendChild(this.bigCarrotIconWrapper)
 
+
+    this.fullScreenCloseButton = document.createElement('a')
+    this.fullScreenCloseButton.href = ''
+    this.fullScreenCloseButton.style.width = '20px'
+    this.fullScreenCloseButton.style.height = '20px'
+    this.fullScreenCloseButton.style.position = 'absolute'
+    this.fullScreenCloseButton.style.top = '10px'
+    this.fullScreenCloseButton.style.right = '10px'
+    this.fullScreenCloseButton.style.fontSize = '25px'
+    this.fullScreenCloseButton.innerHTML = '×'
+    this.fullScreenCloseButton.addEventListener('click', (event) => {
+      event.preventDefault()
+      this.setFullscreen(false)
+      this.showMessage(1)
+    })
     // Message
     this.domElementMessageContainer = document.createElement('div')
     this.domElementMessageContainer.style.display = 'flex'
@@ -180,6 +210,7 @@ export default class CaroteneDisplay {
     // Append everything
     this.domElement.appendChild(this.domElementIcon)
     this.domElement.appendChild(this.domElementMessageContainer)
+    this.domElement.appendChild(this.fullScreenCloseButton)
 
     const style = document.createElement('style')
     style.appendChild(document.createTextNode(`@keyframes rotatingBigCarrot { from { transform: rotate3d(0.2, 1, 0.2, 0deg); } to { transform: rotate3d(-0.2, 1, 0.2, 360deg)  } }`))
