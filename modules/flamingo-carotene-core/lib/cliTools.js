@@ -1,6 +1,7 @@
 const util = require('util')
 const chalk = require('chalk')
 const emoji = require('node-emoji')
+var readline = require('readline');
 
 class CliTools {
   constructor () {
@@ -137,8 +138,8 @@ class CliTools {
       this.addToBuffer(message, type, verbose)
 
       if (!this.doBufferOut) {
-        process.stdout.clearLine()
-        process.stdout.cursorTo(0)
+        readline.clearLine(process.stdout, 0)
+        readline.cursorTo(process.stdout, 0);
         process.stdout.write(this.formatMessage(message, type, verbose))
       }
     }
