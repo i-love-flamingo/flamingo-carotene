@@ -145,7 +145,7 @@ class Jobmanager {
       this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
       if (this.getOpenJobs().length < 1) {
         this.cliTools.stopBuffer()
-        const buffer = this.cliTools.getBuffer();
+        const buffer = this.cliTools.getBufferAsString();
         process.stdout.write(buffer);
       }
     }
