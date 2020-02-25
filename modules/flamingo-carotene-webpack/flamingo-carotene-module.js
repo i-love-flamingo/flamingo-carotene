@@ -8,6 +8,32 @@ class FlamingoCaroteneWebpack {
   constructor (core) {
     const config = core.getConfig()
 
+    const sassWatcher = {
+      watchId: 'webpackSass',
+      path: [
+        path.join(config.paths.src, '**', '*.{sass,scss}')
+      ],
+      command: 'watchWebpackCss',
+      socketCommand: 'reloadCSS',
+      callbackKey: 'webpackCss',
+      unwatchConfig: null // if you need to unwatch specific files
+    }
+
+    const jsWatcher = {
+      watchId: 'webpackJs',
+      path: [
+        path.join(config.paths.src, '**', '*.js')
+      ],
+      command: 'watchWebpackJs',
+      socketCommand: 'reloadJS',
+      callbackKey: 'webpackJs'
+    }
+
+    this.watcher = [
+      sassWatcher,
+      jsWatcher
+    ]
+
     this.listeners = [
       {
         command: 'config',
@@ -41,7 +67,6 @@ class FlamingoCaroteneWebpack {
         command: 'config',
         handler: function (core) {
           sassWatcher.unwatchConfig = config.webpack.watcher.sass.unwatchConfig
-          watcher.push(sassWatcher)
         }
       },
       {
@@ -82,29 +107,6 @@ class FlamingoCaroteneWebpack {
       {
         command: 'watchWebpackCss',
         handler: buildHandlerCss
-      }
-    ]
-
-    const sassWatcher =  {
-      watchId: 'webpackSass',
-      path: [
-        path.join(config.paths.src, '**', '*.{sass,scss}')
-      ],
-      command: 'watchWebpackCss',
-      socketCommand: 'reloadCSS',
-      callbackKey: 'webpackCss',
-      unwatchConfig: null // if you need to unwatch specific files
-    }
-
-    const watcher = this.watcher = [
-      {
-        watchId: 'webpackJs',
-        path: [
-          path.join(config.paths.src, '**', '*.js')
-        ],
-        command: 'watchWebpackJs',
-        socketCommand: 'reloadJS',
-        callbackKey: 'webpackJs'
       }
     ]
   }

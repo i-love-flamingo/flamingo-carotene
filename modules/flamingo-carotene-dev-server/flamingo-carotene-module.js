@@ -1,9 +1,7 @@
 class DevServerModule {
   constructor (core) {
     this.modules = core.getModules()
-    this.watchers = [] // List of all flamingoWatcher Classes.
     this.watcherConfigs = null
-
     const that = this
 
     this.listeners = [
@@ -40,6 +38,7 @@ class DevServerModule {
         command: 'dev',
         priority: 10,
         description: function () {
+          // Collect all watchers to update set job description
           let desc = 'Start a watcher process, which watches filechanges, and start build target automaticly:\n'
 
           const config = core.getConfig()
@@ -57,15 +56,14 @@ class DevServerModule {
           return desc
         },
         handler: (core) => {
+          // Start DevServer
           const DevServer = require('./lib/devServer.js')
           const devServer = new DevServer(core, this.getWatcherConfigs());
-
 
           let forceInject = false;
           if (core.getCliTools().hasOption(['--freshDevServerBuild'])) {
             forceInject = true
           }
-
           devServer.handleInitialBuild(forceInject)
 
         }
@@ -73,13 +71,10 @@ class DevServerModule {
     ]
   }
 
-  getDictionaryOptions() {
-    return [{
-      option: '--verboseWatch',
-      description: 'Display folders and globs to watch, displays reasons why build targets were called.'
-    }]
-  }
-
+  /**
+   * Get all watcher config objects of all active modules
+   * @returns {[]}
+   */
   getWatcherConfigs () {
     if (this.watcherConfigs) {
       return this.watcherConfigs
@@ -107,6 +102,9 @@ class DevServerModule {
 
   getDictionaryOptions() {
     return [{
+      option: '--verboseWatch',
+      description: 'Display folders and globs to watch, displays reasons why build targets were called.'
+    }, {
       option: '--freshDevServerBuild',
       description: 'Force DevServer to freshly build and inject Carotene-Client into frontend.'
     }]

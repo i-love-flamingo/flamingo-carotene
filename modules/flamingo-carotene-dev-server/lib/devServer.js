@@ -3,6 +3,9 @@ const AnsiConverter = require('ansi-to-html')
 const path = require('path')
 const fs = require('fs')
 
+/**
+ * DevServer - Core of all Filewatchers
+ */
 class DevServer {
 
   constructor(core, watcherConfigs) {
@@ -16,6 +19,9 @@ class DevServer {
     this.watcherVerbose = this.cliTools.hasOption('--verboseWatch')
   }
 
+  /**
+   * Called, before the jobs of an active watcher starts.
+   */
   beforeRunByChange() {
     this.cliTools.info(`DevServer beforeRunByChange`, !this.watcherVerbose)
     this.lastBuildTime = new Date()
@@ -23,8 +29,13 @@ class DevServer {
     this.core.clearBuildNotes()
   }
 
+  /**
+   * Called, when jobs of an active watcher ends
+   */
   afterRunByChange() {
     this.cliTools.info(`DevServer afterRunByChange`, !this.watcherVerbose)
+
+    // if there anyone has report errors or buildNotes to the format that output to html - and send it to client
     if (this.core.hasErrors() || this.core.hasBuildNotes()) {
       const output = this.cliTools.getBufferAsString(this.lastBuildTime, function (message, type, verbose) {
         return `${message}\n`
@@ -56,7 +67,10 @@ class DevServer {
     }
   }
 
-
+  /**
+   * inject client code into js - if nessessary - and start watcher afterwards
+   * @param forceInject
+   */
   handleInitialBuild(forceInject) {
     const jsBuildCommand = 'watchWebpackJs'
     const initialBuildJobManagerGroup = 'initialBuild'
@@ -122,6 +136,9 @@ class DevServer {
     }
   }
 
+  /**
+   * Starts all watcher
+   */
   startWatch() {
     this.initSocket()
     this.cliTools.info(`Opening Socket...`)
@@ -129,18 +146,28 @@ class DevServer {
     this.cliTools.info(`Waiting for a filechange...`)
   }
 
+  /**
+   * Initialize socket server
+   */
   initSocket() {
     const Socket = require('./socket.js')
     this.socket = new Socket(this.core)
     this.socket.init()
   }
 
+  /**
+   * adds all watcher
+   */
   addAllWatcher() {
     for (const watcherConfig of this.watcherConfigs) {
       this.addWatcher(watcherConfig)
     }
   }
 
+  /**
+   * adds a single watcher
+   * @param watcherConfig
+   */
   addWatcher(watcherConfig) {
     this.watcher.push(new FileWatcher(this.socket, this.core, watcherConfig, this, this.beforeRunByChange, this.afterRunByChange))
   }

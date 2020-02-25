@@ -68,6 +68,13 @@ class CliTools {
     this.doBufferOut = true
   }
 
+  /**
+   * Stores a message with timestamp into a buffer
+   *
+   * @param message
+   * @param type      Type of message: default, info, warn
+   * @param verbose   Is verbose message - only log when verbose option is set. Defaults to false
+   */
   addToBuffer(message, type, verbose) {
     this.buffer.push({
       time: new Date(),
@@ -80,6 +87,11 @@ class CliTools {
     }
   }
 
+  /**
+   * Returns messages that are newer as given a given time
+   * @param laterThan   Messages needs to be older than this time (optional)
+   * @returns []object
+   */
   getBuffer (laterThan) {
     const newBuffer = []
     for (const bufferLine of this.buffer) {
@@ -90,9 +102,10 @@ class CliTools {
     return newBuffer
   }
 
-    /**
-   *
-   * @param laterThan
+  /**
+   * Return messages that are newer as given a given time as a string
+   * @param laterThan             Messages needs to be newer than this time (optional)
+   * @param customFormatFunction  Format function. Default is this.formatMessage
    * @returns {string}
    */
   getBufferAsString (laterThan, customFormatFunction) {
@@ -131,6 +144,14 @@ class CliTools {
     }
   }
 
+  /**
+   * Formats a message for CLI output
+   *
+   * @param message
+   * @param type      Type of message: default, info, warn
+   * @param verbose   Is verbose message - only log when verbose option is set. Defaults to false
+   * @returns {string}
+   */
   formatMessage(message, type, verbose) {
     let outMessage = ''
 
