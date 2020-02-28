@@ -61,7 +61,7 @@ class Config {
     const packageJsonPath = path.join(this.config.paths.project, 'package.json')
 
     if (!fs.existsSync(packageJsonPath)) {
-      cliTools.warn(`Error: Missing package.json file in: ${this.config.paths.project}`)
+      cliTools.error(`Error: Missing package.json file in: ${this.config.paths.project}`)
       cliTools.exit(1)
     }
 

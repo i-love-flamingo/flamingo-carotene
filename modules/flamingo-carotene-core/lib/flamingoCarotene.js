@@ -39,7 +39,7 @@ else {
 process.on('exit', () => {
   if (core.hasErrors()) {
     const error = core.getErrors().join('\n')
-    cliTools.info(`Flamingo Carotene finished - with errors:\n${error}`)
+    cliTools.error(`Flamingo Carotene finished - with errors:\n${error}`)
     cliTools.exit(1)
   } else {
     cliTools.info('Flamingo Carotene finished - successfully')

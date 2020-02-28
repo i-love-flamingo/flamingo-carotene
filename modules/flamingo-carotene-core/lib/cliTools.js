@@ -159,6 +159,9 @@ class CliTools {
     const iconCarrot = emoji.get('carrot')
     const iconInfo = emoji.get('information_source')
     const iconWarn = emoji.get('warning')
+    const iconError = emoji.get('x')
+
+    message = message.replace(/\n/g, '\n   ')
 
     switch (type) {
       case 'info':
@@ -166,6 +169,9 @@ class CliTools {
         break
       case 'warn':
         outMessage = `${iconWarn} ${message}\n`
+        break
+      case 'error':
+        outMessage = `${iconError} ${message}\n`
         break
       case 'default':
       default:
@@ -185,6 +191,10 @@ class CliTools {
 
   warn (message, verbose) {
     this.write(message, 'warn', verbose)
+  }
+
+  error (message, verbose) {
+    this.write(message, 'error', verbose)
   }
 
   /**

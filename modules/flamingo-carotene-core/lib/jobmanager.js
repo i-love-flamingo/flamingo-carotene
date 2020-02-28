@@ -51,7 +51,7 @@ class Jobmanager {
       }
 
       this.progressBar = new this.CliProgress.Bar({
-        format: `${emoji.get('carrot')} Build [{bar}] {value}/{total} {openJobList}`,
+        format: `${emoji.get('gear')} Build [{bar}] {value}/{total} {openJobList}`,
         barCompleteChar: '#',
         barIncompleteChar: '.',
         stopOnComplete: true,
