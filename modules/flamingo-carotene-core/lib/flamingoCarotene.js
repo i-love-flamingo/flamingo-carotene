@@ -38,7 +38,7 @@ else {
 // check reported core-errors - and exit
 process.on('exit', () => {
   if (core.hasErrors()) {
-    const error = core.getErrors().join('\n')
+    const error = '- ' + core.getErrors().join('\n- ')
     cliTools.error(`Flamingo Carotene finished - with errors:\n${error}`)
     cliTools.exit(1)
   } else {

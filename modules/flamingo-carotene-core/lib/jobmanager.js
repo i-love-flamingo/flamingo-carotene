@@ -51,16 +51,14 @@ class Jobmanager {
       }
 
       this.progressBar = new this.CliProgress.Bar({
-        format: `${emoji.get('gear')} Build [{bar}] {value}/{total} {openJobList}`,
-        barCompleteChar: '#',
-        barIncompleteChar: '.',
+        format: `${emoji.get('gear')} Build {bar} {value}/{total} {openJobList}`,
         stopOnComplete: true,
         clearOnComplete: true,
         fps: 5,
         stream: output,
         barsize: 65,
-        position: 'center'
-      });
+        hideCursor: true
+      }, this.CliProgress.Presets.shades_grey);
 
 
       this.progressBar.start(1, 0);
