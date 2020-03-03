@@ -91,7 +91,7 @@ const pugLint = (core) => {
         }
 
         if (config.pugLint.breakOnError && errors.length > 0) {
-          core.reportError(`PugLint report errors.`)
+          core.reportError(`PugLint reports errors.`)
         }
         core.getJobmanager().finishJob('puglint')
 

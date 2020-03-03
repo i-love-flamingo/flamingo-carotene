@@ -39,7 +39,7 @@ const flow = (core) => {
     }
 
     if (config.flow.breakOnError && errors.length > 0) {
-      core.reportError(`Flow report errors.`)
+      core.reportError(`Flow reports errors.`)
     }
     core.getJobmanager().finishJob('flow')
 

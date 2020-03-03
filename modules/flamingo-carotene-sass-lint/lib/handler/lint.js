@@ -75,7 +75,7 @@ const sassLint = (core) => {
     }
 
     if (config.sassLint.breakOnError && errors.length > 0) {
-      core.reportError(`SassLint report errors.`)
+      core.reportError(`SassLint reports errors.`)
     }
 
     core.getJobmanager().finishJob('sasslint')

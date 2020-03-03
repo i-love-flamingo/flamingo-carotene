@@ -43,11 +43,11 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     core.getJobmanager().reportFinishJob(jobId)
 
     if (error) {
-      cliTools.warn(error.stack || error)
+      cliTools.error(error.stack || error)
       if (error.details) {
-        cliTools.warn(error.details)
+        cliTools.error(error.details)
       }
-      core.reportError(`Webpack report errors.`)
+      core.reportError(`Webpack reports errors.`)
     }
 
     const statsData = stats.toJson()
@@ -56,6 +56,8 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
       for (const warnings of statsData.warnings) {
         cliTools.warn(warnings)
       }
+
+      core.reportBuildNotes(`WebpackStat reports build notes.`)
     }
 
     if (stats.hasErrors()) {
@@ -63,7 +65,7 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
         cliTools.error(error)
       }
 
-      core.reportError(`WebpackStat report errors.`)
+      core.reportError(`WebpackStat reports errors.`)
     }
 
     if (cliTools.hasOption(['--writeWebpackStats'])) {

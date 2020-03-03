@@ -161,6 +161,7 @@ class CliTools {
     const iconWarn = emoji.get('warning')
     const iconError = emoji.get('x')
 
+    message = message + ''
     message = message.replace(/\n/g, '\n   ')
 
     switch (type) {

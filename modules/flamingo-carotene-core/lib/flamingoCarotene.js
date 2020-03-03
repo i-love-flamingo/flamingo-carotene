@@ -37,10 +37,26 @@ else {
 
 // check reported core-errors - and exit
 process.on('exit', () => {
-  if (core.hasErrors()) {
-    const error = '- ' + core.getErrors().join('\n- ')
-    cliTools.error(`Flamingo Carotene finished - with errors:\n${error}`)
-    cliTools.exit(1)
+  if (core.hasErrors() || core.hasBuildNotes()) {
+    let message = 'Flamingo Carotene finished...'
+
+    if (core.hasBuildNotes()) {
+      const notes = '    - ' + core.getBuildNotes().join('\n    - ')
+      message += `\n  with notes:\n${notes}`
+      core.clearBuildNotes()
+
+      if (!core.hasErrors()) {
+        cliTools.warn(message)
+        return
+      }
+    }
+
+    if (core.hasErrors()) {
+      const errors = '    - ' + core.getErrors().join('\n    - ')
+      message += `\n  with errors:\n${errors}`
+      cliTools.error(message)
+      cliTools.exit(1)
+    }
   } else {
     cliTools.info('Flamingo Carotene finished - successfully')
   }

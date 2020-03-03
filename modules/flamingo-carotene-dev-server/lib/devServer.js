@@ -35,7 +35,7 @@ class DevServer {
   afterRunByChange() {
     this.cliTools.info(`DevServer afterRunByChange`, !this.watcherVerbose)
 
-    // if there anyone has report errors or buildNotes to the format that output to html - and send it to client
+    // if there anyone has reported errors or buildNotes to the format that output to html - and send it to client
     if (this.core.hasErrors() || this.core.hasBuildNotes()) {
       const output = this.cliTools.getBufferAsString(this.lastBuildTime, function (message, type, verbose) {
         return `${message}\n`
@@ -117,13 +117,15 @@ class DevServer {
       this.cliTools.info(`Rebuilding JS to inject Carotene-Client into frontend.`)
       jobManager.reset()
       jobManager.setCallbackOnFinish(function () {
-        jobManager.setCallbackOnFinish(function () {
-        })
-        if (this.core.getErrors().length < 1) {
+        if (this.core.hasErrors()) {
+          this.cliTools.error(`Cant inject Carotene-Client into frontend. There were Errors. Please fix them first`)
+        } else {
+          if (this.core.hasBuildNotes()) {
+            this.cliTools.warn(`There were warnings. You may want to check them.`)
+          }
+
           fs.writeFileSync(devBuildIndicator, '\r')
           this.startWatch()
-        } else {
-          this.cliTools.warn(`Cant inject Carotene-Client into frontend. There were Errors. Please fix them first`)
         }
       }.bind(this))
 
