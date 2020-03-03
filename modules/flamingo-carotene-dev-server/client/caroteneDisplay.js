@@ -85,7 +85,7 @@ export default class CaroteneDisplay {
 
     if (this.domElementMessage && this.displayedMessage !== message) {
       this.domElementMessageIcon.style.animation = iconAnimation
-      this.domElementMessage.innerHTML = `<div>${message}</div>`
+      this.domElementMessage.innerHTML = message
       this.displayedMessage = message
     }
   }
@@ -141,11 +141,7 @@ export default class CaroteneDisplay {
     this.domElement.style[this.displayPosition] = 0
     this.domElement.style.background = 'rgba(0, 0, 0, 0.80)'
     this.domElement.style['border' + this.ucFirst(this.displayOppositPosition)] = '1px solid #F80'
-    this.domElement.style.color = '#fff'
     this.domElement.style.padding = '10px 20px'
-    this.domElement.style.fontSize = '14px'
-    this.domElement.style.fontFamily = '"Courier New", Courier, monospace'
-    this.domElement.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black'
     this.domElement.style.transition = 'transform 300ms ease-in-out'
     this.domElement.addEventListener('mouseover', _ => {
       if (!this.isFullscreen()) {
@@ -203,7 +199,11 @@ export default class CaroteneDisplay {
     this.domElementMessageIcon.innerHTML = this.getSVGCarrotIcon()
     this.domElementMessageContainer.appendChild(this.domElementMessageIcon)
 
-    this.domElementMessage = document.createElement('div')
+    this.domElementMessage = document.createElement('pre')
+    this.domElementMessage.style.color = '#fff'
+    this.domElementMessage.style.fontFamily = '"Courier New", Courier, monospace'
+    this.domElementMessage.style.fontSize = '14px'
+    this.domElementMessage.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black'
     this.domElementMessage.style.flexGrow = 1
     this.domElementMessageContainer.appendChild(this.domElementMessage)
 
