@@ -142,9 +142,11 @@ class DevServer {
    * Starts all watcher
    */
   startWatch() {
-    this.initSocket()
-    this.cliTools.info(`Opening Socket...`)
-    this.addAllWatcher()
+    if (!this.socket) {
+      this.initSocket()
+      this.cliTools.info(`Opening Socket...`)
+      this.addAllWatcher()
+    }
     this.cliTools.info(`Waiting for a filechange...`)
   }
 
