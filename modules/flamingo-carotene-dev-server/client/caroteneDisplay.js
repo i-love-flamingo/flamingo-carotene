@@ -38,6 +38,7 @@ export default class CaroteneDisplay {
 
   setFullscreen (state, showBigCarrot) {
     clearTimeout(this.messageTimeout)
+    clearTimeout(this.fullScreenTimeout)
 
     if (typeof showBigCarrot === 'undefined') {
       showBigCarrot = true
@@ -45,24 +46,41 @@ export default class CaroteneDisplay {
 
     this.fullscreenState = state
     if (state) {
-      if (this.domElement) {
-        this.domElement.style[this.displayOppositPosition] = '0px'
-      }
-      if (this.domElementIcon) {
-        this.domElementIcon.style.display = 'flex'
-      }
-      this.bigCarrotIconWrapper.style.display = showBigCarrot ? 'block' : 'none'
-      this.fullScreenCloseButton.style.display = 'block'
+      this.fullScreenStartTime = Date.now()
+      this._showFullscreen(showBigCarrot)
     } else {
-      if (this.domElement) {
-        this.domElement.style[this.displayOppositPosition] = 'auto'
+      const startTime = this.fullScreenStartTime || 0
+      let timeout = 1000
+      if (Date.now() - startTime > timeout) {
+        timeout = 0
       }
-      if (this.domElementIcon) {
-        this.domElementIcon.style.display = 'none'
-      }
-      this.fullScreenCloseButton.style.display = 'none'
-      this.showMessage(2000)
+
+      this.fullScreenTimeout = setTimeout(_ => {
+        this._hideFullscreen()
+        this.showMessage(2000)
+      }, timeout)
     }
+  }
+
+  _showFullscreen (showBigCarrot) {
+    if (this.domElement) {
+      this.domElement.style[this.displayOppositPosition] = '0px'
+    }
+    if (this.domElementIcon) {
+      this.domElementIcon.style.display = 'flex'
+    }
+    this.bigCarrotIconWrapper.style.display = showBigCarrot ? 'block' : 'none'
+    this.fullScreenCloseButton.style.display = 'block'
+  }
+
+  _hideFullscreen () {
+    if (this.domElement) {
+      this.domElement.style[this.displayOppositPosition] = 'auto'
+    }
+    if (this.domElementIcon) {
+      this.domElementIcon.style.display = 'none'
+    }
+    this.fullScreenCloseButton.style.display = 'none'
   }
 
   setReport (reportData) {
