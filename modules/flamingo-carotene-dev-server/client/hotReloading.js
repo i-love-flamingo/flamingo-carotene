@@ -2,6 +2,7 @@ export default class HotReloading {
   constructor () {
     this.elements = []
     this.loadedElements = 0
+    this.securityWarningLogged = false
   }
 
   selectElements (tagName, requiredAttributes) {
@@ -71,12 +72,12 @@ export default class HotReloading {
   }
 
   elementLoaderCSS (newElement, oldElement, onLoad, onFinishAll) {
-    oldElement.parentNode.insertBefore(newElement, oldElement.nextSibling)
+    this.securityWarningLogged = false
 
     let timeoutId = null
     let intervalId = null
 
-    const loadEvent = function () {
+    const loadEvent = _ => {
       clearInterval(intervalId)
       clearTimeout(timeoutId)
 
@@ -91,25 +92,35 @@ export default class HotReloading {
           onFinishAll()
         }
       }
-    }.bind(this)
+    }
 
-    intervalId = setInterval(function () {
-      let sheet = 'styleSheet'
-      let cssRules = 'rules'
-      if ('sheet' in newElement) {
-        sheet = 'sheet'
-        cssRules = 'cssRules'
+    const checkCss = _ => {
+      if (this._cssIsLoaded(newElement)) {
+        loadEvent()
+      } else {
+        intervalId = setTimeout(checkCss, 100)
       }
-      try {
-        if (newElement[sheet] && newElement[sheet][cssRules].length) {
-          loadEvent()
-        }
-      } catch (e) { } finally { }
-    }, 100)
+    }
+
+    checkCss()
 
     timeoutId = setTimeout(function () {
       loadEvent()
-    }, 15000)
+    }, 10000)
+
+    oldElement.parentNode.insertBefore(newElement, oldElement.nextSibling)
+  }
+
+  _cssIsLoaded (newElement) {
+    try {
+      return newElement.styleSheet && newElement.styleSheet.rules.length || newElement.sheet && newElement.sheet.cssRules.length
+    } catch (e) {
+      if (e.name === 'SecurityError' && !this.securityWarningLogged) {
+        console.warn('Your stylesheet is from a different domain. Hot reloading is limited.')
+        this.securityWarningLogged = true
+      }
+      return false
+    }
   }
 }
 
