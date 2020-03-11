@@ -98,7 +98,7 @@ class DevServer {
 
     // if injectSocket is set to false - dont do anything!
     if (!config.devServer.injectSocket && !forceInject) {
-      startWatch()
+      this.startWatch()
       return
     }
 
@@ -116,18 +116,17 @@ class DevServer {
     if (!fs.existsSync(devBuildIndicator) || forceInject) {
       this.cliTools.info(`Rebuilding JS to inject Carotene-Client into frontend.`)
       jobManager.reset()
-      jobManager.setCallbackOnFinish(function () {
+      jobManager.setCallbackOnFinish(_ => {
+        // start socket after after injection only once
+        jobManager.setCallbackOnFinish(_ => {})
         if (this.core.hasErrors()) {
-          this.cliTools.error(`Cant inject Carotene-Client into frontend. There were Errors. Please fix them first`)
-        } else {
-          if (this.core.hasBuildNotes()) {
-            this.cliTools.warn(`There were warnings. You may want to check them.`)
-          }
-
-          fs.writeFileSync(devBuildIndicator, '\r')
-          this.startWatch()
+          this.cliTools.error(`Cant inject Carotene-Client into frontend. There were Errors. Please fix them first!`)
+          return
         }
-      }.bind(this))
+
+        fs.writeFileSync(devBuildIndicator, '\r')
+        this.startWatch()
+      })
 
       this.core.getDispatcher().dispatchCommand(jsBuildCommand)
 
@@ -142,11 +141,9 @@ class DevServer {
    * Starts all watcher
    */
   startWatch() {
-    if (!this.socket) {
-      this.initSocket()
-      this.cliTools.info(`Opening Socket...`)
-      this.addAllWatcher()
-    }
+    this.initSocket()
+    this.cliTools.info(`Opening Socket...`)
+    this.addAllWatcher()
     this.cliTools.info(`Waiting for a filechange...`)
   }
 
