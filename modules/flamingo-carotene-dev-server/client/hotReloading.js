@@ -60,7 +60,15 @@ export default class HotReloading {
 
       elementLoader.call(this, newElement, element, function () {
         this.removeElement(element)
-        element.remove()
+
+        if (element.remove) {
+          element.remove()
+        }
+        else {
+          // IE11
+          element.parentNode.removeChild(element)
+        }
+
         this.addElement(newElement)
       }.bind(this), onFinish)
     }.bind(this))
