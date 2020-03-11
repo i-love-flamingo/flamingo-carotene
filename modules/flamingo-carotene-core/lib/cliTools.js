@@ -106,7 +106,7 @@ class CliTools {
   /**
    * Return messages that are newer as given a given time as a string
    * @param laterThan             Messages needs to be newer than this time (optional)
-   * @param customFormatFunction  Format function. Default is this.formatMessage
+   * @param customFormatFunction  Format function. Default is this.formatMessage using signature message, type, verbose
    * @returns {string}
    */
   getBufferAsString (laterThan, customFormatFunction) {
@@ -180,7 +180,6 @@ class CliTools {
     }
     return outMessage
   }
-
 
   log (message, verbose) {
     this.write(message, 'default', verbose)

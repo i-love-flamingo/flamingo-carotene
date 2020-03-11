@@ -104,8 +104,8 @@ class Core {
     buildNotes = []
   }
 
-  reportBuildNotes (warnings) {
-    buildNotes.push(warnings)
+  reportBuildNotes (note) {
+    buildNotes.push(note)
   }
 
   getBuildNotes () {
