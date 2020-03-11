@@ -14,6 +14,9 @@ class FileWatcher {
    *    callbackKey - key of config[KEY].callback function, that will be called
    *    watcherConfig - (optional) config object to be passed to the chokidar file watcher
    *    unwatchConfig - (optional) string or array of strings of file-, folder-, or glob-paths
+   * @param devServer
+   * @param beforeRunCallback
+   * @param afterRunCallback
    */
   constructor (socket, core, watcherConfig, devServer, beforeRunCallback, afterRunCallback) {
     // Socket to client
