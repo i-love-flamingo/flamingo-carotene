@@ -29,5 +29,6 @@
     "rollup": "^1.31.1",
     "rollup-plugin-babel": "^4.3.3",
     "socket.io": "^2.3.0"
-  }
+  },
+  "gitHead": "23f060e6f0327f1a2cf9b78d453f452331f5c4be"
 }
