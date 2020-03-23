@@ -116,16 +116,18 @@ function () {
      * Set state value of object property defined by object path string
      * @param {String} path String in object notation to store value
      * @param {Object} value Value that should be set to specified path
+     * @param {Boolean} forceDispatch Dispatch even if new value same as old one
      * @return {void}
      */
 
   }, {
     key: "set",
     value: function set(path, value) {
+      var forceDispatch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var currentValue = this.get(path);
-      var newValueEqualsCurrentValue = deepEqualStrict(currentValue, value); // Only dispatch action if change occurs
+      var dispatchState = forceDispatch || !deepEqualStrict(currentValue, value);
 
-      if (!newValueEqualsCurrentValue) {
+      if (dispatchState) {
         this.store.dispatch({
           type: 'SET: ' + path,
           path: path,
