@@ -79,14 +79,14 @@ class State {
    * Set state value of object property defined by object path string
    * @param {String} path String in object notation to store value
    * @param {Object} value Value that should be set to specified path
+   * @param {Boolean} forceDispatch Dispatch even if new value same as old one
    * @return {void}
    */
-  set (path, value) {
+  set (path, value, forceDispatch = false) {
     const currentValue = this.get(path)
-    const newValueEqualsCurrentValue = deepEqualStrict(currentValue, value)
+    const dispatchState = forceDispatch || !deepEqualStrict(currentValue, value)
 
-    // Only dispatch action if change occurs
-    if (!newValueEqualsCurrentValue) {
+    if (dispatchState) {
       this.store.dispatch({type: 'SET: ' + path, path, value})
     }
   }

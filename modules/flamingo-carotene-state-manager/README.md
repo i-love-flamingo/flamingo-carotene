@@ -57,6 +57,8 @@ By calling `set()` you'll set a new value for a key. You can even create new sta
 state.set('baz.data', 'myNewValue')
 ```
 
+To force dispatching the state use ```state.set('baz.data', 'myNewValue', true)``` 
+
 ### Watching a state
 
 You can watch for a state change.
