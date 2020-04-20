@@ -44,7 +44,6 @@ class Jobmanager {
     if (this.useProgress) {
       this.cliTools.startBuffer();
 
-
       const output = process.stdout
       if (this.forceProgress) {
         output.isTTY = true
@@ -60,24 +59,25 @@ class Jobmanager {
         hideCursor: true
       }, this.CliProgress.Presets.shades_grey);
 
-
       this.progressBar.start(1, 0);
       this.progressBar.update(0, {'openJobList': ''});
       this.reportJobChange()
     }
   }
 
-  addJob(id, label, group, info ) {
+  addJob(id, label, group = '', info ) {
+    this.cliTools.info(`Job start: ${label} ${info ? ' - '+info : ''}`)
+
     if (this.getTotalJobCount() === 0) {
       this.reset()
     }
 
-    this.cliTools.info(`Job start: ${label} ${info ? ' - '+info : ''}`)
     this.jobs[id] = {label:label, group: group, finished: false, subjobs: 0, subProgress: 0, info:info, start:new Date().getTime()};
 
     if (this.useProgress) {
       this.progressBar.setTotal(this.getTotalJobCount())
     }
+
     this.updateProgressBar()
   }
 
@@ -142,9 +142,9 @@ class Jobmanager {
     if (this.useProgress) {
       this.progressBar.update(this.getFinishedJobCount(), {'openJobList': this.getOpenJobs().join(', ')});
       if (this.getOpenJobs().length < 1) {
-        this.cliTools.stopBuffer()
         const buffer = this.cliTools.getBufferAsString();
         process.stdout.write(buffer);
+        this.cliTools.stopBuffer()
       }
     }
     this.reportJobChange()
