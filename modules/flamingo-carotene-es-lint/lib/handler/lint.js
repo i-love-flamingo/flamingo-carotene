@@ -63,15 +63,25 @@ const eslint = (core) => {
     if (output.length > 0) {
       if (code !== 0) {
         cliTools.warn(output)
+
+        if (config.eslint.breakOnError) {
+          core.reportError(`ESLint reports errors.`)
+        } else {
+          core.reportBuildNotes('ESLint reports build notes.');
+        }
       } else {
         cliTools.info(output)
       }
-      core.reportBuildNotes('ESLint reports build notes.');
     }
 
-    if (config.eslint.breakOnError && errors.length > 0) {
-      core.reportError(`ESLint reports errors.`)
+    if (errors.length > 0) {
+      if (config.eslint.breakOnError) {
+        core.reportError(`ESLint reports errors.`)
+      } else {
+        core.reportBuildNotes('ESLint reports build notes.');
+      }
     }
+
     core.getJobmanager().finishJob('eslint')
   })
 }
