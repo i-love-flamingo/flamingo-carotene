@@ -53,7 +53,7 @@ const eslint = (core) => {
 
   childProcess.on('error', function (exception) {
     console.log('An Error occured while ES Linting:', exception)
-    core.reportError(`ESLint reports errors.`)
+    core.reportError('ESLint reports errors.')
   })
 
   childProcess.on('exit', function (code) {
@@ -61,24 +61,16 @@ const eslint = (core) => {
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
-      if (code !== 0) {
-        cliTools.warn(output)
-
+      if (code !== 0 || errors.length > 0) {
         if (config.eslint.breakOnError) {
-          core.reportError(`ESLint reports errors.`)
+          cliTools.error(output)
+          core.reportError('ESLint reports errors.')
         } else {
-          core.reportBuildNotes('ESLint reports build notes.');
+          cliTools.warn(output)
+          core.reportBuildNotes('ESLint reports notes.')
         }
       } else {
         cliTools.info(output)
-      }
-    }
-
-    if (errors.length > 0) {
-      if (config.eslint.breakOnError) {
-        core.reportError(`ESLint reports errors.`)
-      } else {
-        core.reportBuildNotes('ESLint reports build notes.');
       }
     }
 

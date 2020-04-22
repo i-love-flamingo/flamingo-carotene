@@ -47,7 +47,7 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
       if (error.details) {
         cliTools.error(error.details)
       }
-      core.reportError(`Webpack reports errors.`)
+      core.reportError('Webpack reports errors.')
     }
 
     const statsData = stats.toJson()
@@ -57,7 +57,7 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
         cliTools.warn(warnings)
       }
 
-      core.reportBuildNotes(`WebpackStat reports build notes.`)
+      core.reportBuildNotes('WebpackStat reports build notes.')
     }
 
     if (stats.hasErrors()) {
@@ -65,7 +65,7 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
         cliTools.error(error)
       }
 
-      core.reportError(`WebpackStat reports errors.`)
+      core.reportError('WebpackStat reports errors.')
     }
 
     if (cliTools.hasOption(['--writeWebpackStats'])) {

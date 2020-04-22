@@ -65,7 +65,7 @@ const pugLint = (core) => {
       const errorPrefix = `${config.paths.project}/`
       const lines = data.toString().split("\n").map((line) => {
         if (line.includes(errorPrefix)) {
-          return `⚠️   ${line.split(errorPrefix).join('')}`
+          return `${line.split(errorPrefix).join('')}`
         }
         return line
       })
@@ -83,16 +83,19 @@ const pugLint = (core) => {
         const output = [].concat(results, errors).join('\n').trim()
 
         if (output.length > 0) {
-          if (code !== 0) {
-            cliTools.warn(output)
+          if (code !== 0 || errors.length > 0) {
+            if (config.pugLint.breakOnError) {
+              cliTools.error(output)
+              core.reportError('PugLint reports errors.')
+            } else {
+              cliTools.warn(output)
+              core.reportBuildNotes('PugLint reports notes.')
+            }
           } else {
             cliTools.info(output)
           }
         }
 
-        if (config.pugLint.breakOnError && errors.length > 0) {
-          core.reportError(`PugLint reports errors.`)
-        }
         core.getJobmanager().finishJob('puglint')
 
       }

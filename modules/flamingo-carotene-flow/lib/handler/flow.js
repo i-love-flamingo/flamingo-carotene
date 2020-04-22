@@ -31,16 +31,19 @@ const flow = (core) => {
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
-      if (code !== 0) {
-        cliTools.warn(output)
+      if (code !== 0 || errors.length > 0) {
+        if (config.flow.breakOnError) {
+          cliTools.error(output)
+          core.reportError('Flow reports errors.')
+        } else {
+          cliTools.warn(output)
+          core.reportBuildNotes('Flow reports notes.')
+        }
       } else {
         cliTools.info(output)
       }
     }
 
-    if (config.flow.breakOnError && errors.length > 0) {
-      core.reportError(`Flow reports errors.`)
-    }
     core.getJobmanager().finishJob('flow')
 
   })

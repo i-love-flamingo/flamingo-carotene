@@ -66,16 +66,17 @@ const sassLint = (core) => {
     const output = [].concat(results, errors).join('\n').trim()
 
     if (output.length > 0) {
-      if (code !== 0) {
-        cliTools.warn(output)
+      if (code !== 0 || errors.length > 0) {
+        if (config.sassLint.breakOnError) {
+          cliTools.error(output)
+          core.reportError('SassLint reports errors.')
+        } else {
+          cliTools.warn(output)
+          core.reportBuildNotes('SassLint report notes.')
+        }
       } else {
         cliTools.info(output)
       }
-      core.reportBuildNotes(`SassLint report notes.`)
-    }
-
-    if (config.sassLint.breakOnError && errors.length > 0) {
-      core.reportError(`SassLint reports errors.`)
     }
 
     core.getJobmanager().finishJob('sasslint')

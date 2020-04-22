@@ -73,19 +73,22 @@ const pugBuild = (core) => {
       if (finishedSubJobs >= jobArrays.length) {
         core.getJobmanager().reportFinishJob('pug')
         const output = [].concat(results, errors).join('\n').trim()
+
         if (output.length > 0) {
-          if (code !== 0) {
-            cliTools.warn(output)
+          if (code !== 0 || errors.length > 0) {
+            if (config.pug.breakOnError) {
+              cliTools.error(output)
+              core.reportError('Pug reports errors.')
+            } else {
+              cliTools.warn(output)
+              core.reportBuildNotes('Pug reports notes.')
+            }
           } else {
             cliTools.info(output)
           }
         }
 
-        if (config.pug.breakOnError && errors.length > 0) {
-          core.reportError(`Pug reported errors.`)
-        }
         core.getJobmanager().finishJob('pug')
-
       }
     })
   }
