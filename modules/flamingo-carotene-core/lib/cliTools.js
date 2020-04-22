@@ -136,9 +136,9 @@ class CliTools {
     verbose = !!verbose
 
     if (this.verbose || this.verbose === verbose) {
-      if (this.doBufferOut) {
-        this.addToBuffer(message, type, verbose)
-      } else {
+      this.addToBuffer(message, type, verbose)
+
+      if (!this.doBufferOut) {
         readline.clearLine(process.stdout, 0)
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(this.formatMessage(message, type, verbose))
