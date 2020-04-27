@@ -1,7 +1,10 @@
 const buildHandler = require('./lib/handler/build')
+const path = require('path')
 
 class FlamingoCaroteneStaticAsset {
   constructor (core) {
+    this.config = core.getConfig()
+
     this.listeners = [
       {
         command: 'config',
@@ -36,11 +39,33 @@ class FlamingoCaroteneStaticAsset {
           buildHandler(core)
         }
       },
+      {
+        command: 'watchCopyAssets',
+        handler: function (core) {
+          buildHandler(core)
+        }
+      },
     ]
   }
 
   getListeners () {
     return this.listeners
+  }
+
+  getWatchers () {
+    const pathsToWatch = []
+    for(const assetPath of this.config.staticAsset.assetPaths) {
+      pathsToWatch.push(path.join(this.config.paths.src, assetPath.src, '**', '*'))
+    }
+
+    return [{
+      watchId: 'staticAsset',
+      path: pathsToWatch,
+      command: 'watchCopyAssets',
+      socketCommand: 'built',
+      callbackKey: 'staticAsset',
+      unwatchConfig: null // if you need to unwatch specific files
+    }]
   }
 }
 

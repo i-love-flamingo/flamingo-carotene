@@ -76,17 +76,18 @@ const build = (core) => {
     return
   }
 
+  jobManager.addJob('staticAssets', 'Copy static assets', 'staticAsset')
+  jobManager.setSubJobTotalCount('staticAssets', 1)
+
   // Creates base directory if it doesn't exist
   mkdirp(config.staticAsset.basePaths.dest, function (err) {
-    jobManager.reportFinishJob('staticAssets')
-
     if (err) {
       errors.push(err)
     }
 
-    jobManager.addJob('staticAssets', 'Copy static assets')
     // Processes all paths given to copy files
     processPaths(config.staticAsset)
+    jobManager.reportFinishJob('staticAssets')
 
     logErrors(cliTools)
     jobManager.finishJob('staticAssets')
