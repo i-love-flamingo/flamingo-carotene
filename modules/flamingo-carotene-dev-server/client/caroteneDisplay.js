@@ -223,6 +223,7 @@ export default class CaroteneDisplay {
     this.domElementMessage.style.fontSize = '14px'
     this.domElementMessage.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black'
     this.domElementMessage.style.flexGrow = 1
+    this.domElementMessage.style.margin = 0
     this.domElementMessageContainer.appendChild(this.domElementMessage)
 
     // Append everything
