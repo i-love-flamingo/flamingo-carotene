@@ -1,0 +1,26 @@
+{
+  "name": "flamingo-carotene-vuejs",
+  "version": "6.5.19",
+  "description": "Provide a simple wrapper to attach VueJs to Carotene projects",
+  "author": "team-frontend <team-frontend@aoe.com>",
+  "license": "OSL-3.0",
+  "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-vuejs",
+  "keywords": [
+    "flamingo-carotene",
+    "flamingo",
+    "carotene",
+    "om3"
+  ],
+  "scripts": {
+    "test": "echo \"No tests present\"",
+    "link": "npm link"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "pug-plain-loader": "^1.0.0",
+    "vue-loader": "^15.9.1",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
