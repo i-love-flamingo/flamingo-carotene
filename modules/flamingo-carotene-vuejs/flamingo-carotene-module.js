@@ -8,7 +8,6 @@ class FlamingoCaroteneVueJs {
     this.listeners = [
       {
         command: 'config',
-        priority: 100,
         handler: function (core) {
           const config = core.getConfig()
 
