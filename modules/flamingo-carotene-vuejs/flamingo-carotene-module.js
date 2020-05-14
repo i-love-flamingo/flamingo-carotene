@@ -1,5 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
+const {buildHandler, entriesHandler} = require('lib/handler/build')
+
 
 class FlamingoCaroteneVueJs {
   constructor (core) {
@@ -39,8 +41,20 @@ class FlamingoCaroteneVueJs {
             ...config.webpackConfig.plugins,
             new VueLoaderPlugin(),
           ]
+
+          config.webpackConfig.entry = {
+            ...config.webpackConfig.entry,
+            ...entriesHandler(),
+          }
         }
       },
+      {
+        command: 'translate',
+        description: 'Builds internationalized file for VueJs',
+        handler: function (core) {
+          buildHandler(core)
+        }
+      }
     ]
   }
 

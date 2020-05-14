@@ -16,3 +16,5 @@ iles with the extension ".vue" will be added to the WebPack watcher and a new ru
 
 Additionally, to allow for the use of Pug templating in VueJs components, another rule has been added for ".pug" files using the [pug-plain-loader module](https://www.npmjs.com/package/pug-plain-loader).
  
+### Internationalization
+The module also provides internationalization for VueJS. By passing a path to translated yaml files, it will build language based JS Object containing appropriate keys and values for translations.  
