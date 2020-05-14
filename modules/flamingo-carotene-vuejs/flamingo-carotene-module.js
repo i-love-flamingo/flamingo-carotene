@@ -14,7 +14,7 @@ class FlamingoCaroteneVueJs {
           const config = core.getConfig()
           // Create paths for internationalization
           config.paths.vueI18n = path.join(config.paths.src, '..', '..', 'translations', 'merged')
-          config.paths.generated = path.join(config.paths.src, '..', 'generated')
+          config.paths.generated = path.join(config.paths.src, '..', 'generated', 'i18n')
 
           // Create internationalized translations
           buildI18nHandler(core)

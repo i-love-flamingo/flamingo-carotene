@@ -6,8 +6,8 @@ const path = require('path')
 const yaml = require('js-yaml')
 
 const build = (core) => {
-  const tmpI18nPath = path.join(process.cwd(), 'generated/i18n')
   const config = core.getConfig()
+  const tmpI18nPath = path.join(process.cwd(), config.paths.generated)
 
   // i18n
   mkdirp(tmpI18nPath)
@@ -73,14 +73,14 @@ const build = (core) => {
 const entries = () => {
   // get all available locales
   const locales = glob.sync('**/*.js', {
-    cwd: path.join(process.cwd(), config.paths.generated, 'i18n'),
+    cwd: path.join(process.cwd(), config.paths.generated),
   }).map(filename => {
     return path.basename(filename, '.js')
   })
 
   const entry = {}
   for (const locale of locales) {
-    entry[`i18n_${locale}`] = path.join(config.paths.generated, 'i18n', `${locale}.js`)
+    entry[`i18n_${locale}`] = path.join(config.paths.generated, `${locale}.js`)
   }
   return entry
 }
