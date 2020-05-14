@@ -1,4 +1,3 @@
-// https://github.com/shelljs/shelljs
 const mkdirp = require('mkdirp')
 const _ = require('lodash')
 const glob = require('glob')
@@ -6,8 +5,9 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 
-const build = () => {
+const build = (core) => {
   const tmpI18nPath = path.join(process.cwd(), 'generated/i18n')
+  const config = core.getConfig()
 
   // i18n
   mkdirp(tmpI18nPath)
@@ -24,20 +24,27 @@ const build = () => {
 
   translationKeys = _.uniq(translationKeys.map(key => key.slice(4, key.length - 1)))
   // get all available locales
-  const locales = _.uniq(glob.sync('**/*.all.yaml', { cwd: path.join(process.cwd(), '../translations/merged') }).map(filename => {
+  const locales = _.uniq(glob.sync('**/*.all.yaml', {
+    cwd: path.join(process.cwd(), config.paths.vueI18n)
+  }).map(filename => {
     return path.basename(filename, '.all.yaml')
   }))
 
   for (const locale of locales) {
     // map translation keys found in vue templates and generate actual translation files, one for each locale
     const translationFilePaths = glob.sync(`**/${locale}.all.yaml`, {
-      cwd: path.join(process.cwd(), '../translations/merged')
+      cwd: path.join(process.cwd(), config.paths.vueI18n)
     })
     let translations = {}
 
     for (const translationFilePath of translationFilePaths) {
       const translationObj = yaml.safeLoad(
-        fs.readFileSync(path.join(process.cwd(), '../translations/merged', translationFilePath), 'utf8')
+        fs.readFileSync(
+          path.join(
+            process.cwd(),
+            config.paths.vueI18n,
+            translationFilePath
+          ), 'utf8')
       )
       translations = Object.assign(translations, translationObj)
     }
@@ -46,8 +53,7 @@ const build = () => {
     for (const key of translationKeys) {
       if (translations[key]) {
         let transValue = translations[key].other
-        transValue = transValue.split('{{.').join('{').split('}}').join('}')
-        vueTranslations[key] = transValue
+        vueTranslations[key] = transValue.split('{{.').join('{').split('}}').join('}')
       }
     }
 
@@ -65,20 +71,18 @@ const build = () => {
 }
 
 const entries = () => {
-  (function () {
-    // get all available locales
-    const locales = glob.sync('**/*.js', {
-      cwd: path.join(process.cwd(), 'generated/i18n'),
-    }).map(filename => {
-      return path.basename(filename, '.js')
-    })
+  // get all available locales
+  const locales = glob.sync('**/*.js', {
+    cwd: path.join(process.cwd(), 'generated/i18n'),
+  }).map(filename => {
+    return path.basename(filename, '.js')
+  })
 
-    const entry = {}
-    for (const locale of locales) {
-      entry[`i18n_${locale}`] = path.join(config.paths.generated, 'i18n', `${locale}.js`)
-    }
-    return entry
-  }())
+  const entry = {}
+  for (const locale of locales) {
+    entry[`i18n_${locale}`] = path.join(config.paths.generated, 'i18n', `${locale}.js`)
+  }
+  return entry
 }
 
 module.exports = {build, entries}
