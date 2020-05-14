@@ -73,7 +73,7 @@ const build = (core) => {
 const entries = () => {
   // get all available locales
   const locales = glob.sync('**/*.js', {
-    cwd: path.join(process.cwd(), 'generated/i18n'),
+    cwd: path.join(process.cwd(), config.paths.generated, 'i18n'),
   }).map(filename => {
     return path.basename(filename, '.js')
   })

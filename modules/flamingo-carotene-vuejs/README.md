@@ -18,3 +18,5 @@ Additionally, to allow for the use of Pug templating in VueJs components, anothe
  
 ### Internationalization
 The module also provides internationalization for VueJS. By passing a path to translated yaml files, it will build language based JS Object containing appropriate keys and values for translations.  
+```config.paths.vueI18n``` is the source from which the module should find the translations.
+```config.paths.generated``` is the location where the Vue translations should be built to.
