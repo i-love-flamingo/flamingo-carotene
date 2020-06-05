@@ -59,9 +59,7 @@ function deepEqualStrict(value1, value2) {
  */
 
 
-var State =
-/*#__PURE__*/
-function () {
+var State = /*#__PURE__*/function () {
   function State() {
     _classCallCheck(this, State);
 

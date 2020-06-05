@@ -23,9 +23,7 @@
     return Constructor;
   }
 
-  var CaroteneDisplay =
-  /*#__PURE__*/
-  function () {
+  var CaroteneDisplay = /*#__PURE__*/function () {
     function CaroteneDisplay(displayPosition) {
       _classCallCheck(this, CaroteneDisplay);
 
@@ -272,6 +270,7 @@
         this.domElementMessage.style.fontSize = '14px';
         this.domElementMessage.style.textShadow = '1px 1px 1px black, 1px -1px 1px black, -1px  1px 1px black, -1px -1px 1px black';
         this.domElementMessage.style.flexGrow = 1;
+        this.domElementMessage.style.margin = 0;
         this.domElementMessageContainer.appendChild(this.domElementMessage); // Append everything
 
         this.domElement.appendChild(this.domElementIcon);
@@ -313,9 +312,7 @@
     return CaroteneDisplay;
   }();
 
-  var HotReloading =
-  /*#__PURE__*/
-  function () {
+  var HotReloading = /*#__PURE__*/function () {
     function HotReloading() {
       _classCallCheck(this, HotReloading);
 

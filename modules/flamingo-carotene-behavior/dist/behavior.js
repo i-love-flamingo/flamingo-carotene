@@ -9,9 +9,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /**
  *
  */
-var Behavior =
-/*#__PURE__*/
-function () {
+var Behavior = /*#__PURE__*/function () {
   /**
    * @param listOfBehaviorClasses
    *
