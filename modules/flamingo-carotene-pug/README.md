@@ -23,10 +23,14 @@ location.
 This module exposes the following config
 ```js
 config.paths.pug = {
+  fileMode: 'ast',
   src: path.join(config.paths.src, 'page'),
   dist: path.join(config.paths.dist, 'template', 'page')
 }
 ```
+`ast` Target filemode. 'ast' and 'html' is supported.
+- 'ast' Renders a JSON-AST representation of the pug file (default)
+- 'html' Renders HTML 
 
 `src` Path to the pug source files
 

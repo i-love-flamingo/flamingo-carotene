@@ -18,6 +18,7 @@ class FlamingoCarotenePug {
           config.pug = {
             filesPattern: '/{*,.,*/page/*}/{.,*,*/*.partial}/*.pug',
             buildCallback: null,
+            fileMode: 'ast',
             breakOnError: false
           }
         }

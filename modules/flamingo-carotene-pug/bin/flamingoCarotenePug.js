@@ -14,6 +14,15 @@ const baseDir = path.resolve(process.cwd());
 const sourceDir = path.resolve(baseDir, arguments.shift());
 const targetDir = path.resolve(baseDir, arguments.shift());
 const nodeDir = path.resolve(baseDir, arguments.shift());
+const fileMode = arguments.shift();
+switch(fileMode) {
+  case 'ast':
+  case 'html':
+    break;
+  default:
+    throw 'Unknown target file type to compile from pug. Only "ast" or "html" supported.';
+}
+
 const pugFilesToCompile = arguments
 
 
@@ -27,9 +36,16 @@ let error
 
 for(const pugFile of pugFilesToCompile) {
   const pugFilePath = path.resolve(sourceDir, pugFile)
-  let targetAstFilePath = path.resolve(targetDir, pugFile)
-  targetAstFilePath = targetAstFilePath.split('.pug').join('.ast.json')
-  error = compilePugFile(pugFilePath, targetAstFilePath, path.basename(pugFilePath), sourceDir, nodeDir)
+  let compiledFilePath = path.resolve(targetDir, pugFile)
+  switch(fileMode) {
+    case 'ast':
+      compiledFilePath = compiledFilePath.split('.pug').join('.ast.json')
+      break;
+    case 'html':
+      compiledFilePath = compiledFilePath.split('.pug').join('.html')
+      break;
+  }
+  error = compilePugFile(pugFilePath, compiledFilePath, path.basename(pugFilePath), sourceDir, nodeDir)
   if (error) {
     break
   }
@@ -124,11 +140,11 @@ function optimizeAst(ast, basedir) {
   return ast
 }
 
-function compilePugFile(sourcePugFilePath, targetAstFilePath, filename, basedir, nodeDir, done) {
+function compilePugFile(sourcePugFilePath, compiledFilePath, filename, basedir, nodeDir, done) {
   let error = null
   try {
     const content = fs.readFileSync(sourcePugFilePath, 'utf8')
-    pug.compile(content, {
+    const compiledFn = pug.compile(content, {
       filename,
       basedir: basedir,
       compileDebug: false,
@@ -141,21 +157,29 @@ function compilePugFile(sourcePugFilePath, targetAstFilePath, filename, basedir,
             return path.join(filename[0] === '/' ? options.basedir : path.dirname(source.trim()), filename)
           },
           preCodeGen(ast, options) {
-
-            ast = optimizeAst(ast, basedir)
-            const astJson = JSON.stringify(ast, null, ' ')
-            mkdirp(path.dirname(targetAstFilePath))
-            fs.writeFileSync(targetAstFilePath, astJson)
-            throw new StopCompileException()
+            if (fileMode === 'ast') {
+              ast = optimizeAst(ast, basedir)
+              const astJson = JSON.stringify(ast, null, ' ')
+              mkdirp(path.dirname(compiledFilePath))
+              fs.writeFileSync(compiledFilePath, astJson)
+              throw new StopCompileException()
+            }
+            else {
+              return ast
+            }
           }
         }
       ]
     })
+    if (fileMode === 'html') {
+      mkdirp(path.dirname(compiledFilePath))
+      fs.writeFileSync(compiledFilePath, compiledFn())
+    }
   } catch (e) {
     if (e instanceof StopCompileException) {
 
     } else {
-      error = console.error(`ERROR Compiling ${sourcePugFilePath} to ${targetAstFilePath}`)
+      error = console.error(`ERROR Compiling ${sourcePugFilePath} to ${compiledFilePath}`)
       error+= e;
     }
   }
