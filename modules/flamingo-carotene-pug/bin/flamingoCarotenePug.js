@@ -22,6 +22,7 @@ switch(fileMode) {
   default:
     throw 'Unknown target file type to compile from pug. Only "ast" or "html" supported.';
 }
+const relativeRoot = arguments.shift();
 
 const pugFilesToCompile = arguments
 
@@ -36,7 +37,9 @@ let error
 
 for(const pugFile of pugFilesToCompile) {
   const pugFilePath = path.resolve(sourceDir, pugFile)
-  let compiledFilePath = path.resolve(targetDir, pugFile)
+  const fileNameFragment = path.relative(relativeRoot, pugFilePath)
+  let compiledFilePath = path.resolve(targetDir, fileNameFragment)
+
   switch(fileMode) {
     case 'ast':
       compiledFilePath = compiledFilePath.split('.pug').join('.ast.json')

@@ -40,13 +40,29 @@ config.paths.pug = {
 config.pug = {
   filesPattern: '/{*,.,*/page/*}/{.,*,*/*.partial}/*.pug',
   buildCallback: null || function,
+  useRelativeSrc: false,
   breakOnError: false
 }
 ```
 
 `filesPattern` Glob pattern to find the files inside the src path
 
+`useRelativeSrc` If set to true, the compiled files will be stored to 'paths.pug.dist' relative to its sourc.
+#### Example:
+config.paths.src = '/foo'
+config.paths.pug.src = '/foo/pugPages'
+config.paths.pug.dist = '/htdocs'
+
+##### useRelativeSrc = FALSE
+a template called "index" will be stored into '/htdocs/pugPages'
+a template called "test/index" will be stored into '/htdocs/pugPages/test'
+
+##### useRelativeSrc = TRUE
+a template called "index" will be stored into '/htdocs'
+a template called "test/index" will be stored into '/htdocs/test'
+
 `buildCallback` The callback function to execute when the template compilation was finished
 
 `breakOnError` True to break the process when an error occurred, false to only write it to output. Will be set to true
 for production build automatically.
+
