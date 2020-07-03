@@ -66,10 +66,25 @@ class FlamingoCaroteneVueJs {
         }
       }
     ]
+
+    this.watcher = [
+      {
+        watchId: 'vue',
+        path: [
+          path.join(config.paths.src, '**', '*.vue')
+        ],
+        command: 'watchVue',
+        callbackKey: 'vue'
+      }
+    ]
   }
 
   getListeners () {
     return this.listeners
+  }
+
+  getWatchers () {
+    return this.watcher
   }
 }
 
