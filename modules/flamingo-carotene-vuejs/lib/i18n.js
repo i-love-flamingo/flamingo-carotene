@@ -3,8 +3,6 @@ import VueI18n from 'vue-i18n'
 
 Vue.use(VueI18n)
 
-const i18n = new VueI18n({
-  locale: 'default', // we mostly use component based localization (see http://kazupon.github.io/vue-i18n/en/component.html)
+export default new VueI18n({
+  locale: 'default', // we mostly use component based localization (see http://kazupon.github.io/vue-i18n/guide/component.html)
 })
-
-export default i18n
