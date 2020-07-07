@@ -71,11 +71,12 @@ class FlamingoCaroteneVueJs {
       {
         watchId: 'vue',
         path: [
-          path.join(config.paths.src, '**', '*.vue')
+          path.join(config.paths.src, '**', '*.vue'),
         ],
-        command: 'watchVue',
-        callbackKey: 'vue'
-      }
+        command: 'watchWebpackJs',
+        socketCommand: 'reloadJS',
+        callbackKey: 'webpackJs',
+      },
     ]
   }
 
