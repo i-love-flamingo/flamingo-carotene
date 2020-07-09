@@ -12,7 +12,7 @@ class FlamingoCaroteneVueJs {
         command: 'config',
         handler: function (core) {
           const config = core.getConfig()
-          // Create paths for internationalization
+          // Create default paths for internationalization
           config.paths.vueI18n = path.join(config.paths.project, '..', 'translations', 'merged')
           config.paths.generated = path.join(config.paths.project, 'generated', 'i18n')
 
@@ -20,10 +20,7 @@ class FlamingoCaroteneVueJs {
           buildI18nHandler(core)
 
           // Add vue to the list of extensions WebPack should resolve file names to
-          config.webpackConfig.resolve.extensions = [
-            ...config.webpackConfig.resolve.extensions,
-            '.vue'
-          ]
+          config.webpackConfig.resolve.extensions.push('.vue')
 
           // Add new loaders for Vue and Pug/Vue compatibility
           config.webpackConfig.module.rules = [
@@ -46,10 +43,7 @@ class FlamingoCaroteneVueJs {
           ]
 
           // Add Vue Loader Plugin
-          config.webpackConfig.plugins = [
-            ...config.webpackConfig.plugins,
-            new VueLoaderPlugin(),
-          ]
+          config.webpackConfig.plugins.push(new VueLoaderPlugin())
         }
       },
       {
