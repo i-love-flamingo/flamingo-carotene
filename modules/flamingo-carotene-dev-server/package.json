@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-dev-server",
-  "version": "6.5.19",
+  "version": "6.5.20",
   "description": "Provide the functionality to add file watchers for developing projects with the Flamingo Carotene tooling",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -22,7 +22,6 @@
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "ansi-to-html": "^0.6.14",
-    "babel-core": "7.0.0-bridge.0",
     "babel-plugin-import-glob": "^2.0.0",
     "chokidar": "^3.3.1",
     "debounce": "^1.2.0",

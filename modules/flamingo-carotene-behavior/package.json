@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-behavior",
-  "version": "6.5.0",
+  "version": "6.5.21",
   "description": "The behavior module enables to initialize javascript behaviors on html elements",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -18,11 +18,11 @@
     "link": "npm link"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.8.4",
-    "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^25.1.0",
     "babel-plugin-import-glob": "^2.0.0",
     "jest": "^25.1.0",

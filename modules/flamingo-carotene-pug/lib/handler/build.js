@@ -34,7 +34,14 @@ const pugBuild = (core) => {
   jobParameters.push(path.resolve(config.paths.src)) // sourceDir
   jobParameters.push(path.resolve(config.paths.pug.dist)) // distDir
   jobParameters.push(path.join(config.paths.project, 'node_modules')) // nodeDir
+  jobParameters.push(config.pug.fileMode) // fileMode
 
+  if (config.pug.useRelativeSrc) {
+    jobParameters.push(path.resolve(config.paths.pug.src))
+  }
+  else {
+    jobParameters.push(path.resolve(config.paths.src))
+  }
 
   // leave 1 cpu core unused...
   const threadCount = (require('os').cpus().length || 2) - 1
