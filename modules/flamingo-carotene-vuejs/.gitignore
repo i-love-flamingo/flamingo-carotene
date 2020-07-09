@@ -2,9 +2,7 @@
 .cache
 .idea
 .gradle
-.sass-cache
 .temp
-dist
 node_modules
 npm-debug.log
 yarn-error.log
