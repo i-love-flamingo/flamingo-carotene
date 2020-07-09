@@ -5,17 +5,21 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 
+//TODO: use config.paths.vueI18n and config.paths.generated everywhere
 const build = (core) => {
-  const tmpI18nPath = path.join(process.cwd(), 'generated/i18n')
+  const config = core.getConfig()
+  const tmpI18nPath = path.join(process.cwd(), config.paths.generated)
   const translationKeys = getTranslationKey()
   const messages = {}
 
   // create directory
   mkdirp('-p', tmpI18nPath)
 
-  for (const locale of getLocales()) {
+  for (const locale of getLocales(config.paths.vueI18n)) {
     // map translation keys found in vue templates and generate actual translation files, one for each locale
-    const translationFilePaths = glob.sync(`**/${locale}.all.yaml`, { cwd: path.join(process.cwd(), '../translations/merged') })
+    const translationFilePaths = glob.sync(`**/${locale}.all.yaml`, {
+      cwd: path.join(process.cwd(), config.paths.vueI18n)
+    })
     const translations = getTranslationsFromPaths(translationFilePaths)
 
     const vueTranslations = {}
@@ -49,8 +53,8 @@ function getTranslationKey () {
 }
 
 // get all available locales
-function getLocales () {
-  return _.uniq(glob.sync('**/*.all.yaml', { cwd: path.join(process.cwd(), '../translations/merged') }).map(filename => {
+function getLocales (path) {
+  return _.uniq(glob.sync('**/*.all.yaml', { cwd: path.join(process.cwd(), path) }).map(filename => {
     return path.basename(filename, '.all.yaml')
   }))
 }
@@ -58,7 +62,7 @@ function getLocales () {
 function getTranslationsFromPaths (translationFilePaths) {
   let translations = {}
   for (const translationFilePath of translationFilePaths) {
-    const translationObj = yaml.safeLoad(fs.readFileSync(path.join(process.cwd(), '../translations/merged', translationFilePath), 'utf8'))
+    const translationObj = yaml.safeLoad(fs.readFileSync(path.join(process.cwd(), translationFilePath), 'utf8'))
     translations = Object.assign(translations, translationObj)
   }
   return translations
