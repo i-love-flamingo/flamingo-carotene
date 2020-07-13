@@ -1,7 +1,5 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
-const { buildI18nHandler } = require('lib/handler/build')
-
 
 class FlamingoCaroteneVueJs {
   constructor (core) {
@@ -12,12 +10,6 @@ class FlamingoCaroteneVueJs {
         command: 'config',
         handler: function (core) {
           const config = core.getConfig()
-          // Create default paths for internationalization
-          config.paths.vueI18n = path.join(config.paths.project, '..', 'translations', 'merged')
-          config.paths.generated = path.join(config.paths.project, 'generated', 'i18n')
-
-          // Create internationalized translations
-          buildI18nHandler(core)
 
           // Add vue to the list of extensions WebPack should resolve file names to
           config.webpackConfig.resolve.extensions.push('.vue')
@@ -44,13 +36,6 @@ class FlamingoCaroteneVueJs {
 
           // Add Vue Loader Plugin
           config.webpackConfig.plugins.push(new VueLoaderPlugin())
-        }
-      },
-      {
-        command: 'translate',
-        description: 'Builds internationalized file for VueJs',
-        handler: function (core) {
-          buildI18nHandler(core)
         }
       }
     ]
