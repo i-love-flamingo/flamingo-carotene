@@ -3,14 +3,13 @@ const path = require('path')
 
 class FlamingoCaroteneVueJs {
   constructor (core) {
-    this.config = core.getConfig()
+    const config = core.getConfig()
 
     this.listeners = [
       {
         command: 'config',
+        priority: -50,
         handler: function (core) {
-          const config = core.getConfig()
-
           // Add vue to the list of extensions WebPack should resolve file names to
           config.webpackConfig.resolve.extensions.push('.vue')
 

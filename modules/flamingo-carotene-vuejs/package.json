@@ -19,6 +19,10 @@
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "path": "^0.12.7"
+    "flamingo-carotene-webpack": "^6.5.17",
+    "path": "^0.12.7",
+    "pug-plain-loader": "^1.0.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11"
   }
 }
