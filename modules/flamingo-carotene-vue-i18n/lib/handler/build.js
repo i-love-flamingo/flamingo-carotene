@@ -5,7 +5,6 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 
-//TODO: use config.paths.vueI18n and config.paths.generated everywhere
 const build = (core) => {
   const config = core.getConfig()
   const tmpI18nPath = path.join(process.cwd(), config.paths.generated)
