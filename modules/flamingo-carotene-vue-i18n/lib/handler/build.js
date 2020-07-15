@@ -7,9 +7,15 @@ const yaml = require('js-yaml')
 
 const build = (core) => {
   const config = core.getConfig()
+  const cliTools = core.getCliTools()
   const tmpI18nPath = path.join(process.cwd(), config.paths.generated)
   const translationKeys = getTranslationKey()
   const messages = {}
+
+  if (!config.paths.vueI18n || !config.paths.generated) {
+    cliTools.warn('Vue i18n paths are missing')
+    return
+  }
 
   // create directory
   mkdirp('-p', tmpI18nPath)
