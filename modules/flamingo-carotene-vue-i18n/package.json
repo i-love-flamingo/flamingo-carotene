@@ -1,7 +1,7 @@
 {
-  "name": "flamingo-carotene-vue-18n",
+  "name": "flamingo-carotene-vue-i18n",
   "version": "6.6.0-alpha.2",
-  "description": "Provide a simple wrapper to attach VueJs to Carotene projects",
+  "description": "Provide a simple wrapper to handle internationalization VueJs Carotene projects",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-vue-i18n",
