@@ -8,9 +8,11 @@ class FlamingoCaroteneVueJs {
     this.listeners = [
       {
         command: 'config',
-        priority: -50,
+        priority: -20,
         handler: function (core) {
+          const config = core.getConfig()
           const cliTools = core.getCliTools()
+          config.paths.vue = __dirname
 
           if (!config.webpackConfig || !config.webpackConfig.resolve || !config.webpackConfig.resolve.extensions) {
             cliTools.warn('VueJS is configured to use a webpack loader but there is no webpack config available')
