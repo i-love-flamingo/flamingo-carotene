@@ -1,5 +1,5 @@
 const path = require('path')
-const { buildI18nHandler } = require('/lib/handler/build')
+const { buildI18n } = require('./lib/handler/build')
 
 
 class FlamingoCaroteneVueJs {
@@ -11,17 +11,17 @@ class FlamingoCaroteneVueJs {
 
     this.listeners = [
       {
-        command: 'config',
+        command: 'build',
+        // Create internationalized translations
         handler: function (core) {
-          // Create internationalized translations
-          buildI18nHandler(core)
+          buildI18n(core)
         }
       },
       {
         command: 'translate',
         description: 'Builds internationalized file for VueJs',
         handler: function (core) {
-          buildI18nHandler(core)
+          buildI18n(core)
         }
       }
     ]

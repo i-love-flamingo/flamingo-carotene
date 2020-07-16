@@ -5,10 +5,9 @@ const fs = require('fs')
 const path = require('path')
 const yaml = require('js-yaml')
 
-const build = (core) => {
+const buildI18n = (core) => {
   const config = core.getConfig()
   const cliTools = core.getCliTools()
-  const tmpI18nPath = path.join(process.cwd(), config.paths.generated)
   const translationKeys = getTranslationKey()
   const messages = {}
 
@@ -18,14 +17,14 @@ const build = (core) => {
   }
 
   // create directory
-  mkdirp('-p', tmpI18nPath)
+  mkdirp.sync(config.paths.generated)
 
   for (const locale of getLocales(config.paths.vueI18n)) {
     // map translation keys found in vue templates and generate actual translation files, one for each locale
     const translationFilePaths = glob.sync(`**/${locale}.all.yaml`, {
-      cwd: path.join(process.cwd(), config.paths.vueI18n)
+      cwd: config.paths.vueI18n
     })
-    const translations = getTranslationsFromPaths(translationFilePaths)
+    const translations = getTranslationsFromPaths(config.paths.vueI18n, translationFilePaths)
 
     const vueTranslations = {}
     for (const key of translationKeys) {
@@ -41,7 +40,7 @@ const build = (core) => {
   }
 
   // generate import files, one for each locale
-  fs.writeFileSync(`${tmpI18nPath}/messages.json`, JSON.stringify(messages), { encoding: 'utf8' })
+  fs.writeFileSync(`${config.paths.generated}/messages.json`, JSON.stringify(messages), { encoding: 'utf8' })
 }
 
 // parse all vue template files for translation keys
@@ -58,19 +57,19 @@ function getTranslationKey () {
 }
 
 // get all available locales
-function getLocales (path) {
-  return _.uniq(glob.sync('**/*.all.yaml', { cwd: path.join(process.cwd(), path) }).map(filename => {
+function getLocales (translationsPath) {
+  return _.uniq(glob.sync('**/*.all.yaml', { cwd: translationsPath }).map(filename => {
     return path.basename(filename, '.all.yaml')
   }))
 }
 
-function getTranslationsFromPaths (translationFilePaths) {
+function getTranslationsFromPaths (basePath, translationFilePaths) {
   let translations = {}
   for (const translationFilePath of translationFilePaths) {
-    const translationObj = yaml.safeLoad(fs.readFileSync(path.join(process.cwd(), translationFilePath), 'utf8'))
+    const translationObj = yaml.safeLoad(fs.readFileSync(path.join(basePath, translationFilePath), 'utf8'))
     translations = Object.assign(translations, translationObj)
   }
   return translations
 }
 
-module.exports = {build}
+module.exports = { buildI18n }
