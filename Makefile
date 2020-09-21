@@ -31,5 +31,8 @@ ci:
 outdated:
 	npx lerna exec -- npm outdated
 
+upgradeAll:
+	npx lerna exec -- npx npm-check-updates -u
+
 yarn-link:
 	lerna exec -- yarn link

@@ -10,9 +10,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * Scroll the page to a given Y Coordinate or to a dom element
  * Animation is timebased, animation will skip frames, if client could not handle the speed
  * */
-var SmoothScrollTo =
-/*#__PURE__*/
-function () {
+var SmoothScrollTo = /*#__PURE__*/function () {
   function SmoothScrollTo() {
     _classCallCheck(this, SmoothScrollTo);
 

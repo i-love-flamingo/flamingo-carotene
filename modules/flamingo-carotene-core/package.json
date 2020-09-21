@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "ansi-to-html": "^0.6.14",
-    "chalk": "^3.0.0",
-    "cli-progress": "^3.6.0",
-    "cli-table3": "^0.5.1",
+    "chalk": "^4.1.0",
+    "cli-progress": "^3.8.2",
+    "cli-table3": "^0.6.0",
     "intercept-stdout": "^0.1.2",
     "node-emoji": "^1.10.0",
     "progress": "^2.0.3",

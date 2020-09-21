@@ -19,20 +19,20 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "deep-equal": "^2.0.1",
+    "deep-equal": "^2.0.3",
     "object-path": "^0.11.4",
     "object-path-immutable": "^4.1.0",
     "redux": "^4.0.5",
     "redux-watch": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
-    "@babel/preset-env": "^7.10.2",
-    "babel-jest": "^24.9.0",
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
     "babel-plugin-import-glob": "^2.0.0",
-    "jest": "^24.9.0",
-    "jsdom": "^15.2.1"
+    "jest": "^26.4.2",
+    "jsdom": "^16.4.0"
   }
 }
