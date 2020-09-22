@@ -176,3 +176,16 @@ To do this, execute
 npx lerna publish
 ```
 This will try to publish all modules.
+
+### Keeping packages up-to-date
+To keep packages up-to-date and to reduce vulnerability please update all packages on a regular basis.
+
+Run the following command one by one to update all packages and publish the result. 
+```shell script
+make cleanDep
+make upgradeAll
+make install
+make build
+make test
+make publishToNpm
+```
