@@ -26,3 +26,8 @@ When **no config** was found in your project, this module will use some minor de
 * The [autoprefixer](https://github.com/postcss/autoprefixer) plugin will be added. The plugin will respond to the
 [browserslist](https://github.com/browserslist/browserslist) config.
 * The source map generation will be turned on for production builds.
+
+## Troubleshooting
+* **[XYZ] requires a peer of postcss@^8.1.0 [...] or Error: true is not a PostCSS plugin**
+Peer dependency PostCSS version 8.1 must be install within project: npm install -D postcss@^8.1.0
+
