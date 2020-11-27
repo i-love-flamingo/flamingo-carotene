@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-vuejs",
-  "version": "6.7.3",
+  "version": "6.7.4",
   "description": "Provide a simple wrapper to attach VueJs to Carotene projects",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -19,7 +19,7 @@
     "vue": "^2.6.12"
   },
   "devDependencies": {
-    "flamingo-carotene-webpack": "^6.7.2",
+    "flamingo-carotene-webpack": "^6.7.4",
     "path": "^0.12.7",
     "pug-plain-loader": "^1.0.0",
     "vue-loader": "^15.9.5",
