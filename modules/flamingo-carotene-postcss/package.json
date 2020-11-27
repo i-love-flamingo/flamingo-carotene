@@ -16,7 +16,7 @@
     "link": "npm link"
   },
   "dependencies": {
-    "autoprefixer": "^10.0.1",
-    "postcss-loader": "^4.0.4"
+    "autoprefixer": "^10.0.3",
+    "postcss-loader": "^4.1.0"
   }
 }

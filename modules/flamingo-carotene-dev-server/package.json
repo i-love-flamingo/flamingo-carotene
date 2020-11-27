@@ -17,17 +17,17 @@
     "link": "npm link"
   },
   "dependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.1",
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
     "ansi-to-html": "^0.6.14",
     "babel-plugin-import-glob": "^2.0.0",
     "chokidar": "^3.4.3",
     "debounce": "^1.2.0",
-    "rollup": "^2.31.0",
+    "rollup": "^2.33.3",
     "rollup-plugin-babel": "^4.3.3",
-    "socket.io": "^2.3.0"
+    "socket.io": "^3.0.3"
   },
   "gitHead": "23f060e6f0327f1a2cf9b78d453f452331f5c4be"
 }

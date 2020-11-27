@@ -11,14 +11,14 @@
 		"link": "npm link"
 	},
 	"dependencies": {
-		"external-svg-sprite-loader": "^6.0.1",
+		"external-svg-sprite-loader": "^7.1.1",
 		"unfetch": "^4.2.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.12.1",
-		"@babel/core": "^7.12.1",
+		"@babel/cli": "^7.12.8",
+		"@babel/core": "^7.12.9",
 		"@babel/plugin-proposal-class-properties": "^7.12.1",
-		"@babel/preset-env": "^7.12.1",
+		"@babel/preset-env": "^7.12.7",
 		"flamingo-carotene-babel": "^6.7.2",
 		"flamingo-carotene-webpack": "^6.7.2"
 	}
