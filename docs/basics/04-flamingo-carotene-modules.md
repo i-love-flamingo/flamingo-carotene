@@ -189,3 +189,5 @@ make build
 make test
 make publishToNpm
 ```
+
+If you see any some errors during install or build you may want to run ```npm install``` and ```npm run build``` manually in those modules.
