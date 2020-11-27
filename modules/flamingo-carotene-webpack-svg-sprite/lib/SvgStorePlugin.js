@@ -198,7 +198,7 @@ class SvgStorePlugin {
     replaceSpritePathsInModuleWithInterpolatedPaths(module, sprite) {
         switch (module.constructor.name) {
             case 'CssModule':
-                module.content = sprite.replacePathsWithInterpolatedPaths(module.content);
+                module.content = sprite.replacePathsWithInterpolatedPaths(module.content.toString());
                 break;
 
             case 'NormalModule': {
