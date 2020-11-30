@@ -11,13 +11,15 @@ class Socket {
       return
     }
 
-    this.io = require('socket.io')()
+    this.io = require('socket.io')(this.config.devServer.port, {
+      cors: {
+        origin: '*',
+      }
+    })
 
     this.io.on('connection', (client) => {
       this.io.emit('connected', this.config.devServer)
     })
-
-    this.io.listen(this.config.devServer.port)
   }
 
   report (reportData) {

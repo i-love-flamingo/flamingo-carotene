@@ -1,4 +1,4 @@
-const io = require('socket.io-client')
+const io = require('socket.io/client-dist/socket.io')
 const sockeUri = window.location.protocol + '//' + window.location.hostname + ':3000'
 const socket = io(sockeUri)
 
