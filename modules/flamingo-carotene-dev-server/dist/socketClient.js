@@ -461,7 +461,7 @@
     return HotReloading;
   }();
 
-  var io = require('socket.io/client-dist/socket.io');
+  var io = require('socket.io-client');
 
   var sockeUri = window.location.protocol + '//' + window.location.hostname + ':3000';
   var socket = io(sockeUri);
