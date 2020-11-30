@@ -210,10 +210,10 @@ class WebpackConfig {
   }
 
   getStyleLoaders () {
-    let styleLoaders = [
+    return [
       {
         loader: MiniCssExtractPlugin.loader,
-        options: this.getMiniCssExtractPluginOptions()
+        options: this.getMiniCssExtractLoaderOptions()
       },
       {
         loader: 'css-loader',
@@ -234,16 +234,9 @@ class WebpackConfig {
         options: {}
       }
     ]
-
-    if (!isProd) {
-      styleLoaders.forEach((styleLoader) => {
-        styleLoader.options.sourceMap = true
-      })
-    }
-    return styleLoaders
   }
 
-  getMiniCssExtractPluginOptions () {
+  getMiniCssExtractLoaderOptions () {
     const pluginOptions = {}
 
     if (this.config.webpack.dist.cssFolderName) {

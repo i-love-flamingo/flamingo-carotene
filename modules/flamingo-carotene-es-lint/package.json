@@ -22,7 +22,7 @@
     "eslint-loader": "^4.0.2"
   },
   "peerDependencies": {
-    "eslint-config-flamingo-carotene": "^6.7.4",
+    "eslint-config-flamingo-carotene": "^6.7.5",
     "flamingo-carotene-webpack": "^6.7.4"
   }
 }
