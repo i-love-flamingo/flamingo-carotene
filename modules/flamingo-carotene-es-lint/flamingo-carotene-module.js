@@ -49,6 +49,9 @@ class ESLint {
             return
           }
 
+          config.webpackConfig.resolveLoader = Object.assign({ modules: [] }, config.webpackConfig.resolveLoader)
+          config.webpackConfig.resolveLoader.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
+
           const loaderConfig = {
             enforce: 'pre',
             test: /\.js$/,
