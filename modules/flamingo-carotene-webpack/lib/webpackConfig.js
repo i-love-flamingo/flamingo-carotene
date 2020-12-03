@@ -2,7 +2,7 @@ const path = require('path')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ManifestPlugin = require('webpack-manifest-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 const isProd = !process.env.NODE_ENV || process.env.NODE_ENV === 'production'
 
@@ -134,7 +134,7 @@ class WebpackConfig {
         new MiniCssExtractPlugin({
           filename: this.getCssFileName()
         }),
-        new ManifestPlugin()
+        new WebpackManifestPlugin()
       ]
     }
 
