@@ -57,8 +57,14 @@ class WebpackConfig {
       },
       resolve: {
         modules: [
-            this.config.paths.src,
-            path.join(this.config.paths.project, 'node_modules')
+          this.config.paths.src,
+          path.join(this.config.paths.project, 'node_modules')
+        ]
+      },
+      resolveLoader: {
+        modules: [
+          this.config.paths.src,
+          path.join(this.config.paths.project, 'node_modules')
         ]
       },
       module: {

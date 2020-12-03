@@ -1,3 +1,4 @@
+const path = require('path')
 const SvgStorePlugin  = require('./lib/SvgStorePlugin.js')
 
 class FlamingoCaroteneWebpackSvgSprite {
@@ -7,6 +8,12 @@ class FlamingoCaroteneWebpackSvgSprite {
         command: 'config',
         handler: function (core) {
           const config = core.getConfig()
+
+          config.webpackConfig.resolve = Object.assign({ modules: [] }, config.webpackConfig.resolve)
+          config.webpackConfig.resolve.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
+          config.webpackConfig.resolveLoader = Object.assign({ modules: [] }, config.webpackConfig.resolveLoader)
+          config.webpackConfig.resolveLoader.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
+
           config.webpackConfig.module.rules = [
             ...config.webpackConfig.module.rules,
             {
