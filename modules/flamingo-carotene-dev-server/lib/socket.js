@@ -13,7 +13,7 @@ class Socket {
 
     this.io = require('socket.io')(this.config.devServer.port, {
       cors: {
-        origin: '*',
+        origin: '*'
       }
     })
 

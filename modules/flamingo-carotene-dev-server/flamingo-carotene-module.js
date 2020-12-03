@@ -1,3 +1,5 @@
+const path = require('path')
+
 class DevServerModule {
   constructor (core) {
     this.modules = core.getModules()
@@ -5,6 +7,23 @@ class DevServerModule {
     const that = this
 
     this.listeners = [
+      {
+        command: 'config',
+        priority: -10,
+        handler: function (core) {
+          const config = core.getConfig()
+
+          if (!config.webpackConfig || !config.webpackConfig.resolve || !config.webpackConfig.resolveLoader) {
+            core.getCliTools().warn('Dev server is configured to use a webpack loader but there is no webpack config available')
+            return
+          }
+
+          config.webpackConfig.resolve = Object.assign({ modules: [] }, config.webpackConfig.resolve)
+          config.webpackConfig.resolve.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
+          config.webpackConfig.resolveLoader = Object.assign({ modules: [] }, config.webpackConfig.resolveLoader)
+          config.webpackConfig.resolveLoader.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
+        }
+      },
       {
         command: 'config',
         priority: 100,
