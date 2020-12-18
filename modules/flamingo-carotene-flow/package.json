@@ -15,6 +15,6 @@
     "link": "npm link"
   },
   "dependencies": {
-    "flow-bin": "^0.138.0"
+    "flow-bin": "^0.140.0"
   }
 }

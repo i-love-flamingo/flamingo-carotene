@@ -32,8 +32,7 @@ outdated:
 	npx lerna exec -- npm outdated
 
 upgradeAll:
-	npx lerna exec -- npx npm-check-updates -u -x webpack
-	npx lerna exec -- npx npm-check-updates -u -t minor -f webpack
+	npx lerna exec -- npx npm-check-updates -u -t minor
 
 yarn-link:
 	lerna exec -- yarn link

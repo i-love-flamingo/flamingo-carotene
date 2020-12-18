@@ -187,6 +187,13 @@ make upgradeAll
 make install
 make build
 make test
+make link
+```
+
+Then link your project's flamingo modules to test the current version.
+
+If everything is well publish the modules.
+```
 make publishToNpm
 ```
 
