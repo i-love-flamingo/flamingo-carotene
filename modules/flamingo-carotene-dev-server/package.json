@@ -24,12 +24,12 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "ansi-to-html": "^0.6.14",
     "babel-plugin-import-glob": "^2.0.0",
-    "chokidar": "^3.4.3",
+    "chokidar": "^3.5.0",
     "debounce": "^1.2.0",
-    "rollup": "^2.35.1",
+    "rollup": "^2.36.1",
     "rollup-plugin-babel": "^4.3.3",
-    "socket.io": "^3.0.4",
-    "socket.io-client": "^3.0.4"
+    "socket.io": "^3.1.0",
+    "socket.io-client": "^3.1.0"
   },
   "gitHead": "23f060e6f0327f1a2cf9b78d453f452331f5c4be"
 }
