@@ -1,5 +1,6 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
+import sass from 'rollup-plugin-sass';
 
 const config = {
   input: 'client/socketClient.js',
@@ -13,7 +14,10 @@ const config = {
     nodeResolve({
       browser: true
     }),
-    babel()
+    babel(),
+    sass({
+      output: true
+    })
   ],
 };
 

@@ -81,10 +81,22 @@ class DevServerModule {
 
           let forceInject = false;
           if (core.getCliTools().hasOption(['--freshDevServerBuild'])) {
-            forceInject = true
+            forceInject = true // Include module dir to the rules so that separate so that files such as css or sass can be loaded
           }
+
           devServer.handleInitialBuild(forceInject)
 
+        }
+      },
+      {
+        command: 'config',
+        priority: 9,
+        handler: (core) => {
+          const config = core.getConfig()
+
+          // Include module dir to the rules so that separate so that files such as css or sass can be loaded
+          config.webpack.rulesInclude = config.webpack.rulesInclude || []
+          config.webpack.rulesInclude.unshift(path.join(__dirname, 'dist'))
         }
       }
     ]

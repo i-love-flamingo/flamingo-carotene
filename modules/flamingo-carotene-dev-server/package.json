@@ -19,6 +19,7 @@
   "dependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@rollup/plugin-node-resolve": "^10.0.0",
@@ -28,6 +29,7 @@
     "debounce": "^1.2.0",
     "rollup": "^2.36.1",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-sass": "^1.2.2",
     "socket.io": "^3.1.0",
     "socket.io-client": "^3.1.0"
   },
