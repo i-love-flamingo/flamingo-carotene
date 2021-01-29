@@ -228,6 +228,7 @@ class WebpackConfig {
       {
         loader: 'sass-loader',
         options: {
+          implementation: require('node-sass'),
           sassOptions: {
             includePaths: [
               path.join(this.config.paths.project, 'node_modules')
