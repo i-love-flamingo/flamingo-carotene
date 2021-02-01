@@ -29,11 +29,13 @@ class PostCSS {
 
           const loaderConfig = {
             loader: 'postcss-loader',
-            options: {}
+            options: {
+              postcssOptions: {}
+            }
           }
 
           if (!this.isConfigAvailableInProject()) {
-            loaderConfig.options = {
+            loaderConfig.options.postcssOptions = {
               plugins: [
                 require('autoprefixer')
               ]
