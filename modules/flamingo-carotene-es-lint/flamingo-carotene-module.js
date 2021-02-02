@@ -49,11 +49,6 @@ class ESLint {
             return
           }
 
-          config.webpackConfig.resolve = Object.assign({ modules: [] }, config.webpackConfig.resolve)
-          config.webpackConfig.resolve.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
-          config.webpackConfig.resolveLoader = Object.assign({ modules: [] }, config.webpackConfig.resolveLoader)
-          config.webpackConfig.resolveLoader.modules.unshift(path.join(path.resolve(__dirname, 'node_modules')))
-
           const loaderConfig = {
             enforce: 'pre',
             test: /\.js$/,
@@ -65,7 +60,7 @@ class ESLint {
               configFile: config.eslint.configFilePath,
               fix: false, // webpack eslint should NOT fix problems (commonly used this config in dev mode, with watcher)
               cache: config.eslint.cache,
-              cacheFile: config.eslint.cacheFile,
+              cacheFile: config.eslint.cacheFile
             }
           }
 
