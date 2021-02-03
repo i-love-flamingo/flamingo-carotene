@@ -63,17 +63,15 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     const statsData = stats.toJson()
 
     if (stats.hasWarnings()) {
-      for (const warnings of statsData.warnings) {
-        cliTools.warn(warnings)
-      }
+      statsData.warnings.forEach(warning => cliTools.warn(warning))
+      statsData.children.forEach(child => child.warnings.forEach(warning => cliTools.warn(warning)))
 
       core.reportBuildNotes('WebpackStat reports build notes.')
     }
 
     if (stats.hasErrors()) {
-      for (const error of statsData.errors) {
-        cliTools.error(error)
-      }
+      statsData.errors.forEach(error => cliTools.error(error))
+      statsData.children.forEach(child => child.errors.forEach(error => cliTools.error(error)))
 
       core.reportError('WebpackStat reports errors.')
     }

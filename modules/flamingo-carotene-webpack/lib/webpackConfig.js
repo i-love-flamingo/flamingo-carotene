@@ -211,7 +211,7 @@ class WebpackConfig {
 
   getJsLoaders () {
     return [
-      'webpack-import-glob-loader'
+      'import-glob'
     ]
   }
 
@@ -237,7 +237,7 @@ class WebpackConfig {
         }
       },
       {
-        loader: 'webpack-import-glob-loader',
+        loader: 'import-glob',
         options: {}
       }
     ]
