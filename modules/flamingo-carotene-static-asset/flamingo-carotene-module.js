@@ -9,7 +9,7 @@ class FlamingoCaroteneStaticAsset {
       {
         command: 'config',
         priority: 100,
-        handler: function (core) {
+        handler: core => {
           const config = core.getConfig()
           config.staticAsset = {
             assetPaths: [
@@ -28,22 +28,16 @@ class FlamingoCaroteneStaticAsset {
       {
         command: 'build',
         description: 'Copy static assets',
-        handler: function (core) {
-          buildHandler(core)
-        }
+        handler: core => buildHandler(core)
       },
       {
         command: 'copyAssets',
         description: 'Copy static assets',
-        handler: function (core) {
-          buildHandler(core)
-        }
+        handler: core => buildHandler(core)
       },
       {
         command: 'watchCopyAssets',
-        handler: function (core) {
-          buildHandler(core)
-        }
+        handler: core => buildHandler(core)
       },
     ]
   }
@@ -54,9 +48,8 @@ class FlamingoCaroteneStaticAsset {
 
   getWatchers () {
     const pathsToWatch = []
-    for(const assetPath of this.config.staticAsset.assetPaths) {
-      pathsToWatch.push(path.join(this.config.paths.src, assetPath.src, '**', '*'))
-    }
+    this.config.staticAsset.assetPaths
+      .forEach(assetPath => pathsToWatch.push(path.join(this.config.paths.src, assetPath.src, '**', '*')))
 
     return [{
       watchId: 'staticAsset',
