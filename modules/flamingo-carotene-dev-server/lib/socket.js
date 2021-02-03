@@ -12,8 +12,10 @@ class Socket {
     }
 
     this.io = require('socket.io')(this.config.devServer.port, {
+      allowEIO3: true,
       cors: {
-        origin: '*'
+        origin: 'http://localhost:3210',
+        credentials: true
       }
     })
 
