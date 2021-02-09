@@ -1,50 +1,76 @@
 import state from './../src/stateManager.js'
 
-const initialState = {
-	foo: true,
-	bar: {
-		foo: 1,
-		bar: 2,
-    baz: 3
-	}
-}
-
-state.init(initialState)
-
-test('state cant be initialized more than one time', () => {
-  const t = () => {
-    state.init({})
+describe('State manager', () => {
+  const initialState = {
+    foo: true,
+    bar: {
+      foo: 1,
+      bar: 2,
+      baz: 3
+    }
   }
-  expect(t).toThrow(Error)
-});
 
-test('state has correct initial values', () => {
-	expect(state.get('foo')).toBe(true);
-  expect(state.get('bar.foo')).toBe(1);
-  expect(state.get('bar.bar')).toBe(2);
-});
-
-test('state watch reports changes correctly', done => {
-  const newValue = 15
-	state.watch(`bar.foo`, (newState) => {
-    expect(newState).toBe(newValue);
-    expect(state.get('bar.foo')).toBe(newValue);
-    done()
-	})
-	state.set('bar.foo', newValue)
-});
-
-test('unknown state returns undefined', () => {
-  expect(state.get('blubber.blah')).toBe(undefined);
-});
-
-test('unknown state set triggers watcher', done => {
-  const newValue = 'fooobar'
-  state.watch(`blubber.blah`, (newState) => {
-    expect(newState).toBe(newValue);
-    expect(state.get('blubber.blah')).toBe(newValue);
-    done()
+  beforeEach(() => {
+    state.init(initialState)
   })
-  state.set('blubber.blah', newValue)
-});
 
+  afterEach(() => {
+    state.store = null
+  })
+
+  test(`can't be initialized more than one time`, () => {
+    const t = () => {
+      state.init({})
+    }
+    expect(t).toThrow(Error)
+  })
+
+  test('has correct initial values', () => {
+    expect(state.get('foo')).toBe(true)
+    expect(state.get('bar.foo')).toBe(1)
+    expect(state.get('bar.bar')).toBe(2)
+  })
+
+  test('watch function reports changes correctly', done => {
+    const newValue = 15
+    state.watch(`bar.foo`, (newState) => {
+      expect(newState).toBe(newValue)
+      expect(state.get('bar.foo')).toBe(newValue)
+      done()
+    })
+    state.set('bar.foo', newValue)
+  })
+
+  test('returns undefined when getting unknown state path', () => {
+    expect(state.get('blubber.blah')).toBe(undefined)
+  })
+
+  test('triggers watcher when setting new unknown path', done => {
+    const newValue = 'fooobar'
+    state.watch(`blubber.blah`, (newState) => {
+      expect(newState).toBe(newValue)
+      expect(state.get('blubber.blah')).toBe(newValue)
+      done()
+    })
+    state.set('blubber.blah', newValue)
+  })
+
+  test('should not report state change on equal state', done => {
+    const mockFn = jest.fn()
+    state.watch(`bar.foo`, mockFn)
+    state.set('bar.foo', initialState.bar.foo)
+    setTimeout(_ => {
+      expect(mockFn).not.toHaveBeenCalled()
+      done()
+    }, 33)
+  })
+
+  test('reports state change on equal state with noCompare option on watch function', done => {
+    state.watch(`bar.foo`, (newState, oldState) => {
+      expect(newState).toBe(oldState)
+      expect(state.get('bar.foo')).toBe(initialState.bar.foo)
+      done()
+    }, { noCompare: true })
+    state.set('bar.foo', initialState.bar.foo)
+  })
+})

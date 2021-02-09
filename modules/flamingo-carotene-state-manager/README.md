@@ -70,4 +70,16 @@ state.watch(`baz.data`, (newValue) => {
 ```
 
 Note that the `newValue` is an immutable. So you can't change the state by changing `newValue` inside the watcher.
-To change states, always call `set()`. 
+To change states, always call `set()`.
+
+#### Options
+```js
+state.watch(`baz.data`, myCallback, { noCompare: true })
+```  
+
+##### noCompare
+You can enforce triggering listener functions even if the state
+has not changed by adding ```noCompare: true``` to the options object.
+
+Default is ```false```
+

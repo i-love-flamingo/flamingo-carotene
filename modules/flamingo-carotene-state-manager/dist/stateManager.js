@@ -11,7 +11,7 @@ var _objectPath = require("object-path");
 
 var _reduxWatch = _interopRequireDefault(require("redux-watch"));
 
-var _deepEqual = _interopRequireDefault(require("deep-equal"));
+var _fastDeepEqual = _interopRequireDefault(require("fast-deep-equal"));
 
 var _objectPathImmutable = require("object-path-immutable");
 
@@ -26,6 +26,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /**
  * Generic reducer with the ability to set values in the state tree
  * @param state {Object} The current state object
+ * @param action
  * @param action.type {String} Generic action type to set value. 'applicationStore.SET' ist the only available action type.
  * @param action.path {String} Path to the part of the state object that should be changed
  * @param action.value {Object} Value of the change
@@ -41,19 +42,6 @@ var rootReducer = function rootReducer() {
 
   return state;
 };
-/**
- * Internal wrapper for deepEqual with strict option set
- * @param {Object} value1 First comparand
- * @param {Object} value2 Second comparand
- * @return {Boolean} Result of equality comparison
- */
-
-
-function deepEqualStrict(value1, value2) {
-  return (0, _deepEqual["default"])(value1, value2, {
-    strict: true
-  });
-}
 /**
  * Application state manager. Can store application wide state information and publish changes.
  */
@@ -85,17 +73,27 @@ var State = /*#__PURE__*/function () {
      * Subscribe to changes in specific parts of the store.
      * @param {String} path String in object notation to store part of interest
      * @param {Function} callback Callback function for store changes
+     * @param {Object} options Options object
+     * @param {Boolean} options.noCompare Will not compare new and old state before triggering listeners
      * @return {Function} Function which can be used to unsubscribe callback
      */
 
   }, {
     key: "watch",
     value: function watch(path, callback) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       // check if path param is used as callback without specific path (watch whole store)
       var callbackFunc = typeof path === 'function' ? path : callback;
-      var pathStr = typeof path === 'string' ? path : ''; // create watcher and subscribe to store
+      var pathStr = typeof path === 'string' ? path : '';
+      var opts = Object.assign({
+        noCompare: false
+      }, options); // using falsy compare function result triggers listener regardless if state value has actually changed
 
-      var watchFunc = (0, _reduxWatch["default"])(this.store.getState, pathStr, deepEqualStrict);
+      var compareFn = opts.noCompare ? function (_) {
+        return false;
+      } : _fastDeepEqual["default"]; // create watcher and subscribe to store
+
+      var watchFunc = (0, _reduxWatch["default"])(this.store.getState, pathStr, compareFn);
       return this.store.subscribe(watchFunc(callbackFunc));
     }
     /**
@@ -120,16 +118,11 @@ var State = /*#__PURE__*/function () {
   }, {
     key: "set",
     value: function set(path, value) {
-      var currentValue = this.get(path);
-      var newValueEqualsCurrentValue = deepEqualStrict(currentValue, value); // Only dispatch action if change occurs
-
-      if (!newValueEqualsCurrentValue) {
-        this.store.dispatch({
-          type: 'SET: ' + path,
-          path: path,
-          value: value
-        });
-      }
+      this.store.dispatch({
+        type: 'SET: ' + path,
+        path: path,
+        value: value
+      });
     }
   }]);
 

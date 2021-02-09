@@ -1,32 +1,23 @@
 import { createStore } from 'redux'
 import { get } from 'object-path'
 import watch from 'redux-watch'
-import deepEqual from 'deep-equal'
+import fastDeepEqual from 'fast-deep-equal'
 import { wrap } from 'object-path-immutable'
 
 /**
  * Generic reducer with the ability to set values in the state tree
  * @param state {Object} The current state object
+ * @param action
  * @param action.type {String} Generic action type to set value. 'applicationStore.SET' ist the only available action type.
  * @param action.path {String} Path to the part of the state object that should be changed
  * @param action.value {Object} Value of the change
  * @return {Object} The new state object
  */
-const rootReducer = function rootReducer (state = {}, action) {
+const rootReducer = (state = {}, action) => {
   if (action.type.startsWith('SET:') && action.path !== undefined) {
     return wrap(state).set(action.path, action.value).value()
   }
   return state
-}
-
-/**
- * Internal wrapper for deepEqual with strict option set
- * @param {Object} value1 First comparand
- * @param {Object} value2 Second comparand
- * @return {Boolean} Result of equality comparison
- */
-function deepEqualStrict (value1, value2) {
-  return deepEqual(value1, value2, {strict: true})
 }
 
 /**
@@ -54,15 +45,24 @@ class State {
    * Subscribe to changes in specific parts of the store.
    * @param {String} path String in object notation to store part of interest
    * @param {Function} callback Callback function for store changes
+   * @param {Object} options Options object
+   * @param {Boolean} options.noCompare Will not compare new and old state before triggering listeners
    * @return {Function} Function which can be used to unsubscribe callback
    */
-  watch (path, callback) {
+  watch (path, callback, options = {}) {
     // check if path param is used as callback without specific path (watch whole store)
     const callbackFunc = typeof path === 'function' ? path : callback
     const pathStr = typeof path === 'string' ? path : ''
 
+    const opts = Object.assign({
+      noCompare: false
+    }, options)
+
+    // using falsy compare function result triggers listener regardless if state value has actually changed
+    const compareFn = opts.noCompare ? _ => false : fastDeepEqual
+
     // create watcher and subscribe to store
-    const watchFunc = watch(this.store.getState, pathStr, deepEqualStrict)
+    const watchFunc = watch(this.store.getState, pathStr, compareFn)
     return this.store.subscribe(watchFunc(callbackFunc))
   }
 
@@ -82,13 +82,7 @@ class State {
    * @return {void}
    */
   set (path, value) {
-    const currentValue = this.get(path)
-    const newValueEqualsCurrentValue = deepEqualStrict(currentValue, value)
-
-    // Only dispatch action if change occurs
-    if (!newValueEqualsCurrentValue) {
-      this.store.dispatch({type: 'SET: ' + path, path, value})
-    }
+    this.store.dispatch({ type: 'SET: ' + path, path, value })
   }
 }
 
