@@ -6,6 +6,7 @@ module.exports = {
     ]
   ],
   plugins: [
-    "import-glob"
+    "import-glob",
+    "@babel/plugin-proposal-class-properties"
   ]
 }

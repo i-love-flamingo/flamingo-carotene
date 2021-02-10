@@ -23,6 +23,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * Generic reducer with the ability to set values in the state tree
  * @param state {Object} The current state object
@@ -51,49 +53,39 @@ var State = /*#__PURE__*/function () {
   function State() {
     _classCallCheck(this, State);
 
-    this.store = null;
+    _defineProperty(this, "store", null);
   }
-  /**
-   * Initialize application state with js-object. To be called only once before usage of state instance.
-   * @param {Object} initialState Object containing the initial application state
-   * @return {void}
-   */
-
 
   _createClass(State, [{
     key: "init",
+
+    /**
+     * Initialize application state with js-object. To be called only once before usage of state instance.
+     * @param {Object} initialState Object containing the initial application state
+     * @return {void}
+     */
     value: function init(initialState) {
-      if (!this.store) {
-        this.store = (0, _redux.createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-      } else {
+      if (this.store) {
         throw new Error('State: Store is already initialized');
       }
+
+      this.store = (0, _redux.createStore)(rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     }
     /**
      * Subscribe to changes in specific parts of the store.
      * @param {String} path String in object notation to store part of interest
      * @param {Function} callback Callback function for store changes
-     * @param {Object} options Options object
-     * @param {Boolean} options.noCompare Will not compare new and old state before triggering listeners
      * @return {Function} Function which can be used to unsubscribe callback
      */
 
   }, {
     key: "watch",
     value: function watch(path, callback) {
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       // check if path param is used as callback without specific path (watch whole store)
       var callbackFunc = typeof path === 'function' ? path : callback;
-      var pathStr = typeof path === 'string' ? path : '';
-      var opts = Object.assign({
-        noCompare: false
-      }, options); // using falsy compare function result triggers listener regardless if state value has actually changed
+      var pathStr = typeof path === 'string' ? path : ''; // create watcher and subscribe to store
 
-      var compareFn = opts.noCompare ? function (_) {
-        return false;
-      } : _fastDeepEqual["default"]; // create watcher and subscribe to store
-
-      var watchFunc = (0, _reduxWatch["default"])(this.store.getState, pathStr, compareFn);
+      var watchFunc = (0, _reduxWatch["default"])(this.store.getState, pathStr, _fastDeepEqual["default"]);
       return this.store.subscribe(watchFunc(callbackFunc));
     }
     /**
@@ -111,18 +103,20 @@ var State = /*#__PURE__*/function () {
     /**
      * Set state value of object property defined by object path string
      * @param {String} path String in object notation to store value
-     * @param {Object} value Value that should be set to specified path
+     * @param {*} value Value that should be set to specified path
      * @return {void}
      */
 
   }, {
     key: "set",
     value: function set(path, value) {
-      this.store.dispatch({
-        type: 'SET: ' + path,
-        path: path,
-        value: value
-      });
+      if (!(0, _fastDeepEqual["default"])(this.get(path), value)) {
+        this.store.dispatch({
+          type: 'SET: ' + path,
+          path: path,
+          value: value
+        });
+      }
     }
   }]);
 

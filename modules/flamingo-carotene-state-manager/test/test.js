@@ -55,22 +55,10 @@ describe('State manager', () => {
     state.set('blubber.blah', newValue)
   })
 
-  test('should not report state change on equal state', done => {
+  test('should not report state change on equal state', () => {
     const mockFn = jest.fn()
     state.watch(`bar.foo`, mockFn)
     state.set('bar.foo', initialState.bar.foo)
-    setTimeout(_ => {
-      expect(mockFn).not.toHaveBeenCalled()
-      done()
-    }, 33)
-  })
-
-  test('reports state change on equal state with noCompare option on watch function', done => {
-    state.watch(`bar.foo`, (newState, oldState) => {
-      expect(newState).toBe(oldState)
-      expect(state.get('bar.foo')).toBe(initialState.bar.foo)
-      done()
-    }, { noCompare: true })
-    state.set('bar.foo', initialState.bar.foo)
+    expect(mockFn).not.toHaveBeenCalled()
   })
 })
