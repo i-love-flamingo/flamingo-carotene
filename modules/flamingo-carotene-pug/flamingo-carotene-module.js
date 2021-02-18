@@ -67,6 +67,13 @@ class FlamingoCarotenePug {
   getWatchers () {
     return this.watcher
   }
+
+  getDictionaryOptions() {
+    return [{
+      option: '--page=...',
+      description: 'Only build page templates with this string in filename'
+    }]
+  }
 }
 
 module.exports = FlamingoCarotenePug
