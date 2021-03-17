@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-flamingo-carotene",
-  "version": "6.7.21",
+  "version": "6.7.23",
   "description": "Flamingo carotene default ESLint config",
   "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
@@ -18,6 +18,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-standard": "^4.1.0",
-    "flamingo-carotene-es-lint": "^6.7.21"
+    "flamingo-carotene-es-lint": "^6.7.23"
   }
 }

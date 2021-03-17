@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-postcss",
-  "version": "6.7.16",
+  "version": "6.7.23",
   "description": "Provide the postcss loader for a flamingo-carotene-webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
