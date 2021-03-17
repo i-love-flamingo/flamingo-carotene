@@ -15,14 +15,12 @@ if (!window.caroteneDevClient) {
   })
 
   socket.on('connected', function onConnected (devServerConfig) {
-    if (devServerConfig.hasOwnProperty('useCaroteneDisplay')) {
-      if (devServerConfig.useCaroteneDisplay) {
-        let position = 'bottom'
-        if (devServerConfig.hasOwnProperty('caroteneDisplayPosition')) {
-          position = devServerConfig.caroteneDisplayPosition
-        }
-        caroteneDisplay = new CaroteneDisplay(position)
+    if (!caroteneDisplay && devServerConfig.hasOwnProperty('useCaroteneDisplay') && devServerConfig.useCaroteneDisplay) {
+      let position = 'bottom'
+      if (devServerConfig.hasOwnProperty('caroteneDisplayPosition')) {
+        position = devServerConfig.caroteneDisplayPosition
       }
+      caroteneDisplay = new CaroteneDisplay(position)
     }
 
     if (caroteneDisplay) {

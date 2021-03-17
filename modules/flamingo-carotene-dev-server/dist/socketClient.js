@@ -439,16 +439,14 @@
     socket.on('connect', function onConnect() {// Do nothing here - we know the socket.id from here
     });
     socket.on('connected', function onConnected(devServerConfig) {
-      if (devServerConfig.hasOwnProperty('useCaroteneDisplay')) {
-        if (devServerConfig.useCaroteneDisplay) {
-          var position = 'bottom';
+      if (!caroteneDisplay && devServerConfig.hasOwnProperty('useCaroteneDisplay') && devServerConfig.useCaroteneDisplay) {
+        var position = 'bottom';
 
-          if (devServerConfig.hasOwnProperty('caroteneDisplayPosition')) {
-            position = devServerConfig.caroteneDisplayPosition;
-          }
-
-          caroteneDisplay = new CaroteneDisplay(position);
+        if (devServerConfig.hasOwnProperty('caroteneDisplayPosition')) {
+          position = devServerConfig.caroteneDisplayPosition;
         }
+
+        caroteneDisplay = new CaroteneDisplay(position);
       }
 
       if (caroteneDisplay) {
