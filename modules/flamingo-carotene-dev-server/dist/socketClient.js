@@ -119,6 +119,8 @@
         if (this.domElement) {
           this.domElement.classList.remove(CaroteneDisplay.CLASSES.fullscreen);
         }
+
+        this.bigCarrotIconWrapper.classList.remove(CaroteneDisplay.CLASSES.bigCarrotIconWrapperShow);
       }
     }, {
       key: "setReport",
