@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.22.0",
+    "eslint": "^7.25.0",
     "eslint-config-flamingo-carotene": "^6.7.23",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^4.0.2"
   },
   "peerDependencies": {
-    "flamingo-carotene-webpack": "^6.7.19"
+    "flamingo-carotene-webpack": "^6.7.23"
   }
 }
