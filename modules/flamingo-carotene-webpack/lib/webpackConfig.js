@@ -124,6 +124,12 @@ class WebpackConfig {
             parallel: true,
             sourceMap: (mode === 'development'),
             uglifyOptions: {
+              comments: (mode === 'development'),
+              // Compression specific options
+              compress: {
+                // Drop console statements
+                drop_console: (mode !== 'development')
+              },
               keep_fnames: true // Needed for IE11 and behaviors - otherwise the IE cannot differentiate the behavior names
             }
           }),
