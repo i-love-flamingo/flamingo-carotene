@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.13",
-    "postcss-loader": "^4.2.0"
+    "postcss": "^8.2.15",
+    "postcss-loader": "^4.3.0"
   }
 }

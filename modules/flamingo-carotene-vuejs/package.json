@@ -22,7 +22,7 @@
     "flamingo-carotene-webpack": "^6.7.24",
     "path": "^0.12.7",
     "pug-plain-loader": "^1.1.0",
-    "vue-loader": "^15.9.6",
+    "vue-loader": "^15.9.7",
     "vue-template-compiler": "^2.6.12"
   }
 }

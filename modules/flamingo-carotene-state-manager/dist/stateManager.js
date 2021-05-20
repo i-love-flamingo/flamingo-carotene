@@ -58,13 +58,13 @@ var State = /*#__PURE__*/function () {
 
   _createClass(State, [{
     key: "init",
-
+    value:
     /**
      * Initialize application state with js-object. To be called only once before usage of state instance.
      * @param {Object} initialState Object containing the initial application state
      * @return {void}
      */
-    value: function init(initialState) {
+    function init(initialState) {
       if (this.store) {
         throw new Error('State: Store is already initialized');
       }
