@@ -20,6 +20,7 @@
 		"@babel/plugin-proposal-class-properties": "^7.13.0",
 		"@babel/preset-env": "^7.14.2",
 		"flamingo-carotene-babel": "^6.7.25",
-		"flamingo-carotene-webpack": "^6.7.25"
+		"flamingo-carotene-webpack": "^6.7.25",
+    "webpack": "^4.46.0"
 	}
 }
