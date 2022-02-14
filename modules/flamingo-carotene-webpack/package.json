@@ -16,19 +16,19 @@
     "link": "npm link"
   },
   "dependencies": {
-    "css-loader": "^5.2.7",
+    "css-loader": "^6.6.0",
+    "css-minimizer-webpack-plugin": "^3.4.1",
     "file-loader": "^6.2.0",
     "hard-source-webpack-plugin": "^0.13.1",
     "import-glob": "^1.5.0",
-    "mini-css-extract-plugin": "^1.6.2",
-    "node-sass": "^5.0.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.8",
-    "sass-loader": "^10.2.1",
-    "style-loader": "^2.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "node-sass": "^7.0.0",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.1",
     "url-loader": "^4.1.1",
-    "webpack": "^4.46.0",
+    "webpack": "^5.68.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-manifest-plugin": "^3.2.0"
+    "webpack-manifest-plugin": "^4.1.1"
   }
 }

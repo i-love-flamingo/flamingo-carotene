@@ -71,7 +71,7 @@ class SvgStorePlugin {
         hooks.optimize.tap(this.constructor.name, this.generateSprites.bind(this, compilation));
 
         // Replace the sprites URL with the hashed URL during the chunks optimization phase
-        hooks.optimizeChunks.tap(this.constructor.name, this.fixSpritePathsInChunks.bind(this));
+        hooks.optimizeChunks.tap(this.constructor.name, this.fixSpritePathsInChunks.bind(this, compilation));
 
         // Add sprites to the compilation assets
         if (options.emit) {
@@ -82,19 +82,16 @@ class SvgStorePlugin {
 
     /**
      * Looks for sprite URLs in the modules in the given chunks and replaces them with the URL containing the sprite hash.
-     * @param {Chunk[]} chunks
      */
-    fixSpritePathsInChunks(chunks) {
+    fixSpritePathsInChunks(compilation) {
         const spritesWithInterpolatedName = this.getSpritesWithInterpolateName();
-
         for (const sprite of spritesWithInterpolatedName) {
-            for (const chunk of chunks) {
-                for (const module of chunk.modulesIterable) {
-                    this.replaceSpritePathsInModuleWithInterpolatedPaths(module, sprite);
-                }
-            }
+          compilation.chunks.forEach(chunk => {
+            compilation.chunkGraph.getChunkModules(chunk).forEach((module) => {
+              this.replaceSpritePathsInModuleWithInterpolatedPaths(module, sprite);
+            })
+          })
         }
-
     }
 
     /**
@@ -258,8 +255,7 @@ class SvgStorePlugin {
 
             // Add chunk to the compilation
             // NOTE: This step is only to allow other plugins to detect the existence of this asset
-            compilation.chunks.push(chunk);
-
+            compilation.addChunk(chunk);
         }
 
         callback();

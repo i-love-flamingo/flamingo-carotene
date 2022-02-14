@@ -18,12 +18,11 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
   const webpack = require('webpack')
   const path = require('path')
   const ProgressPlugin = require('webpack/lib/ProgressPlugin');
-  const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
-  // Remove ProgressPlugin && HardSourceWebpackPlugin from plugins,
+  // Remove ProgressPlugin from plugins,
   // to get the chance to create new one...
   config.webpackConfig.plugins = config.webpackConfig.plugins.filter(function(plugin) {
-    return !(plugin instanceof ProgressPlugin) && !(plugin instanceof HardSourceWebpackPlugin)
+    return !(plugin instanceof ProgressPlugin)
   });
 
   // ProgressPlugin
@@ -33,26 +32,19 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
 
   // HardSource Cache
   if (config.webpackCacheConfig) {
-    const cacheConfig = Object.assign(config.webpackCacheConfig, {
+    config.webpackConfig.cache = {
+      type: 'filesystem',
+      store: 'pack',
+      allowCollectingMemory: true,
       cacheDirectory: path.join(config.paths.webpackCache, jobId)
-    });
-    config.webpackConfig.plugins.push(new HardSourceWebpackPlugin(cacheConfig))
-    config.webpackConfig.plugins.push(new HardSourceWebpackPlugin.ExcludeModulePlugin([
-      {
-        // HardSource works with mini-css-extract-plugin but due to how
-        // mini-css emits assets, assets are not emitted on repeated builds with
-        // mini-css and hard-source together. Ignoring the mini-css loader
-        // modules, but not the other css loader modules, excludes the modules
-        // that mini-css needs rebuilt to output assets every time.
-        test: /mini-css-extract-plugin[\\/]dist[\\/]loader/,
-      }
-    ]))
+    }
   }
 
   webpack(config.webpackConfig, (error, stats) => {
     core.getJobmanager().reportFinishJob(jobId)
 
     if (error) {
+      console.log(error)
       cliTools.error(error.stack || error)
       if (error.details) {
         cliTools.error(error.details)
@@ -63,14 +55,27 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     const statsData = stats.toJson()
 
     if (stats.hasWarnings()) {
-      statsData.warnings.forEach(warning => cliTools.warn(warning))
+      statsData.warnings.forEach(warning => {
+        if (warning.hasOwnProperty('message')) {
+          cliTools.warn(warning.message)
+        } else {
+          cliTools.warn(warning)
+        }
+      })
       statsData.children.forEach(child => child.warnings.forEach(warning => cliTools.warn(warning)))
 
       core.reportBuildNotes('WebpackStat reports build notes.')
     }
 
     if (stats.hasErrors()) {
-      statsData.errors.forEach(error => cliTools.error(error))
+
+      statsData.errors.forEach(error => {
+        if (error.hasOwnProperty('message')) {
+          cliTools.error(error.message)
+        } else {
+          cliTools.error(error)
+        }
+      })
       statsData.children.forEach(child => child.errors.forEach(error => cliTools.error(error)))
 
       core.reportError('WebpackStat reports errors.')

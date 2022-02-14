@@ -1,6 +1,6 @@
 const path = require('path')
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
@@ -117,14 +117,15 @@ class WebpackConfig {
             }
           }
         },
+        minimize: (mode !== 'development'),
         minimizer: [
-          new OptimizeCSSAssetsPlugin({}),
-          new UglifyJsPlugin({
-            cache: true,
+          new CssMinimizerPlugin({}),
+          new TerserPlugin({
+            // cache: true,
             parallel: true,
-            sourceMap: (mode === 'development'),
-            uglifyOptions: {
-              comments: (mode === 'development'),
+            extractComments: (mode !== 'development'),
+            terserOptions: {
+              sourceMap: (mode === 'development'),
               // Compression specific options
               compress: {
                 // Drop console statements
