@@ -21,7 +21,7 @@
     "hard-source-webpack-plugin": "^0.13.1",
     "import-glob": "^1.5.0",
     "mini-css-extract-plugin": "^1.6.2",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.8",
     "sass-loader": "^10.2.1",
     "style-loader": "^2.0.0",
