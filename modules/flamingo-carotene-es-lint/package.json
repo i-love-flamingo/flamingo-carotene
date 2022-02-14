@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-es-lint",
-  "version": "6.7.29",
+  "version": "7.0.0-alpha.0",
   "description": "Provide the standalone version and flamingo-carotene-webpack loader of es lint",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",

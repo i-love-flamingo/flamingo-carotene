@@ -2,5 +2,5 @@
   "packages": [
     "modules/*"
   ],
-  "version": "6.7.29"
+  "version": "7.0.0-alpha.0"
 }
