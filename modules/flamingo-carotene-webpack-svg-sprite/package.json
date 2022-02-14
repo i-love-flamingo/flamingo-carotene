@@ -21,6 +21,6 @@
 		"@babel/preset-env": "^7.16.11",
 		"flamingo-carotene-babel": "^6.7.29",
 		"flamingo-carotene-webpack": "^6.7.29",
-		"webpack": "^4.46.0"
-	}
+    "webpack": "^5.68.0"
+  }
 }
