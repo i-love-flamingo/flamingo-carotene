@@ -73,7 +73,9 @@ config.webpack = {
 
 `buildCallback` The callback function to execute when the webpack compiler was finished
 
+## Export Webpack Configuration
 
+To get the webpack configuration simply call ```npx flamingo-carotene exportWebpackConfig```
 
 ## List of Flamingo Carotene webpack modules
 - [flamingo-carotene-babel](../flamingo-carotene-babel)

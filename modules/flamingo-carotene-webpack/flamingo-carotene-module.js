@@ -3,6 +3,7 @@ const path = require('path')
 const buildHandlerAll = require('./lib/handler/buildAll')
 const buildHandlerJs = require('./lib/handler/buildJs')
 const buildHandlerCss = require('./lib/handler/buildCss')
+const exportWebpackConfig = require('./lib/handler/exportConfig')
 
 class FlamingoCaroteneWebpack {
   constructor (core) {
@@ -112,6 +113,11 @@ class FlamingoCaroteneWebpack {
       {
         command: 'watchWebpackCss',
         handler: buildHandlerCss
+      },
+      {
+        command: 'exportWebpackConfig',
+        description: 'Export generated Webpack config as json file',
+        handler: exportWebpackConfig
       }
     ]
   }
