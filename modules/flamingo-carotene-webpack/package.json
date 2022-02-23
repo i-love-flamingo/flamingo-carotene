@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-webpack",
-  "version": "7.0.0-alpha.2",
+  "version": "7.0.0-alpha.3",
   "description": "Provide an abstraction for webpack with the ability for other modules to extend the webpack config, with integration into the flamingo-carotene-dev-server module",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
