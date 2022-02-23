@@ -94,16 +94,7 @@ class WebpackConfig {
           },
           {
             test: /\.(woff|woff2|eot|ttf|otf)(\?.*)?$/,
-            include: this.getRulesInclude(),
-            use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 1000,
-                  name: this.getFontFileName()
-                }
-              }
-            ]
+            type: 'asset/resource'
           }
         ]
       },

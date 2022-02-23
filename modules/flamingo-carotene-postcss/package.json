@@ -18,6 +18,6 @@
   "dependencies": {
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",
-    "postcss-loader": "^4.3.0"
+    "postcss-loader": "^6.2.1"
   }
 }
