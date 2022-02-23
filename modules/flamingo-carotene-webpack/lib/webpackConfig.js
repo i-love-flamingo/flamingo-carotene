@@ -104,7 +104,8 @@ class WebpackConfig {
             commons: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendor',
-              chunks: 'all'
+              chunks: 'all',
+              enforce: true
             }
           }
         },
