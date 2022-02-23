@@ -81,16 +81,7 @@ class WebpackConfig {
           },
           {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-            include: this.getRulesInclude(),
-            use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 8192,
-                  name: this.getImageFileName()
-                }
-              }
-            ]
+            type: 'asset/resource'
           },
           {
             test: /\.(woff|woff2|eot|ttf|otf)(\?.*)?$/,
