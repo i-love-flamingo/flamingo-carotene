@@ -15,12 +15,12 @@
 		"unfetch": "^4.2.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.17.0",
-		"@babel/core": "^7.17.2",
+		"@babel/cli": "^7.17.6",
+		"@babel/core": "^7.17.7",
 		"@babel/plugin-proposal-class-properties": "^7.16.7",
 		"@babel/preset-env": "^7.16.11",
 		"flamingo-carotene-babel": "^6.7.29",
 		"flamingo-carotene-webpack": "^7.0.0-alpha.3",
-		"webpack": "^5.68.0"
+		"webpack": "^5.70.0"
 	}
 }

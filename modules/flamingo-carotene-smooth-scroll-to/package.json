@@ -18,9 +18,9 @@
     "link": "npm link"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
     "@babel/preset-env": "^7.16.11"
   }
 }

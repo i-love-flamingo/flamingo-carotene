@@ -18,14 +18,14 @@
     "link": "npm link"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^27.5.1",
     "babel-plugin-import-glob": "^2.0.0",
-    "jest": "^26.6.3",
-    "jsdom": "^16.7.0"
+    "jest": "^27.5.1",
+    "jsdom": "^19.0.0"
   }
 }
