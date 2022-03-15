@@ -208,7 +208,7 @@ class SvgStorePlugin {
 
                 if (typeof source === 'string') {
                     module._source = sprite.replacePathsWithInterpolatedPaths(source);
-                } else if (typeof source === 'object') {
+                } else if (typeof source === 'object' && source !== null) {
                     if (typeof source._name === 'string') {
                         source._name = sprite.replacePathsWithInterpolatedPaths(source._name);
                     }
