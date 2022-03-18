@@ -241,7 +241,8 @@ class SvgStorePlugin {
             // Create a chunk for the sprite
             const chunk = new Chunk(name);
             chunk.ids = [];
-            chunk.files.push(resourcePath);
+            chunk.files = new Set();
+            chunk.files.add(resourcePath);
 
             // Add the sprite to the compilation assets
             compilation.assets[resourcePath] = {

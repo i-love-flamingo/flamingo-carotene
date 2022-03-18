@@ -17,7 +17,7 @@ class FlamingoCaroteneWebpackSvgSprite {
                 {
                   loader: SvgStorePlugin.loader,
                   options: {
-                    name: 'svgIcons/svgIconSprite.[hash:5].svg',
+                    name: 'svgIconSprite.[contenthash].svg',
                     iconName: '[name]'
                   }
                 }
