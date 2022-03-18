@@ -21,6 +21,6 @@
     "eslint-plugin-standard": "^4.1.0"
   },
   "peerDependencies": {
-    "flamingo-carotene-es-lint": "^6.7.26"
+    "flamingo-carotene-es-lint": "^7.0.1"
   }
 }
