@@ -1,6 +1,6 @@
 {
 	"name": "flamingo-carotene-webpack-svg-sprite",
-	"version": "7.0.5",
+	"version": "7.0.6",
 	"description": "Flamingo Carotene svg sprite solution",
 	"author": "team-frontend <team-frontend@aoe.com>",
 	"license": "OSL-3.0",
@@ -21,7 +21,7 @@
 		"@babel/plugin-proposal-class-properties": "^7.16.7",
 		"@babel/preset-env": "^7.16.11",
 		"flamingo-carotene-babel": "^7.0.4",
-		"flamingo-carotene-webpack": "^7.0.5",
+		"flamingo-carotene-webpack": "^7.0.6",
 		"webpack": "^5.70.0"
 	}
 }
