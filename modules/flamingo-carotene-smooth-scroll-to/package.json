@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-smooth-scroll-to",
-  "version": "7.0.0",
+  "version": "7.0.4",
   "description": "The smooth scroll module enables to scroll smoothly to a given y coordinate or dom element",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
