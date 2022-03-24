@@ -76,7 +76,9 @@ config.webpack = {
 ## Node or Dart Sass
 Node sass is active by default. If you want to use dart-sass set
 
-```config.webpackFeatures.sassEngine``` to ```dart```
+```js
+config.webpackFeatures.sassEngine = "dart"
+```
 
 
 ## Export Webpack Configuration
