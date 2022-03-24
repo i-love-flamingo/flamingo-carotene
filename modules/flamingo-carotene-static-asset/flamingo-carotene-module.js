@@ -48,8 +48,11 @@ class FlamingoCaroteneStaticAsset {
 
   getWatchers () {
     const pathsToWatch = []
-    this.config.staticAsset.assetPaths
-      .forEach(assetPath => pathsToWatch.push(path.join(this.config.paths.src, assetPath.src, '**', '*')))
+
+    if (this.config?.staticAsset?.assetPaths) {
+      this.config.staticAsset.assetPaths
+        .forEach(assetPath => pathsToWatch.push(path.join(this.config.paths.src, assetPath.src, '**', '*')))
+    }
 
     return [{
       watchId: 'staticAsset',
