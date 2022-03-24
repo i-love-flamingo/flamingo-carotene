@@ -218,7 +218,7 @@ class WebpackConfig {
       {
         loader: 'sass-loader',
         options: {
-          implementation: require('node-sass'),
+          implementation: this.getSassImplementation(),
           sassOptions: {
             includePaths: [
               path.join(this.config.paths.project, 'node_modules')
@@ -231,6 +231,22 @@ class WebpackConfig {
         options: {}
       }
     ]
+  }
+
+  getSassImplementation() {
+    let engine = null;
+    switch (this.config.webpack.sassEngine) {
+      case 'dart':
+        engine = require('dart-sass')
+        break
+      case 'node':
+        engine = require('node-sass')
+        break
+      default:
+        this.cliTools.error(`sassEngine \"${this.config.webpack.sassEngine}\" unknown - use "dart" or "node"`)
+        engine = require('node-sass')
+    }
+    return engine
   }
 
   getMiniCssExtractLoaderOptions () {
