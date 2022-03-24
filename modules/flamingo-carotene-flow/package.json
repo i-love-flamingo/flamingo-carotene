@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "flow-bin": "^0.173.0"

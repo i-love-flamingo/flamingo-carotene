@@ -14,7 +14,8 @@
   "scripts": {
     "build": "rm -rf ./dist & mkdir dist & npx rollup -c",
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "@babel/cli": "^7.17.6",

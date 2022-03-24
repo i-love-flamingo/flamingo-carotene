@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rm -rf ./dist & mkdir dist & npx babel src/stateManager.js -o dist/stateManager.js",
     "test": "jest",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "core-js": "^3.21.1",

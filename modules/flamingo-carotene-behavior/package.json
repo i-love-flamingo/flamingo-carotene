@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rm -rf ./dist & mkdir dist & npx babel src/behavior.js -o dist/behavior.js",
     "test": "jest",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

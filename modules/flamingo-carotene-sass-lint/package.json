@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "sass-lint": "^1.13.1"

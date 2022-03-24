@@ -16,7 +16,8 @@
   },
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "async": "^3.2.3",

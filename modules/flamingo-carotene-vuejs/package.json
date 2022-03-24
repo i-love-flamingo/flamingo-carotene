@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "vue": "^2.6.14"

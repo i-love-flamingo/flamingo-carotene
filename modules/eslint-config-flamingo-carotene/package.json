@@ -9,7 +9,8 @@
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/eslint-config-flamingo-carotene",
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",

@@ -15,7 +15,8 @@
   "scripts": {
     "build": "rm -rf ./dist & mkdir dist & npx babel src/smoothScrollTo.js -o dist/smoothScrollTo.js",
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

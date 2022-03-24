@@ -18,7 +18,8 @@
   },
   "scripts": {
     "test": "echo \"No tests present\"",
-    "link": "npm link"
+    "link": "npm link",
+    "unlink": "npm unlink"
   },
   "dependencies": {
     "ansi-to-html": "^0.7.2",
