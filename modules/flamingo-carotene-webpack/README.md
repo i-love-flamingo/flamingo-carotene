@@ -73,6 +73,12 @@ config.webpack = {
 
 `buildCallback` The callback function to execute when the webpack compiler was finished
 
+## Node or Dart Sass
+Node sass is active by default. If you want to use dart-sass set
+
+```config.webpackFeatures.sassEngine``` to ```dart```
+
+
 ## Export Webpack Configuration
 
 To get the webpack configuration simply call ```npx flamingo-carotene exportWebpackConfig```

@@ -235,15 +235,15 @@ class WebpackConfig {
 
   getSassImplementation() {
     let engine = null;
-    switch (this.config.webpack.sassEngine) {
+    switch (this.config?.webpackFeatures?.sassEngine) {
       case 'dart':
-        engine = require('dart-sass')
+        engine = require('sass')
         break
       case 'node':
         engine = require('node-sass')
         break
       default:
-        this.cliTools.error(`sassEngine \"${this.config.webpack.sassEngine}\" unknown - use "dart" or "node"`)
+        this.cliTools.error(`sassEngine \"${this.config?.webpackFeatures?.sassEngine}\" unknown - use "dart" or "node"`)
         engine = require('node-sass')
     }
     return engine

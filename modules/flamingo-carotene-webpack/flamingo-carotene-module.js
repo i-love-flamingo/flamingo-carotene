@@ -45,8 +45,11 @@ class FlamingoCaroteneWebpack {
             dist: config.paths.dist
           }
 
+          config.webpackFeatures = {
+            sassEngine: 'node'
+          }
+
           config.webpack = {
-            sassEngine: 'node', // can be "dart"!
             dist: {
               jsFolderName: 'js',
               cssFolderName: 'css',
