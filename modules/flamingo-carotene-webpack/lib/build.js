@@ -30,7 +30,6 @@ const webpackBuild = function (core, jobId, jobLabel, jobGroup) {
     core.getJobmanager().setSubJobProgress(jobId, Math.round(percentage * 100 ))
   }))
 
-  // HardSource Cache
   if (config.webpackCacheConfig) {
     config.webpackConfig.cache = {
       type: 'filesystem',
