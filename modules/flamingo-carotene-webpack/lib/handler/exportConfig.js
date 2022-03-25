@@ -4,13 +4,18 @@ const fs = require('fs')
 const webpackExportConfig = function (core) {
   const config = core.getConfig()
 
-  let data = JSON.stringify(config.webpackConfig, null, 4);
-  fs.writeFileSync('webpack.config.json', data);
+  const fs = require('fs')
+  const serialize = require('serialize-javascript');
 
-  core.getCliTools().info(`Webpack Config was exported to ./webpack.config.json`)
+  const data = serialize(config.webpackConfig, {
+    'ignoreFunction': true,
+    'space': 2,
+    'unsafe': true
+  });
 
+  fs.writeFileSync('webpack.config.js', data);
 
-
+  core.getCliTools().info(`Webpack Config was exported to ./webpack.config.js`)
 }
 
 module.exports = webpackExportConfig
