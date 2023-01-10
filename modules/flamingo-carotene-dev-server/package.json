@@ -31,8 +31,8 @@
     "rollup": "^2.70.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-sass": "^1.2.10",
-    "socket.io": "^4.4.1",
-    "socket.io-client": "^4.4.1"
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.5.4"
   },
   "gitHead": "23f060e6f0327f1a2cf9b78d453f452331f5c4be"
 }

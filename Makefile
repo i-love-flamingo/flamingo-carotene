@@ -1,4 +1,4 @@
-.PHONY: link
+.PHONY: link unlink
 
 build:
 	npx lerna run build
@@ -12,6 +12,9 @@ install:
 
 link:
 	npx lerna run link
+
+unlink:
+	npx lerna run unlink
 
 test:
 	npx lerna run test
