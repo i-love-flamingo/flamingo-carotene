@@ -17,10 +17,10 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.7",
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
     "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.16.11",
-    "babel-loader": "^8.2.3"
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^8.3.0"
   }
 }

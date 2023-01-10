@@ -24,8 +24,8 @@
   "dependencies": {
     "ansi-to-html": "^0.7.2",
     "chalk": "^4.1.2",
-    "cli-progress": "^3.10.0",
-    "cli-table3": "^0.6.1",
+    "cli-progress": "^3.11.2",
+    "cli-table3": "^0.6.3",
     "intercept-stdout": "^0.1.2",
     "node-emoji": "^1.11.0",
     "progress": "^2.0.3",
