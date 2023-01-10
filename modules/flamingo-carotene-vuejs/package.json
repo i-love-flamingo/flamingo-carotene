@@ -17,13 +17,13 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "vue": "^2.6.14"
+    "vue": "^2.7.14"
   },
   "devDependencies": {
     "flamingo-carotene-webpack": "^7.0.7",
     "path": "^0.12.7",
     "pug-plain-loader": "^1.1.0",
-    "vue-loader": "^15.9.8",
-    "vue-template-compiler": "^2.6.14"
+    "vue-loader": "^15.10.1",
+    "vue-template-compiler": "^2.7.14"
   }
 }

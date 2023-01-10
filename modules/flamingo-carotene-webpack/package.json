@@ -17,20 +17,20 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "css-loader": "^6.7.1",
+    "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "file-loader": "^6.2.0",
     "import-glob": "^1.5.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "node-sass": "^7.0.0",
-    "sass": "^1.49.9",
+    "mini-css-extract-plugin": "^2.7.2",
+    "node-sass": "^7.0.3",
+    "sass": "^1.57.1",
     "sass-loader": "^12.6.0",
     "serialize-javascript": "^6.0.0",
     "style-loader": "^3.3.1",
-    "terser-webpack-plugin": "^5.3.1",
+    "terser-webpack-plugin": "^5.3.6",
     "url-loader": "^4.1.1",
-    "webpack": "^5.70.0",
-    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack": "^5.75.0",
+    "webpack-bundle-analyzer": "^4.7.0",
     "webpack-manifest-plugin": "^5.0.0"
   }
 }

@@ -19,9 +19,9 @@
     "unlink": "npm unlink"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.7",
-    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
-    "@babel/preset-env": "^7.16.11"
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/plugin-transform-modules-commonjs": "^7.20.11",
+    "@babel/preset-env": "^7.20.2"
   }
 }

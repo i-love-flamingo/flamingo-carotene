@@ -17,8 +17,8 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.2",
-    "postcss": "^8.4.8",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
     "postcss-loader": "^6.2.1"
   }
 }
