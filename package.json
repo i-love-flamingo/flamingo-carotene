@@ -14,9 +14,6 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "workspaces": [
-    "modules/*"
-  ],
   "scripts": {
     "test": "npx lerna run test",
     "lint": "npx lerna run lint",
