@@ -410,8 +410,7 @@
 
   if (!window.caroteneDevClient) {
     window.caroteneDevClient = true;
-    var _require = require('socket.io-client'),
-      io = _require.io;
+    var io = require('socket.io-client');
     var socketUri = window.location.protocol + '//' + window.location.hostname + ':3000';
     var socket = io(socketUri);
     var caroteneDisplay = null;
