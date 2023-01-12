@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-static-asset",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "Provide a simple possibility to copy assets at build time",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
