@@ -4,9 +4,9 @@ import HotReloading from './hotReloading.js'
 if (!window.caroteneDevClient) {
   window.caroteneDevClient = true
 
-  const io = require('socket.io-client')
-  const sockeUri = window.location.protocol + '//' + window.location.hostname + ':3000'
-  const socket = io(sockeUri)
+  const { io } = require('socket.io-client')
+  const socketUri = window.location.protocol + '//' + window.location.hostname + ':3000'
+  const socket = io(socketUri)
 
   let caroteneDisplay = null
 
@@ -29,12 +29,12 @@ if (!window.caroteneDevClient) {
     }
   })
 
-  socket.on('disconnect', function() {
+  socket.on('disconnect', function () {
     if (caroteneDisplay) {
       caroteneDisplay.setMessage('Disconnected from Flamingo Carotene Dev Server')
       caroteneDisplay.showMessage(2000)
     }
-  });
+  })
 
   socket.on('report', function onReport (reportData) {
     if (caroteneDisplay) {

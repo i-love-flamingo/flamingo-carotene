@@ -11,7 +11,8 @@ class Socket {
       return
     }
 
-    this.io = require('socket.io')(this.config.devServer.port, {
+    const { Server } = require('socket.io')
+    this.io = new Server(this.config.devServer.port, {
       allowEIO3: true,
       cors: {
         origin: true,
@@ -19,7 +20,7 @@ class Socket {
       }
     })
 
-    this.io.on('connection', (client) => {
+    this.io.on('connection', () => {
       this.io.emit('connected', this.config.devServer)
     })
   }
@@ -30,7 +31,7 @@ class Socket {
     }
   }
 
-  reportBuildOutput(output) {
+  reportBuildOutput (output) {
     if (this.io) {
       this.io.emit('buildOutput', output)
     }

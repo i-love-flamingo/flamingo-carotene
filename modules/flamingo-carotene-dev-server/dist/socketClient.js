@@ -410,9 +410,10 @@
 
   if (!window.caroteneDevClient) {
     window.caroteneDevClient = true;
-    var io = require('socket.io-client');
-    var sockeUri = window.location.protocol + '//' + window.location.hostname + ':3000';
-    var socket = io(sockeUri);
+    var _require = require('socket.io-client'),
+      io = _require.io;
+    var socketUri = window.location.protocol + '//' + window.location.hostname + ':3000';
+    var socket = io(socketUri);
     var caroteneDisplay = null;
     socket.on('connect', function onConnect() {
       // Do nothing here - we know the socket.id from here
