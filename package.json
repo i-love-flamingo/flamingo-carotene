@@ -5,14 +5,14 @@
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "keywords": [
     "flamingo-carotene",
     "flamingo",
     "carotene",
     "om3"
-  ],
-  "workspaces": [
-    "modules/*"
   ],
   "scripts": {
     "test": "npx lerna run test",
