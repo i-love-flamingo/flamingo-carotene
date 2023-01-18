@@ -1,6 +1,3 @@
-const webpackBuildHandler = require('../build')
-const fs = require('fs')
-
 const webpackExportConfig = function (core) {
   const config = core.getConfig()
 
