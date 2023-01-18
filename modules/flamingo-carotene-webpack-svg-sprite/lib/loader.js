@@ -1,8 +1,8 @@
 'use strict';
 
-const imagemin = require('imagemin');
-const imageminSvgo = require('imagemin-svgo');
-const loaderUtils = require('loader-utils');
+import imagemin from 'imagemin';
+import imageminSvgo from 'imagemin-svgo';
+import loaderUtils from 'loader-utils';
 
 /**
  * Default values for every param that can be passed in the loader options.
@@ -76,7 +76,7 @@ function loader(content) {
 
                     ${process.env.NODE_ENV !== 'production' && hasSamePath ? `
                         var addCacheBust = typeof document !== 'undefined' && document.readyState === 'complete';
-    
+
                         if (addCacheBust) {
                             symbolUrl = '${icon.getUrlToSymbol(true)}';
                             viewUrl = '${icon.getUrlToView(true)}';
