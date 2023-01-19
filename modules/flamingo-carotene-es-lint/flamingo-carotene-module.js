@@ -61,7 +61,7 @@ class ESLint {
 
           // When break on error config is set, set configs to break the webpack compiler
           if (config.eslint.breakOnError) {
-            loaderConfig.options.emitWarning = false
+            loaderConfig.emitWarning = false
           }
 
           config.webpackConfig.plugins.push(new ESLintPlugin(loaderConfig))
