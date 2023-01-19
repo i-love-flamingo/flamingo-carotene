@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const mkdirp = require('mkdirp-sync')
+const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const pug = require('pug')
@@ -163,7 +163,7 @@ function compilePugFile(sourcePugFilePath, compiledFilePath, filename, basedir, 
             if (fileMode === 'ast') {
               ast = optimizeAst(ast, basedir)
               const astJson = JSON.stringify(ast, null, ' ')
-              mkdirp(path.dirname(compiledFilePath))
+              mkdirp.sync(path.dirname(compiledFilePath))
               fs.writeFileSync(compiledFilePath, astJson)
               throw new StopCompileException()
             }
@@ -175,7 +175,7 @@ function compilePugFile(sourcePugFilePath, compiledFilePath, filename, basedir, 
       ]
     })
     if (fileMode === 'html') {
-      mkdirp(path.dirname(compiledFilePath))
+      mkdirp.sync(path.dirname(compiledFilePath))
       fs.writeFileSync(compiledFilePath, compiledFn())
     }
   } catch (e) {

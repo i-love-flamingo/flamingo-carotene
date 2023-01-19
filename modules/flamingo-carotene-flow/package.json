@@ -16,6 +16,6 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "flow-bin": "^0.196.3"
+    "flow-bin": "^0.197.0"
   }
 }

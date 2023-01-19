@@ -1,6 +1,6 @@
-import nodeResolve from '@rollup/plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
-import sass from 'rollup-plugin-sass';
+const nodeResolve = require('@rollup/plugin-node-resolve');
+const babel = require('@rollup/plugin-babel');
+const sass = require('rollup-plugin-sass');
 
 const config = {
   input: 'client/socketClient.js',
@@ -14,11 +14,13 @@ const config = {
     nodeResolve({
       browser: true
     }),
-    babel(),
+    babel({
+      babelHelpers: "bundled"
+    }),
     sass({
       output: true
     })
   ],
 };
 
-export default config;
+module.exports = config

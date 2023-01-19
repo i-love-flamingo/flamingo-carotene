@@ -1,7 +1,7 @@
 'use strict';
 
-const imagemin = require('imagemin');
-const imageminSvgo = require('imagemin-svgo');
+const imagemin = require('external-svg-sprite-loader/node_modules/imagemin');
+const imageminSvgo = require('external-svg-sprite-loader/node_modules/imagemin-svgo');
 const loaderUtils = require('loader-utils');
 
 /**
@@ -76,7 +76,7 @@ function loader(content) {
 
                     ${process.env.NODE_ENV !== 'production' && hasSamePath ? `
                         var addCacheBust = typeof document !== 'undefined' && document.readyState === 'complete';
-    
+
                         if (addCacheBust) {
                             symbolUrl = '${icon.getUrlToSymbol(true)}';
                             viewUrl = '${icon.getUrlToView(true)}';
