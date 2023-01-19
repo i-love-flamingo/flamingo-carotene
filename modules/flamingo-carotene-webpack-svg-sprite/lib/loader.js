@@ -1,8 +1,8 @@
 'use strict';
 
-import imagemin from 'imagemin';
-import imageminSvgo from 'imagemin-svgo';
-import loaderUtils from 'loader-utils';
+const imagemin = require('external-svg-sprite-loader/node_modules/imagemin');
+const imageminSvgo = require('external-svg-sprite-loader/node_modules/imagemin-svgo');
+const loaderUtils = require('loader-utils');
 
 /**
  * Default values for every param that can be passed in the loader options.
