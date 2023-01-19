@@ -13,7 +13,7 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "babel-eslint": "^10.1.0",
+    "@babel/eslint-parser": "^7.19.1",
     "eslint": "^8.32.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -23,6 +23,6 @@
     "eslint-plugin-standard": "^5.0.0"
   },
   "peerDependencies": {
-    "flamingo-carotene-es-lint": "^8.0.2"
+    "flamingo-carotene-es-lint": "^8.1.0-alpha.0"
   }
 }
