@@ -1,4 +1,5 @@
 const path = require('path')
+const ESLintPlugin = require('eslint-webpack-plugin');
 const lintHandler = require('./lib/handler/lint')
 
 const configFileNames = ['.eslintrc', '.eslintrc.js', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json']
@@ -44,24 +45,18 @@ class ESLint {
             return
           }
 
-          if (!config.webpackConfig || !config.webpackConfig.module || !config.webpackConfig.module.rules) {
-            cliTools.warn('ESLint is configured to use a webpack loader but there is no webpack config availbale')
+          if (!config.webpackConfig || !config.webpackConfig.plugins) {
+            cliTools.warn('ESLint is configured to use a webpack plugin but there is no webpack config available')
             return
           }
 
           const loaderConfig = {
-            enforce: 'pre',
-            test: /\.js$/,
-            loader: 'eslint-loader',
-            exclude: /(node_modules|dist)/,
-            options: {
-              emitWarning: true,
-              useEslintrc: false,
-              configFile: config.eslint.configFilePath,
-              fix: false, // webpack eslint should NOT fix problems (commonly used this config in dev mode, with watcher)
-              cache: config.eslint.cache,
-              cacheFile: config.eslint.cacheFile
-            }
+            emitWarning: true,
+            useEslintrc: false,
+            overrideConfigFile: config.eslint.configFilePath,
+            fix: false, // webpack eslint should NOT fix problems (commonly used this config in dev mode, with watcher)
+            cache: config.eslint.cache,
+            cacheLocation: config.eslint.cacheFile
           }
 
           // When break on error config is set, set configs to break the webpack compiler
@@ -69,7 +64,7 @@ class ESLint {
             loaderConfig.options.emitWarning = false
           }
 
-          config.webpackConfig.module.rules.push(loaderConfig)
+          config.webpackConfig.plugins.push(new ESLintPlugin(loaderConfig))
         }
       },
       {
