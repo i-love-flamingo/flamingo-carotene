@@ -11,7 +11,6 @@
     "carotene",
     "om3"
   ],
-  "type": "module",
   "main": "lib/core.js",
   "bin": {
     "flamingo-carotene": "./bin/flamingoCarotene.js",
