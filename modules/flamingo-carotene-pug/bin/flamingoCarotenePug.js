@@ -7,6 +7,9 @@ const walk = require('pug-walk')
 
 const arguments = process.argv;
 
+const runner = arguments.shift();
+const selfName = arguments.shift();
+
 const baseDir = path.resolve(process.cwd());
 const sourceDir = path.resolve(baseDir, arguments.shift());
 const targetDir = path.resolve(baseDir, arguments.shift());
@@ -72,6 +75,9 @@ function optimizeAst(ast, basedir) {
 
   // pass 1: remove duplicate mixins and identify called mixins
   ast = walk(ast, function before(node, replace) {
+
+    let cleanUpProperties = false
+
     // make filename relative
     if (node.hasOwnProperty('filename')) {
       node.filename = cleanFilename(node.filename, basedir)
