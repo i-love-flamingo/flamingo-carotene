@@ -11,6 +11,7 @@
     "carotene",
     "om3"
   ],
+  "type": "module",
   "main": "lib/core.js",
   "bin": {
     "flamingo-carotene": "./bin/flamingoCarotene.js",
@@ -23,7 +24,7 @@
   },
   "dependencies": {
     "ansi-to-html": "^0.7.2",
-    "chalk": "^5.2.0",
+    "chalk": "^4.1.2",
     "cli-progress": "^3.11.2",
     "cli-table3": "^0.6.3",
     "intercept-stdout": "^0.1.2",
