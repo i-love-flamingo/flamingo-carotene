@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-core",
-  "version": "8.0.0",
+  "version": "8.1.0-alpha.0",
   "description": "Core features for the Flamingo Carotene tooling",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
