@@ -1,7 +1,7 @@
 const util = require('util')
 const chalk = require('chalk')
 const emoji = require('node-emoji')
-var readline = require('readline');
+const readline = require('readline');
 
 class CliTools {
   constructor () {
