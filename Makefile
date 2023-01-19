@@ -22,6 +22,9 @@ test:
 updateModules:
 	npx lerna exec -- npm update
 
+audit:
+	npx lerna exec -- npm audit
+
 fixAudit:
 	npx lerna exec -- npm audit fix
 
