@@ -27,6 +27,6 @@
     "babel-jest": "^29.3.1",
     "babel-plugin-import-glob": "^2.0.0",
     "jest": "^29.3.1",
-    "jsdom": "^19.0.0"
+    "jsdom": "^21.0.0"
   }
 }
