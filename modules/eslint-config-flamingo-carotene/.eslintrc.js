@@ -4,6 +4,8 @@ module.exports = {
 
   // eslint-config-standard
   parserOptions: {
+    requireConfigFile: false,
+
     ecmaVersion: 2018,
     ecmaFeatures: {
       jsx: true
@@ -34,7 +36,7 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'block-spacing': ['error', 'always'],
     'brace-style': ['error', '1tbs', { allowSingleLine: true }],
-    camelcase: ['error', { properties: 'never'}],
+    camelcase: ['error', { properties: 'never' }],
     'comma-dangle': ['error', {
       arrays: 'never',
       objects: 'never',
@@ -48,7 +50,7 @@ module.exports = {
     curly: ['error', 'multi-line'],
     'dot-location': ['error', 'property'],
     'eol-last': 'error',
-    eqeqeq: ['error', 'always', { null: 'ignore'}],
+    eqeqeq: ['error', 'always', { null: 'ignore' }],
     'func-call-spacing': ['error', 'never'],
     'generator-star-spacing': ['error', { before: true, after: true }],
     'handle-callback-err': ['error', '^(err|error)$'],
@@ -167,9 +169,9 @@ module.exports = {
     'no-with': 'error',
     'object-curly-spacing': ['error', 'always'],
     'object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
-    'one-var': ['error', { initialized: 'never'}],
-    'operator-linebreak': ['error', 'after', { overrides: {'?': 'before', ':': 'before'}}],
-    'padded-blocks': ['error', { blocks: 'never', switches: 'never', classes: 'never'}],
+    'one-var': ['error', { initialized: 'never' }],
+    'operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
+    'padded-blocks': ['error', { blocks: 'never', switches: 'never', classes: 'never' }],
     'prefer-promise-reject-errors': 'error',
     quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     'rest-spread-spacing': ['error', 'never'],
@@ -181,7 +183,7 @@ module.exports = {
     'space-infix-ops': 'error',
     'space-unary-ops': ['error', { words: true, nonwords: false }],
     'spaced-comment': ['error', 'always', {
-      line: { markers: ['*package', '!', '/', ',', '=']},
+      line: { markers: ['*package', '!', '/', ',', '='] },
       block: {
         balanced: true,
         markers: ['*package', '!', ',', ':', '::', 'flow-include'],
