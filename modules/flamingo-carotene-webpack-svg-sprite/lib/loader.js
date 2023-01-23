@@ -1,7 +1,7 @@
 'use strict';
 
-const imagemin = require('external-svg-sprite-loader/node_modules/imagemin');
-const imageminSvgo = require('external-svg-sprite-loader/node_modules/imagemin-svgo');
+const imagemin = require('imagemin');
+const imageminSvgo = require('imagemin-svgo');
 const loaderUtils = require('loader-utils');
 
 /**
