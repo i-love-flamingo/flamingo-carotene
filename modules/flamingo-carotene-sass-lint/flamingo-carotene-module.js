@@ -12,7 +12,13 @@ class SassLint {
           config.paths.sassLint = __dirname
 
           config.sassLint = {
-            breakOnError: false
+            additionalShellParameters: [],
+            breakOnError: false,
+            cache: false,
+            fileInclude: "src/**/*.s+(a|c)ss",
+            fixErrors: false,
+            ignoreFilePath: false,
+            maxWarnings: 25,
           }
         }
       },
