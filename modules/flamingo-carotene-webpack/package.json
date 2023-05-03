@@ -22,7 +22,6 @@
     "file-loader": "^6.2.0",
     "import-glob": "^1.5.0",
     "mini-css-extract-plugin": "^2.7.5",
-    "node-sass": "^8.0.0",
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "serialize-javascript": "^6.0.1",
