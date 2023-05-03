@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-flow",
-  "version": "8.1.0",
+  "version": "9.0.0-alpha.0",
   "description": "Provide flow support",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
