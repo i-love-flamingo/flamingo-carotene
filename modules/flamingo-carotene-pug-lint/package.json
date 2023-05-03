@@ -19,6 +19,6 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "pug-lint": "^2.6.0"
+    "pug-lint": "^2.7.0"
   }
 }
