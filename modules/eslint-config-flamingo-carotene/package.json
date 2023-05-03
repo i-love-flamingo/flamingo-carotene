@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-flamingo-carotene",
-  "version": "9.0.0-alpha.0",
+  "version": "9.0.0-alpha.1",
   "description": "Flamingo carotene default ESLint config",
   "author": "team-frontend <team-frontend@aoe.com>",
   "homepage": "",
