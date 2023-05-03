@@ -3,9 +3,4 @@
 
 defaultSeverity: warning
 extends:
-  - stylelint-config-standard
-  - stylelint-config-recommended
   - stylelint-config-sass-guidelines
-  - stylelint-config-standard-scss
-plugins:
-  - stylelint-scss
