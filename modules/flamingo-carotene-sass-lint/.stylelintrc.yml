@@ -1,6 +1,0 @@
-# Documentation for the stylelint Linter is available at:
-# https://stylelint.io/user-guide/rules
-
-defaultSeverity: warning
-extends:
-  - stylelint-config-sass-guidelines
