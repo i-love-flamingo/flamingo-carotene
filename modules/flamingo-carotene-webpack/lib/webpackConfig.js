@@ -226,10 +226,6 @@ class WebpackConfig {
           }
         }
       },
-      {
-        loader: 'import-glob',
-        options: {}
-      }
     ]
   }
 
