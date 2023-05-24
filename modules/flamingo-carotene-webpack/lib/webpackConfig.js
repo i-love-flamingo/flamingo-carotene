@@ -102,7 +102,7 @@ class WebpackConfig {
         },
         minimize: (mode !== 'development'),
         minimizer: [
-          new CssMinimizerPlugin({}),
+          new CssMinimizerPlugin(),
           new TerserPlugin({
             // cache: true,
             parallel: true,
