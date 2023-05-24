@@ -5,6 +5,7 @@ module.exports = {
       {modules: false}
     ]
   ],
+  exclude: /node_modules\/(css-loader)/,
   plugins: [
     "import-glob",
     "@babel/plugin-proposal-class-properties"
