@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-webpack",
-  "version": "9.0.0-alpha.4",
+  "version": "8.1.0",
   "description": "Provide an abstraction for webpack with the ability for other modules to extend the webpack config, with integration into the flamingo-carotene-dev-server module",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "css-loader": "^6.7.4",
-    "css-minimizer-webpack-plugin": "^5.0.0",
+    "css-minimizer-webpack-plugin": "^4.2.2",
     "file-loader": "^6.2.0",
     "import-glob": "^1.5.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "mini-css-extract-plugin": "^2.7.2",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",
     "serialize-javascript": "^6.0.1",
