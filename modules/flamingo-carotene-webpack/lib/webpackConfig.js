@@ -220,6 +220,7 @@ class WebpackConfig {
         options: {
           implementation: this.getSassImplementation(),
           sassOptions: {
+            quietDeps: true,
             includePaths: [
               path.join(this.config.paths.project, 'node_modules')
             ]
