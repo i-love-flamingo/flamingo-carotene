@@ -8,7 +8,7 @@ publishToNpm:
 
 install:
 	npx lerna clean --yes
-	npx lerna bootstrap
+	npm i
 
 link:
 	npx lerna run link
@@ -20,22 +20,22 @@ test:
 	npx lerna run test
 
 updateModules:
-	npx lerna exec -- npm update
+	npm update
 
 audit:
-	npx lerna exec -- npm audit
+	npm audit
 
 fixAudit:
-	npx lerna exec -- npm audit fix
+	npm audit fix
 
 cleanDep:
 	npx lerna clean --yes
 
 ci:
-	npx lerna exec -- npm ci
+	npm ci
 
 outdated:
-	npx lerna exec -- npm outdated
+	npm outdated
 
 upgradeAll:
 	npx lerna exec -- npx npm-check-updates -u -t minor

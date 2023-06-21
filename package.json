@@ -8,6 +8,9 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "workspaces": [
+    "modules/*"
+  ],
   "keywords": [
     "flamingo-carotene",
     "flamingo",
@@ -20,6 +23,6 @@
     "link-modules": "make link"
   },
   "devDependencies": {
-    "lerna": "^5.6.2"
+    "lerna": "^7.0.2"
   }
 }
