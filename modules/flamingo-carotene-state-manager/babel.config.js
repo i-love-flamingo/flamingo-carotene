@@ -7,6 +7,6 @@ module.exports = {
   ],
   plugins: [
     "import-glob",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-transform-class-properties"
   ]
 }

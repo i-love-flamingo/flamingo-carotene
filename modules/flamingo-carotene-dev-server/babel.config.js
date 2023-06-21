@@ -8,6 +8,6 @@ module.exports = {
   exclude: /node_modules\/(css-loader)/,
   plugins: [
     "import-glob",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-transform-class-properties"
   ]
 }
