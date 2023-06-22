@@ -8,7 +8,7 @@ publishToNpm:
 
 install:
 	npx lerna clean --yes
-	npx lerna exec -- npm i
+	npm i
 
 link:
 	npx lerna run link
@@ -23,10 +23,10 @@ updateModules:
 	npm update
 
 audit:
-	npx lerna exec -- npm audit
+	npm audit
 
 fixAudit:
-	npx lerna exec -- npm audit fix
+	npm audit fix
 
 cleanDep:
 	npx lerna clean --yes
