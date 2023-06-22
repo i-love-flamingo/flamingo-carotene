@@ -12,7 +12,7 @@
 		"unlink": "npm unlink"
 	},
 	"dependencies": {
-		"external-svg-sprite-loader": "^7.2.0",
+		"external-svg-sprite-loader": "file:./node_modules_local/external-svg-sprite-loader",
 		"unfetch": "^4.2.0"
 	},
 	"devDependencies": {
