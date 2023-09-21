@@ -17,9 +17,9 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "async": "^3.2.4",
-    "glob": "^8.1.0",
-    "mkdirp": "^2.1.6",
-    "shelljs": "^0.8.5"
+    "async": "3.2.4",
+    "glob": "8.1.0",
+    "mkdirp": "2.1.6",
+    "shelljs": "0.8.5"
   }
 }

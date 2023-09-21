@@ -20,9 +20,9 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "async": "^3.2.4",
-    "glob": "^8.1.0",
-    "mkdirp": "^2.1.6",
-    "pug": "^3.0.2"
+    "async": "3.2.4",
+    "glob": "8.1.0",
+    "mkdirp": "2.1.6",
+    "pug": "3.0.2"
   }
 }

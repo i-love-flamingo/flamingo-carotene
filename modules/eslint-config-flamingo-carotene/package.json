@@ -13,16 +13,16 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.22.5",
-    "eslint": "^8.43.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0"
+    "@babel/eslint-parser": "7.22.15",
+    "eslint": "8.49.0",
+    "eslint-config-standard": "17.1.0",
+    "eslint-plugin-import": "2.28.1",
+    "eslint-plugin-n": "15.7.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-standard": "5.0.0"
   },
   "peerDependencies": {
-    "flamingo-carotene-es-lint": "^9.0.0-alpha.4"
+    "flamingo-carotene-es-lint": "9.0.0-alpha.12"
   }
 }

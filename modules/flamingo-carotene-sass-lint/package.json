@@ -17,6 +17,6 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "stylelint-config-sass-guidelines": "^10.0.0"
+    "stylelint-config-sass-guidelines": "10.0.0"
   }
 }
