@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-state-manager",
-  "version": "9.0.0-alpha.12",
+  "version": "9.0.0-alpha.13",
   "description": "The state manager enables to decouple the interaction between dom components using a global state",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
