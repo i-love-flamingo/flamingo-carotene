@@ -3809,8 +3809,8 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-flamingo-carotene@9.0.0-alpha.12, "eslint-config-flamingo-carotene@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/eslint-config-flamingo-carotene":
-  version "9.0.0-alpha.12"
+eslint-config-flamingo-carotene@^9.0.0-alpha.13, "eslint-config-flamingo-carotene@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/eslint-config-flamingo-carotene":
+  version "9.0.0-alpha.13"
   resolved "file:modules/eslint-config-flamingo-carotene"
   dependencies:
     "@babel/eslint-parser" "7.22.15"
@@ -4361,8 +4361,8 @@ find-up@^6.3.0:
     locate-path "^7.1.0"
     path-exists "^5.0.0"
 
-flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-babel":
-  version "9.0.0-alpha.12"
+flamingo-carotene-babel@^9.0.0-alpha.13, "flamingo-carotene-babel@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-babel":
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-babel"
   dependencies:
     "@babel/cli" "7.22.15"
@@ -4372,11 +4372,11 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     babel-loader "9.1.3"
 
 "flamingo-carotene-behavior@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-behavior":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-behavior"
 
 "flamingo-carotene-core@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-core":
-  version "9.0.0-alpha.0"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-core"
   dependencies:
     ansi-to-html "0.7.2"
@@ -4390,7 +4390,7 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     word-wrap "1.2.5"
 
 "flamingo-carotene-dev-server@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-dev-server":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-dev-server"
   dependencies:
     "@babel/cli" "7.22.15"
@@ -4410,20 +4410,20 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     socket.io-client "4.7.2"
 
 "flamingo-carotene-es-lint@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-es-lint":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-es-lint"
   dependencies:
-    eslint-config-flamingo-carotene "9.0.0-alpha.12"
+    eslint-config-flamingo-carotene "^9.0.0-alpha.13"
     eslint-webpack-plugin "3.2.0"
 
 "flamingo-carotene-flow@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-flow":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-flow"
   dependencies:
     flow-bin "0.216.1"
 
 "flamingo-carotene-postcss@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-postcss":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-postcss"
   dependencies:
     autoprefixer "10.4.16"
@@ -4431,13 +4431,13 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     postcss-loader "7.3.3"
 
 "flamingo-carotene-pug-lint@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-pug-lint":
-  version "9.0.0-alpha.0"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-pug-lint"
   dependencies:
     pug-lint "2.7.0"
 
 "flamingo-carotene-pug@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-pug":
-  version "9.0.0-alpha.0"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-pug"
   dependencies:
     async "3.2.4"
@@ -4446,17 +4446,17 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     pug "3.0.2"
 
 "flamingo-carotene-sass-lint@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-sass-lint":
-  version "9.0.0-alpha.3"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-sass-lint"
   dependencies:
     stylelint-config-sass-guidelines "10.0.0"
 
 "flamingo-carotene-smooth-scroll-to@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-smooth-scroll-to":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-smooth-scroll-to"
 
 "flamingo-carotene-state-manager@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-state-manager":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-state-manager"
   dependencies:
     core-js "3.32.2"
@@ -4467,7 +4467,7 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     redux-watch "1.2.0"
 
 "flamingo-carotene-static-asset@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-static-asset":
-  version "9.0.0-alpha.0"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-static-asset"
   dependencies:
     async "3.2.4"
@@ -4476,14 +4476,14 @@ flamingo-carotene-babel@9.0.0-alpha.12, "flamingo-carotene-babel@file:/Users/dyl
     shelljs "0.8.5"
 
 "flamingo-carotene-webpack-svg-sprite@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-webpack-svg-sprite":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-webpack-svg-sprite"
   dependencies:
     external-svg-sprite-loader "file:./node_modules_local/external-svg-sprite-loader"
     unfetch "4.2.0"
 
 "flamingo-carotene-webpack@file:/Users/dylan.provost/Documents/workspace/i-love-flamingo/flamingo-carotene-clone/modules/flamingo-carotene-webpack":
-  version "9.0.0-alpha.12"
+  version "9.0.0-alpha.13"
   resolved "file:modules/flamingo-carotene-webpack"
   dependencies:
     css-loader "6.8.1"
