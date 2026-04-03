@@ -77,8 +77,12 @@ class DevServerModule {
         handler: (core) => {
           const config = core.getConfig()
 
-          // Include module dir to the rules so that separate so that files such as css or sass can be loaded
+          // First make webpack object exsist
+          config.webpack = config.webpack || {}
+          
+          // make rulesInclude object exsist
           config.webpack.rulesInclude = config.webpack.rulesInclude || []
+          
           config.webpack.rulesInclude.unshift(path.join(__dirname, 'dist'))
         }
       }
