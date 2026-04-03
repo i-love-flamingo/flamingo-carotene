@@ -1,6 +1,6 @@
 {
   "name": "flamingo-carotene-static-asset",
-  "version": "9.0.0-alpha.13",
+  "version": "9.0.0-alpha.14",
   "description": "Provide a simple possibility to copy assets at build time",
   "author": "team-frontend <team-frontend@aoe.com>",
   "license": "OSL-3.0",
@@ -17,9 +17,9 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "async": "3.2.4",
-    "glob": "8.1.0",
-    "mkdirp": "2.1.6",
-    "shelljs": "0.8.5"
-  }
+    "async": "3.2.6",
+    "glob": "13.0.6",
+    "mkdirp": "3.0.1",
+    "shelljs": "0.10.0"
+  },
 }
