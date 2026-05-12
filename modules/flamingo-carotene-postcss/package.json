@@ -3,7 +3,7 @@
   "version": "9.0.0-alpha.13",
   "description": "Provide the postcss loader for a flamingo-carotene-webpack setup",
   "author": "team-frontend <team-frontend@aoe.com>",
-  "license": "OSL-3.0",
+  "license": "MIT",
   "repository": "https://github.com/i-love-flamingo/flamingo-carotene/tree/master/modules/flamingo-carotene-postcss",
   "keywords": [
     "flamingo-carotene",
